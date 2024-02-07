@@ -13,10 +13,10 @@ public class App extends JFrame implements GameListener{
         super(s);
         this.setSize(1600,900);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
         this.setResizable(false);
         spanel = new StartPanel();
-        this.add(spanel);
+        add(spanel);
+        this.setVisible(true);
     }
     public void process(GameStateEvent e) {
         if(e.getSource()==spanel){

@@ -11,12 +11,18 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     public StartPanel(){
         start = new JButton("Start");
         start.addActionListener(this);
+        start.setBounds(0, 0, 200, 50);
         instructions = new JButton("Instructions");
         instructions.addActionListener(this);
-       this.addMouseListener(this); 
+        start.setVisible(true);
+        start.setFocusable(false);
+        this.add(start);
+        this.setVisible(true);
     }
     public void paint(Graphics g){
-
+        paintComponents(g);
+        //g.setColor(Color.BLACK);
+        //g.fillRect(0, 0, 100, 100);
     }
     public void actionPerformed(ActionEvent e){
         if (e.getSource()==start){
@@ -25,8 +31,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mousePressed'");
+        
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
