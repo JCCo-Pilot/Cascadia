@@ -1,5 +1,7 @@
 package Panels;
-
-public class StartPanel {
+import java.util.*;
+import javax.swing.*;
+import EventAndListener.*;
+public class StartPanel extends JPanel{
 
 }

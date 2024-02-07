@@ -1,6 +1,5 @@
 import java.util.*;
 import javax.swing.*;
-
 import EventAndListener.*;
 import Panels.*;
 public class App extends JFrame implements GameListener{
@@ -18,6 +17,14 @@ public class App extends JFrame implements GameListener{
         this.setResizable(false);
     }
     public void process(GameStateEvent e) {
-        
+        if(e.getSource()==spanel){
+            this.remove(spanel);
+            mpanel = new MainPanel();
+            this.add(mpanel);
+        }else if (e.getSource()==mpanel){
+            this.remove(mpanel);
+            epanel = new EndPanel();
+            this.add(epanel);
+        }
     }
 }
