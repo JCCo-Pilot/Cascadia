@@ -2,6 +2,7 @@ import java.util.*;
 import javax.swing.*;
 
 import EventAndListener.*;
+import Panels.*;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
         App  ap = new App("String");
