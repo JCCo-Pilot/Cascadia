@@ -1,6 +1,8 @@
 import java.util.*;
 import javax.swing.*;
-public class App extends JFrame{
+
+import EventAndListener.*;
+public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
         App  ap = new App("String");
     }
@@ -10,5 +12,10 @@ public class App extends JFrame{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setResizable(false);
+    }
+    @Override
+    public void process(GameStateEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'process'");
     }
 }
