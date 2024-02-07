@@ -15,6 +15,8 @@ public class App extends JFrame implements GameListener{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setResizable(false);
+        spanel = new StartPanel();
+        this.add(spanel);
     }
     public void process(GameStateEvent e) {
         if(e.getSource()==spanel){
