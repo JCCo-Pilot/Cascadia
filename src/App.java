@@ -6,6 +6,9 @@ public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
         App  ap = new App("String");
     }
+    private StartPanel spanel;
+    private MainPanel mpanel;
+    private EndPanel epanel;
     public App(String s){
         super(s);
         this.setSize(1600,900);
@@ -13,9 +16,7 @@ public class App extends JFrame implements GameListener{
         this.setVisible(true);
         this.setResizable(false);
     }
-    @Override
     public void process(GameStateEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'process'");
+        
     }
 }
