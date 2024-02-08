@@ -14,6 +14,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private int state = -1;
     private ArrayList<BufferedImage>images = new ArrayList<>();
     public StartPanel(){
+        //setSize(1600,900);
         setLayout(null);
         start = new JButton("Start");
         start.addActionListener(this);
@@ -27,6 +28,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         start.setFocusable(false);
         this.add(start);
         this.add(instructions);
+        repaint();
         this.setVisible(true);
     }
     private void pullImages(){
@@ -40,6 +42,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         }
     }
     public void paint(Graphics g){
+        paintComponents(g);
         if (state == 1){
 
         }
