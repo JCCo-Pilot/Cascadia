@@ -18,9 +18,9 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         setLayout(null);
         start = new JButton("Start");
         start.addActionListener(this);
-        start.setBounds(0, 0, 200, 50);
+        start.setBounds(700, 300, 200, 50);
         instructions = new JButton("Instructions");
-        instructions.setBounds(500,0,200,50);
+        instructions.setBounds(700,360,200,50);
         instructions.addActionListener(this);
         instructions.setVisible(true);
         instructions.setFocusable(false);
@@ -42,7 +42,8 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         }
     }
     public void paint(Graphics g){
-        paintComponents(g);
+        super.paintComponents(g);
+        super.paint(g);
         if (state == 1){
 
         }
@@ -60,8 +61,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     public void mousePressed(MouseEvent e) {
         
     }
-    public void mouseReleased(MouseEvent e) {}
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}    public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
     public void setListener(GameListener gl){
         listener = gl;
