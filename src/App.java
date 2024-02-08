@@ -2,6 +2,7 @@ import java.util.*;
 import javax.swing.*;
 import EventAndListener.*;
 import Panels.*;
+import static java.lang.System.*;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
         App  ap = new App("String");
@@ -15,6 +16,7 @@ public class App extends JFrame implements GameListener{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         spanel = new StartPanel();
+        spanel.setListener(this);
         add(spanel);
         this.setVisible(true);
     }
@@ -23,6 +25,7 @@ public class App extends JFrame implements GameListener{
             this.remove(spanel);
             mpanel = new MainPanel();
             this.add(mpanel);
+            out.println("Switched");
         }else if (e.getSource()==mpanel){
             this.remove(mpanel);
             epanel = new EndPanel();

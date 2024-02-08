@@ -4,10 +4,15 @@ import javax.swing.*;
 import EventAndListener.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.imageio.ImageIO;
+import java.awt.image.*;
+import static java.lang.System.*;
 public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private GameListener listener;
     private JButton start;
     private JButton instructions;
+    private int state = -1;
+    private ArrayList<BufferedImage>images = new ArrayList<>();
     public StartPanel(){
         setLayout(null);
         start = new JButton("Start");
@@ -24,15 +29,29 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         this.add(instructions);
         this.setVisible(true);
     }
+    private void pullImages(){
+        try{
+            for (int i = 1;i<17;i++){
+                BufferedImage temp = ImageIO.read(StartPanel.class.getResource("/Images/Instructions/"+i+".png"));
+                images.add(temp);
+            }
+        }catch(Exception e){
+            out.println("Errors in pulling instruction images");
+        }
+    }
     public void paint(Graphics g){
-        paintComponents(g);
-        //g.setColor(Color.BLACK);
-        //g.fillRect(0, 0, 100, 100);
+        if (state == 1){
+
+        }
     }
     public void actionPerformed(ActionEvent e){
         if (e.getSource()==start){
             GameStateEvent gse = new GameStateEvent(this, 1);
+            listener.process(gse);
+        }else if (e.getSource()==instructions){
+            state = 1;
         }
+        repaint();
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
