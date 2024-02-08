@@ -9,14 +9,19 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private JButton start;
     private JButton instructions;
     public StartPanel(){
+        setLayout(null);
         start = new JButton("Start");
         start.addActionListener(this);
         start.setBounds(0, 0, 200, 50);
         instructions = new JButton("Instructions");
+        instructions.setBounds(500,0,200,50);
         instructions.addActionListener(this);
+        instructions.setVisible(true);
+        instructions.setFocusable(false);
         start.setVisible(true);
         start.setFocusable(false);
         this.add(start);
+        this.add(instructions);
         this.setVisible(true);
     }
     public void paint(Graphics g){
