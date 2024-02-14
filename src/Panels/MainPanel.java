@@ -11,6 +11,10 @@ public class MainPanel extends JPanel implements MouseListener{
     public MainPanel(){
         
     }
+    @Override
+    public void paint(Graphics g){
+        g.drawRect(0, 0, 500, 500);
+    }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         
