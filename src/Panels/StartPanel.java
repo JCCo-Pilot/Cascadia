@@ -12,6 +12,8 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private JButton start;
     private JButton instructions;
     private int state = -1;
+    private final int width = 1600;
+    private final int height = 900;
     private ArrayList<BufferedImage>images = new ArrayList<>();
     public StartPanel(){
         //setSize(1600,900);
@@ -44,8 +46,27 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     public void paint(Graphics g){
         super.paintComponents(g);
         super.paint(g);
-        if (state == 1){
-
+        switch (state) {
+            case 1:
+                g.drawImage(images.get(0), 0, 0, width, height, null);
+            break;
+            case 2:
+                g.drawImage(images.get(0), 0, 0, width, height, null);
+                g.drawImage(images.get(0), 0, 0, width, height, null);
+            break;
+            case 3:
+                g.drawImage(images.get(0), 0, 0, width, height, null);
+                g.drawImage(images.get(0), 0, 0, width, height, null);
+            break;
+            case 4:
+            break;
+            case 5:
+            break;
+            case 6:
+            break;
+            case 7:
+            break;
+            case 8:
         }
     }
     public void actionPerformed(ActionEvent e){
@@ -54,6 +75,8 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             listener.process(gse);
         }else if (e.getSource()==instructions){
             state = 1;
+            instructions.setVisible(false);
+            start.setVisible(false);
         }
         repaint();
     }
