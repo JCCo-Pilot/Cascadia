@@ -11,7 +11,7 @@ public class ScoreBoard extends JComponent implements MouseListener{
     private int xSize,ySize;
     private int xPos,yPos;
     public ScoreBoard(){
-
+        
     }
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
