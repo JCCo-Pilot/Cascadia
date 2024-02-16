@@ -8,12 +8,16 @@ import javax.imageio.ImageIO;
 import java.awt.image.*;
 import static java.lang.System.*;
 public class MainPanel extends JPanel implements MouseListener{
+    private GameListener listener;
     public MainPanel(){
         
     }
     @Override
     public void paint(Graphics g){
         g.drawRect(0, 0, 500, 500);
+    }
+    public void setListener(GameListener g){
+        listener = g;
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {

@@ -67,10 +67,20 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 g.drawImage(images.get(8), width/2, 0, width, height, null);
             break;
             case 6:
+                g.drawImage(images.get(9), 0, 0, width, height, null);
+                g.drawImage(images.get(10), width/2, 0, width, height, null);
             break;
             case 7:
+                g.drawImage(images.get(11), 0, 0, width, height, null);
+                g.drawImage(images.get(12), width/2, 0, width, height, null);
             break;
             case 8:
+                g.drawImage(images.get(13), 0, 0, width, height, null);
+                g.drawImage(images.get(14), width/2, 0, width, height, null);
+            break;
+            case 9:
+                g.drawImage(images.get(14), 0, 0, width, height, null);
+                g.drawImage(images.get(15), width/2, 0, width, height, null);
             break;
         }
     }
