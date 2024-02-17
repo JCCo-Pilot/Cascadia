@@ -12,7 +12,7 @@ public class PickArea {
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
     public PickArea(){
         createTokens();
-        sumChecker();
+        randShuffle();
     }
     private void createTokens(){
         for (int i =0;i<20;i++){
@@ -20,6 +20,12 @@ public class PickArea {
             tokens.add(new WildlifeTokens(1));
             tokens.add(new WildlifeTokens(2));
             tokens.add(new WildlifeTokens(3));
+        }
+    }
+    private void randShuffle(){
+        int numTime = (int)(Math.random()*90)+10;
+        for (int i = 0;i<numTime;i++){
+            Collections.shuffle(tokens);
         }
     }
     private void sumChecker(){
