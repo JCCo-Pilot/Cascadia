@@ -29,8 +29,12 @@ public class WildlifeTokens {
                 break;
             }
         }catch(Exception e){
-            out.println("Error in WildLife Tokens");
+            //out.println("Error in WildLife Tokens");
         }
+    }
+    @Override
+    public String toString(){
+        return type[var];
     }
     public String getName(){
         return type[var];
