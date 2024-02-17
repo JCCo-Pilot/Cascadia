@@ -8,7 +8,7 @@ import static java.lang.System.*;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
         //App  ap = new App("String");
-        PickArea pa = new PickArea();
+        PickArea pa = new PickArea(4);
     }
     private StartPanel spanel;
     private MainPanel mpanel;

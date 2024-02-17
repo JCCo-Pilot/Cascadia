@@ -10,9 +10,12 @@ import java.awt.image.*;
 import static java.lang.System.*;
 public class PickArea {
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
-    public PickArea(){
+    private int numPlayers;
+    public PickArea(int i){
+        numPlayers = i;
         createTokens();
         randShuffle();
+        createHabitatTiles();
     }
     private void createTokens(){
         for (int i =0;i<20;i++){
@@ -20,6 +23,20 @@ public class PickArea {
             tokens.add(new WildlifeTokens(1));
             tokens.add(new WildlifeTokens(2));
             tokens.add(new WildlifeTokens(3));
+        }
+    }
+    private void createHabitatTiles(){
+        //create all 85 tiles
+        switch(numPlayers){
+            case 2:
+                //remove 42
+            break;
+            case 3:
+                //remove 22
+            break;
+            case 4:
+                //remove 2 
+            break;
         }
     }
     private void randShuffle(){
