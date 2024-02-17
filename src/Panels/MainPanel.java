@@ -22,7 +22,7 @@ public class MainPanel extends JPanel implements MouseListener{
     @Override
     public void paint(Graphics g){
         paintComponent(g);
-        g.drawRect(0, 0, 500, 500);
+        g.fillRect(700, 100, 500, 500);
     }
     public void setListener(GameListener g){
         listener = g;
