@@ -1,8 +1,8 @@
 package Panels;
 import java.util.*;
 import javax.swing.*;
-
-import Components.ScoreBoard;
+import Entities.*;
+import Components.*;
 import EventAndListener.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,11 +11,13 @@ import java.awt.image.*;
 import static java.lang.System.*;
 public class MainPanel extends JPanel implements MouseListener{
     private GameListener listener;
+    private ScoreBoard scoreBoard;
+    private ArrayList<Player> players;
     public MainPanel(){
-        ScoreBoard sb = new ScoreBoard();
-        this.add(sb);
-        sb.setVisible(true);
-        repaint();
+
+    }
+    private void construct(){
+
     }
     @Override
     public void paint(Graphics g){
