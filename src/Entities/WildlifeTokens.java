@@ -19,14 +19,26 @@ public class WildlifeTokens {
                     image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Bear.png"));
                 break;  
                 case 1:
+                    image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Elk.png"));
                 break;
                 case 2:
+                    image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Salmon.png"));
                 break;
                 case 3:
+                    image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Fox.png"));
                 break;
             }
         }catch(Exception e){
             out.println("Error in WildLife Tokens");
         }
+    }
+    public String getName(){
+        return type[var];
+    }
+    public int getType(){
+        return var;
+    }
+    public BufferedImage getImage(){
+        return image;
     }
 }
