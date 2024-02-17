@@ -99,7 +99,8 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     public void mousePressed(MouseEvent e) {
         
     }
-    public void mouseReleased(MouseEvent e) {}    public void mouseEntered(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}    
+    public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
     public void setListener(GameListener gl){
         listener = gl;

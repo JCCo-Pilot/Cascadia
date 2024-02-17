@@ -11,12 +11,15 @@ public class ScoreBoard extends JComponent implements MouseListener{
     private int xSize,ySize;
     private int xPos,yPos;
     public ScoreBoard(){
-        
+        out.println("Scoreboard created");
+        xSize = 100;
+        ySize = 100;
     }
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D antiAlias = (Graphics2D) g;
         antiAlias.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.fillRect(0, 0, 100, 100);
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
