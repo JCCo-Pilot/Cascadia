@@ -12,7 +12,7 @@ public class PickArea {
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
     public PickArea(){
         createTokens();
-        out.println(tokens);
+        sumChecker();
     }
     private void createTokens(){
         for (int i =0;i<20;i++){
@@ -28,7 +28,19 @@ public class PickArea {
         int numElk = 0;
         int numSalmon = 0;
         for (int i = 0; i<tokens.size();i++){
-            if ()
+            if (tokens.get(i).getName().equals("Bear")){
+                numBear++;
+            }else if (tokens.get(i).getName().equals("Elk")){
+                numElk++;
+            }else if (tokens.get(i).getName().equals("Salmon")){
+                numSalmon++;
+            }else if (tokens.get(i).getName().equals("Fox")){
+                numFox++;
+            }
         }
+        out.println("Bears -"+numBear);
+        out.println("Elks -"+numElk);
+        out.println("Salmon -"+numSalmon);
+        out.println("Fox -"+numFox);
     }
 }
