@@ -8,14 +8,23 @@ import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
 import static java.lang.System.*;
-public class PickArea {
+public class PickArea extends JComponent implements MouseListener{
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
     private int numPlayers;
+    private int xSize,ySize;
     public PickArea(int i){
         numPlayers = i;
+        xSize = 100;
+        ySize = 800;
         createTokens();
         randShuffle();
         createHabitatTiles();
+    }
+    public void paint(Graphics g){
+
+    }
+    public void paintComponent(Graphics g){
+        
     }
     private void createTokens(){
         for (int i =0;i<20;i++){
@@ -66,4 +75,12 @@ public class PickArea {
         out.println("Salmon -"+numSalmon);
         out.println("Fox -"+numFox);
     }
+    public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
+    public Dimension getMinimumSize() {return new Dimension(xSize, ySize );}
+    public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
+    public void mouseClicked(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
 }

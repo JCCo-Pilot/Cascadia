@@ -14,7 +14,7 @@ public class MainPanel extends JPanel implements MouseListener{
     private ScoreBoard scoreBoard;
     private ArrayList<Player> players;
     public MainPanel(){
-
+        
     }
     private void construct(){
 
