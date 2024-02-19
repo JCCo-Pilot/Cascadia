@@ -12,19 +12,32 @@ public class PickArea extends JComponent implements MouseListener{
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
     private int numPlayers;
     private int xSize,ySize;
-    public PickArea(int i){
+    private int xPos,yPos;
+    public PickArea(int i,int x, int y , int xS, int yS){
+        super();
+        construct(x,y,xS,yS);
         numPlayers = i;
-        xSize = 100;
-        ySize = 800;
+        this.setVisible(true);
         createTokens();
         randShuffle();
         createHabitatTiles();
     }
-    public void paint(Graphics g){
-
+    private void construct(int x, int y, int xS, int yS){
+        enableInputMethods(true);
+        addMouseListener(this);
+        xPos = x; yPos = y;
+        xSize = xS; ySize = yS;
     }
+    public void paint(Graphics g){
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, xSize, ySize);
+    }
+    @Override
     public void paintComponent(Graphics g){
-        
+        super.paintComponent(g);
+        Graphics2D antiAlias = (Graphics2D) g;
+        antiAlias.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        paint(g);
     }
     private void createTokens(){
         for (int i =0;i<20;i++){
@@ -83,4 +96,8 @@ public class PickArea extends JComponent implements MouseListener{
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
+    public int getXPos(){return xPos;}
+    public int getYPos(){return yPos;}
+    public int getXSize(){return xSize;}
+    public int getYSize(){return ySize;}
 }
