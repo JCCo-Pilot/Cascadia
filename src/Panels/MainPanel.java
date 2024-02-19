@@ -21,7 +21,7 @@ public class MainPanel extends JPanel implements MouseListener{
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         add(pa);
 
-        pd = new PlayerDisplay(0, 176, 1000, 500);
+        pd = new PlayerDisplay(0, 170, 1000, 690);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
         this.setVisible(true);

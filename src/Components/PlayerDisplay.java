@@ -31,11 +31,13 @@ public class PlayerDisplay extends JComponent implements MouseListener{
             testHexagons.add(new PointGenerator(100*i+100, 0, 100.0));
             testHexagons.add(new PointGenerator(100*i+100, 77*2, 100.0));
             testHexagons.add(new PointGenerator(100*i+100, 77*4, 100.0));
+            testHexagons.add(new PointGenerator(100*i+100, 77*6, 100.0));
         }
         for(int i =0; i<9;i++){
             testHexagons.add(new PointGenerator(50+(100*i), 77, 100.0));
             testHexagons.add(new PointGenerator(50+(100*i), 77*3, 100.0));
             testHexagons.add(new PointGenerator(50+(100*i), 77*5, 100.0));
+            testHexagons.add(new PointGenerator(50+(100*i), 77*7, 100.0));
         }
     }
     @Override
