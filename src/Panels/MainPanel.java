@@ -15,7 +15,7 @@ public class MainPanel extends JPanel implements MouseListener{
     private ArrayList<Player> players;
     public MainPanel(){
         setLayout(null);
-        pa = new PickArea(4,0,0,500,170);
+        pa = new PickArea(4,0,0,530,170);
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         add(pa);
         this.setVisible(true);

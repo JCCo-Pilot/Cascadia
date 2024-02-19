@@ -34,7 +34,11 @@ public class PickArea extends JComponent implements MouseListener{
         g.setColor(Color.RED);
         //spacing+(size+space)*i
         for (int i = 0;i<4;i++){
-            g.fillRect(5+(105)*i, 5, 100, 100);
+            g.fillRect(6+(106)*i, 6, 100, 100);
+        }
+        g.setColor(Color.BLUE);
+        for (int i = 0;i<4;i++){
+            g.fillOval(31+(106)*i, 111, 50, 50);
         }
     }
     @Override
