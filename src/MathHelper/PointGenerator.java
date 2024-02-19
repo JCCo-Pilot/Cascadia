@@ -2,7 +2,7 @@ package MathHelper;
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.event.*;
 public class PointGenerator {
     private MathPoint[] ogPoints = new MathPoint[6];
     private MathPoint[] rotated = new MathPoint[6];
@@ -30,19 +30,31 @@ public class PointGenerator {
         }
     }
     public void drawHexagon(Graphics g){
-        for (int i =0; i<5;i++){
-            drawLine(g, ogPoints[i], ogPoints[i+1]);
+        if (rotationOffset==0){
+            for (int i =0; i<5;i++){
+                drawLine(g, ogPoints[i], ogPoints[i+1]);
+            }
+            drawLine(g,ogPoints[5],ogPoints[0]);
+        }else{
+            for (int i =0; i<5;i++){
+                drawLine(g, rotated[i], rotated[i+1]);
+            }
+            drawLine(g,rotated[5],rotated[0]);
         }
-        drawLine(g,ogPoints[5],ogPoints[0]);
+        
     }
     public void rotateCC(){
         if(rotationOffset==0){
             rotationOffset++;
+        }else{
+            rotationOffset--;
         }
     }
     public void rotateC(){
         if(rotationOffset==0){
             rotationOffset++;
+        }else{
+            rotationOffset--;
         }
     }
     public int getOffset(){
@@ -52,7 +64,28 @@ public class PointGenerator {
         g.drawLine(p.xPoint,p.yPoint,a.xPoint,a.yPoint);
     }
     public boolean isPointInsideHexagon(MouseEvent e){
-        
+        if (rotationOffset==0){
+            return isPointInsideHexagon(e.getX(), e.getY());
+        }else{
+            return isPointInsideRotated(e.getX(), e.getY());
+        }
+    }
+    private boolean isPointInsideRotated(int x, int y){
+        int[] xPoints = new int[6];
+        int[] yPoints = new int[6];
+        for (int i = 0; i < 6; i++) {
+            xPoints[i] = rotated[i].xPoint;
+            yPoints[i] = rotated[i].yPoint;
+        }
+        int i, j = 5;
+        boolean oddNodes = false;
+        for (i = 0; i < 6; i++) {
+            if ((yPoints[i] < y && yPoints[j] >= y || yPoints[j] < y && yPoints[i] >= y) && (xPoints[i] <= x || xPoints[j] <= x)) {
+                oddNodes ^= (xPoints[i] + (y - yPoints[i]) / (yPoints[j] - yPoints[i]) * (xPoints[j] - xPoints[i]) < x);
+            }
+            j = i;
+        }
+        return oddNodes;
     }
     private boolean isPointInsideHexagon(int x, int y) {
         int[] xPoints = new int[6];
