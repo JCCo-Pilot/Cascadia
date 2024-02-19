@@ -40,7 +40,10 @@ public class PickArea extends JComponent implements MouseListener{
         for (int i = 0;i<4;i++){
             g.fillOval(31+(106)*i, 111, 50, 50);
         }
+        g.fillRect(324+106,111,94,50);
+        g.fillRect(324+106,6,94,100);
     }
+
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
