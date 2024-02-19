@@ -7,8 +7,7 @@ import Panels.*;
 import static java.lang.System.*;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
-        //App  ap = new App("String");
-        out.println(Math.sqrt(5.0));
+        App  ap = new App("String");
     }
     private StartPanel spanel;
     private MainPanel mpanel;

@@ -43,7 +43,13 @@ public class PickArea extends JComponent implements MouseListener{
         g.fillRect(324+106,111,94,50);
         g.fillRect(324+106,6,94,100);
     }
-
+    private void pointGeneration(int x, int y, Double size){
+        Double b = ((4.0 - Math.sqrt(7)) / 6) * size;
+        Integer sz = (int) Math.round(size);
+        Integer a = (int) Math.round(b);
+        Integer[] xPoints = {x, x + sz, x + sz, x, x, x};
+        Integer[] yPoints = {y, y + a, y + sz - a, y + sz, y + sz - a, y + a};
+    }
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
