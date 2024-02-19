@@ -12,12 +12,18 @@ import static java.lang.System.*;
 public class MainPanel extends JPanel implements MouseListener{
     private GameListener listener;
     private PickArea pa;
+    private PlayerDisplay pd;
     private ArrayList<Player> players;
     public MainPanel(){
         setLayout(null);
+        
         pa = new PickArea(4,0,0,530,170);
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         add(pa);
+
+        pd = new PlayerDisplay(0, 200, 1000, 500);
+        pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
+        add(pd);
         this.setVisible(true);
     }
     private void construct(){
