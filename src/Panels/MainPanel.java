@@ -11,13 +11,12 @@ import java.awt.image.*;
 import static java.lang.System.*;
 public class MainPanel extends JPanel implements MouseListener{
     private GameListener listener;
-    private ScoreBoard scoreBoard;
     private PickArea pa;
     private ArrayList<Player> players;
     public MainPanel(){
         setLayout(null);
-        pa = new PickArea(4,0,0,100,100);
-        pa.setBounds(0, 0, 100, 100);
+        pa = new PickArea(4,0,0,500,170);
+        pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         add(pa);
         this.setVisible(true);
     }
