@@ -12,6 +12,10 @@ import static java.lang.System.*;
 public class PlayerDisplay extends JComponent implements MouseListener{
     private int xSize,ySize;
     private int xPos,yPos;
+    private PointGenerator pg1 = new PointGenerator(0, 0, 100.0);
+    private PointGenerator pg2 = new PointGenerator(100, 0, 100.0);
+    private PointGenerator pg3 = new PointGenerator(50, 77, 100.0);
+    private PointGenerator pg4 = new PointGenerator(150, 77, 100.0);
     public PlayerDisplay(int x, int y, int xS, int yS){
         super();
         this.setVisible(true);
@@ -30,6 +34,11 @@ public class PlayerDisplay extends JComponent implements MouseListener{
     public void paint(Graphics g){
         g.setColor(Color.GREEN);
         g.fillRect(0,0,xSize,ySize);
+        g.setColor(Color.BLACK);
+        pg1.drawHexagon(g);
+        pg2.drawHexagon(g);
+        pg3.drawHexagon(g);
+        pg4.drawHexagon(g);
     }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
     public Dimension getMinimumSize() {return new Dimension(xSize, ySize );}
