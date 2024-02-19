@@ -7,12 +7,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
+import MathHelper.*;
 import static java.lang.System.*;
 public class PickArea extends JComponent implements MouseListener{
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
     private int numPlayers;
     private int xSize,ySize;
     private int xPos,yPos;
+    private PointGenerator[]hexagons = new PointGenerator[4];
     public PickArea(int i,int x, int y , int xS, int yS){
         super();
         construct(x,y,xS,yS);
@@ -27,6 +29,10 @@ public class PickArea extends JComponent implements MouseListener{
         addMouseListener(this);
         xPos = x; yPos = y;
         xSize = xS; ySize = yS;
+        for (int i = 0;i<4;i++){
+            PointGenerator pg = new PointGenerator(6+(106)*i, 6, 100.0);
+            hexagons[i]= pg;
+        }
     }
     public void paint(Graphics g){
         g.setColor(Color.BLACK);
@@ -34,7 +40,8 @@ public class PickArea extends JComponent implements MouseListener{
         g.setColor(Color.RED);
         //spacing+(size+space)*i
         for (int i = 0;i<4;i++){
-            g.fillRect(6+(106)*i, 6, 100, 100);
+            //g.fillRect(6+(106)*i, 6, 100, 100);
+            hexagons[i].drawHexagon(g);
         }
         g.setColor(Color.BLUE);
         for (int i = 0;i<4;i++){
@@ -103,7 +110,13 @@ public class PickArea extends JComponent implements MouseListener{
     public Dimension getMinimumSize() {return new Dimension(xSize, ySize );}
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
     public void mouseClicked(MouseEvent e) {}
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+        for (int i = 0;i<4;i++){
+            if(hexagons[i].isPointInsideHexagon(e)){
+                out.println("yes");
+            }
+        }
+    }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
