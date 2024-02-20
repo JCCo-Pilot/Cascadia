@@ -14,6 +14,7 @@ public class MainPanel extends JPanel implements MouseListener{
     private PickArea pa;
     private PlayerDisplay pd;
     private ArrayList<Player> players;
+    private ArrayList<JButton>buttons;
     public MainPanel(){
         setLayout(null);
         
@@ -24,10 +25,14 @@ public class MainPanel extends JPanel implements MouseListener{
         pd = new PlayerDisplay(0, 170, 1000, 690);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
+
+        //construct();
         this.setVisible(true);
     }
     private void construct(){
-
+        for (int i= 0;i<4;i++){
+            buttons.add(new JButton(""));
+        }
     }
     @Override
     public void paint(Graphics g){
