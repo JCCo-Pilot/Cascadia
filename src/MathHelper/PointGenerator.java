@@ -18,7 +18,7 @@ public class PointGenerator {
         int s = (int)(Math.round(size));
         unitCirclePoints(x, y, s);
         rotationOffset = 0;
-        //RotationGenerator(x, y, size);
+        unitCircleRotation(x, y, s);
     }
     private void RotationGenerator(int x, int y, Double size){
         Double b = ((4.0 - Math.sqrt(7)) / 6) * size;
@@ -129,6 +129,17 @@ public class PointGenerator {
         Integer yPoints[] = {y-radius,y-hOffset,y+hOffset,y+radius,y+hOffset,y-hOffset};
         for (int i =0; i<6;i++){
             ogPoints[i]= new MathPoint(xPoints[i], yPoints[i]);
+        }
+    }
+    private void unitCircleRotation(int x, int y, int radius){
+        Double rootOffset = (Math.sqrt(3)/2)*radius;
+        Double halfOffset = radius/2.0;
+        int rOffset = (int)Math.round(rootOffset);
+        int hOffset = (int)Math.round(halfOffset);
+        Integer xPoints[] = {x-hOffset,x+hOffset,x+radius,x+hOffset,x-hOffset,x-radius};
+        Integer yPoints[] = {y-rOffset,y-rOffset,y,y+rOffset,y+rOffset,y};
+        for(int i =0;i<6;i++){
+            rotated[i]= new MathPoint(xPoints[i], yPoints[i]);
         }
     }
 }
