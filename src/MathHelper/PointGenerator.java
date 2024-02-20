@@ -6,16 +6,15 @@ import java.awt.event.*;
 public class PointGenerator {
     private MathPoint[] ogPoints = new MathPoint[6];
     private MathPoint[] rotated = new MathPoint[6];
+    private int xPos,yPos;
+    private Double large;
     private int rotationOffset;
+    public PointGenerator(int x, int y, int sz){
+        Double d = sz+0.0;
+        
+    }
     public PointGenerator(int x, int y, Double size){//default point generator 0/180 degree
-        Double b = ((4.0 - Math.sqrt(7)) / 6) * size;
-        Integer sz = (int) Math.round(size);
-        Integer a = (int) Math.round(b);
-        Integer[] xPoints = {x+(sz/2), x + sz, x + sz, x+(sz/2), x, x};
-        Integer[] yPoints = {y, y + a, y + sz - a, y + sz, y + sz - a, y + a};
-        for (int i =0; i<6;i++){
-            ogPoints[i]= new MathPoint(xPoints[i], yPoints[i]);
-        }
+        calculation(x, y, size);
         rotationOffset = 0;
         RotationGenerator(x, y, size);
     }
@@ -42,6 +41,21 @@ public class PointGenerator {
             drawLine(g,rotated[5],rotated[0]);
         }
         
+    }
+    public void setX(int i){
+        xPos = i;
+        calculation(xPos, yPos, large);
+        RotationGenerator(xPos, yPos, large);
+    }
+    private void calculation(int x, int y, Double size){
+        Double b = ((4.0 - Math.sqrt(7)) / 6) * size;
+        Integer sz = (int) Math.round(size);
+        Integer a = (int) Math.round(b);
+        Integer[] xPoints = {x+(sz/2), x + sz, x + sz, x+(sz/2), x, x};
+        Integer[] yPoints = {y, y + a, y + sz - a, y + sz, y + sz - a, y + a};
+        for (int i =0; i<6;i++){
+            ogPoints[i]= new MathPoint(xPoints[i], yPoints[i]);
+        }
     }
     public void rotateCC(){
         if(rotationOffset==0){
