@@ -14,9 +14,11 @@ public class PointGenerator {
         
     }
     public PointGenerator(int x, int y, Double size){//default point generator 0/180 degree
-        calculation(x, y, size);
+        //calculation(x, y, size);
+        int s = (int)(Math.round(size));
+        unitCirclePoints(x, y, s);
         rotationOffset = 0;
-        RotationGenerator(x, y, size);
+        //RotationGenerator(x, y, size);
     }
     private void RotationGenerator(int x, int y, Double size){
         Double b = ((4.0 - Math.sqrt(7)) / 6) * size;
@@ -117,5 +119,16 @@ public class PointGenerator {
             j = i;
         }
         return oddNodes;
+    }
+    private void unitCirclePoints(int x, int y, int radius){
+        Double rootOffset = (Math.sqrt(3)/2)*radius;
+        Double halfOffset = radius/2.0;
+        int rOffset = (int)Math.round(rootOffset);
+        int hOffset = (int)Math.round(halfOffset);
+        Integer xPoints[] = {x,rOffset+x,rOffset+x,x,x-rOffset,x-rOffset};
+        Integer yPoints[] = {y-radius,y-hOffset,y+hOffset,y+radius,y+hOffset,y-hOffset};
+        for (int i =0; i<6;i++){
+            ogPoints[i]= new MathPoint(xPoints[i], yPoints[i]);
+        }
     }
 }

@@ -30,7 +30,7 @@ public class PickArea extends JComponent implements MouseListener{
         xPos = x; yPos = y;
         xSize = xS; ySize = yS;
         for (int i = 0;i<4;i++){
-            PointGenerator pg = new PointGenerator(6+(106)*i, 6, 100.0);
+            PointGenerator pg = new PointGenerator(6+(106)*i, 50, 50.0); //changed from y-6 to y-50
             hexagons[i]= pg;
         }
     }
