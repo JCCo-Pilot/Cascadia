@@ -27,6 +27,7 @@ public class App extends JFrame implements GameListener{
             this.remove(spanel);
             mpanel = new MainPanel();
             this.add(mpanel);
+            mpanel.setListener(this);
             repaint();
             this.setVisible(true);
             out.println("Switched");
@@ -34,6 +35,21 @@ public class App extends JFrame implements GameListener{
             this.remove(mpanel);
             epanel = new EndPanel();
             this.add(epanel);
+        }else{
+            switch (e.getState()) {
+                case 10:
+                    out.println("works");
+                break;
+                case 20:
+                    out.println("works1");
+                break; 
+                case 30:
+                    out.println("works2");
+                break;
+                case 40:
+                    out.println("works3"); 
+                break;
+            }
         }
     }
 }

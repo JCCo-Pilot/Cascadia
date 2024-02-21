@@ -9,7 +9,7 @@ import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
 import static java.lang.System.*;
-public class MainPanel extends JPanel implements MouseListener{
+public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private GameListener listener;
     private PickArea pa;
     private PlayerDisplay pd;
@@ -34,7 +34,8 @@ public class MainPanel extends JPanel implements MouseListener{
             buttons.add(new JButton("Player "+(i+1)));
         }
         for (int i= 0;i<buttons.size();i++){
-            buttons.get(i).setBounds(700+150*i,0,150,50);
+            buttons.get(i).setBounds(840+150*i,0,150,50);
+            buttons.get(i).addActionListener(this);
             buttons.get(i).setVisible(true);
             buttons.get(i).setFocusable(false);
             this.add(buttons.get(i));
@@ -49,6 +50,14 @@ public class MainPanel extends JPanel implements MouseListener{
     }
     public void setListener(GameListener g){
         listener = g;
+    }
+    public void actionPerformed(ActionEvent e){
+        for (int i =1;i<buttons.size();i++){
+            if (e.getSource()==buttons.get(i)){
+                GameStateEvent gse = new  GameStateEvent(buttons.get(i), 10*i);
+                listener.process(gse);
+            }
+        }
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
