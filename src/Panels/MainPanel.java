@@ -14,10 +14,9 @@ public class MainPanel extends JPanel implements MouseListener{
     private PickArea pa;
     private PlayerDisplay pd;
     private ArrayList<Player> players;
-    private ArrayList<JButton>buttons;
+    private ArrayList<JButton>buttons = new ArrayList<>();
     public MainPanel(){
         setLayout(null);
-        
         pa = new PickArea(4,0,0,530,170);
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         add(pa);
@@ -26,12 +25,19 @@ public class MainPanel extends JPanel implements MouseListener{
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
 
-        //construct();
+        construct();
         this.setVisible(true);
     }
     private void construct(){
+        buttons.add(new JButton("Scoring Cards"));
         for (int i= 0;i<4;i++){
-            buttons.add(new JButton(""));
+            buttons.add(new JButton("Player "+(i+1)));
+        }
+        for (int i= 0;i<buttons.size();i++){
+            buttons.get(i).setBounds(700+150*i,0,150,50);
+            buttons.get(i).setVisible(true);
+            buttons.get(i).setFocusable(false);
+            this.add(buttons.get(i));
         }
     }
     @Override

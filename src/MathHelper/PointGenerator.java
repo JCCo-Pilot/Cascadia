@@ -19,6 +19,8 @@ public class PointGenerator {
         unitCirclePoints(x, y, s);
         rotationOffset = 0;
         unitCircleRotation(x, y, s);
+        xPos = x;
+        yPos = y;
     }
     private void RotationGenerator(int x, int y, Double size){
         Double b = ((4.0 - Math.sqrt(7)) / 6) * size;
@@ -42,7 +44,9 @@ public class PointGenerator {
             }
             drawLine(g,rotated[5],rotated[0]);
         }
-        
+        //g.setColor(Color.BLACK);
+        //g.fillOval(xPos-20, yPos-20, 40, 40);
+        //g.setColor(Color.GREEN);
     }
     public void setX(int i){
         xPos = i;
