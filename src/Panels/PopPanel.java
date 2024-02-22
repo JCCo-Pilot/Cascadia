@@ -8,6 +8,7 @@ import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
 import MathHelper.*;
+import static java.lang.System.*;
 public class PopPanel extends JComponent implements MouseListener{
     private int state = -1;
     public PopPanel(){
@@ -21,7 +22,8 @@ public class PopPanel extends JComponent implements MouseListener{
         g.fillRect(0, 0, 1600, 900);
     }
     public void currentPlayer(int i){
-
+        state =i;
+        out.println(i);
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {

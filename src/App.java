@@ -53,18 +53,21 @@ public class App extends JFrame implements GameListener{
                     //out.println("works1");
                     this.remove(mpanel);
                     add(pPanel);
+                    pPanel.currentPlayer(2);
                     repaint();
                 break; 
                 case 30:
                     //out.println("works2");
                     this.remove(mpanel);
                     add(pPanel);
+                    pPanel.currentPlayer(3);
                     repaint();
                 break;
                 case 40:
                     //out.println("works3"); 
                     this.remove(mpanel);
                     add(pPanel);
+                    pPanel.currentPlayer(4);
                     repaint();
                 break;
             }
