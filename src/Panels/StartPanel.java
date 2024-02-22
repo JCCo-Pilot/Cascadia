@@ -2,6 +2,8 @@ package Panels;
 import java.util.*;
 import javax.swing.*;
 import EventAndListener.*;
+import MathHelper.PointGenerator;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
@@ -15,6 +17,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private final int width = 1600;
     private final int height = 900;
     private ArrayList<BufferedImage>images = new ArrayList<>();
+    private ArrayList<PointGenerator>hexagons = new ArrayList<>();
     public StartPanel(){
         //setSize(1600,900);
         setLayout(null);
@@ -31,7 +34,28 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         this.add(start);
         this.add(instructions);
         repaint();
+        makeHexagons();
         this.setVisible(true);
+    }
+    private void makeHexagons(){
+        int size = 100;
+        Double inc = size*Math.sqrt(3)/2;
+        int xInc = (int)(Math.round(inc));
+        for (int i =0; i<8;i++){
+            hexagons.add(new PointGenerator(xInc*2*(i+1), 0+150, 100.0));
+            hexagons.add(new PointGenerator(xInc*2*(i+1), 150*2+150, 100.0));
+            hexagons.add(new PointGenerator(xInc*2*(i+1), 150*4+150, 100.0));
+            /*hexagons.add(new PointGenerator(xInc*2*(i+1), 75*6+75, 50.0));
+            hexagons.add(new PointGenerator(xInc*2*(i+1), 75*8+75, 50.0));*/
+        }
+        for (int i =0; i<9;i++){
+            hexagons.add(new PointGenerator(xInc+(174*i), 0, 100.0));
+            hexagons.add(new PointGenerator(xInc+(174*i), 150+150, 100.0));
+            hexagons.add(new PointGenerator(xInc+(174*i), 150*3+150, 100.0));
+            hexagons.add(new PointGenerator(xInc+(174*i), 150*5+150, 100.0));
+            /*hexagons.add(new PointGenerator(xInc+(86*i), 75*7+75, 50.0));
+            hexagons.add(new PointGenerator(xInc+(86*i), 75*9+75, 50.0));*/
+        }
     }
     private void pullImages(){
         try{
@@ -82,6 +106,12 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 g.drawImage(images.get(14), 0, 0, width, height, null);
                 g.drawImage(images.get(15), width/2, 0, width, height, null);
             break;
+        }
+        paintHexagons(g);
+    }
+    private void paintHexagons(Graphics g){
+        for(int i=0;i<hexagons.size();i++){
+            hexagons.get(i).drawHexagon(g);
         }
     }
     public void actionPerformed(ActionEvent e){
