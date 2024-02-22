@@ -18,6 +18,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private final int height = 900;
     private ArrayList<BufferedImage>images = new ArrayList<>();
     private ArrayList<PointGenerator>hexagons = new ArrayList<>();
+    private ArrayList<PointGenerator>playerOptions = new ArrayList<>();
     public StartPanel(){
         //setSize(1600,900);
         setLayout(null);
@@ -41,6 +42,9 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         int size = 100;
         Double inc = size*Math.sqrt(3)/2;
         int xInc = (int)(Math.round(inc));
+        for (int i=0;i<3;i++){
+            playerOptions.add(new PointGenerator(600+(200*i), 300, 100.0));
+        }
         for (int i =0; i<10;i++){
             //hexagons.add(new PointGenerator(xInc*2*(i+1), 0+150, 100.0));
             hexagons.add(new PointGenerator(xInc*2*(i), 150*2+150, 100.0));
@@ -66,8 +70,6 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     public void paint(Graphics g){
         super.paintComponents(g);
         super.paint(g);
-        g.setFont(new Font("Arial", 100, 100));
-        g.drawString("Cascadia", 550, 200);
         switch (state) {
             case 1:
                 g.drawImage(images.get(0), 0, 0, width, height, null);
@@ -104,8 +106,18 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 g.drawImage(images.get(14), 0, 0, width, height, null);
                 g.drawImage(images.get(15), width/2, 0, width, height, null);
             break;
+            case 10:
+                for(int i=0;i<playerOptions.size();i++){
+                    playerOptions.get(i).drawHexagon(g);
+                }
+            break;
         }
-        paintHexagons(g);
+        if (state==-1){
+            g.setFont(new Font("Arial", 100, 100));
+            g.drawString("Cascadia", 550, 200);
+            paintHexagons(g);
+        }
+        
     }
     private void paintHexagons(Graphics g){
         for(int i=0;i<hexagons.size();i++){
@@ -114,11 +126,14 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     }
     public void actionPerformed(ActionEvent e){
         if (e.getSource()==start){
-            GameStateEvent gse = new GameStateEvent(this, 1);
-            listener.process(gse);
+            //GameStateEvent gse = new GameStateEvent(this, 1);
+            //listener.process(gse);
+            state = 10;
+            //instructions.setVisible(false);
+            start.setVisible(false);
         }else if (e.getSource()==instructions){
             state = 1;
-            instructions.setVisible(false);
+            //instructions.setVisible(false);
             start.setVisible(false);
         }
         repaint();
