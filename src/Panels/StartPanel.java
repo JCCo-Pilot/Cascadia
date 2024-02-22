@@ -148,13 +148,13 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         
         if (state==10){
             if(playerOptions.get(0).isPointInsideHexagon(e)){
-                GameStateEvent gse = new GameStateEvent(this, 0+1);
+                GameStateEvent gse = new GameStateEvent(this, 1);
                 listener.process(gse);
             }else if(playerOptions.get(1).isPointInsideHexagon(e)){
-                GameStateEvent gse = new GameStateEvent(this, 0+1);
+                GameStateEvent gse = new GameStateEvent(this, 2);
                 listener.process(gse);
             }else if(playerOptions.get(2).isPointInsideHexagon(e)){
-                GameStateEvent gse = new GameStateEvent(this, 0+1);
+                GameStateEvent gse = new GameStateEvent(this, 3);
                 listener.process(gse);
             }
         }

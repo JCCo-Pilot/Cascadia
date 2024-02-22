@@ -37,7 +37,7 @@ public class App extends JFrame implements GameListener{
             this.add(epanel);
         }else{
             switch (e.getState()) {
-                case 10:
+                case 10://player pop ups 1.2.3.4
                     out.println("works");
                 break;
                 case 20:
