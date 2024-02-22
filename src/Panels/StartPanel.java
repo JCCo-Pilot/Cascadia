@@ -35,6 +35,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         this.add(start);
         //this.add(instructions);*/
         repaint();
+        addMouseListener(this);
         makeHexagons();
         this.setVisible(true);
     }
@@ -43,7 +44,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         Double inc = size*Math.sqrt(3)/2;
         int xInc = (int)(Math.round(inc));
         for (int i=0;i<3;i++){
-            playerOptions.add(new PointGenerator(600+(200*i), 300, 100.0));
+            playerOptions.add(new PointGenerator(600+(200*i), 300+150, 100.0));
         }
         for (int i =0; i<10;i++){
             //hexagons.add(new PointGenerator(xInc*2*(i+1), 0+150, 100.0));
@@ -110,6 +111,10 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 for(int i=0;i<playerOptions.size();i++){
                     playerOptions.get(i).drawHexagon(g);
                 }
+                g.setFont(new Font("Arial", 100, 100));
+                g.drawString("2", 570, 330+150);
+                g.drawString("3", 770, 330+150);
+                g.drawString("4", 970, 330+150);
             break;
         }
         if (state==-1){
@@ -141,6 +146,18 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         
+        if (state==10){
+            if(playerOptions.get(0).isPointInsideHexagon(e)){
+                GameStateEvent gse = new GameStateEvent(this, 0+1);
+                listener.process(gse);
+            }else if(playerOptions.get(1).isPointInsideHexagon(e)){
+                GameStateEvent gse = new GameStateEvent(this, 0+1);
+                listener.process(gse);
+            }else if(playerOptions.get(2).isPointInsideHexagon(e)){
+                GameStateEvent gse = new GameStateEvent(this, 0+1);
+                listener.process(gse);
+            }
+        }
     }
     public void mouseReleased(MouseEvent e) {}    
     public void mouseEntered(MouseEvent e) {}
