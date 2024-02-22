@@ -43,14 +43,12 @@ public class App extends JFrame implements GameListener{
         }else{
             switch (e.getState()) {
                 case 10://player pop ups 1.2.3.4
-                    //out.println("works");
                     this.remove(mpanel);
                     add(pPanel);
                     pPanel.currentPlayer(1);
                     repaint();
                 break;
                 case 20:
-                    //out.println("works1");
                     this.remove(mpanel);
                     add(pPanel);
                     pPanel.currentPlayer(2);
