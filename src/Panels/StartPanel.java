@@ -23,16 +23,16 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         setLayout(null);
         start = new JButton("Start");
         start.addActionListener(this);
-        start.setBounds(700, 300, 200, 50);
-        instructions = new JButton("Instructions");
+        start.setBounds(695, 580, 175, 50);
+        /*instructions = new JButton("Instructions");
         instructions.setBounds(700,360,200,50);
         instructions.addActionListener(this);
         instructions.setVisible(true);
-        instructions.setFocusable(false);
+        instructions.setFocusable(false);*/
         start.setVisible(true);
         start.setFocusable(false);
         this.add(start);
-        this.add(instructions);
+        //this.add(instructions);*/
         repaint();
         makeHexagons();
         this.setVisible(true);
@@ -41,20 +41,16 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         int size = 100;
         Double inc = size*Math.sqrt(3)/2;
         int xInc = (int)(Math.round(inc));
-        for (int i =0; i<8;i++){
-            hexagons.add(new PointGenerator(xInc*2*(i+1), 0+150, 100.0));
-            hexagons.add(new PointGenerator(xInc*2*(i+1), 150*2+150, 100.0));
-            hexagons.add(new PointGenerator(xInc*2*(i+1), 150*4+150, 100.0));
-            /*hexagons.add(new PointGenerator(xInc*2*(i+1), 75*6+75, 50.0));
-            hexagons.add(new PointGenerator(xInc*2*(i+1), 75*8+75, 50.0));*/
+        for (int i =0; i<10;i++){
+            //hexagons.add(new PointGenerator(xInc*2*(i+1), 0+150, 100.0));
+            hexagons.add(new PointGenerator(xInc*2*(i), 150*2+150, 100.0));
+            hexagons.add(new PointGenerator(xInc*2*(i), 150*4+150, 100.0));
         }
-        for (int i =0; i<9;i++){
-            hexagons.add(new PointGenerator(xInc+(174*i), 0, 100.0));
-            hexagons.add(new PointGenerator(xInc+(174*i), 150+150, 100.0));
+        for (int i =0; i<10;i++){
+            //hexagons.add(new PointGenerator(xInc+(174*i), 0, 100.0));
+            //hexagons.add(new PointGenerator(xInc+(174*i), 150+150, 100.0));
             hexagons.add(new PointGenerator(xInc+(174*i), 150*3+150, 100.0));
             hexagons.add(new PointGenerator(xInc+(174*i), 150*5+150, 100.0));
-            /*hexagons.add(new PointGenerator(xInc+(86*i), 75*7+75, 50.0));
-            hexagons.add(new PointGenerator(xInc+(86*i), 75*9+75, 50.0));*/
         }
     }
     private void pullImages(){
@@ -70,6 +66,8 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     public void paint(Graphics g){
         super.paintComponents(g);
         super.paint(g);
+        g.setFont(new Font("Arial", 100, 100));
+        g.drawString("Cascadia", 550, 200);
         switch (state) {
             case 1:
                 g.drawImage(images.get(0), 0, 0, width, height, null);
