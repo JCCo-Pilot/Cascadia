@@ -24,16 +24,16 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         setLayout(null);
         start = new JButton("Start");
         start.addActionListener(this);
-        start.setBounds(695, 580, 175, 50);
-        /*instructions = new JButton("Instructions");
-        instructions.setBounds(700,360,200,50);
+        start.setBounds(696, 550, 175, 50);
+        instructions = new JButton("Instructions");
+        instructions.setBounds(1305,700,175,50);
         instructions.addActionListener(this);
         instructions.setVisible(true);
-        instructions.setFocusable(false);*/
+        instructions.setFocusable(false);
         start.setVisible(true);
         start.setFocusable(false);
         this.add(start);
-        //this.add(instructions);*/
+        this.add(instructions);
         repaint();
         addMouseListener(this);
         makeHexagons();
@@ -120,6 +120,8 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         if (state==-1){
             g.setFont(new Font("Arial", 100, 100));
             g.drawString("Cascadia", 550, 200);
+            /*g.setFont(new Font("Arial", 100, 40));
+            g.drawString("Start",740,610);*/
             paintHexagons(g);
         }
         
@@ -134,7 +136,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             //GameStateEvent gse = new GameStateEvent(this, 1);
             //listener.process(gse);
             state = 10;
-            //instructions.setVisible(false);
+            instructions.setVisible(false);
             start.setVisible(false);
         }else if (e.getSource()==instructions){
             state = 1;

@@ -12,6 +12,7 @@ public class App extends JFrame implements GameListener{
     private StartPanel spanel;
     private MainPanel mpanel;
     private EndPanel epanel;
+    private PopPanel pPanel;
     public App(String s){
         super(s);
         this.setSize(1600,900);
@@ -20,6 +21,10 @@ public class App extends JFrame implements GameListener{
         spanel = new StartPanel();
         spanel.setListener(this);
         add(spanel);
+
+        pPanel = new PopPanel();
+
+
         this.setVisible(true);
     }
     public void process(GameStateEvent e) {
@@ -38,16 +43,29 @@ public class App extends JFrame implements GameListener{
         }else{
             switch (e.getState()) {
                 case 10://player pop ups 1.2.3.4
-                    out.println("works");
+                    //out.println("works");
+                    this.remove(mpanel);
+                    add(pPanel);
+                    pPanel.currentPlayer(1);
+                    repaint();
                 break;
                 case 20:
-                    out.println("works1");
+                    //out.println("works1");
+                    this.remove(mpanel);
+                    add(pPanel);
+                    repaint();
                 break; 
                 case 30:
-                    out.println("works2");
+                    //out.println("works2");
+                    this.remove(mpanel);
+                    add(pPanel);
+                    repaint();
                 break;
                 case 40:
-                    out.println("works3"); 
+                    //out.println("works3"); 
+                    this.remove(mpanel);
+                    add(pPanel);
+                    repaint();
                 break;
             }
         }

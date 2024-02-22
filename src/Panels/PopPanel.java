@@ -9,10 +9,19 @@ import javax.imageio.ImageIO;
 import java.awt.image.*;
 import MathHelper.*;
 public class PopPanel extends JComponent implements MouseListener{
+    private int state = -1;
     public PopPanel(){
         super();
         this.setVisible(true);
         
+    }
+    public void paint(Graphics g){
+        super.paint(g);
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, 1600, 900);
+    }
+    public void currentPlayer(int i){
+
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
