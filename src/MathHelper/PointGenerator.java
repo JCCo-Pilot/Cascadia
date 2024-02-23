@@ -8,6 +8,7 @@ public class PointGenerator {
     private int xPos,yPos;
     private Double radius;
     private boolean clicked;
+    private myPolygon myPoly;
     public PointGenerator(int x, int y, int sz){
         radius = sz+0.0;
         unitCirclePoints(x, y, sz);
@@ -44,7 +45,8 @@ public class PointGenerator {
         g.drawLine(p.xPoint,p.yPoint,a.xPoint,a.yPoint);
     }
     public boolean isPointInsideHexagon(MouseEvent e){
-        return isPointInsideHexagon(e.getX(), e.getY());
+        return myPoly.contains(e.getX(), e.getY());
+        //return isPointInsideHexagon(e.getX(), e.getY());
     }
     private boolean isPointInsideHexagon(int x, int y) {
         int[] xPoints = new int[6];
@@ -73,5 +75,6 @@ public class PointGenerator {
         for (int i =0; i<6;i++){
             ogPoints[i]= new MathPoint(xPoints[i], yPoints[i]);
         }
+        myPoly = new myPolygon(ogPoints);
     }
 }

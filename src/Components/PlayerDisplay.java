@@ -74,6 +74,7 @@ public class PlayerDisplay extends JComponent implements MouseListener{
         for(int i =0;i<testHexagons.size();i++){
             if(testHexagons.get(i).isPointInsideHexagon(e)){
                 testHexagons.get(i).clicked();
+                
             }
         }
         repaint();
