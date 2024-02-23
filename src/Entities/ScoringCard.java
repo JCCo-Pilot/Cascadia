@@ -36,7 +36,7 @@ public class ScoringCard {
             }
         }
         switch(cardLetter){
-            case CARD_A:
+            case 0://Card A
                 switch(bearGroups.size()){
                     case 0:
                     return 0;
@@ -51,7 +51,7 @@ public class ScoringCard {
                     default:
                     return 0;
                 }
-            case CARD_B: 
+            case 1: //Card B
                 Integer numGroupsOfThree = 0;
                 for(HashSet<HabitatTiles> group: bearGroups){
                     if(group.size()==3){
@@ -59,7 +59,7 @@ public class ScoringCard {
                     }
                 }
                 return 10*numGroupsOfThree;
-            case CARD_C:
+            case 2: //Card C
                 Integer points2 = 0;
                 Boolean hasOne = false;
                 Boolean hasTwo = false;
@@ -82,7 +82,7 @@ public class ScoringCard {
                 }
                 if(hasOne&&hasTwo&&hasThree){points2 += 3;}
                 return points2;
-            case CARD_D:
+            case 3: //Card D
                 Integer points3 = 0;
                 for(HashSet<HabitatTiles> group: bearGroups){
                     switch(group.size()){

@@ -20,19 +20,19 @@ public class WildlifeTokens {
         var = i;
         try{
             switch(var){
-                case BEAR:
+                case 0:
                     image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Bear.png"));
                 break;  
-                case ELK:
+                case 1:
                     image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Elk.png"));
                 break;
-                case SALMON:
+                case 2:
                     image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Salmon.png"));
                 break;
-                case HAWK:
+                case 3:
                     image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Hawk.png"));
                 break;
-                case FOX:
+                case 4:
                     image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Fox.png"));
                 break;
             }
