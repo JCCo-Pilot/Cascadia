@@ -203,9 +203,9 @@ public class ScoringCard {
                             }
                             Boolean fitsShape = false;
                             for(int i = 0; i<6; i++){//since we need to query the nodes connected to the start node, it is easier to orient the start node in all 6 directions to check for the specific shape in one orientation
-                                HabitatTiles upleft = start4.get(HabitatTiles.UP_LEFT+i);
-                                HabitatTiles upright = start4.get(HabitatTiles.UP_RIGHT+i);
-                                HabitatTiles top = upright.get(HabitatTiles.UP_LEFT+i);
+                                HabitatTiles upleft = start4.get(HabitatTiles.next(HabitatTiles.UP_LEFT, i));
+                                HabitatTiles upright = start4.get(HabitatTiles.next(HabitatTiles.UP_RIGHT, i));
+                                HabitatTiles top = upright.get(HabitatTiles.next(HabitatTiles.UP_LEFT, i));
                                 if(upleft!=null&&upright!=null&&top!=null&&upleft.tokenInt().equals(ELK)&&upright.tokenInt().equals(ELK)&&top.tokenInt().equals(ELK)){
                                     groupPoints1.put(s, 13);
                                 }
