@@ -57,6 +57,9 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             hexagons.add(new PointGenerator(xInc+(174*i), 150*3+150, 100.0));
             hexagons.add(new PointGenerator(xInc+(174*i), 150*5+150, 100.0));
         }
+        for(int i =0;i<hexagons.size();i++){
+            //hexagons.get(i).clicked();
+        }
     }
     private void pullImages(){
         try{
@@ -71,6 +74,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     public void paint(Graphics g){
         super.paintComponents(g);
         super.paint(g);
+        setBackground(Color.WHITE);
         switch (state) {
             case 1:
                 g.drawImage(images.get(0), 0, 0, width, height, null);

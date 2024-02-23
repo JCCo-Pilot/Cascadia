@@ -31,12 +31,12 @@ public class PickArea extends JComponent implements MouseListener{
         xPos = x; yPos = y;
         xSize = xS; ySize = yS;
         for (int i = 0;i<4;i++){
-            PointGenerator pg = new PointGenerator(56+(106)*i, 50, 50.0); //changed from y-6 to y-50
+            PointGenerator pg = new PointGenerator(56, 150+(106*i), 50.0); //changed from y-6 to y-50
             hexagons[i]= pg;
         }
     }
     public void paint(Graphics g){
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);
         g.fillRect(0, 0, xSize, ySize);
         g.setColor(Color.RED);
         //spacing+(size+space)*i
@@ -46,10 +46,10 @@ public class PickArea extends JComponent implements MouseListener{
         }
         g.setColor(Color.BLUE);
         for (int i = 0;i<4;i++){
-            g.fillOval(31+(106)*i, 111, 50, 50);
+            g.fillOval(131, 100+25+(106)*i, 50, 50);
         }
-        g.fillRect(324+106,111,94,50);
-        g.fillRect(324+106,6,94,100);
+        g.setFont(new Font("Arial", 100, 50));
+        g.drawString("Player 1:",10,70);
     }
     @Override
     public void paintComponent(Graphics g){
