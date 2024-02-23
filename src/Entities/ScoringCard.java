@@ -203,9 +203,9 @@ public class ScoringCard {
                             }
                             Boolean fitsShape = false;
                             for(int i = 0; i<6; i++){//since we need to query the nodes connected to the start node, it is easier to orient the start node in all 6 directions to check for the specific shape in one orientation
-                                HabitatTiles upleft = start4.get(HabitatTiles.UP_LEFT+i);
-                                HabitatTiles upright = start4.get(HabitatTiles.UP_RIGHT+i);
-                                HabitatTiles top = upright.get(HabitatTiles.UP_LEFT+i);
+                                HabitatTiles upleft = start4.get(HabitatTiles.next(HabitatTiles.UP_LEFT, i));
+                                HabitatTiles upright = start4.get(HabitatTiles.next(HabitatTiles.UP_RIGHT, i));
+                                HabitatTiles top = upright.get(HabitatTiles.next(HabitatTiles.UP_LEFT, i));
                                 if(upleft!=null&&upright!=null&&top!=null&&upleft.tokenInt().equals(ELK)&&upright.tokenInt().equals(ELK)&&top.tokenInt().equals(ELK)){
                                     groupPoints1.put(s, 13);
                                 }
@@ -221,33 +221,39 @@ public class ScoringCard {
                 return points1;
             
             case 2:
-                Integer points2 = 0;
+                HashMap<HashSet<HabitatTiles>, Integer> groupPoints2 = new HashMap<HashSet<HabitatTiles>, Integer>();//maps each group to its number of points, will be used to clear up adjacent groups
+                .//Integer points2 = 0;
                 for(HashSet<HabitatTiles> s:elkGroups){
                     switch(s.size()){
                         case 1:
-                            points2+=2;
+                            groupPoints2.put(s, 2);
                         break;
                         case 2:
-                            points2+=4;
+                            groupPoints2.put(s, 4);
                         break;
                         case 3:
-                            points2+=7;
+                            groupPoints2.put(s, 7);
                         break;
                         case 4:
-                            points2+=10;
+                            groupPoints2.put(s, 10);
                         break;
                         case 5:
-                            points2+=14;
+                            groupPoints2.put(s, 14);
                         break;
                         case 6:
-                            points2+=18;
+                            groupPoints2.put(s, 18);
                         break;
                         case 7:
-                            points2+=23;
+                            groupPoints2.put(s, 23);
                         break;
                         default://8 or more
-                            points2+=28;
+                            groupPoints2.put(s, 28);
                     }
+                }
+                resolveConnectedElkGroups(groupPoints2);
+                Integer points2 = 0;
+                for(Integer points:groupPoints2.values()){
+                points2+=points;
                 }
                 return points2;
             
@@ -312,16 +318,17 @@ public class ScoringCard {
                                         }
                                     }
                                 }
-                            resolveConnectedElkGroups(groupPoints3);
-                            Integer points3 = 0;
-                            for(Integer points:groupPoints3.values()){
-                                points3+=points;
-                            }
-                            return points3;
-                        
+
                         }
                     }
                 }
+                resolveConnectedElkGroups(groupPoints3);
+                Integer points3 = 0;
+                for(Integer points:groupPoints3.values()){
+                points3+=points;
+                }
+                return points3;
+            break;
         }
         return 0;
     }
