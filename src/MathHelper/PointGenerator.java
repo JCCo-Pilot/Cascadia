@@ -21,6 +21,7 @@ public class PointGenerator {
         unitCircleRotation(x, y, s);
         xPos = x;
         yPos = y;
+        large = size;
     }
     private void RotationGenerator(int x, int y, Double size){
         Double b = ((4.0 - Math.sqrt(7)) / 6) * size;
@@ -76,6 +77,9 @@ public class PointGenerator {
         }else{
             rotationOffset--;
         }
+    }
+    public Double getSize(){
+        return large;
     }
     public int getOffset(){
         return rotationOffset;

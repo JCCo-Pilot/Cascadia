@@ -16,6 +16,7 @@ public class HabitatTiles extends PointGenerator{
     public static Integer UP_RIGHT = 4;
     public static Integer UP_LEFT = 5;
 
+    private BufferedImage image;
     private HashSet<String> animals = new HashSet<String>();
     private HashMap<Integer, String> habitatSides = new HashMap<Integer, String>();
     private HashMap<Integer, HabitatTiles> connections = new HashMap<Integer, HabitatTiles>();
@@ -120,7 +121,14 @@ public class HabitatTiles extends PointGenerator{
         }
         return count;
     }
-
+    @Override
+    public void drawHexagon(Graphics g){
+        Double offset = super.getSize();
+        int yOffset = (int)(Math.round(offset));
+        Double yo = -1*Math.sqrt(3)/2.0*offset;
+        int xOffset = (int)(Math.round(yo));
+        g.drawImage(image, x+xOffset, y-yOffset, null);
+    }
     //MISC*******************************************************************************************************
     public void replaceNullConnectionsWithEmpty(){
         for(int i = 0; i<6; i++){
