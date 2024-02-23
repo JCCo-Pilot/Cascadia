@@ -111,6 +111,8 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 for(int i=0;i<playerOptions.size();i++){
                     playerOptions.get(i).drawHexagon(g);
                 }
+                g.setFont(new Font("Arial", 100, 70));
+                g.drawString("Number of Players:",520,250);
                 g.setFont(new Font("Arial", 100, 100));
                 g.drawString("2", 570, 330+150);
                 g.drawString("3", 770, 330+150);

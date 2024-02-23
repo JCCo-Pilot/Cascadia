@@ -57,6 +57,7 @@ public class PlayerDisplay extends JComponent implements MouseListener{
         g.setColor(Color.GREEN);
         g.fillRect(0,0,xSize,ySize);
         g.setColor(Color.BLACK);
+        Polygon p = new Polygon();
         for (int i =0; i<testHexagons.size();i++){
             testHexagons.get(i).drawHexagon(g);
         }
@@ -70,7 +71,12 @@ public class PlayerDisplay extends JComponent implements MouseListener{
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        
+        for(int i =0;i<testHexagons.size();i++){
+            if(testHexagons.get(i).isPointInsideHexagon(e)){
+                testHexagons.get(i).clicked();
+            }
+        }
+        repaint();
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}

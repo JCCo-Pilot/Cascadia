@@ -7,6 +7,7 @@ public class PointGenerator {
     private MathPoint[] ogPoints = new MathPoint[6];
     private int xPos,yPos;
     private Double radius;
+    private boolean clicked;
     public PointGenerator(int x, int y, int sz){
         radius = sz+0.0;
         unitCirclePoints(x, y, sz);
@@ -20,6 +21,10 @@ public class PointGenerator {
         radius = sz;
     }
     public void drawHexagon(Graphics g){
+        if (clicked){
+            myPolygon mp = new myPolygon(ogPoints);
+            g.fillPolygon(mp);
+        }
         for (int i =0; i<5;i++){
             drawLine(g, ogPoints[i], ogPoints[i+1]);
         }
@@ -31,6 +36,9 @@ public class PointGenerator {
     }
     public Double getSize(){
         return radius;
+    }
+    public void clicked(){
+        clicked= !clicked;
     }
     private void drawLine(Graphics g, MathPoint p, MathPoint a){
         g.drawLine(p.xPoint,p.yPoint,a.xPoint,a.yPoint);
