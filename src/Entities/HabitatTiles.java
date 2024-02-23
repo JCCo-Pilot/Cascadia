@@ -186,6 +186,24 @@ public class HabitatTiles extends PointGenerator{
         return (i-1) % 6;
     }
 
+    public static Integer next(Integer i, Integer increment){
+        //gets number representing next [increment] side, going clockwise.
+        Integer ret = i;
+        for(int c = 0; c<increment; c++){
+            ret = (ret+1) % 6;
+        }
+        return ret;
+    }
+
+    public static Integer previous(Integer i, Integer decrement){
+        //gets number representing previous [increment] side, going clockwise.
+        Integer ret = i;
+        for(int c = 0; c<decrement; c++){
+            ret = (ret-1) % 6;
+        }
+        return ret;
+    }
+
     public Image getImage(){
         //TODO: idk how the images will be stored so
         try {
@@ -201,10 +219,25 @@ public class HabitatTiles extends PointGenerator{
         return connections;
     }
 
+    public HabitatTiles replaceWith(HabitatTiles h){
+        HabitatTiles removed = new HabitatTiles();
+        for(HabitatTiles t:this.connections.values()){
+            removed = t.add(h, t.getSideOf(this));
+        }
+        return removed;
+    }
+
+    public HabitatTiles findFirstWithSpecificToken(Integer token){
+        for(Integer i:connections.keySet()){
+            if(connections.get(i).tokenInt().equals(token)){
+                return connections.get(i);
+            }
+        }
+        return null;
+    }
+
     public boolean equals(Object o){
         HabitatTiles h = (HabitatTiles)o;
         return h.imageName.equals(this.imageName);
     }
-
-    
 }
