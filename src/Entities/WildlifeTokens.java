@@ -8,23 +8,31 @@ import javax.imageio.*;
 import java.awt.event.*;
 import static java.lang.System.*;
 public class WildlifeTokens {
-    private String[]type = {"Bear","Elk","Salmon","Fox"};
+    public final static Integer BEAR = 0;
+    public final static Integer ELK = 1;
+    public final static Integer SALMON = 2;
+    public final static Integer HAWK = 3;
+    public final static Integer FOX = 4;
+    private String[]type = {"Bear","Elk","Salmon","Hawk", "Fox"};
     private BufferedImage image;
     private int var;
     public WildlifeTokens(int i){
         var = i;
         try{
             switch(var){
-                case 0:
+                case BEAR:
                     image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Bear.png"));
                 break;  
-                case 1:
+                case ELK:
                     image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Elk.png"));
                 break;
-                case 2:
+                case SALMON:
                     image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Salmon.png"));
                 break;
-                case 3:
+                case HAWK:
+                    image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Hawk.png"));
+                break;
+                case FOX:
                     image = ImageIO.read(WildlifeTokens.class.getResource("/Image/Fox.png"));
                 break;
             }
