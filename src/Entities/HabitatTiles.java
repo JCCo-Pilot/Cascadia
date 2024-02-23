@@ -7,6 +7,8 @@ import java.util.*;
 import java.awt.image.*;
 import javax.imageio.*;
 import java.awt.event.*;
+import java.awt.geom.*;
+
 import static java.lang.System.*;
 public class HabitatTiles extends PointGenerator{
     public static Integer LEFT = 0;
@@ -15,6 +17,7 @@ public class HabitatTiles extends PointGenerator{
     public static Integer RIGHT = 3;
     public static Integer UP_RIGHT = 4;
     public static Integer UP_LEFT = 5;
+
 
     private BufferedImage image;
     private HashSet<String> animals = new HashSet<String>();
@@ -123,11 +126,16 @@ public class HabitatTiles extends PointGenerator{
     }
     @Override
     public void drawHexagon(Graphics g){
+        Graphics2D g2d = (Graphics2D) g;
+
         Double offset = super.getSize();
         int yOffset = (int)(Math.round(offset));
         Double yo = -1*Math.sqrt(3)/2.0*offset;
         int xOffset = (int)(Math.round(yo));
-        g.drawImage(image, x+xOffset, y-yOffset, null);
+
+        /*AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(rotation), super.getX(), super.getY());
+        g2d.setTranform(transform);*/
+        g.drawImage(image, x+xOffset,y-yOffset,null);
     }
     //MISC*******************************************************************************************************
     public void replaceNullConnectionsWithEmpty(){
@@ -160,7 +168,7 @@ public class HabitatTiles extends PointGenerator{
     }
 
     public void rotate(){
-        rotation++;
+        rotation+=60;
         HashMap<Integer, String> temp = new HashMap<Integer, String>();
         for(int i = 0; i<6; i++){
             temp.put(previousInt(i), habitatSides.get(i));
