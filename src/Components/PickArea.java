@@ -113,9 +113,7 @@ public class PickArea extends JComponent implements MouseListener{
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         for (int i = 0;i<4;i++){
-            if(hexagons[i].isPointInsideHexagon(e)){
-                hexagons[i].rotateC();
-            }
+            
         }
         repaint();
     }
