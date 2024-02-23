@@ -17,11 +17,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private ArrayList<JButton>buttons = new ArrayList<>();
     public MainPanel(int l){
         setLayout(null);
-        pa = new PickArea(4,0,0,530,170);
+        pa = new PickArea(l,0,0,250,870);
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         add(pa);
 
-        pd = new PlayerDisplay(0, 170, 1000, 690);
+        pd = new PlayerDisplay(250, 0, 1100, 870);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
 
@@ -34,7 +34,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
             buttons.add(new JButton("Player "+(i+1)));
         }
         for (int i= 0;i<buttons.size();i++){
-            buttons.get(i).setBounds(840+150*i,0,150,50);
+            buttons.get(i).setBounds(1350,0+50*i,250,50);
             buttons.get(i).addActionListener(this);
             buttons.get(i).setVisible(true);
             buttons.get(i).setFocusable(false);
