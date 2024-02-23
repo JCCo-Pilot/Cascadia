@@ -31,7 +31,7 @@ public class HabitatGraph{
         return iterationReturn;
     }
 
-    public void iterate(HabitatTiles h, HashSet<HabitatTiles> s){
+    private void iterate(HabitatTiles h, HashSet<HabitatTiles> s){
         if(h==null||s.contains(h)){
             return;
         }else{
