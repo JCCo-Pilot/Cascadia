@@ -113,7 +113,12 @@ public class ScoringCard {
     private HashSet<HabitatTiles> findBearGroup(HabitatTiles bear, HashSet<HabitatTiles> visitedBears){
         HashSet<HabitatTiles> bearGroup = new HashSet<HabitatTiles>();
         addBearToGroup(bear, visitedBears, bearGroup);
-        return bearGroup;
+        if(bearGroup.size()>0){
+            return bearGroup;
+        }else{
+            return null;
+        }
+        
     }
 
     private void addBearToGroup(HabitatTiles bear, HashSet<HabitatTiles> visitedBears, HashSet<HabitatTiles> bearGroup){
