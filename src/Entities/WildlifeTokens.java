@@ -21,19 +21,19 @@ public class WildlifeTokens {
         try{
             switch(var){
                 case 0:
-                    image = ImageIO.read(new File("C:/Cascadia/src//Entities/Tokens/BearToken.png"));
+                    image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/BearToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/BearToken.png"));
                 break;  
                 case 1:
-                    image = ImageIO.read(new File("C:/Cascadia/src//Entities/Tokens/ElkToken.png"));
+                    image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/ElkToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/ElkToken.png"));
                 break;
                 case 2:
-                    image = ImageIO.read(new File("C:/Cascadia/src//Entities/Tokens/SalmonToken.png"));
+                    image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/SalmonToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/SalmonToken.png"));
                 break;
                 case 3:
-                    image = ImageIO.read(new File("C:/Cascadia/src//Entities/Tokens/HawkToken.png"));
+                    image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/HawkToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/HawkToken.png"));
                 break;
                 case 4:
