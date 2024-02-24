@@ -103,6 +103,7 @@ public class PickArea extends JComponent implements MouseListener{
         int numFox = 0;
         int numElk = 0;
         int numSalmon = 0;
+        int numHawk =0;
         for (int i = 0; i<tokens.size();i++){
             if (tokens.get(i).getName().equals("Bear")){
                 numBear++;
@@ -112,12 +113,15 @@ public class PickArea extends JComponent implements MouseListener{
                 numSalmon++;
             }else if (tokens.get(i).getName().equals("Fox")){
                 numFox++;
+            }else if (tokens.get(i).getName().equals("Hawk")){
+                numHawk++;
             }
         }
         out.println("Bears -"+numBear);
         out.println("Elks -"+numElk);
         out.println("Salmon -"+numSalmon);
         out.println("Fox -"+numFox);
+        out.println("Hawk -"+numHawk);
     }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
     public Dimension getMinimumSize() {return new Dimension(xSize, ySize );}
