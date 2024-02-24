@@ -369,7 +369,8 @@ public class ScoringCard {
 
     private HashSet<HabitatTiles> elkIterateInCircle(HabitatTiles start, Integer direction, Boolean isClockwise){
         HashSet<HabitatTiles> visitedElk = new HashSet<HabitatTiles>();
-        elkIterateInCircle(start, direction, visitedElk, isClockwise);
+        visitedElk.add(start);
+        elkIterateInCircle(start.get(direction), direction, visitedElk, isClockwise);
         return visitedElk;
     }
 
