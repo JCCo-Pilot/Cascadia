@@ -118,8 +118,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             /*g.setFont(new Font("Arial", 100, 40));
             g.drawString("Start",740,610);*/
             g.drawImage(bg,0,0,1590,865,null);
-            paintHexagons(g);
-            
+            //paintHexagons(g);
             paintComponents(g);
         }
         
@@ -146,7 +145,15 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        
+        if (state==-1){
+            if (hexagons.get(0).isPointInsideHexagon(e)){
+                state =10;
+                repaint();
+            }else if (hexagons.get(1).isPointInsideHexagon(e)){
+                state =1;
+                repaint();
+            }
+        }
         if (state==10){
             if(playerOptions.get(0).isPointInsideHexagon(e)){
                 GameStateEvent gse = new GameStateEvent(this, 1);

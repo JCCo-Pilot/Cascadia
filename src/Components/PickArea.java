@@ -27,7 +27,7 @@ public class PickArea extends JComponent implements MouseListener{
         randShuffle();
         createHabitatTiles();
 
-        jb.setBounds(0,800,100,50);
+        jb.setBounds(0,800,150,50);
         jb.setVisible(true);
         add(jb);
         

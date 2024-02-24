@@ -16,8 +16,10 @@ public class WildlifeTokens {
     private String[]type = {"Bear","Elk","Salmon","Hawk", "Fox"};
     private BufferedImage image;
     private int var;
+    private int xPos,yPos;
     public WildlifeTokens(int i){
         var = i;
+        xPos = 0; yPos = 0;
         try{
             switch(var){
                 case 0:
