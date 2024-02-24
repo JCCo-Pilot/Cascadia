@@ -209,7 +209,9 @@ public class ElkCard implements ScoringCard{
                                         }
                                     }
                                 }
-                                if(!foundCircle){
+                                
+                        }
+                        if(!foundCircle){
                                     for(int i = 0; i<6; i++){
                                         if(startIfNoOther.get(i).tokenAnimal().equals(CardAnimals.ELK)){
                                             direction = i;
@@ -248,7 +250,6 @@ public class ElkCard implements ScoringCard{
                                         }
                                     }
                                 }
-                        }
                     }
                 }
                 resolveConnectedElkGroups(groupPoints3);
