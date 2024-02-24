@@ -23,6 +23,7 @@ public class PickArea extends JComponent implements MouseListener{
         numPlayers = i;
         this.setVisible(true);
         createTokens();
+        //sumChecker();
         randShuffle();
         createHabitatTiles();
 
@@ -54,7 +55,8 @@ public class PickArea extends JComponent implements MouseListener{
         }
         g.setColor(Color.BLUE);
         for (int i = 0;i<4;i++){
-            g.fillOval(131, 200+25+(106)*i, 50, 50);
+            g.drawImage(tokens.get(i).getImage(),131,200+25+(106*i),50,50,null);
+            //g.fillOval(131, 200+25+(106)*i, 50, 50);
         }
         g.setFont(new Font("Arial", 100, 50));
         g.drawString("Player 1:",10,70);
@@ -73,6 +75,7 @@ public class PickArea extends JComponent implements MouseListener{
             tokens.add(new WildlifeTokens(1));
             tokens.add(new WildlifeTokens(2));
             tokens.add(new WildlifeTokens(3));
+            tokens.add(new WildlifeTokens(4));
         }
     }
     private void createHabitatTiles(){
