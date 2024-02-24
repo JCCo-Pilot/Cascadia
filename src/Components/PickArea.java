@@ -15,6 +15,7 @@ public class PickArea extends JComponent implements MouseListener{
     private int numPlayers;
     private int xSize,ySize;
     private int xPos,yPos;
+    private JButton jb = new JButton("Over-Population");
     private PointGenerator[]hexagons = new PointGenerator[4];
     public PickArea(int i,int x, int y , int xS, int yS){
         super();
@@ -24,6 +25,12 @@ public class PickArea extends JComponent implements MouseListener{
         createTokens();
         randShuffle();
         createHabitatTiles();
+
+        jb.setBounds(0,800,100,50);
+        jb.setVisible(true);
+        add(jb);
+        
+        setVisible(true);
     }
     private void construct(int x, int y, int xS, int yS){
         enableInputMethods(true);
@@ -31,11 +38,12 @@ public class PickArea extends JComponent implements MouseListener{
         xPos = x; yPos = y;
         xSize = xS; ySize = yS;
         for (int i = 0;i<4;i++){
-            PointGenerator pg = new PointGenerator(56, 150+(106*i), 50.0); //changed from y-6 to y-50
+            PointGenerator pg = new PointGenerator(56, 250+(106*i), 50.0); //changed from y-6 to y-50
             hexagons[i]= pg;
         }
     }
     public void paint(Graphics g){
+        
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, xSize, ySize);
         g.setColor(Color.RED);
@@ -46,10 +54,11 @@ public class PickArea extends JComponent implements MouseListener{
         }
         g.setColor(Color.BLUE);
         for (int i = 0;i<4;i++){
-            g.fillOval(131, 100+25+(106)*i, 50, 50);
+            g.fillOval(131, 200+25+(106)*i, 50, 50);
         }
         g.setFont(new Font("Arial", 100, 50));
         g.drawString("Player 1:",10,70);
+        paintComponents(g);
     }
     @Override
     public void paintComponent(Graphics g){
