@@ -47,13 +47,11 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             playerOptions.add(new PointGenerator(600+(200*i), 300+150, 100.0));
         }
         for (int i =0; i<10;i++){
-            //hexagons.add(new PointGenerator(xInc*2*(i+1), 0+150, 100.0));
+
             hexagons.add(new PointGenerator(xInc*2*(i), 150*2+150, 100.0));
             hexagons.add(new PointGenerator(xInc*2*(i), 150*4+150, 100.0));
         }
         for (int i =0; i<10;i++){
-            //hexagons.add(new PointGenerator(xInc+(174*i), 0, 100.0));
-            //hexagons.add(new PointGenerator(xInc+(174*i), 150+150, 100.0));
             hexagons.add(new PointGenerator(xInc+(174*i), 150*3+150, 100.0));
             hexagons.add(new PointGenerator(xInc+(174*i), 150*5+150, 100.0));
         }
