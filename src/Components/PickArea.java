@@ -71,11 +71,11 @@ public class PickArea extends JComponent implements MouseListener{
     }
     private void createTokens(){
         for (int i =0;i<20;i++){
-            tokens.add(new WildlifeTokens(0));
-            tokens.add(new WildlifeTokens(1));
-            tokens.add(new WildlifeTokens(2));
-            tokens.add(new WildlifeTokens(3));
-            tokens.add(new WildlifeTokens(4));
+            tokens.add(new WildlifeTokens(CardAnimals.BEAR));
+            tokens.add(new WildlifeTokens(CardAnimals.ELK));
+            tokens.add(new WildlifeTokens(CardAnimals.SALMON));
+            tokens.add(new WildlifeTokens(CardAnimals.HAWK));
+            tokens.add(new WildlifeTokens(CardAnimals.FOX));
         }
     }
     private void createHabitatTiles(){
