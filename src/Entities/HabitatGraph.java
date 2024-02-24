@@ -15,10 +15,10 @@ public class HabitatGraph{
         this.root = root;
     }
 
-    public HashSet<HabitatTiles> filter(Integer i){
+    public HashSet<HabitatTiles> filter(CardAnimals i){
         HashSet<HabitatTiles> filterReturn = new HashSet<HabitatTiles>();
         for(HabitatTiles h:iterate()){
-            if(h.tokenInt()==i){
+            if(h.tokenAnimal()==i){
                 filterReturn.add(h);
             }
         }

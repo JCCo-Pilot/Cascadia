@@ -20,7 +20,7 @@ public class HabitatTiles extends PointGenerator{
 
 
     private BufferedImage image;
-    private HashSet<String> animals = new HashSet<String>();
+    private HashSet<CardAnimals> animals = new HashSet<CardAnimals>();
     private HashMap<Integer, String> habitatSides = new HashMap<Integer, String>();
     private HashMap<Integer, HabitatTiles> connections = new HashMap<Integer, HabitatTiles>();
     private Integer rotation = 0;
@@ -61,7 +61,7 @@ public class HabitatTiles extends PointGenerator{
         }
 
         for(int i = 0; i<animals.length; i++){
-            this.animals.add(animals[i]);
+            this.animals.add(CardAnimals.StringToAnimal(animals[i]));
         }
     }
 
@@ -85,7 +85,7 @@ public class HabitatTiles extends PointGenerator{
         }
 
         for(int i = 0; i<animals.length; i++){
-            this.animals.add(animals[i]);
+            this.animals.add(CardAnimals.StringToAnimal(animals[i]));
         }
     }
     
@@ -98,7 +98,7 @@ public class HabitatTiles extends PointGenerator{
         token = w;
     }
 
-    public void setToken(Integer i){
+    public void setToken(CardAnimals i){
         token = new WildlifeTokens(i);
     }
 
@@ -106,7 +106,7 @@ public class HabitatTiles extends PointGenerator{
         return token.toString();
     }
 
-    public Integer tokenInt(){
+    public CardAnimals tokenAnimal(){
         return token.getType();
     }
 
@@ -115,10 +115,10 @@ public class HabitatTiles extends PointGenerator{
         return this.habitatSides.get(connection).equals(c.habitatSides.get(c.getSideOf(this)));
     }
 
-    public Integer getNumberOf(Integer i){
+    public Integer getNumberOf(CardAnimals i){
         Integer count = 0;
         for(int c: connections.keySet()){
-            if(connections.get(c).tokenInt()==i){
+            if(connections.get(c).tokenAnimal()==i){
                 count++;
             }
         }
@@ -209,7 +209,7 @@ public class HabitatTiles extends PointGenerator{
         try {
             return ImageIO.read(new File(imageName+".png"));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         return null;
@@ -227,9 +227,9 @@ public class HabitatTiles extends PointGenerator{
         return removed;
     }
 
-    public HabitatTiles findFirstWithSpecificToken(Integer token){
+    public HabitatTiles findFirstWithSpecificToken(CardAnimals token){
         for(Integer i:connections.keySet()){
-            if(connections.get(i).tokenInt().equals(token)){
+            if(connections.get(i).tokenAnimal().equals(token)){
                 return connections.get(i);
             }
         }

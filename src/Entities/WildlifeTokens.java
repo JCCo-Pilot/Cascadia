@@ -8,37 +8,33 @@ import javax.imageio.*;
 import java.awt.event.*;
 import static java.lang.System.*;
 public class WildlifeTokens {
-    public final static Integer BEAR = 0;
-    public final static Integer ELK = 1;
-    public final static Integer SALMON = 2;
-    public final static Integer HAWK = 3;
-    public final static Integer FOX = 4;
     private String[]type = {"Bear","Elk","Salmon","Hawk", "Fox"};
     private BufferedImage image;
-    private int var;
+    private CardAnimals animalType;
     private int xPos,yPos;
-    public WildlifeTokens(int i){
-        var = i;
-        xPos = 0; yPos = 0;
+    public WildlifeTokens(CardAnimals animalType){
+        this.animalType = animalType;
+        xPos = 0;
+        yPos = 0;
         try{
-            switch(var){
-                case 0:
+            switch(animalType){
+                case BEAR:
                     image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/BearToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/BearToken.png"));
                 break;  
-                case 1:
+                case ELK:
                     image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/ElkToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/ElkToken.png"));
                 break;
-                case 2:
+                case SALMON:
                     image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/SalmonToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/SalmonToken.png"));
                 break;
-                case 3:
+                case HAWK:
                     image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/HawkToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/HawkToken.png"));
                 break;
-                case 4:
+                case FOX:
                     image = ImageIO.read(new File("C:/Cascadia/src//Entities/Tokens/FoxToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/FoxToken.png"));
                 break;
@@ -49,13 +45,13 @@ public class WildlifeTokens {
     }
     @Override
     public String toString(){
-        return type[var];
+        return animalType.toString();
     }
     public String getName(){
-        return type[var];
+        return this.toString();
     }
-    public int getType(){
-        return var;
+    public CardAnimals getType(){
+        return animalType;
     }
     public BufferedImage getImage(){
         return image;
