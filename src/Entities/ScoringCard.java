@@ -227,7 +227,7 @@ public class ScoringCard {
             
             case 2:
                 HashMap<HashSet<HabitatTiles>, Integer> groupPoints2 = new HashMap<HashSet<HabitatTiles>, Integer>();//maps each group to its number of points, will be used to clear up adjacent groups
-                .//Integer points2 = 0;
+                //Integer points2 = 0;
                 for(HashSet<HabitatTiles> s:elkGroups){
                     switch(s.size()){
                         case 1:
@@ -323,7 +323,45 @@ public class ScoringCard {
                                         }
                                     }
                                 }
-
+                                if(!foundCircle){
+                                    for(int i = 0; i<6; i++){
+                                        if(startIfNoOther.get(i).tokenInt().equals(ELK)){
+                                            direction = i;
+                                            if(startIfNoOther.get(i).get(HabitatTiles.nextInt(i)).tokenInt().equals(ELK)){
+                                                isClockwise = true;
+                                                isCircle = true;
+                                            }else if(startIfNoOther.get(i).get(HabitatTiles.previousInt(i)).tokenInt().equals(ELK)){
+                                                isClockwise = false;
+                                                isCircle = true;
+                                            }
+                                            if(isCircle){
+                                                    HashSet<HabitatTiles> circle = elkIterateInCircle(startIfNoOther, i, isClockwise);
+                                                    foundCircle = true;
+                                                    switch(circle.size()){
+                                                        case 1://redundancy
+                                                            groupPoints3.put(circle, 2);
+                                                        break;
+                                                        case 2://redundancy
+                                                            groupPoints3.put(circle, 5);
+                                                        break;
+                                                        case 3:
+                                                            groupPoints3.put(circle, 8);
+                                                        break;
+                                                        case 4:
+                                                            groupPoints3.put(circle, 12);
+                                                        break;
+                                                        case 5:
+                                                            groupPoints3.put(circle, 16);
+                                                        break;
+                                                        case 6:
+                                                            groupPoints3.put(circle, 21);
+                                                        break;
+                                                    }
+                                                
+                                            }
+                                        }
+                                    }
+                                }
                         }
                     }
                 }
@@ -333,7 +371,7 @@ public class ScoringCard {
                 points3+=points;
                 }
                 return points3;
-            break;
+            
         }
         return 0;
     }
@@ -419,5 +457,136 @@ public class ScoringCard {
             }
         }
         return false;
+    }
+
+    //SALMON************************************************************************************************************************
+    public Integer salmonScore(HabitatGraph h){
+        HashSet<HabitatTiles> salmon = h.filter(SALMON);
+        HashSet<HabitatTiles> visitedSalmon = new HashSet<HabitatTiles>();
+        HashSet<HashSet<HabitatTiles>> salmonRuns = new HashSet<HashSet<HabitatTiles>>();
+        for(HabitatTiles s:salmon){
+            salmonRuns.add(findSalmonRun(s, visitedSalmon));
+        }
+        switch(cardLetter){
+            case 0:
+                Integer points0 = 0;
+                for(HashSet<HabitatTiles> run: salmonRuns){
+                    switch(run.size()){
+                        case 0://redundancy, shouldn't ever happen but yk
+                            points0+=0;
+                        break;
+                        case 1:
+                            points0+=2;
+                        break;
+                        case 2:
+                            points0+=5;
+                        break;
+                        case 3:
+                            points0+=8;
+                        break;
+                        case 4:
+                            points0+=12;
+                        break;
+                        case 5:
+                            points0+=16;
+                        break;
+                        case 6:
+                            points0+=20;
+                        break;
+                        default://7 or more
+                            points0+=25;
+                        break;
+                    }
+                }
+                return points0;
+            case 1:
+                Integer points1 = 0;
+                for(HashSet<HabitatTiles> run: salmonRuns){
+                    switch(run.size()){
+                        case 0://redundancy, shouldn't ever happen but yk
+                            points1+=0;
+                        break;
+                        case 1:
+                            points1+=2;
+                        break;
+                        case 2:
+                            points1+=4;
+                        break;
+                        case 3:
+                            points1+=9;
+                        break;
+                        case 4:
+                            points1+=11;
+                        break;
+                        default://5 or more
+                            points1+=17;
+                        break;
+                    }
+                }
+                return points1;
+            case 2:
+                Integer points2 = 0;
+                for(HashSet<HabitatTiles> run: salmonRuns){
+                    switch(run.size()){
+                        case 0://redundancy, shouldn't ever happen but yk
+                              points2+=0;
+                        break;
+                        case 1://catches these two so they dont go to default
+                        break;
+                        case 2:                            
+                        break;
+                        case 3:
+                            points2+=10;
+                        break;
+                        case 4:
+                            points2+=12;
+                        break;
+                        default://5 or more
+                            points2+=15;
+                        break;
+                    }
+                }
+                return points2;
+            case 3:
+                Integer points3 = 0;
+                for(HashSet<HabitatTiles> run: salmonRuns){
+                    points3 += run.size();
+                    HashSet<HabitatTiles> adjacentTokens = new HashSet<HabitatTiles>();//the use of a HashSet means that there is no need to manually filter out duplicates
+                    //TODO: if the empty animal token ever gets changed to avoid null errors, change what it is here
+                    for(HabitatTiles salmonTile: run){
+                        for(HabitatTiles connection: salmonTile.getConnections().values()){
+                            if(connection.getToken()!=null){
+                                adjacentTokens.add(connection);
+                            }
+                        }
+                    }
+                    points3 += adjacentTokens.size();
+                }
+                return points3;
+        }
+        return 0;
+    }
+
+    private HashSet<HabitatTiles> findSalmonRun(HabitatTiles salmon, HashSet<HabitatTiles> visitedSalmon){
+        HashSet<HabitatTiles> salmonRun = new HashSet<HabitatTiles>();
+        addSalmonToRun(salmon, visitedSalmon, salmonRun);
+        if(salmonRun.size()>0){
+            return salmonRun;
+        }else{
+            return null;
+        }
+        
+    }
+
+    private void addSalmonToRun(HabitatTiles salmon, HashSet<HabitatTiles> visitedSalmon, HashSet<HabitatTiles> salmonRun){
+        if(salmon.tokenInt()!=SALMON||visitedSalmon.contains(salmon)||salmon.getNumberOf(SALMON)>2){
+            return;
+        }else{
+            visitedSalmon.add(salmon);
+            salmonRun.add(salmon);
+            for(HabitatTiles h:salmon.getConnections().values()){
+                addSalmonToRun(h, visitedSalmon, salmonRun);
+            }
+        }
     }
 }
