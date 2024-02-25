@@ -18,7 +18,7 @@ public class PointGenerator {
     private Double radius;
     private boolean clicked;
     private myPolygon myPoly;
-    private BufferedImage test;
+    private WildlifeTokens test;
     public PointGenerator(int x, int y, int sz){
         radius = sz+0.0;
         unitCirclePoints(x, y, sz);
@@ -42,7 +42,7 @@ public class PointGenerator {
         drawLine(g,ogPoints[5],ogPoints[0]);
         // part of the test code will remove later
         if (test!=null){
-            g.drawImage(test,xPos-35,yPos-35,70,70,null);
+            g.drawImage(test.getImage(),xPos-35,yPos-35,70,70,null);
         }
         //end of test code
     }
@@ -57,8 +57,11 @@ public class PointGenerator {
         clicked= !clicked;
     }
     //test code will remove later
-    public void addImage(BufferedImage im){
-        test = im;
+    public void addToken(WildlifeTokens t){
+        test = t;
+    }
+    public WildlifeTokens getTokens(){
+        return test;
     }
     //end of removal
     private void drawLine(Graphics g, MathPoint p, MathPoint a){

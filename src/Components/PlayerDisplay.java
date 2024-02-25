@@ -78,8 +78,10 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             if(testHexagons.get(i).isPointInsideHexagon(e)){
                 //testHexagons.get(i).clicked();
                 if (token!=null){
-                    testHexagons.get(i).addImage(token.getImage());
-                    token =null;
+                    if (testHexagons.get(i).getTokens()==null){
+                        testHexagons.get(i).addToken(token);
+                        token =null;
+                    }  
                 }
             }
         }
