@@ -52,6 +52,9 @@ public class PlayerDisplay extends JComponent implements MouseListener{
         Graphics2D antiAlias = (Graphics2D) g;
         antiAlias.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         paint(g);
+
+        g.setColor(Color.GREEN);
+        g.fillRect(0, 0, xPos, yPos);
     }
     public void paint(Graphics g){
         g.setColor(Color.BLACK);
@@ -63,6 +66,7 @@ public class PlayerDisplay extends JComponent implements MouseListener{
         pg2.drawHexagon(g);
         pg3.drawHexagon(g);
         pg4.drawHexagon(g);*/
+        
     }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
     public Dimension getMinimumSize() {return new Dimension(xSize, ySize );}

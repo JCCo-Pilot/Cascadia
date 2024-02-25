@@ -20,11 +20,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private BufferedImage bg;
     public MainPanel(int l){
         setLayout(null);
-        pa = new PickArea(l,0,0,300,870);
+        pa = new PickArea(l,0,0,310,870);
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         add(pa);
 
-        pd = new PlayerDisplay(300, 0, 1000, 870);
+        pd = new PlayerDisplay(310, 0, 905, 870);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
 
@@ -58,7 +58,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         for (int i=0;i<4;i++){
             g.drawRect(1213, 19+(40*i), 352, 40);
         }*/
-        
+        //g.fillRect(310,0,905,870);
         this.paintComponents(g);
         //pa.paint(g);
         //g.fillRect(700, 100, 500, 500);
