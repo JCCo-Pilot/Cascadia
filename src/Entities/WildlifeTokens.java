@@ -22,23 +22,23 @@ public class WildlifeTokens {
         try{
             switch(animalType){
                 case BEAR:
-                    image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/BearToken.png"));
+                    image = ImageIO.read(new File("src/Entities/Tokens/BearToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/BearToken.png"));
                 break;  
                 case ELK:
-                    image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/ElkToken.png"));
+                    image = ImageIO.read(new File("src/Entities/Tokens/ElkToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/ElkToken.png"));
                 break;
                 case SALMON:
-                    image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/SalmonToken.png"));
+                    image = ImageIO.read(new File("src/Entities/Tokens/SalmonToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/SalmonToken.png"));
                 break;
                 case HAWK:
-                    image = ImageIO.read(new File("C:/Cascadia/src/Entities/Tokens/HawkToken.png"));
+                    image = ImageIO.read(new File("src/Entities/Tokens/HawkToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/HawkToken.png"));
                 break;
                 case FOX:
-                    image = ImageIO.read(new File("C:/Cascadia/src//Entities/Tokens/FoxToken.png"));
+                    image = ImageIO.read(new File("src/Entities/Tokens/FoxToken.png"));
                     //image = ImageIO.read(WildlifeTokens.class.getResource("/Tokens/FoxToken.png"));
                 break;
             }
