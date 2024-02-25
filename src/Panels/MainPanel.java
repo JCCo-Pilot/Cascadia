@@ -1,13 +1,15 @@
 package Panels;
 import java.util.*;
 import javax.swing.*;
-import Entities.*;
-import Components.*;
 import EventAndListener.*;
+import MathHelper.*;
+import Entities.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
+import java.io.File;
+import Components.*;
 import static java.lang.System.*;
 public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private GameListener listener;
@@ -15,6 +17,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private PlayerDisplay pd;
     private ArrayList<Player> players;
     private ArrayList<JButton>buttons = new ArrayList<>();
+    private BufferedImage bg;
     public MainPanel(int l){
         setLayout(null);
         pa = new PickArea(l,0,0,300,870);
@@ -25,6 +28,12 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
 
+        try{
+            bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
+        }catch(Exception e){
+            out.println("Unable to pull");
+        }
+
         construct(l);
         this.setVisible(true);
     }
@@ -34,7 +43,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
             buttons.add(new JButton("Player "+(i+1)));
         }
         for (int i= 0;i<buttons.size();i++){
-            buttons.get(i).setBounds(1300,0+50*i,300,50);
+            buttons.get(i).setBounds(1213,19+40*i,352,40);
             buttons.get(i).addActionListener(this);
             buttons.get(i).setVisible(true);
             buttons.get(i).setFocusable(false);
@@ -44,6 +53,12 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     @Override
     public void paint(Graphics g){
         super.paint(g);
+        g.drawImage(bg, 0, 0, 1590,865,null);
+        /*g.setColor(Color.GREEN);
+        for (int i=0;i<4;i++){
+            g.drawRect(1213, 19+(40*i), 352, 40);
+        }*/
+        
         this.paintComponents(g);
         //pa.paint(g);
         //g.fillRect(700, 100, 500, 500);

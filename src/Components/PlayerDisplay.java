@@ -33,7 +33,7 @@ public class PlayerDisplay extends JComponent implements MouseListener{
         Double inc = size*Math.sqrt(3)/2;
         int xInc = (int)(Math.round(inc));
         out.println(xInc);
-        for (int i =0; i<10;i++){
+        /*for (int i =0; i<10;i++){
             testHexagons.add(new PointGenerator(xInc*2*(i+1), 0+75, 50.0));
             testHexagons.add(new PointGenerator(xInc*2*(i+1), 75*2+75, 50.0));
             testHexagons.add(new PointGenerator(xInc*2*(i+1), 75*4+75, 50.0));
@@ -44,7 +44,7 @@ public class PlayerDisplay extends JComponent implements MouseListener{
             testHexagons.add(new PointGenerator(xInc+(86*i), 75*3+75, 50.0));
             testHexagons.add(new PointGenerator(xInc+(86*i), 75*5+75, 50.0));
             testHexagons.add(new PointGenerator(xInc+(86*i), 75*7+75, 50.0));
-        }
+        }*/
     }
     @Override
     public void paintComponent(Graphics g){
@@ -54,8 +54,6 @@ public class PlayerDisplay extends JComponent implements MouseListener{
         paint(g);
     }
     public void paint(Graphics g){
-        g.setColor(Color.GREEN);
-        g.fillRect(0,0,xSize,ySize);
         g.setColor(Color.BLACK);
         Polygon p = new Polygon();
         for (int i =0; i<testHexagons.size();i++){

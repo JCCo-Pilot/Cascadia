@@ -27,7 +27,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         numPlayers = i;
         this.setVisible(true);
         createTokens();
-        sumChecker();
+        //sumChecker();
         randShuffle();
         while(isOverpopulated4()){
             randShuffle();
@@ -53,9 +53,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
     }
     public void paint(Graphics g){
-        
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, xSize, ySize);
         g.setColor(Color.RED);
         //spacing+(size+space)*i
         for (int i = 0;i<4;i++){
