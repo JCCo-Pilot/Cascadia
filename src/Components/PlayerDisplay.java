@@ -29,22 +29,22 @@ public class PlayerDisplay extends JComponent implements MouseListener{
     private void constructHexagons(){//replace all the 50.0 with 100.0
         //y increments are radius*1.5
         //x increments are size* root(3)/2
-        int size = 50;
+        int size = 70;
         Double inc = size*Math.sqrt(3)/2;
         int xInc = (int)(Math.round(inc));
         out.println(xInc);
-        /*for (int i =0; i<10;i++){
-            testHexagons.add(new PointGenerator(xInc*2*(i+1), 0+75, 50.0));
-            testHexagons.add(new PointGenerator(xInc*2*(i+1), 75*2+75, 50.0));
+        for (int i =0; i<7;i++){
+            testHexagons.add(new PointGenerator(xInc*2*(i+1)-30, 0+105, 70.0));
+            /*testHexagons.add(new PointGenerator(xInc*2*(i+1), 75*2+75, 50.0));
             testHexagons.add(new PointGenerator(xInc*2*(i+1), 75*4+75, 50.0));
-            testHexagons.add(new PointGenerator(xInc*2*(i+1), 75*6+75, 50.0));
+            testHexagons.add(new PointGenerator(xInc*2*(i+1), 75*6+75, 50.0));*/
         }
         for(int i =0; i<11;i++){
-            testHexagons.add(new PointGenerator(xInc+(86*i), 75+75, 50.0));
-            testHexagons.add(new PointGenerator(xInc+(86*i), 75*3+75, 50.0));
+            testHexagons.add(new PointGenerator(xInc+(122*i)-30, 105+105, 70.0));
+            /*testHexagons.add(new PointGenerator(xInc+(86*i), 75*3+75, 50.0));
             testHexagons.add(new PointGenerator(xInc+(86*i), 75*5+75, 50.0));
-            testHexagons.add(new PointGenerator(xInc+(86*i), 75*7+75, 50.0));
-        }*/
+            testHexagons.add(new PointGenerator(xInc+(86*i), 75*7+75, 50.0));*/
+        }
     }
     @Override
     public void paintComponent(Graphics g){
