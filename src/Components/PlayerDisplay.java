@@ -13,10 +13,10 @@ public class PlayerDisplay extends JComponent implements MouseListener{
     private int xSize,ySize;
     private int xPos,yPos;
     private ArrayList<PointGenerator>testHexagons = new ArrayList<>();
-    /*private PointGenerator pg1 = new PointGenerator(0, 0, 50.0);
-    private PointGenerator pg2 = new PointGenerator(100, 0, 50.0);
-    private PointGenerator pg3 = new PointGenerator(50, 77, 50.0);
-    private PointGenerator pg4 = new PointGenerator(150, 77, 50.0);*/
+    /*private PointGenerator pg1 = new PointGenerator(0, 0, 70.0);
+    private PointGenerator pg2 = new PointGenerator(100, 0, 70.0);
+    private PointGenerator pg3 = new PointGenerator(50, 77, 70.0);
+    private PointGenerator pg4 = new PointGenerator(150, 77, 70.0);*/
     public PlayerDisplay(int x, int y, int xS, int yS){
         super();
         this.setVisible(true);
@@ -35,15 +35,15 @@ public class PlayerDisplay extends JComponent implements MouseListener{
         out.println(xInc);
         for (int i =0; i<7;i++){
             testHexagons.add(new PointGenerator(xInc*2*(i+1)-30, 0+105, 70.0));
-            /*testHexagons.add(new PointGenerator(xInc*2*(i+1), 75*2+75, 50.0));
-            testHexagons.add(new PointGenerator(xInc*2*(i+1), 75*4+75, 50.0));
-            testHexagons.add(new PointGenerator(xInc*2*(i+1), 75*6+75, 50.0));*/
+            testHexagons.add(new PointGenerator(xInc*2*(i+1)-30, 105*2+105, 70.0));
+            testHexagons.add(new PointGenerator(xInc*2*(i+1)-30, 105*4+105, 70.0));
+            testHexagons.add(new PointGenerator(xInc*2*(i+1)-30, 105*6+105, 70.0));
         }
-        for(int i =0; i<11;i++){
-            testHexagons.add(new PointGenerator(xInc+(122*i)-30, 105+105, 70.0));
-            /*testHexagons.add(new PointGenerator(xInc+(86*i), 75*3+75, 50.0));
-            testHexagons.add(new PointGenerator(xInc+(86*i), 75*5+75, 50.0));
-            testHexagons.add(new PointGenerator(xInc+(86*i), 75*7+75, 50.0));*/
+        for(int i =0; i<6;i++){
+            testHexagons.add(new PointGenerator(xInc+(122*i)-30+122, 105+105, 70.0));
+            testHexagons.add(new PointGenerator(xInc+(122*i)-30+122, 105*3+105, 70.0));
+            testHexagons.add(new PointGenerator(xInc+(122*i)-30+122, 105*5+105, 70.0));
+            //testHexagons.add(new PointGenerator(xInc+(122*i)-30+122, 105*7+105, 70.0));
         }
     }
     @Override
