@@ -14,10 +14,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private int xPos,yPos;
     private WildlifeTokens token;
     private ArrayList<PointGenerator>testHexagons = new ArrayList<>();
-    /*private PointGenerator pg1 = new PointGenerator(0, 0, 70.0);
-    private PointGenerator pg2 = new PointGenerator(100, 0, 70.0);
-    private PointGenerator pg3 = new PointGenerator(50, 77, 70.0);
-    private PointGenerator pg4 = new PointGenerator(150, 77, 70.0);*/
+    private AllowPickEventListener listener;
     public PlayerDisplay(int x, int y, int xS, int yS){
         super();
         this.setVisible(true);
@@ -80,6 +77,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                 if (token!=null){
                     if (testHexagons.get(i).getTokens()==null){
                         testHexagons.get(i).addToken(token);
+                        AllowPickEvent ape = new AllowPickEvent(this, true);
+                        listener.process(ape);
                         token =null;
                     }  
                 }
@@ -87,6 +86,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         }
         repaint();
     }
+    public void addListener(AllowPickEventListener apel){listener = apel;}
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}

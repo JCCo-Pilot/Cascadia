@@ -13,7 +13,7 @@ import javax.print.DocFlavor.INPUT_STREAM;
 import java.awt.image.*;
 import MathHelper.*;
 import static java.lang.System.*;
-public class PickArea extends JComponent implements MouseListener, ActionListener{
+public class PickArea extends JComponent implements MouseListener, ActionListener,AllowPickEventListener{
 
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
     private int numPlayers;
@@ -149,7 +149,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         for(Integer i:firstFour.keySet()){
             if(firstFour.get(i).getType()==max){
                 
-                Integer rand = (int) (Math.random()*tokens.size());
+                Integer rand = (int) (Math.random()*(tokens.size()));
                 tokens.add(firstFour.put(i, tokens.get(rand)));
             }
         }
@@ -246,13 +246,16 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public void mousePressed(MouseEvent e) {
         //131+69,250+(146*i)-100,70,70,
         for (int i = 0;i<4;i++){
+            //pick stuff
             if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
                 if (allowPick){
                     PickEvent event = new PickEvent(this, removeAndReplaceToken(i));
                     listener.process(event);
+                    allowPick=false;
                     break;
                 }
             }
+            //end of picking stuff
         }
         if (isOverpopulated3()){
             overpopButton.setVisible(true);
@@ -260,6 +263,11 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             overpopButton.setVisible(false);
         }
         repaint();
+    }
+    public void process(AllowPickEvent e){
+        if (e.allowed()){
+            allowPick= true;
+        }
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}

@@ -30,6 +30,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         pa.addListener(pd);
         add(pa);
 
+        pd.addListener(pa);
+
         try{
             bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
         }catch(Exception e){
