@@ -19,6 +19,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private int numPlayers;
     private int xSize,ySize;
     private int xPos,yPos;
+    private boolean allowPick;
     private PickListener listener;
     private JButton overpopButton = new JButton("Over-Population");
     private PointGenerator[]hexagons = new PointGenerator[4];
@@ -34,6 +35,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             randShuffle();
         }
         createHabitatTiles();
+
+        allowPick = true;
 
         overpopButton.setBounds(27,795,300,50);
         overpopButton.setVisible(isOverpopulated3());
@@ -232,10 +235,17 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         //131+69,250+(146*i)-100,70,70,
         for (int i = 0;i<4;i++){
             if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
-                PickEvent event = new PickEvent(this, tokens.remove(i));
-                listener.process(event);
-                break;
+                if (allowPick){
+                    PickEvent event = new PickEvent(this, tokens.remove(i));
+                    listener.process(event);
+                    break;
+                }
             }
+        }
+        if (isOverpopulated3()){
+            overpopButton.setVisible(true);
+        }else if (!isOverpopulated3()){
+            overpopButton.setVisible(false);
         }
         repaint();
     }
