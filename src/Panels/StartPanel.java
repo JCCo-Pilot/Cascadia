@@ -48,7 +48,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         Double inc = size*Math.sqrt(3)/2;
         int xInc = (int)(Math.round(inc));
         for (int i=0;i<3;i++){
-            playerOptions.add(new PointGenerator(530+(260*i), 400+150, 150.0));
+            playerOptions.add(new PointGenerator(530+(265*i), 400+180, 150.0));
         }
         hexagons.add(new PointGenerator(795, 575, 150.0));
         hexagons.add(new PointGenerator(1460, 800, 150.0));
@@ -103,9 +103,9 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             break;
             case 10:
                 g.drawImage(starter, 0, 0, 1590, 865, null);
-                for(int i=0;i<playerOptions.size();i++){
+                /*for(int i=0;i<playerOptions.size();i++){
                     playerOptions.get(i).drawHexagon(g);
-                }
+                }*/
                 
                 /*g.setFont(new Font("Arial", 100, 70));
                 g.drawString("Number of Players:",520,250);
