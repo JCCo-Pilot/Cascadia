@@ -204,6 +204,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         return animal;
     }
 
+    
+
     private Boolean isOverpopulated4(){
         HashMap<CardAnimals, Integer> histogram = new HashMap<CardAnimals, Integer>();
         for(int i = 0; i<4; i++){
@@ -227,6 +229,14 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         return false;
     }
 
+    public WildlifeTokens removeAndReplaceToken(Integer index){
+        if(index<=3&&index>=0){
+            int rand = (int) (Math.random()*tokens.size());
+            return tokens.set(index, tokens.remove(rand));
+        }
+        return null;
+    }
+
     
 
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
@@ -238,7 +248,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         for (int i = 0;i<4;i++){
             if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
                 if (allowPick){
-                    PickEvent event = new PickEvent(this, tokens.remove(i));
+                    PickEvent event = new PickEvent(this, removeAndReplaceToken(i));
                     listener.process(event);
                     break;
                 }
