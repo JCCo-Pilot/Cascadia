@@ -144,14 +144,16 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         HashMap<Integer, WildlifeTokens> firstFour = new HashMap<Integer, WildlifeTokens>();//so we can keep original index of ones that arent removed
         for(int i = 0; i<4; i++){
             firstFour.put(i, tokens.remove(0));
+            
         }
         for(Integer i:firstFour.keySet()){
             if(firstFour.get(i).getType()==max){
+                
                 Integer rand = (int) (Math.random()*tokens.size());
                 tokens.add(firstFour.put(i, tokens.get(rand)));
             }
         }
-        for(int i = 3; i<=0; i--){
+        for(int i = 3; i>=0; i--){
             tokens.add(0, firstFour.get(i));
         }
         
