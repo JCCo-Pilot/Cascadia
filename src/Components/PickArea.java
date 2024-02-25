@@ -35,7 +35,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         createHabitatTiles();
 
         overpopButton.setBounds(0,800,150,50);
-        overpopButton.setVisible(isOverpopulated3());
+        //overpopButton.setVisible(isOverpopulated3());
+        overpopButton.setVisible(true);
         overpopButton.setActionCommand("Overpopulation");
         overpopButton.addActionListener(this);
         add(overpopButton);
@@ -48,7 +49,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         xPos = x; yPos = y;
         xSize = xS; ySize = yS;
         for (int i = 0;i<4;i++){
-            PointGenerator pg = new PointGenerator(56, 250+(106*i), 50.0); //changed from y-6 to y-50
+            PointGenerator pg = new PointGenerator(56+59, 250+(106*i)-100, 50.0); //changed from y-6 to y-50
             hexagons[i]= pg;
         }
     }
@@ -61,7 +62,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
         g.setColor(Color.BLUE);
         for (int i = 0;i<4;i++){
-            g.drawImage(tokens.get(i).getImage(),131,200+25+(106*i),50,50,null);
+            g.drawImage(tokens.get(i).getImage(),131+59,225+(106*i)-100,50,50,null);
             //g.fillOval(131, 200+25+(106)*i, 50, 50);
         }
         g.setFont(new Font("Arial", 100, 50));
