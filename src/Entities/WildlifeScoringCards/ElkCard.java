@@ -1,7 +1,13 @@
-package Entities;
+package Entities.WildlifeScoringCards;
 
 import java.util.HashMap;
 import java.util.HashSet;
+
+import Entities.HabitatGraph;
+import Entities.HabitatTiles;
+import Entities.Player;
+import Entities.Enums.CardAnimals;
+import Entities.Enums.CardTypes;
 
 public class ElkCard implements ScoringCard{
     

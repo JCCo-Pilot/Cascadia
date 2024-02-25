@@ -1,10 +1,16 @@
-package Entities;
+package Entities.WildlifeScoringCards;
 
 import java.util.HashSet;
 
+import Entities.HabitatGraph;
+import Entities.HabitatTiles;
+import Entities.Player;
+import Entities.Enums.CardAnimals;
+import Entities.Enums.CardTypes;
+
 public class SalmonCard implements ScoringCard{
     
-    CardAnimals animal = CardAnimals.SALMON;
+    final CardAnimals animal = CardAnimals.SALMON;
     CardTypes cardLetter;
 
     public SalmonCard(CardTypes letter){

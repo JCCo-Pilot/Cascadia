@@ -1,10 +1,16 @@
-package Entities;
+package Entities.WildlifeScoringCards;
 
 import java.util.HashSet;
 
+import Entities.HabitatGraph;
+import Entities.HabitatTiles;
+import Entities.Player;
+import Entities.Enums.CardAnimals;
+import Entities.Enums.CardTypes;
+
 public class BearCard implements ScoringCard{
     
-    CardAnimals animal = CardAnimals.BEAR;
+    final CardAnimals animal = CardAnimals.BEAR;
     CardTypes cardLetter;
 
     public BearCard(CardTypes letter){

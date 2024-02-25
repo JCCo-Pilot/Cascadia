@@ -1,4 +1,4 @@
-package Entities;
+package Entities.Enums;
 
 public enum CardTypes {
     CARD_A,

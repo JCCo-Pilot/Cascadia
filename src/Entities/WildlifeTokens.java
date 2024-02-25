@@ -1,6 +1,9 @@
 package Entities;
 import java.awt.*;
 import javax.swing.*;
+
+import Entities.Enums.CardAnimals;
+
 import java.io.*;
 import java.util.*;
 import java.awt.image.*;

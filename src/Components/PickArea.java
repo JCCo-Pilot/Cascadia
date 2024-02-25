@@ -1,5 +1,7 @@
 package Components;
 import Entities.*;
+import Entities.Enums.CardAnimals;
+
 import java.util.*;
 import javax.swing.*;
 import EventAndListener.*;
