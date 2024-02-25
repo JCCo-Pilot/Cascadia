@@ -48,7 +48,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         Double inc = size*Math.sqrt(3)/2;
         int xInc = (int)(Math.round(inc));
         for (int i=0;i<3;i++){
-            playerOptions.add(new PointGenerator(500+(300*i), 300+150, 150.0));
+            playerOptions.add(new PointGenerator(530+(260*i), 400+150, 150.0));
         }
         hexagons.add(new PointGenerator(795, 575, 150.0));
         hexagons.add(new PointGenerator(1460, 800, 150.0));
@@ -56,6 +56,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private void pullImages(){
         try{
             bg = ImageIO.read(new File("src/Panels/Background/StartBG.png"));
+            starter = ImageIO.read(new File("src/Panels/Background/PlayerSelection.png"));
         }catch(Exception e){
             out.println("Errors in pulling instruction images");
         }
