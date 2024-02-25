@@ -34,7 +34,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
         createHabitatTiles();
 
-        overpopButton.setBounds(0,800,150,50);
+        overpopButton.setBounds(27,795,280,50);
         //overpopButton.setVisible(isOverpopulated3());
         overpopButton.setVisible(true);
         overpopButton.setActionCommand("Overpopulation");
