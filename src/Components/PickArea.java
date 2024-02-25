@@ -228,14 +228,26 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
+        //131+69,250+(146*i)-100,70,70,
         for (int i = 0;i<4;i++){
-            
+            if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
+                
+                break;
+            }
         }
         repaint();
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
+    private boolean pointIsInside(int x, int y, int xSize, int ySize,MouseEvent e){
+        if (e.getX()>x&&e.getX()<x+xSize){
+            if (e.getY()>y&&e.getY()<y+ySize){
+                return true;
+            }
+        }
+        return false;
+    }
     public int getXPos(){return xPos;}
     public int getYPos(){return yPos;}
     public int getXSize(){return xSize;}
