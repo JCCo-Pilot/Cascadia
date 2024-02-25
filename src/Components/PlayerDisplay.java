@@ -9,9 +9,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.*;
 import MathHelper.*;
 import static java.lang.System.*;
-public class PlayerDisplay extends JComponent implements MouseListener{
+public class PlayerDisplay extends JComponent implements MouseListener,PickListener{
     private int xSize,ySize;
     private int xPos,yPos;
+    private WildlifeTokens token;
     private ArrayList<PointGenerator>testHexagons = new ArrayList<>();
     /*private PointGenerator pg1 = new PointGenerator(0, 0, 70.0);
     private PointGenerator pg2 = new PointGenerator(100, 0, 70.0);
@@ -75,8 +76,11 @@ public class PlayerDisplay extends JComponent implements MouseListener{
     public void mousePressed(MouseEvent e) {
         for(int i =0;i<testHexagons.size();i++){
             if(testHexagons.get(i).isPointInsideHexagon(e)){
-                testHexagons.get(i).clicked();
-                
+                //testHexagons.get(i).clicked();
+                if (token!=null){
+                    testHexagons.get(i).addImage(token.getImage());
+                    token =null;
+                }
             }
         }
         repaint();
@@ -88,4 +92,9 @@ public class PlayerDisplay extends JComponent implements MouseListener{
     public int getYPos(){return yPos;}
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
+    public void process(PickEvent e){
+        if (e.getToken()!=null){
+            token = e.getToken();
+        }
+    }
 }

@@ -20,13 +20,15 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private BufferedImage bg;
     public MainPanel(int l){
         setLayout(null);
-        pa = new PickArea(l,0,0,310,870);
-        pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
-        add(pa);
 
         pd = new PlayerDisplay(310, 0, 905, 870);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
+
+        pa = new PickArea(l,0,0,310,870);
+        pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
+        pa.addListener(pd);
+        add(pa);
 
         try{
             bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));

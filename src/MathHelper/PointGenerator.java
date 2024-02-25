@@ -1,14 +1,24 @@
 package MathHelper;
+import Entities.*;
+import Entities.Enums.CardAnimals;
+
 import java.util.*;
 import javax.swing.*;
+import EventAndListener.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.imageio.ImageIO;
+import javax.print.DocFlavor.INPUT_STREAM;
+
+import java.awt.image.*;
+import static java.lang.System.*;
 public class PointGenerator {
     private MathPoint[] ogPoints = new MathPoint[6];
     private int xPos,yPos;
     private Double radius;
     private boolean clicked;
     private myPolygon myPoly;
+    private BufferedImage test;
     public PointGenerator(int x, int y, int sz){
         radius = sz+0.0;
         unitCirclePoints(x, y, sz);
@@ -30,6 +40,11 @@ public class PointGenerator {
             drawLine(g, ogPoints[i], ogPoints[i+1]);
         }
         drawLine(g,ogPoints[5],ogPoints[0]);
+        // part of the test code will remove later
+        if (test!=null){
+            g.drawImage(test,xPos-35,yPos-35,70,70,null);
+        }
+        //end of test code
     }
     public void setX(int i){
         xPos = i;
@@ -41,6 +56,11 @@ public class PointGenerator {
     public void clicked(){
         clicked= !clicked;
     }
+    //test code will remove later
+    public void addImage(BufferedImage im){
+        test = im;
+    }
+    //end of removal
     private void drawLine(Graphics g, MathPoint p, MathPoint a){
         g.drawLine(p.xPoint,p.yPoint,a.xPoint,a.yPoint);
     }
