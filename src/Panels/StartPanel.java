@@ -13,7 +13,7 @@ import java.io.File;
 import static java.lang.System.*;
 public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private GameListener listener;
-    private BufferedImage bg;
+    private BufferedImage bg,starter;
     private JButton start;
     private JButton instructions;
     private int state = -1;
@@ -48,7 +48,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         Double inc = size*Math.sqrt(3)/2;
         int xInc = (int)(Math.round(inc));
         for (int i=0;i<3;i++){
-            playerOptions.add(new PointGenerator(600+(200*i), 300+150, 100.0));
+            playerOptions.add(new PointGenerator(500+(300*i), 300+150, 150.0));
         }
         hexagons.add(new PointGenerator(795, 575, 150.0));
         hexagons.add(new PointGenerator(1460, 800, 150.0));
@@ -56,6 +56,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private void pullImages(){
         try{
             bg = ImageIO.read(new File("C:/Cascadia/src/Panels/Background/StartBG.png"));
+            starter = ImageIO.read(new File("C:/Cascadia/src/Panels/Background/PlayerSelection.png"));
         }catch(Exception e){
             out.println("Errors in pulling instruction images");
         }
@@ -101,15 +102,17 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 g.drawImage(images.get(15), width/2, 0, width, height, null);
             break;
             case 10:
+                g.drawImage(starter, 0, 0, 1590, 865, null);
                 for(int i=0;i<playerOptions.size();i++){
                     playerOptions.get(i).drawHexagon(g);
                 }
-                g.setFont(new Font("Arial", 100, 70));
+                
+                /*g.setFont(new Font("Arial", 100, 70));
                 g.drawString("Number of Players:",520,250);
                 g.setFont(new Font("Arial", 100, 100));
                 g.drawString("2", 570, 330+150);
                 g.drawString("3", 770, 330+150);
-                g.drawString("4", 970, 330+150);
+                g.drawString("4", 970, 330+150);*/
             break;
         }
         if (state==-1){
@@ -148,13 +151,13 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         if (state==-1){
             if (hexagons.get(0).isPointInsideHexagon(e)){
                 state =10;
+                hexagons.clear();
                 repaint();
             }else if (hexagons.get(1).isPointInsideHexagon(e)){
                 state =1;
                 repaint();
             }
-        }
-        if (state==10){
+        }else if (state==10){
             if(playerOptions.get(0).isPointInsideHexagon(e)){
                 GameStateEvent gse = new GameStateEvent(this, 1);
                 listener.process(gse);
