@@ -55,8 +55,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     }
     private void pullImages(){
         try{
-            bg = ImageIO.read(new File("C:/Cascadia/src/Panels/Background/StartBG.png"));
-            starter = ImageIO.read(new File("C:/Cascadia/src/Panels/Background/PlayerSelection.png"));
+            bg = ImageIO.read(new File("src/Panels/Background/StartBG.png"));
         }catch(Exception e){
             out.println("Errors in pulling instruction images");
         }

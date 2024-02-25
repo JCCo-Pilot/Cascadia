@@ -1,21 +1,25 @@
 package Components;
 import Entities.*;
+import Entities.Enums.CardAnimals;
+
 import java.util.*;
 import javax.swing.*;
 import EventAndListener.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
+import javax.print.DocFlavor.INPUT_STREAM;
+
 import java.awt.image.*;
 import MathHelper.*;
 import static java.lang.System.*;
-public class PickArea extends JComponent implements MouseListener{
+public class PickArea extends JComponent implements MouseListener, ActionListener{
 
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
     private int numPlayers;
     private int xSize,ySize;
     private int xPos,yPos;
-    private JButton jb = new JButton("Over-Population");
+    private JButton overpopButton = new JButton("Over-Population");
     private PointGenerator[]hexagons = new PointGenerator[4];
     public PickArea(int i,int x, int y , int xS, int yS){
         super();
@@ -23,13 +27,18 @@ public class PickArea extends JComponent implements MouseListener{
         numPlayers = i;
         this.setVisible(true);
         createTokens();
-        //sumChecker();
+        sumChecker();
         randShuffle();
+        while(isOverpopulated4()){
+            randShuffle();
+        }
         createHabitatTiles();
 
-        jb.setBounds(0,800,150,50);
-        jb.setVisible(true);
-        add(jb);
+        overpopButton.setBounds(0,800,150,50);
+        overpopButton.setVisible(isOverpopulated3());
+        overpopButton.setActionCommand("Overpopulation");
+        overpopButton.addActionListener(this);
+        add(overpopButton);
         
         setVisible(true);
     }
@@ -71,11 +80,11 @@ public class PickArea extends JComponent implements MouseListener{
     }
     private void createTokens(){
         for (int i =0;i<20;i++){
-            tokens.add(new WildlifeTokens(0));
-            tokens.add(new WildlifeTokens(1));
-            tokens.add(new WildlifeTokens(2));
-            tokens.add(new WildlifeTokens(3));
-            tokens.add(new WildlifeTokens(4));
+            tokens.add(new WildlifeTokens(CardAnimals.BEAR));
+            tokens.add(new WildlifeTokens(CardAnimals.ELK));
+            tokens.add(new WildlifeTokens(CardAnimals.SALMON));
+            tokens.add(new WildlifeTokens(CardAnimals.HAWK));
+            tokens.add(new WildlifeTokens(CardAnimals.FOX));
         }
     }
     private void createHabitatTiles(){
@@ -123,6 +132,98 @@ public class PickArea extends JComponent implements MouseListener{
         out.println("Fox -"+numFox);
         out.println("Hawk -"+numHawk);
     }
+
+    private void removeOverpopulation(){
+        if(!isOverpopulated3()){
+            return;
+        }
+        CardAnimals max = getHighestShownTokenType();
+        HashMap<Integer, WildlifeTokens> firstFour = new HashMap<Integer, WildlifeTokens>();//so we can keep original index of ones that arent removed
+        for(int i = 0; i<4; i++){
+            firstFour.put(i, tokens.remove(0));
+        }
+        for(Integer i:firstFour.keySet()){
+            if(firstFour.get(i).getType()==max){
+                Integer rand = (int) (Math.random()*tokens.size());
+                tokens.add(firstFour.put(i, tokens.get(rand)));
+            }
+        }
+        for(int i = 3; i<=0; i--){
+            tokens.add(0, firstFour.get(i));
+        }
+        
+    }
+
+    private Boolean isOverpopulated3(){
+        HashMap<CardAnimals, Integer> histogram = new HashMap<CardAnimals, Integer>();
+        for(int i = 0; i<4; i++){
+            WildlifeTokens w = tokens.get(i);
+            if(histogram.containsKey(w.getType())){
+                histogram.put(w.getType(), histogram.get(w.getType())+1);
+            }else{
+                histogram.put(w.getType(), 1);
+            }
+        }
+        //find max of the values
+        Integer max = Integer.MIN_VALUE;
+        for(CardAnimals c:histogram.keySet()){
+            if(histogram.get(c)>max){
+                max = histogram.get(c);
+            }
+        }
+        if(max>=3){
+            return true;
+        }
+        return false;
+    }
+
+    private CardAnimals getHighestShownTokenType(){
+        HashMap<CardAnimals, Integer> histogram = new HashMap<CardAnimals, Integer>();
+        for(int i = 0; i<4; i++){
+            WildlifeTokens w = tokens.get(i);
+            if(histogram.containsKey(w.getType())){
+                histogram.put(w.getType(), histogram.get(w.getType())+1);
+            }else{
+                histogram.put(w.getType(), 1);
+            }
+        }
+        //find max of the values
+        Integer max = Integer.MIN_VALUE;
+        CardAnimals animal = CardAnimals.BEAR;//default
+        for(CardAnimals c:histogram.keySet()){
+            if(histogram.get(c)>max){
+                max = histogram.get(c);
+                animal = c;
+            }
+        }
+        return animal;
+    }
+
+    private Boolean isOverpopulated4(){
+        HashMap<CardAnimals, Integer> histogram = new HashMap<CardAnimals, Integer>();
+        for(int i = 0; i<4; i++){
+            WildlifeTokens w = tokens.get(i);
+            if(histogram.containsKey(w.getType())){
+                histogram.put(w.getType(), histogram.get(w.getType())+1);
+            }else{
+                histogram.put(w.getType(), 1);
+            }
+        }
+        //find max of the values
+        Integer max = Integer.MIN_VALUE;
+        for(CardAnimals c:histogram.keySet()){
+            if(histogram.get(c)>max){
+                max = histogram.get(c);
+            }
+        }
+        if(max>=4){
+            return true;
+        }
+        return false;
+    }
+
+    
+
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
     public Dimension getMinimumSize() {return new Dimension(xSize, ySize );}
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
@@ -140,4 +241,12 @@ public class PickArea extends JComponent implements MouseListener{
     public int getYPos(){return yPos;}
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if ("Overpopulation".equals(e.getActionCommand())){
+            removeOverpopulation();
+            ((JComponent) e.getSource()).setVisible(false);
+        }
+        repaint();
+    }
 }

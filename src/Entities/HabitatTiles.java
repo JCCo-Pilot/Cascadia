@@ -1,6 +1,9 @@
 package Entities;
 import java.awt.*;
 import javax.swing.*;
+
+import Entities.Enums.CardAnimals;
+import Entities.Enums.Habitats;
 import MathHelper.PointGenerator;
 import java.io.*;
 import java.util.*;
@@ -20,8 +23,8 @@ public class HabitatTiles extends PointGenerator{
 
 
     private BufferedImage image;
-    private HashSet<String> animals = new HashSet<String>();
-    private HashMap<Integer, String> habitatSides = new HashMap<Integer, String>();
+    private HashSet<CardAnimals> animals = new HashSet<CardAnimals>();
+    private HashMap<Integer, Habitats> habitatSides = new HashMap<Integer, Habitats>();
     private HashMap<Integer, HabitatTiles> connections = new HashMap<Integer, HabitatTiles>();
     private Integer rotation = 0;
     private String imageName;
@@ -49,19 +52,19 @@ public class HabitatTiles extends PointGenerator{
         //map each side to a habitat
         if(isKeystone){
             for(int i = 0; i<6; i++){
-                habitatSides.put(i, habitats[0]);
+                habitatSides.put(i, Habitats.toHabitat(habitats[0]));
             }
         }else{
-            habitatSides.put(5, habitats[0]);
-            habitatSides.put(0, habitats[0]);
-            habitatSides.put(1, habitats[0]);
-            habitatSides.put(2, habitats[1]);
-            habitatSides.put(3, habitats[1]);
-            habitatSides.put(4, habitats[1]);
+            habitatSides.put(5, Habitats.toHabitat(habitats[0]));
+            habitatSides.put(0, Habitats.toHabitat(habitats[0]));
+            habitatSides.put(1, Habitats.toHabitat(habitats[0]));
+            habitatSides.put(2, Habitats.toHabitat(habitats[1]));
+            habitatSides.put(3, Habitats.toHabitat(habitats[1]));
+            habitatSides.put(4, Habitats.toHabitat(habitats[1]));
         }
 
         for(int i = 0; i<animals.length; i++){
-            this.animals.add(animals[i]);
+            this.animals.add(CardAnimals.StringToAnimal(animals[i]));
         }
     }
 
@@ -73,19 +76,19 @@ public class HabitatTiles extends PointGenerator{
         //map each side to a habitat
         if(isKeystone){
             for(int i = 0; i<6; i++){
-                habitatSides.put(i, habitats[0]);
+                habitatSides.put(i, Habitats.toHabitat(habitats[0]));
             }
         }else{
-            habitatSides.put(5, habitats[0]);
-            habitatSides.put(0, habitats[0]);
-            habitatSides.put(1, habitats[0]);
-            habitatSides.put(2, habitats[1]);
-            habitatSides.put(3, habitats[1]);
-            habitatSides.put(4, habitats[1]);
+            habitatSides.put(5, Habitats.toHabitat(habitats[0]));
+            habitatSides.put(0, Habitats.toHabitat(habitats[0]));
+            habitatSides.put(1, Habitats.toHabitat(habitats[0]));
+            habitatSides.put(2, Habitats.toHabitat(habitats[1]));
+            habitatSides.put(3, Habitats.toHabitat(habitats[1]));
+            habitatSides.put(4, Habitats.toHabitat(habitats[1]));
         }
 
         for(int i = 0; i<animals.length; i++){
-            this.animals.add(animals[i]);
+            this.animals.add(CardAnimals.StringToAnimal(animals[i]));
         }
     }
     
@@ -98,7 +101,7 @@ public class HabitatTiles extends PointGenerator{
         token = w;
     }
 
-    public void setToken(Integer i){
+    public void setToken(CardAnimals i){
         token = new WildlifeTokens(i);
     }
 
@@ -106,7 +109,7 @@ public class HabitatTiles extends PointGenerator{
         return token.toString();
     }
 
-    public Integer tokenInt(){
+    public CardAnimals tokenAnimal(){
         return token.getType();
     }
 
@@ -115,10 +118,10 @@ public class HabitatTiles extends PointGenerator{
         return this.habitatSides.get(connection).equals(c.habitatSides.get(c.getSideOf(this)));
     }
 
-    public Integer getNumberOf(Integer i){
+    public Integer getNumberOf(CardAnimals i){
         Integer count = 0;
         for(int c: connections.keySet()){
-            if(connections.get(c).tokenInt()==i){
+            if(connections.get(c).tokenAnimal()==i){
                 count++;
             }
         }
@@ -169,7 +172,7 @@ public class HabitatTiles extends PointGenerator{
 
     public void rotate(){
         rotation+=60;
-        HashMap<Integer, String> temp = new HashMap<Integer, String>();
+        HashMap<Integer, Habitats> temp = new HashMap<Integer, Habitats>();
         for(int i = 0; i<6; i++){
             temp.put(previousInt(i), habitatSides.get(i));
         }
@@ -209,7 +212,7 @@ public class HabitatTiles extends PointGenerator{
         try {
             return ImageIO.read(new File(imageName+".png"));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         return null;
@@ -227,9 +230,9 @@ public class HabitatTiles extends PointGenerator{
         return removed;
     }
 
-    public HabitatTiles findFirstWithSpecificToken(Integer token){
+    public HabitatTiles findFirstWithSpecificToken(CardAnimals token){
         for(Integer i:connections.keySet()){
-            if(connections.get(i).tokenInt().equals(token)){
+            if(connections.get(i).tokenAnimal().equals(token)){
                 return connections.get(i);
             }
         }
