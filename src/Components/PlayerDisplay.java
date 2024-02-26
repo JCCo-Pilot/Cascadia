@@ -31,7 +31,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         Double inc = size*Math.sqrt(3)/2;
         int xInc = (int)(Math.round(inc));
         out.println(xInc);
-        for (int i =0; i<7;i++){
+        /*for (int i =0; i<7;i++){
             testHexagons.add(new PointGenerator(xInc*2*(i+1)-30, 0+105, 70.0));
             testHexagons.add(new PointGenerator(xInc*2*(i+1)-30, 105*2+105, 70.0));
             testHexagons.add(new PointGenerator(xInc*2*(i+1)-30, 105*4+105, 70.0));
@@ -42,7 +42,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             testHexagons.add(new PointGenerator(xInc+(122*i)-30+122, 105*3+105, 70.0));
             testHexagons.add(new PointGenerator(xInc+(122*i)-30+122, 105*5+105, 70.0));
             //testHexagons.add(new PointGenerator(xInc+(122*i)-30+122, 105*7+105, 70.0));
-        }
+        }*/
+        TileCreator tc = new TileCreator();
+        testHexagons.addAll(tc.getTiles());
     }
     @Override
     public void paintComponent(Graphics g){

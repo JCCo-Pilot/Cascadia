@@ -76,6 +76,12 @@ public class HabitatTiles extends PointGenerator{
         for(int i = 0; i<animals.length; i++){
             this.animals.add(CardAnimals.StringToAnimal(animals[i]));
         }
+
+        try{
+            image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
+        }catch(Exception e){
+            out.println("Shit fucked up");
+        }
     }
 
     public HabitatTiles(String imageName, String[] habitats, String[] animals, boolean isKeyStone, Integer x, Integer y, Double size){
@@ -99,6 +105,12 @@ public class HabitatTiles extends PointGenerator{
 
         for(int i = 0; i<animals.length; i++){
             this.animals.add(CardAnimals.StringToAnimal(animals[i]));
+        }
+
+        try{
+            image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
+        }catch(Exception e){
+            out.println("Shit fucked up");
         }
     }
     
@@ -146,9 +158,14 @@ public class HabitatTiles extends PointGenerator{
         Double yo = -1*Math.sqrt(3)/2.0*offset;
         int xOffset = (int)(Math.round(yo));
 
+        int xPos = super.getXPos();
+        int yPos = super.getYPos();
         /*AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(rotation), super.getX(), super.getY());
         g2d.setTranform(transform);*/
-        g.drawImage(image, x+xOffset,y-yOffset,null);
+        g.drawImage(image, xPos+xOffset,yPos-yOffset,null);
+        if (super.getTokens()!=null){
+            g.drawImage(super.getTokens().getImage(),xPos-35,yPos-35,70,70,null);
+        }
     }
     //MISC*******************************************************************************************************
     public void replaceNullConnectionsWithEmpty(){
