@@ -6,9 +6,16 @@ public class TileCreator {
         tile = new ArrayList<>();
         construct();
     }
+    public ArrayList<HabitatTiles>getTiles(){
+        return tile;
+    }
     public void construct(){
         int x =61;
-        int xInc = 61;
+        int xinc = 61;
+        int y = 61;
+        int yinc = 61;
+        Double size = 70.0;
+        tile.add(new HabitatTiles("wetland+river-salmon-hawk", new String[]{"wetland", "river"}, new String[]{"salmon", "hawk"}, false, x + xinc, y + yinc, size));
         //tile.add("imagename",x+xinc,y+yinc,size);
         //tile.add();
     }
