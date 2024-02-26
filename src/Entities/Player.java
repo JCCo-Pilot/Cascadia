@@ -10,6 +10,7 @@ public class Player {
     private HabitatGraph graph;
     private HashMap<CardAnimals, Integer> animalScores = new HashMap<CardAnimals, Integer>();
     private HashMap<Habitats, Integer> habitatScores = new HashMap<Habitats, Integer>();
+    private HashMap<Habitats, Integer> habitatBonuses = new HashMap<Habitats, Integer>();
     public Player(int i){
         name= "Player "+i;
         turns = 20;
@@ -34,5 +35,22 @@ public class Player {
 
     public Integer getScore(Habitats h){
         return habitatScores.get(h);
+    }
+
+    public void setBonus(Habitats h, Integer i){
+        habitatBonuses.put(h, i);
+    }
+
+    public Integer getScore(){
+        Integer sum = 0;
+        for(Integer i:animalScores.values()){
+            sum += i;
+        }
+        for(Integer i:habitatScores.values()){
+            sum += i;
+        }
+        for(Integer i:habitatBonuses.values()){
+            sum += i;
+        }
     }
 }
