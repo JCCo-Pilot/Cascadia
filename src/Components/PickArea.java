@@ -43,8 +43,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         allowPick = true;
 
         overpopButton.setBounds(27,795,300,50);
-        //overpopButton.setVisible(isOverpopulated3());
-        overpopButton.setVisible(true);
+        overpopButton.setVisible(isOverpopulated3());
+        //overpopButton.setVisible(true);
         overpopButton.setActionCommand("Overpopulation");
         overpopButton.addActionListener(this);
         add(overpopButton);
