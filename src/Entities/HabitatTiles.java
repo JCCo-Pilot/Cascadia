@@ -239,6 +239,10 @@ public class HabitatTiles extends PointGenerator{
         return null;
     }
 
+    public HashMap<Integer, Habitats> getHabitats(){
+        return habitatSides;
+    }
+
     public boolean equals(Object o){
         HabitatTiles h = (HabitatTiles)o;
         return h.imageName.equals(this.imageName);

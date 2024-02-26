@@ -29,6 +29,16 @@ public class HabitatGraph{
         return filterReturn;
     }
 
+    public HashSet<HabitatTiles> filter(Habitats hab){
+        HashSet<HabitatTiles> filterReturn = new HashSet<HabitatTiles>();
+        for(HabitatTiles h:iterate()){
+            if(h.getHabitats().values().contains(hab)){
+                filterReturn.add(h);
+            }
+        }
+        return filterReturn;
+    }
+
     public HashSet<HabitatTiles> iterate(){
         HashSet<HabitatTiles> iterationReturn = new HashSet<HabitatTiles>();
         iterate(root, iterationReturn);
@@ -46,7 +56,37 @@ public class HabitatGraph{
         }
     }
 
-    public Integer getLargestContiguousGroup(Habitats habitat){
+    public Integer getLargestContiguousGroup(Habitats target){
+        HashSet<HabitatTiles> validStarts = this.filter(target);
+        HashSet<HabitatTiles> visitedTiles = new HashSet<HabitatTiles>();
+        HashSet<HashSet<HabitatTiles>> groups = new HashSet<HashSet<HabitatTiles>>();
+        for(HabitatTiles tile:validStarts){
+            HashSet<HabitatTiles> group = new HashSet<HabitatTiles>();
+            addToContiguousGroup(target, tile, group, visitedTiles);
+            groups.add(group);
+        }
+        Integer max = 0;
+        for(HashSet<HabitatTiles> group:groups){
+            group.remove(null);
+            if(group.size()>max){
+                max = group.size();
+            }
+        }
+        return max;
+    }
 
+    private void addToContiguousGroup(Habitats target, HabitatTiles tile, HashSet<HabitatTiles> group, HashSet<HabitatTiles> visitedTiles){
+        if(visitedTiles.contains(tile)||tile==null){
+            return;
+        }
+        group.add(tile);
+        visitedTiles.add(tile);
+        for(Integer i:tile.getHabitats().keySet()){
+            if(tile.getHabitats().get(i)==target){
+                if(tile.habitatMatch(i)){
+                    addToContiguousGroup(target, tile.get(i), group, visitedTiles);
+                }
+            }
+        }
     }
 }
