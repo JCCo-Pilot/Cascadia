@@ -9,7 +9,9 @@ import Entities.WildlifeScoringCards.ScoringCard;
 public class Scorer{
 
     public static HashMap<Integer, Player> score(ArrayList<Player> players, ArrayList<ScoringCard> scoringCards){
-        
-        return null;
+        for(Player p: players){
+
+        }
     }
+    
 }
