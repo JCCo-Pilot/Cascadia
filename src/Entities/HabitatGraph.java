@@ -3,6 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import Entities.Enums.CardAnimals;
+import Entities.Enums.Habitats;
 
 import java.io.*;
 import java.util.*;
@@ -43,5 +44,9 @@ public class HabitatGraph{
                 iterate(h.get(i), s);
             }
         }
+    }
+
+    public Integer getLargestContiguousGroup(Habitats habitat){
+
     }
 }
