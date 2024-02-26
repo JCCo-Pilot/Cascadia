@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 import javax.print.DocFlavor.INPUT_STREAM;
 
 import java.awt.image.*;
+import java.io.File;
+
 import MathHelper.*;
 import static java.lang.System.*;
 public class PickArea extends JComponent implements MouseListener, ActionListener,AllowPickEventListener{
@@ -21,6 +23,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private int xPos,yPos;
     private boolean allowPick;
     private PickListener listener;
+    private BufferedImage natureToken;
     private ArrayList<Player>players = new ArrayList<>();
     private JButton overpopButton = new JButton("Over-Population");
     private PointGenerator[]hexagons = new PointGenerator[4];
@@ -40,12 +43,18 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         allowPick = true;
 
         overpopButton.setBounds(27,795,300,50);
-        overpopButton.setVisible(isOverpopulated3());
-        //overpopButton.setVisible(true);
+        //overpopButton.setVisible(isOverpopulated3());
+        overpopButton.setVisible(true);
         overpopButton.setActionCommand("Overpopulation");
         overpopButton.addActionListener(this);
         add(overpopButton);
         
+        try{
+            natureToken = ImageIO.read(new File("src/Entities/Tokens/NatureToken.png"));
+        }catch(Exception e){
+            out.println("Error in pulling pick area");
+        }
+
         setVisible(true);
     }
     public void setPlayers(ArrayList<Player>play){
@@ -76,8 +85,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
         g.setFont(new Font("Arial", 100, 50));
         if (players.size()>0){
-            g.drawString(players.get(0).getName(),40,70);
+            g.drawString(players.get(0).getName()+":",40,70);
         }
+        g.drawImage(natureToken,100,700,35,35,null);
         paintComponents(g);
     }
     @Override
