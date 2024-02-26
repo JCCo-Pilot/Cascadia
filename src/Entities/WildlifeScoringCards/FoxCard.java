@@ -21,9 +21,13 @@ public class FoxCard implements ScoringCard{
     }
 
     @Override
+    public CardAnimals getAnimal() {
+        return animal;
+    }
+
+    @Override
     public Integer score(Player p) {
-        //return this.score(p.getGraph());
-        return -1;
+        return this.foxScore(p.getGraph());
     }
 
     public Integer foxScore(HabitatGraph h){

@@ -18,12 +18,13 @@ public class SalmonCard implements ScoringCard{
     }
 
     @Override
-    public Integer score(Player p) {
-        return this.score(p.getGraph());
+    public CardAnimals getAnimal() {
+        return animal;
     }
 
-    public Integer score(HabitatGraph h){
-        return salmonScore(h);
+    @Override
+    public Integer score(Player p) {
+        return this.salmonScore(p.getGraph());
     }
 
     public Integer salmonScore(HabitatGraph h){
@@ -155,4 +156,6 @@ public class SalmonCard implements ScoringCard{
             }
         }
     }
+
+    
 }

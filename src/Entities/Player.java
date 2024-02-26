@@ -3,7 +3,7 @@ import java.util.*;
 
 import Entities.Enums.CardAnimals;
 import Entities.Enums.Habitats;
-public class Player {
+public class Player implements Comparable{
     private int natureTokens;
     private int turns;
     private String name;
@@ -41,6 +41,10 @@ public class Player {
         habitatBonuses.put(h, i);
     }
 
+    public Integer getBonus(Habitats h){
+        return habitatBonuses.get(h);
+    }
+
     public Integer getScore(){
         Integer sum = 0;
         for(Integer i:animalScores.values()){
@@ -52,5 +56,18 @@ public class Player {
         for(Integer i:habitatBonuses.values()){
             sum += i;
         }
+        return sum;
+    }
+
+    public Integer getNatureTokens(){
+        return natureTokens;
+    }
+    @Override
+    public int compareTo(Object o) {
+        Player p = (Player)o;
+        if(this.getScore()-p.getScore()==0){
+            return this.natureTokens-p.getNatureTokens();
+        }
+        return this.getScore()-p.getScore();
     }
 }

@@ -18,12 +18,13 @@ public class BearCard implements ScoringCard{
     }
 
     @Override
-    public Integer score(Player p) {
-        return this.score(p.getGraph());
+    public CardAnimals getAnimal() {
+        return animal;
     }
 
-    public Integer score(HabitatGraph h){
-        return bearScore(h);
+    @Override
+    public Integer score(Player p) {
+        return this.bearScore(p.getGraph());
     }
 
     public Integer bearScore(HabitatGraph h){

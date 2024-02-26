@@ -19,6 +19,11 @@ public class HawkCard implements ScoringCard{
     }
 
     @Override
+    public CardAnimals getAnimal() {
+        return animal;
+    }
+
+    @Override
     public Integer score(Player p) {
         return this.hawkScore(p.getGraph());
     }

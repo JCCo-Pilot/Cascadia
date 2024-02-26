@@ -19,12 +19,13 @@ public class ElkCard implements ScoringCard{
     }
 
     @Override
-    public Integer score(Player p) {
-        return this.score(p.getGraph());
+    public CardAnimals getAnimal() {
+        return animal;
     }
 
-    public Integer score(HabitatGraph h){
-        return elkScore(h);
+    @Override
+    public Integer score(Player p) {
+        return this.elkScore(p.getGraph());
     }
 
     public Integer elkScore(HabitatGraph h){
