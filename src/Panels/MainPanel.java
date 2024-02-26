@@ -15,7 +15,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private GameListener listener;
     private PickArea pa;
     private PlayerDisplay pd;
-    private ArrayList<Player> players;
+    private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<JButton>buttons = new ArrayList<>();
     private BufferedImage bg;
     public MainPanel(int l){
@@ -39,6 +39,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         }
 
         construct(l);
+        pa.setPlayers(players);
         this.setVisible(true);
     }
     private void construct(int limit){
@@ -52,6 +53,10 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
             buttons.get(i).setVisible(true);
             buttons.get(i).setFocusable(false);
             this.add(buttons.get(i));
+        }
+        //construction time
+        for(int i =1;i<5;i++){
+            players.add(new Player(i));
         }
     }
     @Override
