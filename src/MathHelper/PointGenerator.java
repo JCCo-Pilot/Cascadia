@@ -31,6 +31,12 @@ public class PointGenerator {
         xPos = x; yPos = y;
         radius = sz;
     }
+    public int getXPos(){
+        return xPos;
+    }
+    public int getYPos(){
+        return yPos;
+    }
     public void drawHexagon(Graphics g){
         if (clicked){
             myPolygon mp = new myPolygon(ogPoints);

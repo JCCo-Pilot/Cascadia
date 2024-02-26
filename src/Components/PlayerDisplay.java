@@ -84,6 +84,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                 }
             }
         }
+        /*for(int i =0;i<testHexagons.size();i++){
+            out.println("X: "+testHexagons.get(i).getXPos()+", Y: "+testHexagons.get(i).getYPos());
+        }*/
         repaint();
     }
     public void addListener(AllowPickEventListener apel){listener = apel;}
