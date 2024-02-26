@@ -38,6 +38,16 @@ public class HabitatTiles extends PointGenerator{
         imageName = "empty";
     }
 
+    public HabitatTiles(String imageName,int x, int y, Double size){
+        super(x,y,size);
+        imageName = imageName.substring(5);
+        try{
+            image = ImageIO.read(new File("src/Entities/Images"+imageName));
+        }catch(Exception e){
+            out.println("Shit fucked up");
+        }
+    }   
+
     public HabitatTiles(Integer x, Integer y, Double size){
         super(x, y, size);
         imageName = "N/A";
