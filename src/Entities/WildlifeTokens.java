@@ -11,14 +11,25 @@ import javax.imageio.*;
 import java.awt.event.*;
 import static java.lang.System.*;
 public class WildlifeTokens {
-    private String[]type = {"Bear","Elk","Salmon","Hawk", "Fox"};
-    private BufferedImage image;
     private CardAnimals animalType;
     private int xPos,yPos;
     public WildlifeTokens(CardAnimals animalType){
         this.animalType = animalType;
         xPos = 0;
         yPos = 0;
+    }
+    @Override
+    public String toString(){
+        return animalType.toString();
+    }
+    public String getName(){
+        return this.toString();
+    }
+    public CardAnimals getType(){
+        return animalType;
+    }
+    public BufferedImage getImage(){
+        BufferedImage image;
         try{
             switch(animalType){
                 case BEAR:
@@ -43,20 +54,7 @@ public class WildlifeTokens {
                 break;
             }
         }catch(Exception e){
-            out.println("Error in WildLife Tokens");
+            out.println("Error in WildLife Tokens Image");
         }
-    }
-    @Override
-    public String toString(){
-        return animalType.toString();
-    }
-    public String getName(){
-        return this.toString();
-    }
-    public CardAnimals getType(){
-        return animalType;
-    }
-    public BufferedImage getImage(){
-        return image;
     }
 }
