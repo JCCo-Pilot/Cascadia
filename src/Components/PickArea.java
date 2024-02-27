@@ -275,6 +275,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             }
         }else if (limitedSelection>-1&&limitedSelection<4){
             //if you pick the habitat tile first
+            if (hexagons[limitedSelection].getXPos()==0&&hexagons[limitedSelection].getYPos()==0){
+                
+            }
             //if you pick the wildlife token first
         }
         if (isOverpopulated3()){
