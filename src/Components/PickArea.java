@@ -17,6 +17,7 @@ import MathHelper.*;
 import static java.lang.System.*;
 public class PickArea extends JComponent implements MouseListener, ActionListener,AllowPickEventListener{
 
+    private WildlifeTokens[]token4 = new  WildlifeTokens[4];
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
     private int limitedSelection = -1;
     private int xSize,ySize;
@@ -256,10 +257,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                 //pick stuff
                 if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
                     if (allowPick){
-                        //PickEvent event = new PickEvent(this, removeAndReplaceToken(i));
+                        PickEvent event = new PickEvent(this, removeAndReplaceToken(i));
                         //need to delay the swap
-                        PickEvent event = new PickEvent(this, tokens.remove(i));
-                        tokens.set(i,null);
+                        //PickEvent event = new PickEvent(this, tokens.remove(i));
+                        //tokens.set(i,null);
                         listener.process(event);
                         allowPick=false;
                         limitedSelection = i;
@@ -278,8 +279,15 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             }
         }else if (limitedSelection>-1&&limitedSelection<4){
             //if you pick the habitat tile first
+            out.println("Line 282");
             if (hexagons[limitedSelection].getXPos()==0&&hexagons[limitedSelection].getYPos()==0){
-
+                out.println("Line 284");
+                if(pointIsInside(200, 250+(146*limitedSelection)-100, 70, 70, e)&&allowPick){
+                    out.println("Line 286");
+                    PickEvent evnet = new PickEvent(e, removeAndReplaceToken(limitedSelection));
+                    listener.process(evnet);
+                    limitedSelection = -1;
+                }
             }
             //if you pick the wildlife token first
         }
