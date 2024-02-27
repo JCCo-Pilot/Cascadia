@@ -15,7 +15,7 @@ public class TileCreator {
         int y = 61;
         int yinc = 61;
         Double size = 70.0;
-        tile.add(new HabitatTiles("wetland+river-salmon-hawk", new String[]{"wetland", "river"}, new String[]{"salmon", "hawk"}, false, x + xinc, y + yinc, size));
+        tile.add(new HabitatTiles("wetland+river-salmon-hawk", new String[]{"wetland", "river"}, new String[]{"salmon", "hawk"}, false, 92, 105, size));
         //tile.add("imagename",x+xinc,y+yinc,size);
         //tile.add();
     }

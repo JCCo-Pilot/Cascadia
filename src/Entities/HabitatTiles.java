@@ -42,7 +42,7 @@ public class HabitatTiles extends PointGenerator{
         super(x,y,size);
         //imageName = imageName.substring(5);
         try{
-            image = ImageIO.read(new File("src/Entities/Images"+imageName+".png"));
+            image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
         }catch(Exception e){
             out.println("Shit fucked up");
         }
@@ -162,7 +162,8 @@ public class HabitatTiles extends PointGenerator{
         int yPos = super.getYPos();
         /*AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(rotation), super.getX(), super.getY());
         g2d.setTranform(transform);*/
-        g.drawImage(image, xPos+xOffset,yPos-yOffset,null);
+        int size = (int)Math.round(Math.sqrt(3)/2.0)*2*(int)(Math.round(70.0));
+        g.drawImage(image, xPos+xOffset,yPos-yOffset,121,140,null);
         if (super.getTokens()!=null){
             g.drawImage(super.getTokens().getImage(),xPos-35,yPos-35,70,70,null);
         }
@@ -273,5 +274,14 @@ public class HabitatTiles extends PointGenerator{
     public boolean equals(Object o){
         HabitatTiles h = (HabitatTiles)o;
         return h.imageName.equals(this.imageName);
+    }
+
+    public boolean canPick(WildlifeTokens tk){
+        if (token!=null){
+            if(animals.contains(CardAnimals.StringToAnimal(tk.getName()))){
+                return true;
+            }
+        }   
+        return false;
     }
 }

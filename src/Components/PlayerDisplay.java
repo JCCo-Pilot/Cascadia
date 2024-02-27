@@ -13,7 +13,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private int xSize,ySize;
     private int xPos,yPos;
     private WildlifeTokens token;
-    private ArrayList<PointGenerator>testHexagons = new ArrayList<>();
+    private ArrayList<HabitatTiles>testHexagons = new ArrayList<>();
     private AllowPickEventListener listener;
     public PlayerDisplay(int x, int y, int xS, int yS){
         super();
@@ -30,7 +30,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         int size = 70;
         Double inc = size*Math.sqrt(3)/2;
         int xInc = (int)(Math.round(inc));
-        out.println(xInc);
+        out.println(xInc*2*(0+1)-30);
+        
         /*for (int i =0; i<7;i++){
             testHexagons.add(new PointGenerator(xInc*2*(i+1)-30, 0+105, 70.0));
             testHexagons.add(new PointGenerator(xInc*2*(i+1)-30, 105*2+105, 70.0));
@@ -45,6 +46,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         }*/
         TileCreator tc = new TileCreator();
         testHexagons.addAll(tc.getTiles());
+        //testHexagons.add(new PointGenerator(xInc*2*(0+1)-30, 0+105, 70.0));
     }
     @Override
     public void paintComponent(Graphics g){
@@ -77,7 +79,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             if(testHexagons.get(i).isPointInsideHexagon(e)){
                 //testHexagons.get(i).clicked();
                 if (token!=null){
-                    if (testHexagons.get(i).getTokens()==null){
+                    if (testHexagons.get(i).canPick(token)){
                         testHexagons.get(i).addToken(token);
                         AllowPickEvent ape = new AllowPickEvent(this, true);
                         listener.process(ape);
