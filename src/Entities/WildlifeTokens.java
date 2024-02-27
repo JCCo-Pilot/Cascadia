@@ -13,6 +13,7 @@ import static java.lang.System.*;
 public class WildlifeTokens {
     private CardAnimals animalType;
     private int xPos,yPos;
+    //private buffered image
     public WildlifeTokens(CardAnimals animalType){
         this.animalType = animalType;
         xPos = 0;
@@ -29,7 +30,7 @@ public class WildlifeTokens {
         return animalType;
     }
     public BufferedImage getImage(){
-        BufferedImage image;
+        BufferedImage image = null;
         try{
             switch(animalType){
                 case BEAR:
@@ -56,5 +57,6 @@ public class WildlifeTokens {
         }catch(Exception e){
             out.println("Error in WildLife Tokens Image");
         }
+        return image;
     }
 }
