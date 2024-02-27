@@ -286,10 +286,8 @@ public class HabitatTiles extends PointGenerator{
                 return true;
             }*/
             out.println("Name"+tk.getName());
-            for(int i=0;i<animals.size();i++){
-                if(animals.get(i).equals(tk.getType())){
-                    return true;
-                }
+            if(animals.contains(tk.getType())){
+                return true;
             }
         }   
         return false;
