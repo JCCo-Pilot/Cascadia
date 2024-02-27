@@ -27,8 +27,12 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private ArrayList<Player>players = new ArrayList<>();
     private JButton overpopButton = new JButton("Over-Population");
     private PointGenerator[]hexagons = new PointGenerator[4];
+    private ArrayList<HabitatTiles>ht = new ArrayList<>();
     public PickArea(int i,int x, int y , int xS, int yS){
         super();
+
+        ht = new TileCreator().getTiles();
+
         construct(x,y,xS,yS);
         numPlayers = i;
         this.setVisible(true);
@@ -64,10 +68,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         addMouseListener(this);
         xPos = x; yPos = y;
         xSize = xS; ySize = yS;
-        for (int i = 0;i<4;i++){
+        /*for (int i = 0;i<4;i++){
             PointGenerator pg = new PointGenerator(56+69, 275+(146*i)-100, 70.0); //changed from y-6 to y-50
             hexagons[i]= pg;
-        }
+        }*/
     }
     public void paint(Graphics g){
         g.setColor(Color.RED);

@@ -5,6 +5,26 @@ public class TileCreator {
     public TileCreator(){
         tile = new ArrayList<>();
         construct();
+        construct2();
+        setFullX(0);
+        setFullY(0);
+        shuffle();
+    }
+    private void shuffle(){
+        int limit = (int)(Math.random()*100)+10;
+        for(int i =0;i<limit;i++){
+            Collections.shuffle(tile);   
+        }
+    }
+    public void setFullX(int x){
+        for (int i =0;i<tile.size();i++){
+            tile.get(i).setX(x);
+        }
+    }
+    public void setFullY(int x){
+        for (int i =0;i<tile.size();i++){
+            tile.get(i).setY(x);
+        }
     }
     public ArrayList<HabitatTiles>getTiles(){
         return tile;

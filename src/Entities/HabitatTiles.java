@@ -164,10 +164,13 @@ public class HabitatTiles extends PointGenerator{
         int yPos = super.getYPos();
         /*AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(rotation), super.getX(), super.getY());
         g2d.setTranform(transform);*/
+
         int size = (int)Math.round(Math.sqrt(3)/2.0)*2*(int)(Math.round(70.0));
-        g.drawImage(image, xPos+xOffset,yPos-yOffset,121,140,null);
-        if (super.getTokens()!=null){
-            g.drawImage(super.getTokens().getImage(),xPos-35,yPos-35,70,70,null);
+        if (super.getXPos()!=0&&super.getYPos()!=0){
+            g.drawImage(image, xPos+xOffset,yPos-yOffset,121,140,null);
+            if (super.getTokens()!=null){
+                g.drawImage(super.getTokens().getImage(),xPos-35,yPos-35,70,70,null);
+            }   
         }
     }
     //MISC*******************************************************************************************************

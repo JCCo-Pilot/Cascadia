@@ -44,8 +44,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             testHexagons.add(new PointGenerator(xInc+(122*i)-30+122, 105*5+105, 70.0));
             //testHexagons.add(new PointGenerator(xInc+(122*i)-30+122, 105*7+105, 70.0));
         }*/
-        TileCreator tc = new TileCreator();
-        testHexagons.addAll(tc.getTiles());
+        //TileCreator tc = new TileCreator();
+        //testHexagons.addAll(tc.getTiles());
         //testHexagons.add(new PointGenerator(xInc*2*(0+1)-30, 0+105, 70.0));
     }
     @Override
