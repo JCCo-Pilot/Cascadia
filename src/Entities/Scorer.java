@@ -3,22 +3,50 @@ package Entities;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 
 import Entities.Enums.Habitats;
 import Entities.WildlifeScoringCards.ScoringCard;
 
-public class Scorer{
+public class Scorer implements Runnable{
+    private Player player = null;
+    private Habitats habitat = null;
+    private ScoringCard scoringCard = null;
+
+    private static HashSet<Thread> wildlifeThreads = new HashSet<Thread>();
+    private static HashSet<Thread> habitatThreads = new HashSet<Thread>();
+
+    public Scorer(Player p, Habitats h){
+        player = p;
+        habitat = h;
+    }
+
+    public Scorer(Player p, ScoringCard card){
+        player = p;
+        scoringCard = card;
+    }
 
     public static HashMap<Integer, Player> score(ArrayList<Player> players, ArrayList<ScoringCard> scoringCards){
         for(Player p: players){//add all scores to players
-            for(ScoringCard card:scoringCards){
-                p.setScore(card.getAnimal(), card.score(p));
-            }
             for(Habitats h: Habitats.values()){
-                p.setScore(h, p.getGraph().getLargestContiguousGroup(h));
+                Scorer s = new Scorer(p, h);
+                Thread t = new Thread(s);
+                habitatThreads.add(t);
+                t.start();
+            }
+            for(ScoringCard card:scoringCards){
+                Scorer s = new Scorer(p, card);
+                Thread t = new Thread(s);
+                wildlifeThreads.add(t);
+                t.start();
             }
         }
+
+        while(threadsWaiting(habitatThreads)){
+            
+        }
+
         for(Habitats h: Habitats.values()){//add bonuses
             //find max group
             Integer max = 0;
@@ -85,6 +113,11 @@ public class Scorer{
                 break;
             }
         }
+
+        while(threadsWaiting(wildlifeThreads)){
+
+        }
+        
         ArrayList<Player> finalPlayers = new ArrayList<Player>();
         Collections.copy(finalPlayers,players);
         HashMap<Integer, Player> finalOrder = new HashMap<Integer, Player>();
@@ -92,6 +125,28 @@ public class Scorer{
             finalOrder.put((Integer)i, finalPlayers.remove(finalPlayers.indexOf(Collections.max(finalPlayers))));
         }
         return finalOrder;
+    }
+
+    @Override
+    public void run() {
+        this.scorePlayer();
+    }
+
+    public void scorePlayer(){
+        if(habitat!=null){
+            player.setScore(habitat, player.getGraph().getLargestContiguousGroup(habitat));
+        }else if(scoringCard!=null){
+            player.setScore(scoringCard.getAnimal(), scoringCard.score(player));
+        }
+    }
+
+    public static Boolean threadsWaiting(HashSet<Thread> set){
+        for(Thread t:set){
+            if(t.isAlive()){
+                return true;
+            }
+        }
+        return false;
     }
     
 }
