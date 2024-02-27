@@ -290,6 +290,15 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                 }
             }
             //if you pick the wildlife token first
+            else if (!allowPick){
+                if (hexagons[limitedSelection].isPointInsideHexagon(e)){
+                    HabitatTiles temp = hexagons[limitedSelection];
+                    hexagons[limitedSelection] =ht.remove(0); 
+                    PickEvent pe = new PickEvent(this, temp);
+                    listener.process(pe);
+                    limitedSelection = -1;
+                }
+            }
         }
         if (isOverpopulated3()){
             overpopButton.setVisible(true);
