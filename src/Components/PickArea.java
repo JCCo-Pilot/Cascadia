@@ -38,7 +38,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         while(isOverpopulated4()){
             randShuffle();
         }
-        createHabitatTiles();
 
         allowPick = true;
 
@@ -104,20 +103,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             tokens.add(new WildlifeTokens(CardAnimals.SALMON));
             tokens.add(new WildlifeTokens(CardAnimals.HAWK));
             tokens.add(new WildlifeTokens(CardAnimals.FOX));
-        }
-    }
-    private void createHabitatTiles(){
-        //create all 85 tiles
-        switch(numPlayers){
-            case 2:
-                //remove 42
-            break;
-            case 3:
-                //remove 22
-            break;
-            case 4:
-                //remove 2 
-            break;
         }
     }
     private void randShuffle(){

@@ -23,7 +23,9 @@ public class HabitatTiles extends PointGenerator{
 
 
     private BufferedImage image;
-    private HashSet<CardAnimals> animals = new HashSet<CardAnimals>();
+    //private HashSet<CardAnimals> animals = new HashSet<CardAnimals>();
+    private ArrayList<CardAnimals> animals = new ArrayList<CardAnimals>();
+    
     private HashMap<Integer, Habitats> habitatSides = new HashMap<Integer, Habitats>();
     private HashMap<Integer, HabitatTiles> connections = new HashMap<Integer, HabitatTiles>();
     private Integer rotation = 0;
@@ -277,9 +279,17 @@ public class HabitatTiles extends PointGenerator{
     }
 
     public boolean canPick(WildlifeTokens tk){
+        out.println("Can Pick");
         if (token!=null){
-            if(animals.contains(CardAnimals.StringToAnimal(tk.getName()))){
+            /*if(animals.contains(CardAnimals.StringToAnimal(tk.getName()))){
+                System.out.println("Called");
                 return true;
+            }*/
+            out.println("Name"+tk.getName());
+            for(int i=0;i<animals.size();i++){
+                if(animals.get(i).equals(CardAnimals.StringToAnimal(tk.getName()))){
+                    return true;
+                }
             }
         }   
         return false;
