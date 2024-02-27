@@ -11,7 +11,7 @@ public class TileCreator {
         shuffle();
     }
     private void shuffle(){
-        int limit = (int)(Math.random()*100)+10;
+        int limit = (int)(Math.random()*100)+100;
         for(int i =0;i<limit;i++){
             Collections.shuffle(tile);   
         }

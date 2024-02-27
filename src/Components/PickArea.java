@@ -18,7 +18,7 @@ import static java.lang.System.*;
 public class PickArea extends JComponent implements MouseListener, ActionListener,AllowPickEventListener{
 
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
-    private int numPlayers;
+    private int limitedSelection = -1;
     private int xSize,ySize;
     private int xPos,yPos;
     private boolean allowPick;
@@ -26,7 +26,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private BufferedImage natureToken;
     private ArrayList<Player>players = new ArrayList<>();
     private JButton overpopButton = new JButton("Over-Population");
-    private PointGenerator[]hexagons = new PointGenerator[4];
+    private HabitatTiles[]hexagons = new HabitatTiles[4];
     private ArrayList<HabitatTiles>ht = new ArrayList<>();
     public PickArea(int i,int x, int y , int xS, int yS){
         super();
@@ -34,7 +34,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         ht = new TileCreator().getTiles();
 
         construct(x,y,xS,yS);
-        numPlayers = i;
         this.setVisible(true);
         createTokens();
         //sumChecker();
@@ -68,10 +67,12 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         addMouseListener(this);
         xPos = x; yPos = y;
         xSize = xS; ySize = yS;
-        /*for (int i = 0;i<4;i++){
-            PointGenerator pg = new PointGenerator(56+69, 275+(146*i)-100, 70.0); //changed from y-6 to y-50
-            hexagons[i]= pg;
-        }*/
+        for (int i = 0;i<4;i++){
+            //PointGenerator pg = new PointGenerator(56+69, 275+(146*i)-100, 70.0); //changed from y-6 to y-50
+            hexagons[i]= ht.remove(0);
+            hexagons[i].setX(56+69);
+            hexagons[i].setY(275+(146*i)-100);
+        }
     }
     public void paint(Graphics g){
         g.setColor(Color.RED);
@@ -250,17 +251,31 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         //131+69,250+(146*i)-100,70,70,
-        for (int i = 0;i<4;i++){
-            //pick stuff
-            if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
-                if (allowPick){
-                    PickEvent event = new PickEvent(this, removeAndReplaceToken(i));
-                    listener.process(event);
-                    allowPick=false;
-                    break;
+        if (limitedSelection==-1){
+            for (int i = 0;i<4;i++){
+                //pick stuff
+                if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
+                    if (allowPick){
+                        PickEvent event = new PickEvent(this, removeAndReplaceToken(i));
+                        listener.process(event);
+                        allowPick=false;
+                        limitedSelection = i;
+                        break;
+                    }
+                }
+                //end of picking stuff
+                if (hexagons[i].isPointInsideHexagon(e)){
+                    HabitatTiles temp = hexagons[i];
+                    out.println("Clicked "+i);
+                    hexagons[i] =ht.remove(0); 
+                    PickEvent pe = new PickEvent(this, temp);
+                    listener.process(pe);
+                    limitedSelection = i;
                 }
             }
-            //end of picking stuff
+        }else if (limitedSelection>-1&&limitedSelection<4){
+            //if you pick the habitat tile first
+            //if you pick the wildlife token first
         }
         if (isOverpopulated3()){
             overpopButton.setVisible(true);
