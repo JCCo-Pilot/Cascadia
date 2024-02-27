@@ -56,6 +56,10 @@ public class PointGenerator {
         xPos = i;
         unitCirclePoints(xPos, yPos, (int)Math.round(radius));
     }
+    public void setY(int i){
+        yPos = i;
+        unitCirclePoints(xPos, yPos, (int)(Math.round(radius)));
+    }
     public Double getSize(){
         return radius;
     }
