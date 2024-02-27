@@ -280,7 +280,7 @@ public class HabitatTiles extends PointGenerator{
 
     public boolean canPick(WildlifeTokens tk){
         out.println("canPick method:"+tk.toString());
-        if (token==null){
+        if (token==null&&tk!=null){
             /*if(animals.contains(CardAnimals.StringToAnimal(tk.getName()))){
                 System.out.println("Called");
                 return true;
