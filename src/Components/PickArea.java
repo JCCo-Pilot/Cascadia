@@ -27,6 +27,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private BufferedImage natureToken;
     private ArrayList<Player>players = new ArrayList<>();
     private JButton overpopButton = new JButton("Over-Population");
+    private JButton clearToken = new JButton("ClearTokens");
     private HabitatTiles[]hexagons = new HabitatTiles[4];
     private ArrayList<HabitatTiles>ht = new ArrayList<>();
     public PickArea(int i,int x, int y , int xS, int yS){
@@ -44,6 +45,11 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
 
         allowPick = true;
+
+        clearToken.setBounds(27,745,300,50);
+        clearToken.addActionListener(this);
+        clearToken.setVisible(true);
+        this.add(clearToken);
 
         overpopButton.setBounds(27,795,300,50);
         overpopButton.setVisible(isOverpopulated3());
@@ -286,8 +292,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     out.println("Line 286");
                     PickEvent evnet = new PickEvent(e, removeAndReplaceToken(limitedSelection));
                     listener.process(evnet);
-                    //hexagons[limitedSelection].setX(56+69);
-                    //hexagons[limitedSelection].setY(175+(146*limitedSelection));
+                    hexagons[limitedSelection].setX(56+69);
+                    hexagons[limitedSelection].setY(175+(146*limitedSelection));
                     limitedSelection = -1;
                 }
             }
@@ -298,8 +304,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     hexagons[limitedSelection] =ht.remove(0); 
                     PickEvent pe = new PickEvent(this, temp);
                     listener.process(pe);
-                    //hexagons[limitedSelection].setX(56+69);
-                    //hexagons[limitedSelection].setY(175+(146*limitedSelection));
+                    hexagons[limitedSelection].setX(56+69);
+                    hexagons[limitedSelection].setY(175+(146*limitedSelection));
                     limitedSelection = -1;
                 }
             }
@@ -340,6 +346,11 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         if ("Overpopulation".equals(e.getActionCommand())){
             removeOverpopulation();
             ((JComponent) e.getSource()).setVisible(false);
+        }else if (e.getSource()==clearToken){
+            allowPick=true;
+            limitedSelection =-1;
+            //hexagons[limitedSelection].setX(56+69);
+            //hexagons[limitedSelection].setY(175+(146*limitedSelection));
         }
         repaint();
     }

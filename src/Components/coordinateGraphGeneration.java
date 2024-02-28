@@ -6,5 +6,6 @@ public class coordinateGraphGeneration {
     private final double ySpacing = 1.571428571;
     private int xPos, yPos;
     private double radius;
-    //spacing = root3*radius +x
+    //xspacing = root3*radius +orginalx
+    //yspacing = radius*yspacing+originaly
 }
