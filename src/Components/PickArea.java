@@ -286,6 +286,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     out.println("Line 286");
                     PickEvent evnet = new PickEvent(e, removeAndReplaceToken(limitedSelection));
                     listener.process(evnet);
+                    //hexagons[limitedSelection].setX(56+69);
+                    //hexagons[limitedSelection].setY(175+(146*limitedSelection));
                     limitedSelection = -1;
                 }
             }
@@ -296,9 +298,14 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     hexagons[limitedSelection] =ht.remove(0); 
                     PickEvent pe = new PickEvent(this, temp);
                     listener.process(pe);
+                    //hexagons[limitedSelection].setX(56+69);
+                    //hexagons[limitedSelection].setY(175+(146*limitedSelection));
                     limitedSelection = -1;
                 }
             }
+            //hexagons[i].setX(56+69);
+            //hexagons[i].setY(275+(146*i)-100);
+            
         }
         if (isOverpopulated3()){
             overpopButton.setVisible(true);
