@@ -13,7 +13,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private int xSize,ySize;
     private int xPos,yPos;
     private WildlifeTokens token;
-    private Integer[] xPositions = {92,213,334,455,576,697,818,153,274,395,516,637,758};
+    private Integer[] xPositions = {92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758};
     private ArrayList<HabitatTiles>testHexagons = new ArrayList<>();
     private AllowPickEventListener listener;
     public PlayerDisplay(int x, int y, int xS, int yS){
@@ -86,7 +86,19 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         }else if(e.getTile()!=null){
             HabitatTiles tiles = e.getTile();
             tiles.setX(xPositions[testHexagons.size()]);
-            tiles.setY(105);
+            if (testHexagons.size()<7){
+                tiles.setY(105);
+            }else if (testHexagons.size()<13){
+                tiles.setY(215);
+            }else if (testHexagons.size()<20){
+                tiles.setY(325);
+            }else if (testHexagons.size()<26){
+                tiles.setY(435);
+            }else if (testHexagons.size()<33){
+                tiles.setY(435+110);
+            }else if (testHexagons.size()<39){
+                tiles.setY(435+220);
+            }
             testHexagons.add(tiles);
             repaint();
         }
