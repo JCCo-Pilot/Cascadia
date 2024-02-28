@@ -183,6 +183,11 @@ public class HabitatTiles extends PointGenerator{
     }
 
     public HabitatTiles add(HabitatTiles h, Integer side){
+        h.unsafeAdd(this, next(side, 3));
+        return connections.put(side, h);
+    }
+
+    public HabitatTiles unsafeAdd(HabitatTiles h, Integer side){
         return connections.put(side, h);
     }
 
