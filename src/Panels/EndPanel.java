@@ -11,6 +11,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     }
     public void paint(Graphics g){
         g.fillRect(0, 0, 1590, 865);
+        paintComponents(g);
     }
     public void actionPerformed(ActionEvent e){}
     public void mouseClicked(MouseEvent e) {}

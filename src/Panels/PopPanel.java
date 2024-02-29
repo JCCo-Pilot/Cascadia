@@ -25,6 +25,9 @@ public class PopPanel extends JComponent implements MouseListener{
         state =i;
         out.println(i);
     }
+    public void playerTesting(){
+        Player pl = new Player(0);
+    }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         
