@@ -21,7 +21,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     public MainPanel(int l){
         setLayout(null);
 
-        pd = new PlayerDisplay(310, 0, 905, 870);
+        construct(l);
+
+        pd = new PlayerDisplay(310, 0, 905, 870,players);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
 
@@ -38,7 +40,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
             out.println("Unable to pull");
         }
 
-        construct(l);
         pa.setPlayers(players);
         this.setVisible(true);
     }

@@ -1,6 +1,6 @@
 package Entities;
 import java.util.*;
-
+import java.awt.*;
 import Entities.Enums.CardAnimals;
 import Entities.Enums.Habitats;
 public class Player implements Comparable{
@@ -11,6 +11,8 @@ public class Player implements Comparable{
     private HashMap<CardAnimals, Integer> animalScores = new HashMap<CardAnimals, Integer>();
     private HashMap<Habitats, Integer> habitatScores = new HashMap<Habitats, Integer>();
     private HashMap<Habitats, Integer> habitatBonuses = new HashMap<Habitats, Integer>();
+    
+    private ArrayList<HabitatTiles>tiles = new ArrayList<>();
     public Player(int i){
         name= "Player "+i;
         turns = 20;
@@ -19,6 +21,10 @@ public class Player implements Comparable{
     public String getName(){return name;}
     public HabitatGraph getGraph(){
         return graph;
+    }
+
+    public ArrayList<HabitatTiles>getHexagons(){
+        return tiles;
     }
 
     public void setScore(CardAnimals c, Integer i){

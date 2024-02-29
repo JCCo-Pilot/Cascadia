@@ -17,7 +17,7 @@ import MathHelper.*;
 import static java.lang.System.*;
 public class PickArea extends JComponent implements MouseListener, ActionListener,AllowPickEventListener{
 
-    private WildlifeTokens[]token4 = new  WildlifeTokens[4];
+    //private ArrayList<WildlifeTokens>;
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
     private int limitedSelection = -1;
     private int xSize,ySize;

@@ -16,8 +16,13 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private Integer[] xPositions = {92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758};
     private ArrayList<HabitatTiles>testHexagons = new ArrayList<>();
     private AllowPickEventListener listener;
-    public PlayerDisplay(int x, int y, int xS, int yS){
+
+    private ArrayList<Player>players;
+    public PlayerDisplay(int x, int y, int xS, int yS, ArrayList<Player>play){
         super();
+
+        players = play;
+
         this.setVisible(true);
         xPos = x; yPos = y;
         xSize = xS; ySize = yS;
@@ -98,6 +103,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                 tiles.setY(435+110);
             }else if (testHexagons.size()<39){
                 tiles.setY(435+220);
+            }else if (testHexagons.size()<47){
+                tiles.setY(435+330);
             }
             testHexagons.add(tiles);
             repaint();
