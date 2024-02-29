@@ -14,7 +14,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private int xPos,yPos;
     private WildlifeTokens token;
     private Integer[] xPositions = {92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758};
-    private ArrayList<HabitatTiles>testHexagons = new ArrayList<>();
+    //private ArrayList<HabitatTiles>testHexagons = new ArrayList<>();
     private AllowPickEventListener listener;
 
     private ArrayList<Player>players;
@@ -53,8 +53,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public void paint(Graphics g){
         g.setColor(Color.BLACK);
         Polygon p = new Polygon();
-        for (int i =0; i<testHexagons.size();i++){
-            testHexagons.get(i).drawHexagon(g);
+        for (int i =0; i<players.get(0).getHexagons().size();i++){
+            players.get(0).getHexagons().get(i).drawHexagon(g);
         }
     }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
@@ -62,12 +62,12 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        for(int i =0;i<testHexagons.size();i++){
-            if(testHexagons.get(i).isPointInsideHexagon(e)){
+        for(int i =0;i<players.get(0).getHexagons().size();i++){
+            if(players.get(0).getHexagons().get(i).isPointInsideHexagon(e)){
                 if (token!=null){
-                    if (testHexagons.get(i).canPick(token)){
+                    if (players.get(0).getHexagons().get(i).canPick(token)){
                         //out.println("Why");
-                        testHexagons.get(i).addToken(token);
+                        players.get(0).getHexagons().get(i).addToken(token);
                         AllowPickEvent ape = new AllowPickEvent(this, true);
                         listener.process(ape);
                         token =null;
@@ -90,23 +90,24 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             token = e.getToken();
         }else if(e.getTile()!=null){
             HabitatTiles tiles = e.getTile();
-            tiles.setX(xPositions[testHexagons.size()]);
-            if (testHexagons.size()<7){
+            tiles.setX(xPositions[players.get(0).getHexagons().size()]);
+            if (players.get(0).getHexagons().size()<7){
                 tiles.setY(105);
-            }else if (testHexagons.size()<13){
+            }else if (players.get(0).getHexagons().size()<13){
                 tiles.setY(215);
-            }else if (testHexagons.size()<20){
+            }else if (players.get(0).getHexagons().size()<20){
                 tiles.setY(325);
-            }else if (testHexagons.size()<26){
+            }else if (players.get(0).getHexagons().size()<26){
                 tiles.setY(435);
-            }else if (testHexagons.size()<33){
+            }else if (players.get(0).getHexagons().size()<33){
                 tiles.setY(435+110);
-            }else if (testHexagons.size()<39){
+            }else if (players.get(0).getHexagons().size()<39){
                 tiles.setY(435+220);
-            }else if (testHexagons.size()<47){
+            }else if (players.get(0).getHexagons().size()<47){
                 tiles.setY(435+330);
             }
-            testHexagons.add(tiles);
+            //players.get(0).getHexagons()
+            players.get(0).addTile(tiles);
             repaint();
         }
     }

@@ -27,6 +27,10 @@ public class Player implements Comparable{
         return tiles;
     }
 
+    public void addTile(HabitatTiles t){
+        tiles.add(t);
+    }
+
     public void setScore(CardAnimals c, Integer i){
         animalScores.put(c, i);
     }
