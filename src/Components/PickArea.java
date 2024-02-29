@@ -292,6 +292,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     hexagons[limitedSelection].setX(56+69);
                     hexagons[limitedSelection].setY(175+(146*limitedSelection));
                     limitedSelection = -1;
+                    //PickEvent ev = new PickEvent(this, true);
+                    //listener.process(ev);
+                    //players.add(players.remove(0));
                 }
             }
             //if you pick the wildlife token first
@@ -304,6 +307,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     hexagons[limitedSelection].setX(56+69);
                     hexagons[limitedSelection].setY(175+(146*limitedSelection));
                     limitedSelection = -1;
+                    //PickEvent ev = new PickEvent(this, true);
+                    //listener.process(ev);
+                    //players.add(players.remove(0));
                 }
             }
             //hexagons[i].setX(56+69);
@@ -320,6 +326,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public void process(AllowPickEvent e){
         if (e.allowed()){
             allowPick= true;
+            //players.add(players.remove(0));
+            repaint();
         }
     }
     public void mouseReleased(MouseEvent e) {}

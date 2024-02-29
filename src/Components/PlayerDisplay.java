@@ -14,13 +14,14 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private int xPos,yPos;
     private WildlifeTokens token;
     private Integer[] xPositions = {92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758};
-    //private ArrayList<HabitatTiles>testHexagons = new ArrayList<>();
     private AllowPickEventListener listener;
 
+    private boolean switchTrigger;
     private ArrayList<Player>players;
     public PlayerDisplay(int x, int y, int xS, int yS, ArrayList<Player>play){
         super();
 
+        switchTrigger = false;
         players = play;
 
         this.setVisible(true);
@@ -30,7 +31,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         enableInputMethods(true);
         addMouseListener(this);
     }
-    private void constructHexagons(){//replace all the 50.0 with 100.0
+    private void constructHexagons(){
         //y increments are radius*1.5
         //x increments are size* root(3)/2
         int size = 70;
@@ -66,11 +67,11 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             if(players.get(0).getHexagons().get(i).isPointInsideHexagon(e)){
                 if (token!=null){
                     if (players.get(0).getHexagons().get(i).canPick(token)){
-                        //out.println("Why");
                         players.get(0).getHexagons().get(i).addToken(token);
                         AllowPickEvent ape = new AllowPickEvent(this, true);
                         listener.process(ape);
                         token =null;
+                        players.add(players.remove(0));
                     }  
                 }
             }
@@ -86,7 +87,11 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
     public void process(PickEvent e){
-        if (e.getToken()!=null){
+        if (e.switchTurns()){
+            switchTrigger = true;
+            //players.add(players.remove(0));
+            repaint();
+        }else if (e.getToken()!=null){
             token = e.getToken();
         }else if(e.getTile()!=null){
             HabitatTiles tiles = e.getTile();
