@@ -14,6 +14,11 @@ public class GameStateEvent extends EventObject{
         play = p;
         state =0;
     }
+    public GameStateEvent(Object source, int st , Player p){
+        super(source);
+        play = p;
+        state = st;
+    }
     public Player getPlayer(){
         return play;
     }
