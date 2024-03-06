@@ -14,6 +14,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         setLayout(null);
         sd = new scoringDisplay(null, 1,0,0,1590,860);// 665,17,355,865
         repaint();
+        construct();
     }
     public void construct(){
         //coordinates for buttons x - 1020 y - 690, 740, 790, 840 w - 560 h- 50
@@ -28,13 +29,22 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     public void paint(Graphics g){
         //g.fillRect(0, 0, 1590, 865);
         paintComponents(g);
+        testPainting(g);
     }
-    public void testPaintLeader(Graphics g){
+    public void testPainting(Graphics g){
         //scoring cards
+        g.setColor(Color.BLUE);
+        g.fillRect(665, 17, 355, 830);
+        //more scoring stuff
+        for (int i =0;i<4;i++){
+            if(i%2==1){g.setColor(Color.BLACK);}
+            else{g.setColor(Color.BLUE);}
+            g.fillRect(1020,645+(i*50),560,50);
+        }
     }
     private void addAll(ArrayList<JButton>comps){
         for (int i =0;i<comps.size();i++){
-            add(comps.get(i));
+            this.add(comps.get(i));
         }
     }
     public void actionPerformed(ActionEvent e){}
