@@ -260,7 +260,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         if (limitedSelection==-1){
             for (int i = 0;i<4;i++){
                 //pick stuff
-                if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
+                /*if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
                     if (allowPick){
                         PickEvent event = new PickEvent(this, removeAndReplaceToken(i));
                         //need to delay the swap
@@ -271,7 +271,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                         limitedSelection = i;
                         break;
                     }
-                }
+                }*/
                 //end of picking stuff
                 if (hexagons[i].isPointInsideHexagon(e)){
                     HabitatTiles temp = hexagons[i];
@@ -297,7 +297,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                 }
             }
             //if you pick the wildlife token first
-            else if (!allowPick){
+            /*else if (!allowPick){
                 if (hexagons[limitedSelection].isPointInsideHexagon(e)){
                     HabitatTiles temp = hexagons[limitedSelection];
                     hexagons[limitedSelection] =ht.remove(0); 
@@ -310,7 +310,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     //listener.process(ev);
                     //players.add(players.remove(0));
                 }
-            }
+            }*/
             //hexagons[i].setX(56+69);
             //hexagons[i].setY(275+(146*i)-100);
             
