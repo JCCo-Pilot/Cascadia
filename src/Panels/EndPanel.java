@@ -10,7 +10,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     private scoringDisplay sd;
     public EndPanel(){
         setLayout(null);
-        sd = new scoringDisplay(null, HEIGHT, FRAMEBITS, ERROR, ALLBITS, ABORT)
+        sd = new scoringDisplay(null, 1,0,0,1590,860);// 665,17,355,865
         repaint();
     }
     public void paint(Graphics g){
