@@ -41,6 +41,14 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
             else{g.setColor(Color.BLUE);}
             g.fillRect(1020,645+(i*50),560,50);
         }
+        //scoring cards
+        //w,h - 220 
+        //x-1060,1320,1060,1320 y-40,40,270,270
+        g.fillRect(1060, 40, 190+30, 190);
+        g.fillRect(1320, 40, 190+30, 190);
+        g.fillRect(1060, 240, 190+30, 190);
+        g.fillRect(1320, 240, 190+30, 190);
+        g.fillRect(1060, 440, 190+30, 190);
     }
     private void addAll(ArrayList<JButton>comps){
         for (int i =0;i<comps.size();i++){
