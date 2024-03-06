@@ -83,16 +83,12 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     }
     public void paint(Graphics g){
         g.setColor(Color.RED);
-        //g.fillRect(0, 0, xSize, ySize);
-        //spacing+(size+space)*i
         for (int i = 0;i<4;i++){
-            //g.fillRect(6+(106)*i, 6, 100, 100);
             hexagons[i].drawHexagon(g);
         }
         g.setColor(Color.BLACK);
         for (int i = 0;i<4;i++){
             g.drawImage(tokens.get(i).getImage(),131+69,250+(146*i)-100,70,70,null);
-            //g.fillOval(131, 200+25+(106)*i, 50, 50);
         }
         g.setFont(new Font("Arial", 100, 50));
         if (players.size()>0){
@@ -311,10 +307,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     //listener.process(ev);
                     //players.add(players.remove(0));
                 }
-            }
-            //hexagons[i].setX(56+69);
-            //hexagons[i].setY(275+(146*i)-100);
-            
+            } 
         }
         if (isOverpopulated3()){
             overpopButton.setVisible(true);
