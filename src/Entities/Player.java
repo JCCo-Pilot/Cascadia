@@ -72,6 +72,11 @@ public class Player implements Comparable{
     public Integer getNatureTokens(){
         return natureTokens;
     }
+
+    public void drawInventory(Graphics g){
+        // will implement a draw inventory based graph
+    }
+
     @Override
     public int compareTo(Object o) {
         Player p = (Player)o;
