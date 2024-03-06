@@ -8,14 +8,34 @@ import java.awt.event.*;
 import java.awt.*;
 public class EndPanel extends JPanel implements ActionListener,MouseListener{
     private scoringDisplay sd;
+    private int numPlayers;
+    private ArrayList<JButton>playerButtons = new ArrayList<>();
     public EndPanel(){
         setLayout(null);
         sd = new scoringDisplay(null, 1,0,0,1590,860);// 665,17,355,865
         repaint();
     }
+    public void construct(){
+        //coordinates for buttons x - 1020 y - 690, 740, 790, 840 w - 560 h- 50
+        for (int i =0;i<numPlayers;i++){
+            JButton temp = new JButton("Player "+(i+1));
+            temp.setBounds(1020,690+(i*50),560,50);
+            temp.setVisible(true);
+            playerButtons.add(temp);
+        }
+        addAll(playerButtons);
+    }
     public void paint(Graphics g){
         //g.fillRect(0, 0, 1590, 865);
         paintComponents(g);
+    }
+    public void testPaintLeader(Graphics g){
+        //scoring cards
+    }
+    private void addAll(ArrayList<JButton>comps){
+        for (int i =0;i<comps.size();i++){
+            add(comps.get(i));
+        }
     }
     public void actionPerformed(ActionEvent e){}
     public void mouseClicked(MouseEvent e) {
