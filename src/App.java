@@ -56,14 +56,12 @@ public class App extends JFrame implements GameListener{
                     repaint();
                 break; 
                 case 30:
-                    //out.println("works2");
                     this.remove(mpanel);
                     add(pPanel);
                     pPanel.currentPlayer(3);
                     repaint();
                 break;
                 case 40:
-                    //out.println("works3"); 
                     this.remove(mpanel);
                     add(pPanel);
                     pPanel.currentPlayer(4);
