@@ -12,7 +12,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     private ArrayList<JButton>playerButtons = new ArrayList<>();
     public EndPanel(){
         setLayout(null);
-        sd = new scoringDisplay(null, 1,0,0,1590,860);// 665,17,355,865
+        sd = new scoringDisplay(null, 1,665,17,355,830);// 665,17,355,865
         repaint();
         construct();
     }
