@@ -162,16 +162,36 @@ public class HabitatTiles extends PointGenerator{
 
         int xPos = super.getXPos();
         int yPos = super.getYPos();
-        /*AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(rotation), super.getX(), super.getY());
-        g2d.setTranform(transform);*/
+        
+        BufferedImage newImage = rotate(image, Math.toRadians(rotation%360));
 
         int size = (int)Math.round(Math.sqrt(3)/2.0)*2*(int)(Math.round(70.0));
         if (super.getXPos()!=0&&super.getYPos()!=0){
-            g.drawImage(image, xPos+xOffset,yPos-yOffset,121,140,null);
+            g.drawImage(newImage, xPos+xOffset,yPos-yOffset,121,140,null);
             if (super.getTokens()!=null){
                 g.drawImage(super.getTokens().getImage(),xPos-35,yPos-35,70,70,null);
             }   
         }
+    }
+
+    public static BufferedImage rotate(BufferedImage image, double angle) {
+        double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
+        int w = image.getWidth(), h = image.getHeight();
+        int neww = (int)Math.floor(w*cos+h*sin), newh = (int) Math.floor(h * cos + w * sin);
+        GraphicsConfiguration gc = getDefaultConfiguration();
+        BufferedImage result = gc.createCompatibleImage(w, h, Transparency.TRANSLUCENT);
+        Graphics2D g = result.createGraphics();
+        //g.translate((neww - w) / 2, (newh - h) / 2);
+        g.rotate(angle, w / 2, h / 2);
+        g.drawRenderedImage(image, null);
+        g.dispose();
+        return result;
+    }
+    
+    private static GraphicsConfiguration getDefaultConfiguration() {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        return gd.getDefaultConfiguration();
     }
     //MISC*******************************************************************************************************
     public void replaceNullConnectionsWithEmpty(){
