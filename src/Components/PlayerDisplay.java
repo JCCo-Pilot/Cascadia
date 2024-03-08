@@ -15,7 +15,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private WildlifeTokens token;
     private Integer[] xPositions = {92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758};
     private AllowPickEventListener listener;
-
+    
+    private JButton rotateButton;
     private boolean switchTrigger;
     private ArrayList<Player>players;
     public PlayerDisplay(int x, int y, int xS, int yS, ArrayList<Player>play){
@@ -23,7 +24,13 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
 
         switchTrigger = false;
         players = play;
-
+        
+        
+        rotateButton = new JButton("Rotate");
+        rotateButton.setBounds(790, 770, 105, 70);
+        rotateButton.setVisible(true);
+        this.add(rotateButton);
+        
         this.setVisible(true);
         xPos = x; yPos = y;
         xSize = xS; ySize = yS;
@@ -57,6 +64,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         for (int i =0; i<players.get(0).getHexagons().size();i++){
             players.get(0).getHexagons().get(i).drawHexagon(g);
         }
+        paintComponents(g);
     }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
     public Dimension getMinimumSize() {return new Dimension(xSize, ySize );}
