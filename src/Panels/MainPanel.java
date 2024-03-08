@@ -60,6 +60,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
             players.add(new Player(i));
         }
     }
+    //construct the starter tiles
+    private void constructStarters(){
+
+    }
+
     @Override
     public void paint(Graphics g){
         super.paint(g);
