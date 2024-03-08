@@ -87,7 +87,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
     public void process(PickEvent e){
-        if (e.switchTurns()){
+        if(e.getString()!=null){
+            repaint();
+        }else if (e.switchTurns()){
             switchTrigger = true;
             //players.add(players.remove(0));
             repaint();
