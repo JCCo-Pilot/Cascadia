@@ -97,7 +97,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         if (players.size()>0){
             g.drawString(players.get(0).getName()+":",40,70);
         }
-        g.drawImage(natureToken,100,700,35,35,null);
+        g.drawImage(natureToken,50,680,50,50,null);
         paintComponents(g);
     }
     @Override
@@ -353,6 +353,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }else if (e.getSource()==clearToken){
             allowPick=true;
             limitedSelection =-1;
+            players.add(players.remove(0));
             //hexagons[limitedSelection].setX(56+69);
             //hexagons[limitedSelection].setY(175+(146*limitedSelection));
         }

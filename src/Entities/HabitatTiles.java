@@ -173,7 +173,7 @@ public class HabitatTiles extends PointGenerator{
             }   
         }
     }
-
+    //rotational stuff
     public static BufferedImage rotate(BufferedImage image, double angle) {
         double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
         int w = image.getWidth(), h = image.getHeight();
@@ -187,7 +187,7 @@ public class HabitatTiles extends PointGenerator{
         g.dispose();
         return result;
     }
-    
+    //it works
     private static GraphicsConfiguration getDefaultConfiguration() {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
