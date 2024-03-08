@@ -55,6 +55,18 @@ public class HabitatTiles extends PointGenerator{
         imageName = "N/A";
     }
 
+    public HabitatTiles(String imageName,boolean isKey,int x, int y, double sz){
+        super(x,y,sz);
+        this.imageName = imageName;
+        this.isKeystone = isKey;
+
+        String env = imageName.substring(0, imageName.indexOf("-"));
+        String ani = imageName.substring(imageName.indexOf("-")+1);
+
+        ArrayList<String>environments = new ArrayList<>();
+        ArrayList<String>animals = new ArrayList<>();
+
+    }
 
     public HabitatTiles(String imageName, String[] habitats, String[] animals, Boolean isKeyStone){
         super(0, 0, 0);

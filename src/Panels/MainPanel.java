@@ -62,7 +62,17 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     }
     //construct the starter tiles
     private void constructStarters(){
-
+        int x = 0; int y = 0;
+        Double size = 70.0;
+        ArrayList<HabitatTiles>tiles = new ArrayList<>();
+        //create tile 1:
+        tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, x, y, size));
+        tiles.add(new HabitatTiles("forest+lake-salmon-elk-hawk", new String[]{"forest","lake"}, new String[]{"salmon","elk","hawk"}, false, x, y, size));
+        tiles.add(new HabitatTiles("mountain+desert-bear-fox", new String[]{"mountain","desert"}, new String[]{"fox","bear"}, false, x, y, size));
+        //tile 2:
+        tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, x, y, size));
+        //tile 3:
+        //tile 4:
     }
 
     @Override
