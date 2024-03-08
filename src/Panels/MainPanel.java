@@ -44,7 +44,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         this.setVisible(true);
     }
     private void construct(int limit){
-        buttons.add(new JButton("Scoring Cards"));
+        //buttons.add(new JButton("Scoring Cards"));
         for (int i= 0;i<limit;i++){
             buttons.add(new JButton("Player "+(i+1)));
         }
