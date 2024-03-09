@@ -23,11 +23,12 @@ public class TestPanel extends JPanel implements MouseListener{
             tiles.get(i).drawHexagon(g);
         }
     }
+    //x spacing is (size *root3)/2
     private void construct(){
         Double size = 70.0;
-        tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, 100, 100, size,true));
-        tiles.add(new HabitatTiles("forest+lake-salmon-elk-hawk", new String[]{"forest","lake"}, new String[]{"salmon","elk","hawk"}, false, 250, 100, size,true));
-        tiles.add(new HabitatTiles("mountain+desert-bear-fox", new String[]{"mountain","desert"}, new String[]{"fox","bear"}, false, 400, 100, size,true));
+        tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, 250, 100, size,true));
+        tiles.add(new HabitatTiles("forest+lake-salmon-elk-hawk", new String[]{"forest","lake"}, new String[]{"salmon","elk","hawk"}, false, 190, 205, size,true));//240
+        tiles.add(new HabitatTiles("mountain+desert-bear-fox", new String[]{"mountain","desert"}, new String[]{"fox","bear"}, false, 310, 205, size,true));//300
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
