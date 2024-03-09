@@ -2,6 +2,7 @@ import java.util.*;
 import javax.swing.*;
 
 import Entities.HabitatTiles;
+import Entities.StarterTile;
 import EventAndListener.*;
 import MathHelper.PointGenerator;
 import java.awt.*;
@@ -12,6 +13,7 @@ import java.io.File;
 import static java.lang.System.*;
 public class TestPanel extends JPanel implements MouseListener{
     private ArrayList<HabitatTiles>tiles = new ArrayList<>();
+    private ArrayList<StarterTile>startTiles = new ArrayList<>();
     public TestPanel(){
         construct();
         this.addMouseListener(this);
