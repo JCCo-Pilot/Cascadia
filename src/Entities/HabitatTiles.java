@@ -283,6 +283,10 @@ public class HabitatTiles extends PointGenerator{
         return -1;
     }
 
+    public void setOffset(int r){
+        rotation = r;
+    }
+
     public void rotate(){
         rotation+=60;
         HashMap<Integer, Habitats> temp = new HashMap<Integer, Habitats>();
