@@ -290,6 +290,12 @@ public class HabitatTiles extends PointGenerator{
             temp.put(previousInt(i), habitatSides.get(i));
         }
         habitatSides = temp;
+        
+        out.println("Rotation- "+getRotation());
+    }
+
+    public int getRotation(){
+        return rotation;
     }
 
     public static Integer nextInt(Integer i){
