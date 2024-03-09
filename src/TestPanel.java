@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.*;
 import java.io.File;
 import static java.lang.System.*;
-public class TestPanel extends JPanel{
+public class TestPanel extends JPanel implements MouseListener{
     private ArrayList<HabitatTiles>tiles = new ArrayList<>();
     public TestPanel(){
         construct();
@@ -23,6 +23,9 @@ public class TestPanel extends JPanel{
         }
     }
     private void construct(){
-        tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, 100, 100, 70.0,true));
+        Double size = 70.0;
+        tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, 100, 100, size,true));
+        tiles.add(new HabitatTiles("forest+lake-salmon-elk-hawk", new String[]{"forest","lake"}, new String[]{"salmon","elk","hawk"}, false, 250, 100, size,true));
+        tiles.add(new HabitatTiles("mountain+desert-bear-fox", new String[]{"mountain","desert"}, new String[]{"fox","bear"}, false, 400, 100, size,true));
     }
 }
