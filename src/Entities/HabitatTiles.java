@@ -140,6 +140,36 @@ public class HabitatTiles extends PointGenerator{
             out.println("Shit fucked up");
         }
     }
+
+    public HabitatTiles(String imageName, String[] habitats, String[] animals, boolean isKeyStone, Integer x, Integer y, Double size,boolean isStarter){
+        super(x, y, size);
+        this.imageName = imageName;
+        this.isKeystone = isKeyStone;
+
+        //map each side to a habitat
+        if(isKeystone){
+            for(int i = 0; i<6; i++){
+                habitatSides.put(i, Habitats.toHabitat(habitats[0]));
+            }
+        }else{
+            habitatSides.put(5, Habitats.toHabitat(habitats[0]));
+            habitatSides.put(0, Habitats.toHabitat(habitats[0]));
+            habitatSides.put(1, Habitats.toHabitat(habitats[0]));
+            habitatSides.put(2, Habitats.toHabitat(habitats[1]));
+            habitatSides.put(3, Habitats.toHabitat(habitats[1]));
+            habitatSides.put(4, Habitats.toHabitat(habitats[1]));
+        }
+
+        for(int i = 0; i<animals.length; i++){
+            this.animals.add(CardAnimals.StringToAnimal(animals[i]));
+        }
+
+        try{
+            image = ImageIO.read(new File("src/Entities/StarterTilePics/"+imageName+".png"));
+        }catch(Exception e){
+            out.println("Shit fucked up");
+        }
+    }
     
     //WILDLIFE TOKEN METHODS*******************************************************************************************************
     public WildlifeTokens getToken(){

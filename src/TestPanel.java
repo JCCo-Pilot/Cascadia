@@ -23,6 +23,6 @@ public class TestPanel extends JPanel{
         }
     }
     private void construct(){
-        tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, 100, 100, 70.0));
+        tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, 100, 100, 70.0,true));
     }
 }
