@@ -47,7 +47,15 @@ public class TestPanel extends JPanel implements MouseListener{
         tiles.add(new HabitatTiles("desert+swamp-fox-salmon", new String[]{"desert","swamp"}, new String[]{"fox","salmon"}, false, 310, 205, size,true));//300
         tiles.get(2).setOffset(300);
         */
+        //tile 4
+        /*tiles.add(new HabitatTiles("desert-fox-key", new String[]{"desert"}, new String[]{"fox"}, true, 250, 100, size,true));
+        tiles.add(new HabitatTiles("swamp+lake-salmon-fox-hawk", new String[]{"swamp","lake"}, new String[]{"salmon","fox","hawk"}, false, 190, 205, size,true));//240
+        tiles.get(1).setOffset(60);
+        tiles.add(new HabitatTiles("mountain+forest-bear-elk", new String[]{"mountain","forest"}, new String[]{"bear","elk"}, false, 310, 205, size,true));//300
+        tiles.get(2).setOffset(300);
+        */
         
+
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
