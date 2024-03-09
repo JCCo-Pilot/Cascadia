@@ -11,7 +11,11 @@ public class StarterTile {
     public HabitatTiles down_right = null;
     public HabitatTiles up = null;
 
+    private final Double r3 = 1.73205080757;
+    private final Double r3o2 = 0.86602540378;
+
     private int xPos,yPos;
+    private Double size;
     
     public StarterTile(HabitatTiles tile_down_left, HabitatTiles tile_up, HabitatTiles tile_down_right){
         down_left = tile_down_left;
@@ -21,12 +25,14 @@ public class StarterTile {
         xPos = 0; yPos = 0;
     }
 
-    public void setPos(int x, int y){
+    public void setPos(int x, int y, Double sz){
         xPos = x;
         yPos = y;
+        size =sz;
     }
 
     public void calculatePos(){
+        int half = (int)(Math.round(size/2));
         
     }
 
