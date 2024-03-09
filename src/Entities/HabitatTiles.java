@@ -65,7 +65,20 @@ public class HabitatTiles extends PointGenerator{
 
         ArrayList<String>environments = new ArrayList<>();
         ArrayList<String>animals = new ArrayList<>();
+        
+        //sample input:swamp-hawk-key
+        
+        //environmental processing
+        if (env.contains("+")){
+            environments.add(env.substring(0,env.indexOf("+")));
+            env = env.substring(env.indexOf("+")+1);
+        }
+        environments.add(env);
 
+        //habitat processing
+        if(ani.indexOf("-")!=ani.lastIndexOf("-")){
+            //3 habitats
+        }
     }
 
     public HabitatTiles(String imageName, String[] habitats, String[] animals, Boolean isKeyStone){
