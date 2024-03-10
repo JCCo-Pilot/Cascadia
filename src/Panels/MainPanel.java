@@ -64,6 +64,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     //construct the starter tiles
     private void constructStarters(){
         ArrayList<HabitatTiles>tiles = new ArrayList<>();
+        ArrayList<StarterTile>sTiles = new ArrayList<>();
         Double size = 70.0;
         //tile 1
         tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, 250, 100, size,true));
@@ -71,7 +72,25 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         tiles.get(1).setOffset(240);
         tiles.add(new HabitatTiles("mountain+desert-bear-fox", new String[]{"mountain","desert"}, new String[]{"fox","bear"}, false, 310, 205, size,true));//300
         tiles.get(2).setOffset(300);
-        players.get(0).add(new StarterTile(tiles).setPos(400, 400, 70.0));
+        sTiles.add(new StarterTile(tiles).setPos(400, 400, 70.0));
+        tiles.clear();
+        //tile 2
+        tiles.add(new HabitatTiles("forest-elk-key", new String[]{"forest"}, new String[]{"elk"}, true, 250, 100, size,true));
+        tiles.add(new HabitatTiles("lake+mountain-hawk-elk-bear", new String[]{"lake","mountain"}, new String[]{"bear","elk","hawk"}, false, 190, 205, size,true));//240
+        tiles.get(1).setOffset(240);
+        tiles.add(new HabitatTiles("desert+swamp-fox-salmon", new String[]{"desert","swamp"}, new String[]{"fox","salmon"}, false, 310, 205, size,true));//300
+        tiles.get(2).setOffset(300);
+        sTiles.add(new StarterTile(tiles).setPos(400, 400, 70.0));
+        tiles.clear();
+        //tile 3
+        tiles.add(new HabitatTiles("forest-elk-key", new String[]{"forest"}, new String[]{"elk"}, true, 250, 100, size,true));
+        tiles.add(new HabitatTiles("lake+mountain-hawk-elk-bear", new String[]{"lake","mountain"}, new String[]{"bear","elk","hawk"}, false, 190, 205, size,true));//240
+        tiles.get(1).setOffset(240);
+        tiles.add(new HabitatTiles("desert+swamp-fox-salmon", new String[]{"desert","swamp"}, new String[]{"fox","salmon"}, false, 310, 205, size,true));//300
+        tiles.get(2).setOffset(300);
+        sTiles.add(new StarterTile(tiles).setPos(400, 400, 70.0));
+        tiles.clear();
+        //tile 4
     }
 
     @Override
