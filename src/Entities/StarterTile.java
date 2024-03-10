@@ -33,7 +33,10 @@ public class StarterTile {
 
     public void calculatePos(){
         int half = (int)(Math.round(size/2));
-        
+        int offset = (int)(Math.round(r3o2*size));
+        up.setPos(xPos, yPos-(int)(Math.round(size)), size);
+        down_left.setPos(xPos-offset,yPos+half,size);
+        down_right.setPos(xPos+offset,yPos+half,size);
     }
 
     public void paintStarter(Graphics g){

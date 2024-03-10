@@ -110,4 +110,7 @@ public class PointGenerator {
         }
         myPoly = new myPolygon(ogPoints);
     }
+    public void setPos(int x, int y, Double sz){
+        unitCirclePoints(x, y, (int)(Math.round(sz)));
+    }
 }
