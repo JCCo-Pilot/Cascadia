@@ -36,7 +36,7 @@ public class App extends JFrame implements GameListener{
             mpanel.setListener(this);
             repaint();
             this.setVisible(true);
-            out.println("Switched");
+            //out.println("Switched");
         }else if (e.getSource()==mpanel){
             this.remove(mpanel);
             epanel = new EndPanel();

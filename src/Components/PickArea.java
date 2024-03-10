@@ -275,7 +275,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                 //end of picking stuff
                 if (hexagons[i].isPointInsideHexagon(e)){
                     HabitatTiles temp = hexagons[i];
-                    out.println("Clicked "+i);
+                    //out.println("Clicked "+i);
                     hexagons[i] =ht.remove(0); 
                     PickEvent pe = new PickEvent(this, temp);
                     listener.process(pe);

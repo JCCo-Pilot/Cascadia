@@ -75,6 +75,14 @@ public class Player implements Comparable{
         return natureTokens;
     }
 
+    public void findAndReplace(HabitatTiles t){
+        for (int i =0;i<tiles.size();i++){
+            if (t.equals(tiles.get(i))){
+                tiles.set(i,t);
+            }
+        }
+    }
+
     public void drawInventory(Graphics g){
         // will implement a draw inventory based graph
         for (int i =0;i<tiles.size();i++){

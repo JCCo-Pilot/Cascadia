@@ -295,7 +295,7 @@ public class HabitatTiles extends PointGenerator{
         }
         habitatSides = temp;
         
-        out.println("Rotation- "+getRotation());
+        //out.println("Rotation- "+getRotation());
     }
 
     public int getRotation(){
@@ -385,6 +385,22 @@ public class HabitatTiles extends PointGenerator{
             }
         }   
         //out.println("canPick = false");
+        return false;
+    }
+
+    //access for the imagename
+    public String getImageName(){
+        if(imageName!=null){
+            return imageName;
+        }
+        return null;
+    }
+
+    // do they equal each other 
+    public boolean equals(HabitatTiles t){
+        if(t.getImageName().equals(imageName)){
+            return true;
+        }
         return false;
     }
 }

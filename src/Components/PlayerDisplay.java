@@ -9,12 +9,14 @@ import javax.imageio.ImageIO;
 import java.awt.image.*;
 import MathHelper.*;
 import static java.lang.System.*;
-public class PlayerDisplay extends JComponent implements MouseListener,PickListener{
+public class PlayerDisplay extends JComponent implements MouseListener,PickListener,ActionListener{
     private int xSize,ySize;
     private int xPos,yPos;
     private WildlifeTokens token;
     private Integer[] xPositions = {92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758};
     private AllowPickEventListener listener;
+
+    private HabitatTiles current;
     
     private JButton rotateButton;
     private boolean switchTrigger;
@@ -29,6 +31,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         rotateButton = new JButton("Rotate");
         rotateButton.setBounds(790, 770, 105, 70);
         rotateButton.setVisible(true);
+        rotateButton.addActionListener(this);
         this.add(rotateButton);
         
         this.setVisible(true);
@@ -92,11 +95,19 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public int getYPos(){return yPos;}
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
+    public void actionPerformed(ActionEvent e){
+        if (e.getSource()==rotateButton){
+            current.rotate();;
+            players.get(0).findAndReplace(current);
+            repaint();
+        }
+    }
     public void process(PickEvent e){
         if(e.getString()!=null){
             repaint();
         }else if (e.switchTurns()){
             switchTrigger = true;
+            current= null;
             //players.add(players.remove(0));
             repaint();
         }else if (e.getToken()!=null){
@@ -121,6 +132,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             }
             //players.get(0).getHexagons()
             players.get(0).addTile(tiles);
+            
+            current = tiles;
+            
             repaint();
         }
     }
