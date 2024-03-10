@@ -13,15 +13,17 @@ import java.io.File;
 import static java.lang.System.*;
 public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private GameListener listener;
-    private BufferedImage bg,starter;
+    private BufferedImage bg,starter,difficult;
     private JButton start;
     private JButton instructions;
     private int state = -1;
     private final int width = 1600;
     private final int height = 900;
+    private Character difficulty;
     private ArrayList<BufferedImage>images = new ArrayList<>();
     private ArrayList<PointGenerator>hexagons = new ArrayList<>();
     private ArrayList<PointGenerator>playerOptions = new ArrayList<>();
+    private ArrayList<PointGenerator>difficultyOptions = new ArrayList<>();
     public StartPanel(){
         //setSize(1600,900);
         setLayout(null);
@@ -50,6 +52,9 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         for (int i=0;i<3;i++){
             playerOptions.add(new PointGenerator(530+(265*i), 400+180, 150.0));
         }
+        for (int i =0;i<5;i++){
+            difficultyOptions.add(new PointGenerator(530-265+(265*i), 580, 150.0));
+        }
         hexagons.add(new PointGenerator(795, 575, 150.0));
         hexagons.add(new PointGenerator(1460, 800, 150.0));
     }
@@ -57,6 +62,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         try{
             bg = ImageIO.read(new File("src/Panels/Background/StartBG.png"));
             starter = ImageIO.read(new File("src/Panels/Background/PlayerSelection.png"));
+            difficult = ImageIO.read(new File("src/Panels/Background/DiffcultySelection.png"));
         }catch(Exception e){
             out.println("Errors in pulling instruction images");
         }
@@ -114,6 +120,12 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 g.drawString("3", 770, 330+150);
                 g.drawString("4", 970, 330+150);*/
             break;
+            case 100:
+                g.drawImage(difficult, 0, 0, 1590, 865, null);
+                /*for (int i =0;i<difficultyOptions.size();i++){
+                    difficultyOptions.get(i).drawHexagon(g);
+                }*/
+            break;
         }
         if (state==-1){
             g.setFont(new Font("Arial", 100, 100));
@@ -150,12 +162,20 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     public void mousePressed(MouseEvent e) {
         if (state==-1){
             if (hexagons.get(0).isPointInsideHexagon(e)){
-                state =10;
+                state =100;
                 hexagons.clear();
                 repaint();
             }else if (hexagons.get(1).isPointInsideHexagon(e)){
                 state =1;
                 repaint();
+            }
+        }else if (state==100){
+            for(int i =0;i<difficultyOptions.size();i++){
+                if (difficultyOptions.get(i).isPointInsideHexagon(e)){
+                    translate(i);
+                    state =10;
+                    repaint();
+                }
             }
         }else if (state==10){
             if(playerOptions.get(0).isPointInsideHexagon(e)){
@@ -168,6 +188,21 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 GameStateEvent gse = new GameStateEvent(this, 3);
                 listener.process(gse);
             }
+        }
+    }
+    public void translate(int i){
+        switch (i) {
+            case 0:
+                difficulty = 'a';
+            break;
+            case 1:
+                difficulty = 'b';
+            break;
+            case 3:
+                difficulty = 'c';
+            case 4:
+                difficulty = 'd';
+            break;
         }
     }
     public void mouseReleased(MouseEvent e) {}    
