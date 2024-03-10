@@ -106,6 +106,12 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         tiles.get(2).setOffset(300);
         sTiles.add(new StarterTile(tiles).setPos(400, 400, 70.0));
         tiles.clear();
+
+        //randomize adding starter tiles for each players
+        Collections.shuffle(sTiles);
+        for (int i =0;i<players.size();i++){
+            players.get(i).add(sTiles.get(i));
+        }
     }
 
     @Override
