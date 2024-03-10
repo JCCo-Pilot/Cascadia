@@ -17,6 +17,22 @@ public class StarterTile {
     private int xPos,yPos;
     private Double size;
     
+    public StarterTile(ArrayList<HabitatTiles>tiles){
+        for (int i =0;i<tiles.size()&&i<3;i++){
+            switch (i) {
+                case 0:
+                    up = tiles.get(0);
+                break;
+                case 1:
+                    down_left = tiles.get(1);
+                break;
+                case 2:
+                    down_right = tiles.get(2);
+                break;
+            }
+        }
+    }
+
     public StarterTile(HabitatTiles tile_down_left, HabitatTiles tile_up, HabitatTiles tile_down_right){
         down_left = tile_down_left;
         down_right = tile_down_right;
@@ -25,10 +41,12 @@ public class StarterTile {
         xPos = 0; yPos = 0;
     }
 
-    public void setPos(int x, int y, Double sz){
+    public StarterTile setPos(int x, int y, Double sz){
         xPos = x;
         yPos = y;
         size =sz;
+        calculatePos();
+        return this;
     }
 
     public void calculatePos(){
@@ -42,13 +60,13 @@ public class StarterTile {
     public void paintStarter(Graphics g){
         if (xPos !=0&&yPos!=0){
             if (down_left!=null){
-
+                down_left.drawHexagon(g);
             }
             if (down_right!=null){
-
+                down_right.drawHexagon(g);
             }
             if (up!=null){
-
+                up.drawHexagon(g);
             }
         }
     }
