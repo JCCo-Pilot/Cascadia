@@ -22,6 +22,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         setLayout(null);
 
         construct(l);
+        constructStarters();
 
         pd = new PlayerDisplay(310, 0, 905, 870,players);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
@@ -62,17 +63,15 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     }
     //construct the starter tiles
     private void constructStarters(){
-        int x = 0; int y = 0;
-        Double size = 70.0;
         ArrayList<HabitatTiles>tiles = new ArrayList<>();
-        //create tile 1:
-        tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, x, y, size));
-        tiles.add(new HabitatTiles("forest+lake-salmon-elk-hawk", new String[]{"forest","lake"}, new String[]{"salmon","elk","hawk"}, false, x, y, size));
-        tiles.add(new HabitatTiles("mountain+desert-bear-fox", new String[]{"mountain","desert"}, new String[]{"fox","bear"}, false, x, y, size));
-        //tile 2:
-        tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, x, y, size));
-        //tile 3:
-        //tile 4:
+        Double size = 70.0;
+        //tile 1
+        tiles.add(new HabitatTiles("swamp-hawk-key", new String[]{"swamp"}, new String[]{"hawk"}, true, 250, 100, size,true));
+        tiles.add(new HabitatTiles("forest+lake-salmon-elk-hawk", new String[]{"forest","lake"}, new String[]{"salmon","elk","hawk"}, false, 190, 205, size,true));//240
+        tiles.get(1).setOffset(240);
+        tiles.add(new HabitatTiles("mountain+desert-bear-fox", new String[]{"mountain","desert"}, new String[]{"fox","bear"}, false, 310, 205, size,true));//300
+        tiles.get(2).setOffset(300);
+        players.get(0).add(new StarterTile(tiles).setPos(400, 400, 70.0));
     }
 
     @Override

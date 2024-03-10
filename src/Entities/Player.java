@@ -13,6 +13,8 @@ public class Player implements Comparable{
     private HashMap<Habitats, Integer> habitatBonuses = new HashMap<Habitats, Integer>();
     
     private ArrayList<HabitatTiles>tiles = new ArrayList<>();
+    private StarterTile st;
+
     public Player(int i){
         name= "Player "+i;
         turns = 20;
@@ -75,6 +77,16 @@ public class Player implements Comparable{
 
     public void drawInventory(Graphics g){
         // will implement a draw inventory based graph
+        for (int i =0;i<tiles.size();i++){
+            tiles.get(i).drawHexagon(g);
+        }
+        if (st!=null){
+            st.paintStarter(g);
+        }
+    }
+
+    public void add(StarterTile s){
+        st = s;
     }
 
     @Override

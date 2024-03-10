@@ -61,9 +61,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public void paint(Graphics g){
         g.setColor(Color.BLACK);
         Polygon p = new Polygon();
-        for (int i =0; i<players.get(0).getHexagons().size();i++){
-            players.get(0).getHexagons().get(i).drawHexagon(g);
-        }
+        players.get(0).drawInventory(g);
         paintComponents(g);
     }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
