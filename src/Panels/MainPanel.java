@@ -19,7 +19,12 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private PlayerDisplay pd;
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<JButton>buttons = new ArrayList<>();
-    private ArrayList<ScoringCard>cards = new ArrayList<>();
+    //private ArrayList<ScoringCard>cards = new ArrayList<>();
+    private BearCard bearCard;
+    private ElkCard elkCard;
+    private SalmonCard salmonCard;
+    private HawkCard hawkCard;
+    private FoxCard foxCard;
     private BufferedImage bg;
     public MainPanel(int l, Character diffcult){
         setLayout(null);
@@ -53,31 +58,31 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         switch(diff){
             case 'a':
                 CardTypes type = CardTypes.CARD_A; 
-                cards.add(new BearCard(type));
-                cards.add(new FoxCard(type));
-                cards.add(new ElkCard(type));
-                cards.add(new HawkCard(type));
+                bearCard = new BearCard(type);
+                foxCard = new FoxCard(type);
+                elkCard = new ElkCard(type);
+                hawkCard = new HawkCard(type);
             break;
             case 'b':
                 type = CardTypes.CARD_B; 
-                cards.add(new BearCard(type));
-                cards.add(new FoxCard(type));
-                cards.add(new ElkCard(type));
-                cards.add(new HawkCard(type));
+                bearCard = new BearCard(type);
+                foxCard = new FoxCard(type);
+                elkCard = new ElkCard(type);
+                hawkCard = new HawkCard(type);
             break;
             case 'c':
                 type = CardTypes.CARD_C; 
-                cards.add(new BearCard(type));
-                cards.add(new FoxCard(type));
-                cards.add(new ElkCard(type));
-                cards.add(new HawkCard(type));
+                bearCard = new BearCard(type);
+                foxCard = new FoxCard(type);
+                elkCard = new ElkCard(type);
+                hawkCard = new HawkCard(type);
             break;
             case'd':
                 type = CardTypes.CARD_D; 
-                cards.add(new BearCard(type));
-                cards.add(new FoxCard(type));
-                cards.add(new ElkCard(type));
-                cards.add(new HawkCard(type));
+                bearCard = new BearCard(type);
+                foxCard = new FoxCard(type);
+                elkCard = new ElkCard(type);
+                hawkCard = new HawkCard(type);
             break;
             case 'z':
                 Integer[] rands = new Integer[4];
@@ -103,16 +108,16 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
                     }
                     switch(i){
                         case 0:
-                            cards.add(new BearCard(t));
+                            bearCard = (new BearCard(t));
                         break;
                         case 1:
-                            cards.add(new ElkCard(t));
+                            elkCard = (new ElkCard(t));
                         break;
                         case 2:
-                            cards.add(new FoxCard(t));
+                            foxCard =(new FoxCard(t));
                         break;
                         case 3:
-                            cards.add(new HawkCard(t));
+                            hawkCard = (new HawkCard(t));
                         break;
                     }
                     
