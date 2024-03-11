@@ -18,7 +18,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<JButton>buttons = new ArrayList<>();
     private BufferedImage bg;
-    public MainPanel(int l){
+    public MainPanel(int l, Character diffcult){
         setLayout(null);
 
         construct(l);

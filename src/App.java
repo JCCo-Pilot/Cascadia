@@ -31,7 +31,7 @@ public class App extends JFrame implements GameListener{
     public void process(GameStateEvent e) {
         if(e.getSource()==spanel){
             this.remove(spanel);
-            mpanel = new MainPanel(e.getState()+1);
+            mpanel = new MainPanel(e.getState()+1,e.getDifficulty());
             this.add(mpanel);
             mpanel.setListener(this);
             repaint();
