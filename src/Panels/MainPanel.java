@@ -10,6 +10,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.*;
 import java.io.File;
 import Components.*;
+import Entities.WildlifeScoringCards.*;
+import Entities.Enums.*;
 import static java.lang.System.*;
 public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private GameListener listener;
@@ -17,6 +19,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private PlayerDisplay pd;
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<JButton>buttons = new ArrayList<>();
+    private ArrayList<ScoringCard>cards = new ArrayList<>();
     private BufferedImage bg;
     public MainPanel(int l, Character diffcult){
         setLayout(null);
@@ -43,6 +46,77 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
 
         pa.setPlayers(players);
         this.setVisible(true);
+    }
+    private void constructScoring(Character diff){
+        switch(diff){
+            case 'a':
+                CardTypes type = CardTypes.CARD_A; 
+                cards.add(new BearCard(type));
+                cards.add(new FoxCard(type));
+                cards.add(new ElkCard(type));
+                cards.add(new HawkCard(type));
+            break;
+            case 'b':
+                type = CardTypes.CARD_B; 
+                cards.add(new BearCard(type));
+                cards.add(new FoxCard(type));
+                cards.add(new ElkCard(type));
+                cards.add(new HawkCard(type));
+            break;
+            case 'c':
+                type = CardTypes.CARD_C; 
+                cards.add(new BearCard(type));
+                cards.add(new FoxCard(type));
+                cards.add(new ElkCard(type));
+                cards.add(new HawkCard(type));
+            break;
+            case'd':
+                type = CardTypes.CARD_D; 
+                cards.add(new BearCard(type));
+                cards.add(new FoxCard(type));
+                cards.add(new ElkCard(type));
+                cards.add(new HawkCard(type));
+            break;
+            case 'z':
+                Integer[] rands = new Integer[4];
+                for (int i =0;i<rands.length;i++){
+                    rands[i]=(int)(Math.random()*4);
+                }
+                for (int i =0;i<rands.length;i++){
+                    int r = rands[i];
+                    CardTypes t = CardTypes.CARD_A;
+                    switch(r){
+                        case 0:
+                            t = CardTypes.CARD_A;
+                        break;
+                        case 1:
+                            t = CardTypes.CARD_B;
+                        break;
+                        case 2:
+                            t = CardTypes.CARD_C;
+                        break;
+                        case 3:
+                            t = CardTypes.CARD_D;
+                        break;
+                    }
+                    switch(i){
+                        case 0:
+                            cards.add(new BearCard(t));
+                        break;
+                        case 1:
+                            cards.add(new ElkCard(t));
+                        break;
+                        case 2:
+                            cards.add(new FoxCard(t));
+                        break;
+                        case 3:
+                            cards.add(new HawkCard(t));
+                        break;
+                    }
+                    
+                }
+            break;
+        }
     }
     private void construct(int limit){
         //buttons.add(new JButton("Scoring Cards"));

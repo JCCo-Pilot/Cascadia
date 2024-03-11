@@ -198,10 +198,13 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             case 1:
                 difficulty = 'b';
             break;
-            case 3:
+            case 2:
                 difficulty = 'c';
-            case 4:
+            case 3:
                 difficulty = 'd';
+            break;
+            case 4:
+                difficulty = 'z';
             break;
         }
     }

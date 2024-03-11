@@ -9,6 +9,8 @@ import Entities.Enums.CardAnimals;
 import Entities.Enums.CardTypes;
 
 public class BearCard implements ScoringCard{
+
+    private 
     
     final CardAnimals animal = CardAnimals.BEAR;
     CardTypes cardLetter;
