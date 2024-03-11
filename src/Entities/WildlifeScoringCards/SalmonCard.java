@@ -2,6 +2,13 @@ package Entities.WildlifeScoringCards;
 
 import java.util.HashSet;
 
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.imageio.ImageIO;
+import java.awt.image.*;
+import java.io.File;
+
 import Entities.HabitatGraph;
 import Entities.HabitatTiles;
 import Entities.Player;
@@ -9,12 +16,34 @@ import Entities.Enums.CardAnimals;
 import Entities.Enums.CardTypes;
 
 public class SalmonCard implements ScoringCard{
+
+    private BufferedImage image;
     
     final CardAnimals animal = CardAnimals.SALMON;
     CardTypes cardLetter;
 
     public SalmonCard(CardTypes letter){
         this.cardLetter = letter;
+        String choice = "";
+        switch(letter){
+            case CARD_A:
+                choice = "A";
+            break;
+            case CARD_B:
+                choice ="B";
+            break;
+            case CARD_C:
+                choice = "C";
+            break;
+            case CARD_D:
+                choice = "D";
+            break;
+        }
+        try{
+            image = ImageIO.read(new File("src/Entities/ScoringCardsPics/BearScore"+choice+".png"));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
