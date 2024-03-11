@@ -5,6 +5,13 @@ import java.util.HashSet;
 
 //import javax.smartcardio.Card;
 
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.imageio.ImageIO;
+import java.awt.image.*;
+import java.io.File;
+
 import Entities.HabitatGraph;
 import Entities.HabitatTiles;
 import Entities.Player;
@@ -12,12 +19,34 @@ import Entities.Enums.CardAnimals;
 import Entities.Enums.CardTypes;
 
 public class FoxCard implements ScoringCard{
+
+    private BufferedImage image;
     
     final CardAnimals animal = CardAnimals.FOX;
     CardTypes cardLetter;
 
     public FoxCard(CardTypes letter){
         this.cardLetter = letter;
+        String choice = "";
+        switch(letter){
+            case CARD_A:
+                choice = "A";
+            break;
+            case CARD_B:
+                choice ="B";
+            break;
+            case CARD_C:
+                choice = "C";
+            break;
+            case CARD_D:
+                choice = "D";
+            break;
+        }
+        try{
+            image = ImageIO.read(new File("src/Entities/ScoringCardsPics/FoxScore"+choice+".png"));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
