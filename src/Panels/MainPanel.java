@@ -27,6 +27,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         construct(l);
         constructStarters();
 
+        constructScoring(diffcult);
+
         pd = new PlayerDisplay(310, 0, 905, 870,players);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);

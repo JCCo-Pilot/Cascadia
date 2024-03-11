@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
+import java.io.File;
 
 import Entities.HabitatGraph;
 import Entities.HabitatTiles;
@@ -21,11 +22,35 @@ public class BearCard implements ScoringCard{
 
     public BearCard(CardTypes letter){
         this.cardLetter = letter;
+        String choice = "";
+        switch(letter){
+            case CARD_A:
+                choice = "A";
+            break;
+            case CARD_B:
+                choice ="B";
+            break;
+            case CARD_C:
+                choice = "C";
+            break;
+            case CARD_D:
+                choice = "D";
+            break;
+        }
+        try{
+            image = ImageIO.read(new File("src/Entities/ScoringCardsPics/BearScore"+choice+".png"));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public CardAnimals getAnimal() {
         return animal;
+    }
+
+    public BufferedImage getImage(){
+        return image;
     }
 
     @Override
