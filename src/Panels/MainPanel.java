@@ -207,6 +207,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         this.paintComponents(g);
         //pa.paint(g);
         //g.fillRect(700, 100, 500, 500);
+        g.drawImage(bearCard.getImage(), 1213,500,160,160,null);
     }
     public void setListener(GameListener g){
         listener = g;
