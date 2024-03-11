@@ -52,6 +52,10 @@ public class ElkCard implements ScoringCard{
         return animal;
     }
 
+    public BufferedImage getImage(){
+        return image;
+    }
+
     @Override
     public Integer score(Player p) {
         return this.elkScore(p.getGraph());

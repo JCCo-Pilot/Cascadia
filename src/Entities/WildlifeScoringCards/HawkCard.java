@@ -51,6 +51,10 @@ public class HawkCard implements ScoringCard{
         return animal;
     }
 
+    public BufferedImage getImage(){
+        return image;
+    }
+
     @Override
     public Integer score(Player p) {
         return this.hawkScore(p.getGraph());
