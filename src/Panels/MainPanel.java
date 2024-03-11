@@ -62,6 +62,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
                 foxCard = new FoxCard(type);
                 elkCard = new ElkCard(type);
                 hawkCard = new HawkCard(type);
+                salmonCard = new SalmonCard(type);
             break;
             case 'b':
                 type = CardTypes.CARD_B; 
@@ -69,6 +70,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
                 foxCard = new FoxCard(type);
                 elkCard = new ElkCard(type);
                 hawkCard = new HawkCard(type);
+                salmonCard = new SalmonCard(type);
             break;
             case 'c':
                 type = CardTypes.CARD_C; 
@@ -76,6 +78,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
                 foxCard = new FoxCard(type);
                 elkCard = new ElkCard(type);
                 hawkCard = new HawkCard(type);
+                salmonCard = new SalmonCard(type);
             break;
             case'd':
                 type = CardTypes.CARD_D; 
@@ -83,11 +86,12 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
                 foxCard = new FoxCard(type);
                 elkCard = new ElkCard(type);
                 hawkCard = new HawkCard(type);
+                salmonCard = new SalmonCard(type);
             break;
             case 'z':
-                Integer[] rands = new Integer[4];
+                Integer[] rands = new Integer[5];
                 for (int i =0;i<rands.length;i++){
-                    rands[i]=(int)(Math.random()*4);
+                    rands[i]=(int)(Math.random()*5);
                 }
                 for (int i =0;i<rands.length;i++){
                     int r = rands[i];
@@ -118,6 +122,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
                         break;
                         case 3:
                             hawkCard = (new HawkCard(t));
+                        break;
+                        case 4:
+                            salmonCard = (new SalmonCard(t));
                         break;
                     }
                     
@@ -207,11 +214,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         this.paintComponents(g);
         //pa.paint(g);
         //g.fillRect(700, 100, 500, 500);
-        g.drawImage(bearCard.getImage(), 1213,500,160,160,null);
-        g.drawImage(foxCard.getImage(), 1213+160,500,160,160,null);
-        g.drawImage(bearCard.getImage(), 1213,500+160,160,160,null);
-        g.drawImage(bearCard.getImage(), 1213+160,500+160,160,160,null);
-        g.drawImage(bearCard.getImage(), 1213,500+320,160,160,null);
+        g.drawImage(bearCard.getImage(), 1213,300,160,160,null);
+        g.drawImage(foxCard.getImage(), 1213+160,300,160,160,null);
+        g.drawImage(elkCard.getImage(), 1213,300+160,160,160,null);
+        g.drawImage(hawkCard.getImage(), 1213+160,300+160,160,160,null);
+        g.drawImage(salmonCard.getImage(), 1213,300+320,160,160,null);
     }
     public void setListener(GameListener g){
         listener = g;

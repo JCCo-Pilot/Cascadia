@@ -40,7 +40,7 @@ public class SalmonCard implements ScoringCard{
             break;
         }
         try{
-            image = ImageIO.read(new File("src/Entities/ScoringCardsPics/BearScore"+choice+".png"));
+            image = ImageIO.read(new File("src/Entities/ScoringCardsPics/SalmonScore"+choice+".png"));
         }catch(Exception e){
             e.printStackTrace();
         }
