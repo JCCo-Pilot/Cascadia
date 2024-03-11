@@ -1,6 +1,10 @@
 package Entities.WildlifeScoringCards;
 
-import java.util.HashSet;
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.imageio.ImageIO;
+import java.awt.image.*;
 
 import Entities.HabitatGraph;
 import Entities.HabitatTiles;
@@ -10,7 +14,7 @@ import Entities.Enums.CardTypes;
 
 public class BearCard implements ScoringCard{
 
-    private 
+    private BufferedImage image;
     
     final CardAnimals animal = CardAnimals.BEAR;
     CardTypes cardLetter;

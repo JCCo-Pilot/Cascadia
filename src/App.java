@@ -7,15 +7,8 @@ import Panels.*;
 import static java.lang.System.*;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
-        //App  ap = new App("Team Aditya Chen");
+        App  ap = new App("Team Aditya Chen");
         //PanelTester pt = new PanelTester("lmao");
-        Integer[] rands = new Integer[4];
-        int r = 0;
-        for (int i =0;i<100000;i++){
-            r = (int)(Math.random()*4);
-            //rands[i]=r;
-            System.out.print(r+" ");
-        }
     }
     private StartPanel spanel;
     private MainPanel mpanel;
