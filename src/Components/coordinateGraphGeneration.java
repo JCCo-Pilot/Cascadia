@@ -26,16 +26,28 @@ public class coordinateGraphGeneration {
     //xspacing = root3*radius +orginalx
     //yspacing = radius*yspacing+originaly
     private ArrayList<PointGenerator>hexagons = new ArrayList<>();
+    //offsets - 120.0, 110.0 -1 ,100.0, 90.0, 80.0 -1, 70.0, 60.0, 50.0-1, 40.0, 30.0, 20.0-1, 10.0
     public coordinateGraphGeneration(){
-        int increment = convertR3(100);
-        int x = 100;
-        hexagons.add(new PointGenerator(x, 100, 100.0));
-        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
-        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
-        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
-        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
-        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
-        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
+        Double size = 120.0;
+        int xIncrement = convertR3(size);
+        int yIncrement = (int)(Math.round(size*1.5));
+        int x = 10;
+        int y = (int)Math.round(size);
+        //hexagons.add(new PointGenerator(x, y, size));
+        while(y<870){
+            while(x<1550){
+                hexagons.add(new PointGenerator(x+=xIncrement, y, size));
+            }
+            x =10;
+            hexagons.add(new PointGenerator(x+=convertR32(size), y+=yIncrement, size));
+            while(x<1550){
+                hexagons.add(new PointGenerator(x+=xIncrement, y, size));
+            }
+            y+=yIncrement;
+            x = 10;
+        }
+       
+        
     }
 
     public ArrayList<PointGenerator>getHexs(){
@@ -46,7 +58,15 @@ public class coordinateGraphGeneration {
         return (int)(Math.ceil(value*root3));
     }
 
+    public int convertR3(Double value){
+        return (int)(Math.ceil(value*root3));
+    }
+
     public int convertR32(int value){
+        return (int)(Math.round(value*root32));
+    }
+
+    public int convertR32(Double value){
         return (int)(Math.round(value*root32));
     }
 }
