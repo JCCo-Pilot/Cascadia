@@ -214,11 +214,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         this.paintComponents(g);
         //pa.paint(g);
         //g.fillRect(700, 100, 500, 500);
-        g.drawImage(bearCard.getImage(), 1213,300,160,160,null);
-        g.drawImage(foxCard.getImage(), 1213+160,300,160,160,null);
-        g.drawImage(elkCard.getImage(), 1213,300+160,160,160,null);
-        g.drawImage(hawkCard.getImage(), 1213+160,300+160,160,160,null);
-        g.drawImage(salmonCard.getImage(), 1213,300+320,160,160,null);
+        g.drawImage(bearCard.getImage(), 1213,200,175,170,null);
+        g.drawImage(foxCard.getImage(), 1213+175+5,200,175,170,null);
+        g.drawImage(elkCard.getImage(), 1213,200+180,175,170,null);
+        g.drawImage(hawkCard.getImage(), 1213+180,200+180,175,170,null);
+        g.drawImage(salmonCard.getImage(), 1213,200+180+180,175,170,null);
     }
     public void setListener(GameListener g){
         listener = g;
