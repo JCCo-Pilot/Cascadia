@@ -200,6 +200,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             break;
             case 2:
                 difficulty = 'c';
+            break;
             case 3:
                 difficulty = 'd';
             break;
