@@ -27,9 +27,11 @@ public class coordinateGraphGeneration {
     //yspacing = radius*yspacing+originaly
     private ArrayList<PointGenerator>hexagons = new ArrayList<>();
     public coordinateGraphGeneration(){
-        hexagons.add(new PointGenerator(100, 100, 100.0));
-        hexagons.add(new PointGenerator(100+convertR3(100), 100, 100.0));
-        hexagons.add(new PointGenerator(100+convertR3(100)+convertR3(100), 100, 100.0));
+        int increment = convertR3(100);
+        int x = 100;
+        hexagons.add(new PointGenerator(x, 100, 100.0));
+        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
+        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
     }
 
     public ArrayList<PointGenerator>getHexs(){
