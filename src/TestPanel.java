@@ -1,6 +1,7 @@
 import java.util.*;
 import javax.swing.*;
 
+import Components.coordinateGraphGeneration;
 import Entities.HabitatTiles;
 import Entities.StarterTile;
 import EventAndListener.*;
@@ -14,8 +15,11 @@ import static java.lang.System.*;
 public class TestPanel extends JPanel implements MouseListener{
     private ArrayList<HabitatTiles>tiles = new ArrayList<>();
     private ArrayList<StarterTile>startTiles = new ArrayList<>();
+    private ArrayList<PointGenerator>pg = new ArrayList<>();
+    private coordinateGraphGeneration cgg = new coordinateGraphGeneration();
     public TestPanel(){
-        construct();
+        //construct();
+        construct2();
         this.addMouseListener(this);
         this.setVisible(true);
     }
@@ -25,8 +29,14 @@ public class TestPanel extends JPanel implements MouseListener{
             //tiles.get(i).drawHexagon(g);
         }
         for (int i =0;i<startTiles.size();i++){
-            startTiles.get(i).paintStarter(g);
+            //startTiles.get(i).paintStarter(g);
         }
+        for (int i =0;i<pg.size();i++){
+            pg.get(i).drawHexagon(g);
+        }
+    }
+    private void construct2(){
+        pg = cgg.getHexs();
     }
     //x spacing is (size *root3)/2
     private void construct(){
