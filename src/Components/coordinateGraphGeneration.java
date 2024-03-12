@@ -32,6 +32,10 @@ public class coordinateGraphGeneration {
         hexagons.add(new PointGenerator(x, 100, 100.0));
         hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
         hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
+        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
+        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
+        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
+        hexagons.add(new PointGenerator(x+=increment, 100, 100.0));
     }
 
     public ArrayList<PointGenerator>getHexs(){
