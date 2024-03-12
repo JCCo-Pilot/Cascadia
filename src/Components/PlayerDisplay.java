@@ -129,6 +129,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         }else if (e.switchTurns()){
             switchTrigger = true;
             current= null;
+            temp = null;
             //players.add(players.remove(0));
             repaint();
         }else if (e.getToken()!=null){
