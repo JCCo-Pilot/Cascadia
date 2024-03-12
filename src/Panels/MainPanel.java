@@ -34,7 +34,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
 
         constructScoring(diffcult);
 
-        pd = new PlayerDisplay(310, 0, 905, 870,players);
+        pd = new PlayerDisplay(310, 15, 905, 830,players);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
 
@@ -160,7 +160,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         tiles.get(1).setOffset(240);
         tiles.add(new HabitatTiles("mountain+desert-bear-fox", new String[]{"mountain","desert"}, new String[]{"fox","bear"}, false, 310, 205, size,true));//300
         tiles.get(2).setOffset(300);
-        sTiles.add(new StarterTile(tiles).setPos(400, 400, 70.0));
+        sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
         tiles.clear();
         //tile 2
         tiles.add(new HabitatTiles("forest-elk-key", new String[]{"forest"}, new String[]{"elk"}, true, 250, 100, size,true));
@@ -168,7 +168,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         tiles.get(1).setOffset(240);
         tiles.add(new HabitatTiles("desert+swamp-fox-salmon", new String[]{"desert","swamp"}, new String[]{"fox","salmon"}, false, 310, 205, size,true));//300
         tiles.get(2).setOffset(300);
-        sTiles.add(new StarterTile(tiles).setPos(400, 400, 70.0));
+        sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
         tiles.clear();
         //tile 3
         tiles.add(new HabitatTiles("forest-elk-key", new String[]{"forest"}, new String[]{"elk"}, true, 250, 100, size,true));
@@ -176,7 +176,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         tiles.get(1).setOffset(240);
         tiles.add(new HabitatTiles("desert+swamp-fox-salmon", new String[]{"desert","swamp"}, new String[]{"fox","salmon"}, false, 310, 205, size,true));//300
         tiles.get(2).setOffset(300);
-        sTiles.add(new StarterTile(tiles).setPos(400, 400, 70.0));
+        sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
         tiles.clear();
         //tile 4
         tiles.add(new HabitatTiles("desert-fox-key", new String[]{"desert"}, new String[]{"fox"}, true, 250, 100, size,true));
@@ -184,7 +184,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         tiles.get(1).setOffset(60);
         tiles.add(new HabitatTiles("mountain+forest-bear-elk", new String[]{"mountain","forest"}, new String[]{"bear","elk"}, false, 310, 205, size,true));//300
         tiles.get(2).setOffset(300);
-        sTiles.add(new StarterTile(tiles).setPos(400, 400, 70.0));
+        sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
         tiles.clear();
         //tile 5
         tiles.add(new HabitatTiles("mountain-bear-key", new String[]{"mountain"}, new String[]{"bear"}, true, 250, 100, size,true));
@@ -192,7 +192,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         tiles.get(1).setOffset(60);
         tiles.add(new HabitatTiles("desert+lake-salmon-bear", new String[]{"mountain","lake"}, new String[]{"salmon","bear"}, false, 310, 205, size,true));//300
         tiles.get(2).setOffset(300);
-        sTiles.add(new StarterTile(tiles).setPos(400, 400, 70.0));
+        sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
         tiles.clear();
 
         //randomize adding starter tiles for each players

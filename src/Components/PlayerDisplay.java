@@ -17,6 +17,10 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private AllowPickEventListener listener;
 
     private HabitatTiles current;
+
+    private HabitatTiles temp;
+
+    private coordinateGraphGeneration cgg;
     
     private JButton rotateButton;
     private boolean switchTrigger;
@@ -40,7 +44,13 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         constructHexagons();
         enableInputMethods(true);
         addMouseListener(this);
+
+        testConstruct();
     }
+    private void testConstruct(){
+        cgg = new coordinateGraphGeneration(xSize,ySize);
+    }
+
     private void constructHexagons(){
         //y increments are radius*1.5
         //x increments are size* root(3)/2
@@ -66,6 +76,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         Polygon p = new Polygon();
         players.get(0).drawInventory(g);
         paintComponents(g);
+        cgg.paintAll(g);
     }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
     public Dimension getMinimumSize() {return new Dimension(xSize, ySize );}
@@ -83,6 +94,16 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                         players.add(players.remove(0));
                     }  
                 }
+            }
+        }
+
+        for (int i =0;i<cgg.getHexs().size();i++){
+            if (cgg.getHexs().get(i).isPointInsideHexagon(e)&&temp!=null){
+                temp.setX(cgg.getHexs().get(i).getXPos());
+                temp.setY(cgg.getHexs().get(i).getYPos());
+                current = temp;
+                players.get(0).addTile(current);
+                temp = null;
             }
         }
         repaint();
@@ -114,7 +135,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             token = e.getToken();
         }else if(e.getTile()!=null){
             HabitatTiles tiles = e.getTile();
-            tiles.setX(xPositions[players.get(0).getHexagons().size()]);
+            temp = tiles;
+            /*tiles.setX(xPositions[players.get(0).getHexagons().size()]);
             if (players.get(0).getHexagons().size()<7){
                 tiles.setY(105);
             }else if (players.get(0).getHexagons().size()<13){
@@ -133,7 +155,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             //players.get(0).getHexagons()
             players.get(0).addTile(tiles);
             
-            current = tiles;
+            current = tiles;*/
             
             repaint();
         }

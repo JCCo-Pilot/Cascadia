@@ -221,10 +221,11 @@ public class HabitatTiles extends PointGenerator{
         BufferedImage newImage = rotate(image, Math.toRadians(rotation%360));
 
         int size = (int)Math.round(Math.sqrt(3)/2.0)*2*(int)(Math.round(70.0));
+        int sz = (int)Math.round(super.getSize()/2);
         if (super.getXPos()!=0&&super.getYPos()!=0){
             g.drawImage(newImage, xPos+xOffset,yPos-yOffset,121,140,null);
             if (super.getTokens()!=null){
-                g.drawImage(super.getTokens().getImage(),xPos-35,yPos-35,70,70,null);
+                g.drawImage(super.getTokens().getImage(),xPos-sz,yPos-sz,sz*2,sz*2,null);
             }   
         }
     }

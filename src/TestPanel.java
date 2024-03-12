@@ -16,7 +16,7 @@ public class TestPanel extends JPanel implements MouseListener{
     private ArrayList<HabitatTiles>tiles = new ArrayList<>();
     private ArrayList<StarterTile>startTiles = new ArrayList<>();
     private ArrayList<PointGenerator>pg = new ArrayList<>();
-    private coordinateGraphGeneration cgg = new coordinateGraphGeneration();
+    //private coordinateGraphGeneration cgg = new coordinateGraphGeneration();
     public TestPanel(){
         //construct();
         construct2();
@@ -36,7 +36,7 @@ public class TestPanel extends JPanel implements MouseListener{
         }
     }
     private void construct2(){
-        pg = cgg.getHexs();
+        //pg = cgg.getHexs();
     }
     //x spacing is (size *root3)/2
     private void construct(){

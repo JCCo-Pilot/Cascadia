@@ -2,6 +2,9 @@ package Components;
 
 import java.util.*;
 
+import java.awt.*;
+import java.awt.event.*;
+
 import Entities.*;
 import Entities.Enums.*;
 import Entities.Images.*;
@@ -27,20 +30,20 @@ public class coordinateGraphGeneration {
     //yspacing = radius*yspacing+originaly
     private ArrayList<PointGenerator>hexagons = new ArrayList<>();
     //offsets - 120.0, 110.0 -1 ,100.0, 90.0, 80.0 -1, 70.0, 60.0, 50.0-1, 40.0, 30.0, 20.0-1, 10.0
-    public coordinateGraphGeneration(){
-        Double size = 120.0;
+    public coordinateGraphGeneration(int xLim, int yLim){
+        Double size = 70.0;
         int xIncrement = convertR3(size);
         int yIncrement = (int)(Math.round(size*1.5));
         int x = 10;
         int y = (int)Math.round(size);
         //hexagons.add(new PointGenerator(x, y, size));
-        while(y<870){
-            while(x<1550){
+        while(y<yLim){
+            while(x<xLim){
                 hexagons.add(new PointGenerator(x+=xIncrement, y, size));
             }
             x =10;
             hexagons.add(new PointGenerator(x+=convertR32(size), y+=yIncrement, size));
-            while(x<1550){
+            while(x<xLim){
                 hexagons.add(new PointGenerator(x+=xIncrement, y, size));
             }
             y+=yIncrement;
@@ -68,5 +71,11 @@ public class coordinateGraphGeneration {
 
     public int convertR32(Double value){
         return (int)(Math.round(value*root32));
+    }
+
+    public void paintAll(Graphics g){
+        for (int i =0;i<hexagons.size();i++){
+            hexagons.get(i).drawHexagon(g);
+        }
     }
 }
