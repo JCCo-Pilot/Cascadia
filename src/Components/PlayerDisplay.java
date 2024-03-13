@@ -75,8 +75,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         g.setColor(Color.BLACK);
         Polygon p = new Polygon();
         players.get(0).drawInventory(g);
-        paintComponents(g);
         cgg.paintAll(g);
+        paintComponents(g);
     }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
     public Dimension getMinimumSize() {return new Dimension(xSize, ySize );}
