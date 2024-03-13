@@ -6,6 +6,8 @@ import java.util.*;
 import java.awt.image.*;
 import javax.imageio.*;
 import java.awt.*;
+
+import static java.lang.System.*;
 public class StarterTile {
     public HabitatTiles down_left = null;
     public HabitatTiles down_right = null;
@@ -52,9 +54,14 @@ public class StarterTile {
     public void calculatePos(){
         int half = (int)(Math.round(size/2));
         int offset = (int)(Math.round(r3o2*size));
-        up.setPos(xPos, yPos-(int)(Math.round(size)), size);
-        down_left.setPos(xPos-offset,yPos+half,size);
-        down_right.setPos(xPos+offset,yPos+half,size);
+        //up.setPos(xPos, yPos-(int)(Math.round(size)), size);
+        //out.println("X-"+xPos);
+        //out.println("Y-"+(yPos-(int)(Math.round(size))));
+        //down_left.setPos(xPos-offset,yPos+half,size);
+        //down_right.setPos(xPos+offset,yPos+half,size);
+        up.setPos(437, 385, size);
+        down_left.setPos(376,490,size);
+        down_right.setPos(498,490,size);
     }
 
     public void paintStarter(Graphics g){

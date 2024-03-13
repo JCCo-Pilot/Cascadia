@@ -47,7 +47,11 @@ public class coordinateGraphGeneration {
             }
             y+=yIncrement;
             x = 10;
-        }   
+        }
+        /*for (int i =0;i<hexagons.size();i++){
+            System.out.println("X-"+i+" "+hexagons.get(i).getXPos());
+            System.out.println("Y-"+i+" "+hexagons.get(i).getYPos());
+        } */  
     }
 
     public void decreaseSize(){

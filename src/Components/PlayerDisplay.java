@@ -100,6 +100,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         for (int i =0;i<cgg.getHexs().size();i++){
             if (cgg.getHexs().get(i).isPointInsideHexagon(e)&&temp!=null){
                 if (canPlace(cgg.getHexs().get(i).getXPos(), cgg.getHexs().get(i).getYPos())){
+                    out.println(cgg.getHexs().get(i).getXPos());
+                    out.println(cgg.getHexs().get(i).getYPos());
+                    
                     temp.setX(cgg.getHexs().get(i).getXPos());
                     temp.setY(cgg.getHexs().get(i).getYPos());
                     current = temp;
