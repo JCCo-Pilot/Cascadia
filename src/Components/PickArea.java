@@ -27,6 +27,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private ArrayList<Player>players = new ArrayList<>();
     private JButton overpopButton = new JButton("Over-Population");
     private JButton clearToken = new JButton("ClearTokens");
+
+    private JComboBox<String>jcb;
+    private JButton spendToken = new JButton("Spend");
+
     private HabitatTiles[]hexagons = new HabitatTiles[4];
     private ArrayList<HabitatTiles>ht = new ArrayList<>();
     public PickArea(int i,int x, int y , int xS, int yS){
@@ -45,12 +49,22 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
 
         allowPick = true;
 
-        clearToken.setBounds(27,745,150,50);
+        clearToken.setBounds(27,745,150,30);
         clearToken.addActionListener(this);
         clearToken.setVisible(true);
         this.add(clearToken);
+        //795
+        spendToken.setBounds(27,775,70,30);
+        spendToken.addActionListener(this);
+        spendToken.setVisible(true);
+        add(spendToken);
 
-        overpopButton.setBounds(27,795,150,50);
+        String[] choices = {"Default","Any Combination of Tiles+Tokens","Select Tokens To Remove"};
+        jcb = new JComboBox<>(choices);
+        jcb.setBounds(97,775,200,20);
+        add(jcb);
+
+        overpopButton.setBounds(177,745,150,30);
         overpopButton.setVisible(isOverpopulated3());
         //overpopButton.setVisible(true);
         overpopButton.setActionCommand("Overpopulation");
