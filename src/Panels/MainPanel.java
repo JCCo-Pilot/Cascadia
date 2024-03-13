@@ -199,6 +199,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         Collections.shuffle(sTiles);
         for (int i =0;i<players.size();i++){
             players.get(i).add(sTiles.get(i));
+            players.get(i).addAll(sTiles.get(i).getTiles());
         }
     }
 

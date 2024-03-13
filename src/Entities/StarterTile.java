@@ -70,4 +70,12 @@ public class StarterTile {
             }
         }
     }
+
+    public ArrayList<HabitatTiles>getTiles(){
+        ArrayList<HabitatTiles>hts = new ArrayList<>();
+        hts.add(up);
+        hts.add(down_left);
+        hts.add(down_right);
+        return hts;
+    }
 }

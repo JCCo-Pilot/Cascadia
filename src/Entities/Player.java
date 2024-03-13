@@ -92,6 +92,10 @@ public class Player implements Comparable{
             st.paintStarter(g);
         }
     }
+    
+    public void addAll(ArrayList<HabitatTiles>ht){
+        tiles.addAll(ht);
+    }
 
     public void add(StarterTile s){
         st = s;
