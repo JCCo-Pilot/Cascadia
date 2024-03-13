@@ -127,19 +127,51 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         //check to make sure it is its neighbor
         int counter = 0;
         for (int i =0;i<temp.size();i++){
+            int cx = temp.get(i).getXPos();
+            int cy = temp.get(i).getYPos();
             //top left
-            
+            if (Math.abs((cx-(r32*sz))-x)<2){
+                if (Math.abs((cy-(1.5*sz))-y)<2){
+                    // it is the top left of the comparision
+                    counter++;
+                }
+            }
             //top right
-            
+            if (Math.abs((cx+(r32*sz))-x)<2){
+                if (Math.abs((cy-(1.5*sz))-y)<2){
+                    // it is the top right of the comparision
+                    counter++;
+                }
+            }
             //direct left
-            
+            if (Math.abs((cx-(r3*sz))-x)<2){
+                if (Math.abs(cy-y)<2){
+                    counter++;
+                }
+            }
             //direct right
-            
+            if (Math.abs((cx+(r3*sz))-x)<2){
+                if (Math.abs(cy-y)<2){
+                    counter++;
+                }
+            }
             //bottom left
-            
+            if (Math.abs((cx-(r32*sz))-x)<2){
+                if (Math.abs((cy+(1.5*sz))-y)<2){
+                    // it is the bottom left of the comparision
+                    counter++;
+                }
+            }
             //bottom right
+            if (Math.abs((cx+(r32*sz))-x)<2){
+                if (Math.abs((cy+(1.5*sz))-y)<2){
+                    // it is the bottom right of the comparision
+                    counter++;
+                }
+            }
         }
-        return true;
+        //out.println(counter>0);
+        return counter>0;
     }
     public void addListener(AllowPickEventListener apel){listener = apel;}
     public void mouseReleased(MouseEvent e) {}
