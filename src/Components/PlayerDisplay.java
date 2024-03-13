@@ -13,7 +13,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private int xSize,ySize;
     private int xPos,yPos;
     private WildlifeTokens token;
-    private Integer[] xPositions = {92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758};
+    //private Integer[] xPositions = {92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758};
     private AllowPickEventListener listener;
 
     private HabitatTiles current;
@@ -111,7 +111,11 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         repaint();
     }
     public boolean canPlace(int x, int y){
+        Double r3 = 1.7320508075688772935;
+        Double ySpace = 1.5;
+        Double r32 = 0.86602540378;
         ArrayList<HabitatTiles>temp = players.get(0).getHexagons();
+        Double sz = temp.get(0).getSize();
         //check for overlap
         for (int i =0;i<temp.size();i++){
             if (temp.get(i).getXPos()==x){
@@ -119,6 +123,21 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                     return false;
                 }
             }
+        }
+        //check to make sure it is its neighbor
+        int counter = 0;
+        for (int i =0;i<temp.size();i++){
+            //top left
+            
+            //top right
+            
+            //direct left
+            
+            //direct right
+            
+            //bottom left
+            
+            //bottom right
         }
         return true;
     }
