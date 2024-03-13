@@ -16,15 +16,22 @@ public class TestPanel extends JPanel implements MouseListener{
     private ArrayList<HabitatTiles>tiles = new ArrayList<>();
     private ArrayList<StarterTile>startTiles = new ArrayList<>();
     private ArrayList<PointGenerator>pg = new ArrayList<>();
+    private JComboBox<String> jcb;
     //private coordinateGraphGeneration cgg = new coordinateGraphGeneration();
     public TestPanel(){
         //construct();
-        construct2();
+        //construct2();
+        setLayout(null);
+        String[] choices = {"Default","Any Combination of Tiles+Tokens","Select Tokens To Remove"};
+        jcb = new JComboBox<>(choices);
+        jcb.setBounds(100,100,200,50);
+        add(jcb);
         this.addMouseListener(this);
         this.setVisible(true);
     }
     @Override
     public void paint(Graphics g){
+        paintComponents(g);
         for(int i =0;i<tiles.size();i++){
             //tiles.get(i).drawHexagon(g);
         }
@@ -32,7 +39,7 @@ public class TestPanel extends JPanel implements MouseListener{
             //startTiles.get(i).paintStarter(g);
         }
         for (int i =0;i<pg.size();i++){
-            pg.get(i).drawHexagon(g);
+            //pg.get(i).drawHexagon(g);
         }
     }
     private void construct2(){
