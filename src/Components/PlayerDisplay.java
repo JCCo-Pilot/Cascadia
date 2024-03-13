@@ -99,14 +99,28 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
 
         for (int i =0;i<cgg.getHexs().size();i++){
             if (cgg.getHexs().get(i).isPointInsideHexagon(e)&&temp!=null){
-                temp.setX(cgg.getHexs().get(i).getXPos());
-                temp.setY(cgg.getHexs().get(i).getYPos());
-                current = temp;
-                players.get(0).addTile(current);
-                temp = null;
+                if (canPlace(cgg.getHexs().get(i).getXPos(), cgg.getHexs().get(i).getYPos())){
+                    temp.setX(cgg.getHexs().get(i).getXPos());
+                    temp.setY(cgg.getHexs().get(i).getYPos());
+                    current = temp;
+                    players.get(0).addTile(current);
+                    temp = null;
+                }
             }
         }
         repaint();
+    }
+    public boolean canPlace(int x, int y){
+        ArrayList<HabitatTiles>temp = players.get(0).getHexagons();
+        //check for overlap
+        for (int i =0;i<temp.size();i++){
+            if (temp.get(i).getXPos()==x){
+                if (temp.get(i).getYPos()==y){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     public void addListener(AllowPickEventListener apel){listener = apel;}
     public void mouseReleased(MouseEvent e) {}

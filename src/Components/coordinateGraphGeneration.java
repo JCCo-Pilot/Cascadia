@@ -24,14 +24,13 @@ public class coordinateGraphGeneration {
     private final double root3 = 1.7320508075688772935;
     private final double ySpacing = 1.571428571;
     private final double root32 = 0.86602540378;
-    private int xPos, yPos;
-    private double radius;
+    private Double size;
     //xspacing = root3*radius +orginalx
     //yspacing = radius*yspacing+originaly
     private ArrayList<PointGenerator>hexagons = new ArrayList<>();
     //offsets - 120.0, 110.0 -1 ,100.0, 90.0, 80.0 -1, 70.0, 60.0, 50.0-1, 40.0, 30.0, 20.0-1, 10.0
     public coordinateGraphGeneration(int xLim, int yLim){
-        Double size = 70.0;
+        size = 70.0;
         int xIncrement = convertR3(size);
         int yIncrement = (int)(Math.round(size*1.5));
         int x = 10;
@@ -48,9 +47,11 @@ public class coordinateGraphGeneration {
             }
             y+=yIncrement;
             x = 10;
-        }
-       
-        
+        }   
+    }
+
+    public void decreaseSize(){
+
     }
 
     public ArrayList<PointGenerator>getHexs(){
