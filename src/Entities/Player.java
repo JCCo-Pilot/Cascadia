@@ -71,6 +71,10 @@ public class Player implements Comparable{
         return sum;
     }
 
+    public void incrementNature(){
+        natureTokens++;
+    }
+
     public Integer getNatureTokens(){
         return natureTokens;
     }

@@ -97,7 +97,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         if (players.size()>0){
             g.drawString(players.get(0).getName()+":",40,70);
         }
-        g.drawImage(natureToken,50,680,50,50,null);
+        //g.drawImage(natureToken,50,680,50,50,null);
+        g.drawString("Tokens: "+players.get(0).getNatureTokens(),50,720);
         paintComponents(g);
     }
     @Override

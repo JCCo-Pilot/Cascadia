@@ -91,6 +91,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                         AllowPickEvent ape = new AllowPickEvent(this, true);
                         listener.process(ape);
                         token =null;
+                        if (players.get(0).getHexagons().get(i).isKeystone){
+                            players.get(0).incrementNature();
+                        }
                         players.add(players.remove(0));
                     }  
                 }
