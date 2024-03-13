@@ -23,6 +23,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private coordinateGraphGeneration cgg;
     
     private JButton rotateButton;
+    private JButton rotateCButton;
     private boolean switchTrigger;
     private ArrayList<Player>players;
     public PlayerDisplay(int x, int y, int xS, int yS, ArrayList<Player>play){
@@ -32,11 +33,17 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         players = play;
         
         
-        rotateButton = new JButton("Rotate");
-        rotateButton.setBounds(790, 770, 105, 70);
+        rotateButton = new JButton("RotateC");
+        rotateButton.setBounds(790, 770, 105, 40);
         rotateButton.setVisible(true);
         rotateButton.addActionListener(this);
         this.add(rotateButton);
+
+        rotateCButton = new JButton("RotateCC");
+        rotateCButton.setBounds(685, 770, 105, 40);
+        rotateCButton.setVisible(true);
+        rotateCButton.addActionListener(this);
+        this.add(rotateCButton);
         
         this.setVisible(true);
         xPos = x; yPos = y;
@@ -188,8 +195,13 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
     public void actionPerformed(ActionEvent e){
-        if (e.getSource()==rotateButton){
+        if (e.getSource()==rotateButton&&current!=null){
             current.rotate();;
+            players.get(0).findAndReplace(current);
+            repaint();
+        }
+        if (e.getSource()==rotateCButton&&current!=null){
+            current.rotateC();
             players.get(0).findAndReplace(current);
             repaint();
         }

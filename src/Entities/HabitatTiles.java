@@ -295,7 +295,21 @@ public class HabitatTiles extends PointGenerator{
             temp.put(previousInt(i), habitatSides.get(i));
         }
         habitatSides = temp;
-        
+        if (rotation>360){
+            rotation-=360;
+        }
+        //out.println("Rotation- "+getRotation());
+    }
+    public void rotateC(){
+        rotation+=300;
+        HashMap<Integer, Habitats> temp = new HashMap<Integer, Habitats>();
+        for(int i = 0; i<6; i++){
+            temp.put(previousInt(i), habitatSides.get(i));
+        }
+        habitatSides = temp;
+        if (rotation>360){
+            rotation-=360;
+        }
         //out.println("Rotation- "+getRotation());
     }
 
