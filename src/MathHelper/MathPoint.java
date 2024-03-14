@@ -56,10 +56,5 @@ public class MathPoint {
         return Math.sqrt(Math.pow(a.doubleValue(), 2)+Math.pow(b.doubleValue(), 2));
 
     }
-
-    public boolean equals(Object o){
-        MathPoint m = (MathPoint)o;
-        return this.xPoint==m.xPoint&&this.yPoint==m.yPoint;
-    }
     
 }
