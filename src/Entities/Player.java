@@ -75,6 +75,12 @@ public class Player implements Comparable{
         natureTokens++;
     }
 
+    public void spendNT(){
+        if(natureTokens>0){
+            natureTokens--;
+        }
+    }
+
     public Integer getNatureTokens(){
         return natureTokens;
     }

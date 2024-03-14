@@ -23,7 +23,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private int xPos,yPos;
     private boolean allowPick;
 
-    private boolean spendTrigger;
+    private boolean removeTrigger;
+    private ArrayList<Integer>removal = new ArrayList<>();
 
     private PickListener listener;
     private BufferedImage natureToken;
@@ -34,7 +35,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
 
     private JComboBox<String>jcb;
     private JButton spendToken = new JButton("Spend");
-    private JButton confirmButton = new JButton("Confirm");
+    private JButton confirmButton = new JButton("Confirm Token Removal");
 
     private HabitatTiles[]hexagons = new HabitatTiles[4];
     private ArrayList<HabitatTiles>ht = new ArrayList<>();
@@ -71,7 +72,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         jcb.setVisible(false);
         add(jcb);
 
-        confirmButton.setBounds(27,775,70,30);
+        confirmButton.setBounds(27,775,150,30);
         confirmButton.addActionListener(this);
         confirmButton.setVisible(false);
         add(confirmButton);
@@ -127,6 +128,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         //g.drawImage(natureToken,50,680,50,50,null);
         g.drawString("Tokens: "+players.get(0).getNatureTokens(),50,720);
         paintComponents(g);
+
+        for (int i =0;i<4&&i<removal.size();i++){
+            g.drawRect(200,(250+(146*removal.get(i)))-100,70,70);
+        }
     }
     @Override
     public void paintComponent(Graphics g){
@@ -286,7 +291,14 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         //131+69,250+(146*i)-100,70,70,
-        if (limitedSelection==-1){
+        if (removeTrigger){
+            for (int i =0;i<4;i++){
+                if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
+                    removal.add(i);
+                }
+            }
+        }
+        if (limitedSelection==-1&&!removeTrigger){
             for (int i = 0;i<4;i++){
                 //pick stuff
                 /*if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
@@ -394,18 +406,29 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             //clicked on remove the stuff
             spendToken.setVisible(false);
             jcb.setVisible(false);
-            
+            confirmButton.setVisible(true);
+            removeTrigger = true;
+            players.get(0).spendNT();
             repaint();
             out.println("398");
+        }else if (e.getSource()==confirmButton&&removeTrigger){
+            ArrayList<WildlifeTokens>wt = new ArrayList<>();
+            for (int i =0;i<4&&i<removal.size();i++){
+                wt.add(removeAndReplaceToken(removal.get(i)));
+            }
+            removeTrigger=false;
+            confirmButton.setVisible(false);   
+            removal.clear();
+            tokens.addAll(wt);
         }
         repaint();
     }
     private void periodic(){
-        if (players.get(0).getNatureTokens()>0){
+        if (players.get(0).getNatureTokens()>0&&!removeTrigger){
             spendToken.setVisible(true);
             jcb.setVisible(true);
         }
-        if (players.get(0).getNatureTokens()<=0){
+        if (players.get(0).getNatureTokens()<=0&&!removeTrigger){
             spendToken.setVisible(false);
             jcb.setVisible(false);
         }
