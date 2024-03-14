@@ -81,6 +81,10 @@ public class PointGenerator {
         return myPoly.contains(e.getX(), e.getY());
         //return isPointInsideHexagon(e.getX(), e.getY());
     }
+    public boolean isPointInsideHexagon(MathPoint p){
+        return myPoly.contains(p.xPoint, p.yPoint);
+        //return isPointInsideHexagon(e.getX(), e.getY());
+    }
     private boolean isPointInsideHexagon(int x, int y) {
         int[] xPoints = new int[6];
         int[] yPoints = new int[6];
@@ -109,11 +113,5 @@ public class PointGenerator {
             ogPoints[i]= new MathPoint(xPoints[i], yPoints[i]);
         }
         myPoly = new myPolygon(ogPoints);
-    }
-    public void setPos(int x, int y, Double sz){
-        xPos = x;
-        yPos = y;
-        radius = sz;
-        unitCirclePoints(x, y, (int)(Math.round(sz)));
     }
 }
