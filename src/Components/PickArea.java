@@ -72,6 +72,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         add(jcb);
 
         confirmButton.setBounds(27,775,70,30);
+        confirmButton.addActionListener(this);
+        confirmButton.setVisible(false);
+        add(confirmButton);
 
         overpopButton.setBounds(170,745,140,30);
         overpopButton.setVisible(isOverpopulated3());
@@ -384,8 +387,16 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             listener.process(ee);
             //hexagons[limitedSelection].setX(56+69);
             //hexagons[limitedSelection].setY(175+(146*limitedSelection));
-        }else if(e.getSource()==spendToken){
-            out.println(jcb.getSelectedIndex());
+        }else if(e.getSource()==spendToken&&jcb.getSelectedIndex()==1){
+            //clicked spend on any combo of tiles+tokens
+            out.println("392");
+        }else if (e.getSource()==spendToken&&jcb.getSelectedIndex()==2){
+            //clicked on remove the stuff
+            spendToken.setVisible(false);
+            jcb.setVisible(false);
+            
+            repaint();
+            out.println("398");
         }
         repaint();
     }

@@ -145,7 +145,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
             this.add(buttons.get(i));
         }
         //construction time
-        for(int i =1;i<5;i++){
+        for(int i =1;i<limit+1;i++){
             players.add(new Player(i));
         }
     }
