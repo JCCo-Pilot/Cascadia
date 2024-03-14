@@ -715,6 +715,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         //131+69,250+(146*i)-100,70,70,
+        if (pickCombo){
+            
+        }
         if (removeTrigger){
             for (int i =0;i<4;i++){
                 if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
