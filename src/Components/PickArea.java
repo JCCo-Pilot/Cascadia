@@ -11,24 +11,11 @@ import javax.imageio.ImageIO;
 import javax.print.DocFlavor.INPUT_STREAM;
 
 import java.awt.image.*;
-import java.io.File;package Components;
-import Entities.*;
-import Entities.Enums.CardAnimals;
-
-import java.util.*;
-import javax.swing.*;
-import EventAndListener.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.imageio.ImageIO;
-import javax.print.DocFlavor.INPUT_STREAM;
-
-import java.awt.image.*;
 import java.io.File;
 
 import MathHelper.*;
 import static java.lang.System.*;
-public class PickArea extends JComponent implements MouseListener, ActionListener,AllowPickEventListener{
+/*public class PickArea extends JComponent implements MouseListener, ActionListener,AllowPickEventListener{
 
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
     private int limitedSelection = -1;
@@ -325,7 +312,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                         limitedSelection = i;
                         break;
                     }
-                }*/
+                }
                 //end of picking stuff
                 if (hexagons[i].isPointInsideHexagon(e)){
                     HabitatTiles temp = hexagons[i];
@@ -364,7 +351,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     //listener.process(ev);
                     //players.add(players.remove(0));
                 }
-            }*/
+            }
             //hexagons[i].setX(56+69);
             //hexagons[i].setY(275+(146*i)-100);
             
@@ -446,7 +433,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             jcb.setVisible(false);
         }
     }
-}
+}*/
 
 import MathHelper.*;
 import static java.lang.System.*;
