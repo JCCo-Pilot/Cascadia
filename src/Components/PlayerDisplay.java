@@ -64,7 +64,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         int size = 70;
         Double inc = size*Math.sqrt(3)/2;
         int xInc = (int)(Math.round(inc));
-        out.println(xInc*2*(0+1)-30);
+        //out.println(xInc*2*(0+1)-30);
         
         
     }
@@ -112,8 +112,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         for (int i =0;i<cgg.getHexs().size();i++){
             if (cgg.getHexs().get(i).isPointInsideHexagon(e)&&temp!=null){
                 if (canPlace(cgg.getHexs().get(i).getXPos(), cgg.getHexs().get(i).getYPos())){
-                    out.println(cgg.getHexs().get(i).getXPos());
-                    out.println(cgg.getHexs().get(i).getYPos());
+                    //out.println(cgg.getHexs().get(i).getXPos());
+                    //out.println(cgg.getHexs().get(i).getYPos());
                     
                     temp.setX(cgg.getHexs().get(i).getXPos());
                     temp.setY(cgg.getHexs().get(i).getYPos());

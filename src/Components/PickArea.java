@@ -28,11 +28,13 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private PickListener listener;
     private BufferedImage natureToken;
     private ArrayList<Player>players = new ArrayList<>();
+   
     private JButton overpopButton = new JButton("Over-Population");
     private JButton clearToken = new JButton("ClearTokens");
 
     private JComboBox<String>jcb;
     private JButton spendToken = new JButton("Spend");
+    private JButton confirmButton = new JButton("Confirm");
 
     private HabitatTiles[]hexagons = new HabitatTiles[4];
     private ArrayList<HabitatTiles>ht = new ArrayList<>();
@@ -68,6 +70,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         jcb.addActionListener(this);
         jcb.setVisible(false);
         add(jcb);
+
+        confirmButton.setBounds(27,775,70,30);
 
         overpopButton.setBounds(170,745,140,30);
         overpopButton.setVisible(isOverpopulated3());
