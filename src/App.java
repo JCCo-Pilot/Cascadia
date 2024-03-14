@@ -41,6 +41,7 @@ public class App extends JFrame implements GameListener{
             this.remove(mpanel);
             epanel = new EndPanel();
             this.add(epanel);
+            //epanel.repaint();
         }else{
             switch (e.getState()) {
                 case 10://player pop ups 1.2.3.4

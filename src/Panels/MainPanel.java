@@ -228,9 +228,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         listener = g;
     }
     public void actionPerformed(ActionEvent e){
-        for (int i =1;i<buttons.size();i++){
+        out.println("Errors in clicking buttons");
+        for (int i =0;i<buttons.size();i++){
             if (e.getSource()==buttons.get(i)){
-                GameStateEvent gse = new  GameStateEvent(buttons.get(i), 10*i);
+                //out.println("Fuck ");
+                GameStateEvent gse = new  GameStateEvent(buttons.get(i), 10*(i+1));
                 listener.process(gse);
             }
         }

@@ -35,13 +35,13 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         
         rotateButton = new JButton("RotateC");
         rotateButton.setBounds(790, 770, 105, 40);
-        rotateButton.setVisible(true);
+        rotateButton.setVisible(false);
         rotateButton.addActionListener(this);
         this.add(rotateButton);
 
         rotateCButton = new JButton("RotateCC");
         rotateCButton.setBounds(685, 770, 105, 40);
-        rotateCButton.setVisible(true);
+        rotateCButton.setVisible(false);
         rotateCButton.addActionListener(this);
         this.add(rotateCButton);
         
@@ -71,6 +71,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        periodic();
         Graphics2D antiAlias = (Graphics2D) g;
         antiAlias.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         paint(g);
@@ -79,6 +80,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         g.fillRect(0, 0, xPos, yPos);
     }
     public void paint(Graphics g){
+        periodic();
         g.setColor(Color.BLACK);
         Polygon p = new Polygon();
         players.get(0).drawInventory(g);
@@ -195,6 +197,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
     public void actionPerformed(ActionEvent e){
+        periodic();
         if (e.getSource()==rotateButton&&current!=null){
             current.rotate();;
             players.get(0).findAndReplace(current);
@@ -242,6 +245,18 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             current = tiles;*/
             
             repaint();
+        }
+    }
+    //method that is periodically called everytime you want a function to work
+    private void periodic(){
+        //check to see if the rotate buttons need to be visible
+        if(current==null){
+            rotateButton.setVisible(false);
+            rotateCButton.setVisible(false);
+        }
+        if (current!=null){
+            rotateButton.setVisible(true);
+            rotateCButton.setVisible(true);
         }
     }
 }

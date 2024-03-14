@@ -22,6 +22,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private int xSize,ySize;
     private int xPos,yPos;
     private boolean allowPick;
+
+    private boolean spendTrigger;
+
     private PickListener listener;
     private BufferedImage natureToken;
     private ArrayList<Player>players = new ArrayList<>();
@@ -56,12 +59,14 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         //795
         spendToken.setBounds(27,775,70,30);
         spendToken.addActionListener(this);
-        spendToken.setVisible(true);
+        spendToken.setVisible(false);
         add(spendToken);
 
-        String[] choices = {"Default","Any Combination of Tiles+Tokens","Select Tokens To Remove"};
+        String[] choices = {"","Any Combination of Tiles+Tokens","Select Tokens To Remove"};
         jcb = new JComboBox<>(choices);
         jcb.setBounds(97,775,200,20);
+        jcb.addActionListener(this);
+        jcb.setVisible(false);
         add(jcb);
 
         overpopButton.setBounds(170,745,140,30);
@@ -95,6 +100,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
     }
     public void paint(Graphics g){
+        periodic();
         g.setColor(Color.RED);
         //g.fillRect(0, 0, xSize, ySize);
         //spacing+(size+space)*i
@@ -118,6 +124,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        periodic();
         Graphics2D antiAlias = (Graphics2D) g;
         antiAlias.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         paint(g);
@@ -373,7 +380,19 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             listener.process(ee);
             //hexagons[limitedSelection].setX(56+69);
             //hexagons[limitedSelection].setY(175+(146*limitedSelection));
+        }else if(e.getSource()==spendToken){
+            out.println(jcb.getSelectedIndex());
         }
         repaint();
+    }
+    private void periodic(){
+        if (players.get(0).getNatureTokens()>0){
+            spendToken.setVisible(true);
+            jcb.setVisible(true);
+        }
+        if (players.get(0).getNatureTokens()<=0){
+            spendToken.setVisible(false);
+            jcb.setVisible(false);
+        }
     }
 }
