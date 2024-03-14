@@ -92,15 +92,17 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
+        System.out.println("Mouse: "+e.getX()+", "+e.getY());
         for(int i =0;i<players.get(0).getHexagons().size();i++){
-            if(players.get(0).getHexagons().get(i).isPointInsideHexagon(e)){
+            if(true){
                 if (token!=null){
-                    if (players.get(0).getHexagons().get(i).canPick(token)){
-                        players.get(0).getHexagons().get(i).addToken(token);
+                    if (true){
+                        players.get(0).getGraph().addToken(token, new MathPoint(e.getX(), e.getY()));
+                        HabitatTiles placedOn = players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY()));
                         AllowPickEvent ape = new AllowPickEvent(this, true);
                         listener.process(ape);
                         token =null;
-                        if (players.get(0).getHexagons().get(i).isKeystone){
+                        if (placedOn.isKeystone){
                             players.get(0).incrementNature();
                         }
                         players.add(players.remove(0));
@@ -118,15 +120,28 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                     temp.setX(cgg.getHexs().get(i).getXPos());
                     temp.setY(cgg.getHexs().get(i).getYPos());
                     current = temp;
-                    players.get(0).addTile(current);
+                    //players.get(0).addTile(current);
                     temp = null;
                 }
             }
         }
+
+        /*System.out.println("token is "+token);
+        System.out.println("current tile is "+current);
+
+        if(token!=null){
+            HabitatTiles toAddOn = players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY()));
+            if(toAddOn.getToken()==null){
+                toAddOn.addToken(token);
+            }
+        }else if(current!=null){
+            players.get(0).addTile(current, new MathPoint(e.getX(), e.getY()));
+        }*/
         repaint();
     }
     public boolean canPlace(int x, int y){
-        Double r3 = 1.7320508075688772935;
+        return true;
+        /*Double r3 = 1.7320508075688772935;
         Double ySpace = 1.5;
         Double r32 = 0.86602540378;
         ArrayList<HabitatTiles>temp = players.get(0).getHexagons();
@@ -186,7 +201,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             }
         }
         //out.println(counter>0);
-        return counter>0;
+        return counter>0;*/
     }
     public void addListener(AllowPickEventListener apel){listener = apel;}
     public void mouseReleased(MouseEvent e) {}
@@ -204,7 +219,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             repaint();
         }
         if (e.getSource()==rotateCButton&&current!=null){
-            current.rotateC();
+            for(int i = 0; i>5; i++){
+                current.rotate();
+            }
             players.get(0).findAndReplace(current);
             repaint();
         }

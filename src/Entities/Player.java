@@ -3,6 +3,7 @@ import java.util.*;
 import java.awt.*;
 import Entities.Enums.CardAnimals;
 import Entities.Enums.Habitats;
+import MathHelper.MathPoint;
 public class Player implements Comparable{
     private int natureTokens;
     private int turns;
@@ -11,9 +12,6 @@ public class Player implements Comparable{
     private HashMap<CardAnimals, Integer> animalScores = new HashMap<CardAnimals, Integer>();
     private HashMap<Habitats, Integer> habitatScores = new HashMap<Habitats, Integer>();
     private HashMap<Habitats, Integer> habitatBonuses = new HashMap<Habitats, Integer>();
-    
-    private ArrayList<HabitatTiles>tiles = new ArrayList<>();
-    private StarterTile st;
 
     public Player(int i){
         name= "Player "+i;
@@ -25,12 +23,12 @@ public class Player implements Comparable{
         return graph;
     }
 
-    public ArrayList<HabitatTiles>getHexagons(){
-        return tiles;
+    public HashSet<HabitatTiles>getHexagons(){
+        return graph.iterate();
     }
 
-    public void addTile(HabitatTiles t){
-        tiles.add(t);
+    public void addTile(HabitatTiles t, MathPoint p){
+        graph.add(t, p);
     }
 
     public void setScore(CardAnimals c, Integer i){
@@ -86,29 +84,30 @@ public class Player implements Comparable{
     }
 
     public void findAndReplace(HabitatTiles t){
-        for (int i =0;i<tiles.size();i++){
-            if (t.equals(tiles.get(i))){
-                tiles.set(i,t);
-            }
-        }
+        
     }
 
     public void drawInventory(Graphics g){
         // will implement a draw inventory based graph
-        for (int i =0;i<tiles.size();i++){
+        /*for (int i =0;i<tiles.size();i++){
             tiles.get(i).drawHexagon(g);
         }
         if (st!=null){
             st.paintStarter(g);
-        }
+        }*/
+        graph.drawGraph(g);
     }
     
     public void addAll(ArrayList<HabitatTiles>ht){
-        tiles.addAll(ht);
+        //tiles.addAll(ht);
     }
 
     public void add(StarterTile s){
-        st = s;
+        System.out.println("StarterTile add method called");
+        System.out.println("up="+s.up);
+        System.out.println("downleft="+s.down_left);
+        System.out.println("downright="+s.down_right);
+        graph = new HabitatGraph(s);
     }
 
     @Override

@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import Entities.Enums.CardAnimals;
 import Entities.Enums.Habitats;
+import MathHelper.MathPoint;
 import MathHelper.PointGenerator;
 import java.io.*;
 import java.util.*;
@@ -209,25 +210,42 @@ public class HabitatTiles extends PointGenerator{
     @Override
     public void drawHexagon(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
+        if(imageName.equals("empty")){
+            super.drawHexagon(g);
+            int xoff = (int)(Math.random()*6)-3;
+            int yoff = (int)(Math.random()*6)-3;
+            g.drawString("Empty", super.getXPos()+xoff, super.getYPos()+yoff);
+        }else{
+            Double offset = super.getSize();
+            int yOffset = (int)(Math.round(offset));
+            Double yo = -1*Math.sqrt(3)/2.0*offset;
+            int xOffset = (int)(Math.round(yo));
 
-        Double offset = super.getSize();
-        int yOffset = (int)(Math.round(offset));
-        Double yo = -1*Math.sqrt(3)/2.0*offset;
-        int xOffset = (int)(Math.round(yo));
+            int xPos = super.getXPos();
+            int yPos = super.getYPos();
+            
+            BufferedImage newImage = rotate(image, Math.toRadians(rotation%360));
 
-        int xPos = super.getXPos();
-        int yPos = super.getYPos();
-        
-        BufferedImage newImage = rotate(image, Math.toRadians(rotation%360));
-
-        int size = (int)Math.round(Math.sqrt(3)/2.0)*2*(int)(Math.round(70.0));
-        int sz = (int)Math.round(super.getSize()/2);
-        if (super.getXPos()!=0&&super.getYPos()!=0){
-            g.drawImage(newImage, xPos+xOffset,yPos-yOffset,121,140,null);
-            if (super.getTokens()!=null){
-                g.drawImage(super.getTokens().getImage(),xPos-sz,yPos-sz,sz*2,sz*2,null);
-            }   
+            int size = (int)Math.round(Math.sqrt(3)/2.0)*2*(int)(Math.round(70.0));
+            int sz = (int)Math.round(super.getSize()/2);
+            if (super.getXPos()!=0&&super.getYPos()!=0){
+                g.drawImage(newImage, xPos+xOffset,yPos-yOffset,121,140,null);
+                if (super.getTokens()!=null){
+                    g.drawImage(super.getTokens().getImage(),xPos-sz,yPos-sz,sz*2,sz*2,null);
+                }   
+            }
         }
+        
+    }
+
+    public MathPoint getCoordinate(){
+        return new MathPoint(getXPos(), getYPos());
+    }
+
+    public void setCoordinate(MathPoint m){
+        super.setX(m.xPoint);
+        super.setY(m.yPoint);
+        System.out.println("Coords of "+this+" set to "+m.xPoint+", "+m.yPoint);
     }
     //rotational stuff
     public static BufferedImage rotate(BufferedImage image, double angle) {
@@ -252,18 +270,19 @@ public class HabitatTiles extends PointGenerator{
     //MISC*******************************************************************************************************
     public void replaceNullConnectionsWithEmpty(){
         for(int i = 0; i<6; i++){
-            if(!connections.containsKey(i)){
-                connections.put(i, new HabitatTiles());
+            if(connections.get(i)==null){
+                add(new HabitatTiles(), i);
             }
         }
     }
 
     public HabitatTiles add(HabitatTiles h, Integer side){
         h.unsafeAdd(this, next(side, 3));
+        h.setCoordinate(this.getAdjacentTileOffset(side));
         return connections.put(side, h);
     }
 
-    private HabitatTiles unsafeAdd(HabitatTiles h, Integer side){
+    HabitatTiles unsafeAdd(HabitatTiles h, Integer side){
         return connections.put(side, h);
     }
 
@@ -363,9 +382,14 @@ public class HabitatTiles extends PointGenerator{
     public HabitatTiles replaceWith(HabitatTiles h){
         HabitatTiles removed = new HabitatTiles();
         for(HabitatTiles t:this.connections.values()){
-            removed = t.add(h, t.getSideOf(this));
+            removed = t.unsafeAdd(h, t.getSideOf(this));
+            h.unsafeAdd(t, this.getSideOf(t));
         }
         return removed;
+    }
+
+    public Boolean isEmpty(){
+        return imageName.equals("empty");
     }
 
     public HabitatTiles findFirstWithSpecificToken(CardAnimals token){
@@ -411,11 +435,45 @@ public class HabitatTiles extends PointGenerator{
         return null;
     }
 
+    public MathPoint getAdjacentTileOffset(Integer direction){
+        Double x = super.getXPos()+0.0;
+        Double y = super.getYPos()+0.0;
+        Double size = super.getSize();
+
+        if(direction==LEFT){
+            x -= Math.sqrt(3)*size;
+        }else if(direction==RIGHT){
+            x += Math.sqrt(3)*size;
+        }else if(direction==UP_RIGHT){
+            x += size*Math.sqrt(3)/2.0;
+            y -= size*3/2.0;
+        }else if(direction==UP_LEFT){
+            x += -1*size*Math.sqrt(3)/2.0;
+            y -= size*3/2.0;
+        }else if(direction==DOWN_RIGHT){
+            x += size*Math.sqrt(3)/2.0;
+            y -= -1*size*3/2.0;
+        }else if(direction==DOWN_LEFT){
+            x += -1*size*Math.sqrt(3)/2.0;
+            y -= -1*size*3/2.0;
+        }
+
+        System.out.println(direction + " offset of "+this+" is "+x+", "+y);
+
+        Integer xPoint = (int)(double)x;
+        Integer yPoint = (int)(double)y;
+
+        return new MathPoint(xPoint, yPoint); 
+    }       
     // do they equal each other 
     public boolean equals(HabitatTiles t){
         if(t.getImageName().equals(imageName)){
             return true;
         }
         return false;
+    }
+
+    public String toString(){
+        return imageName;
     }
 }
