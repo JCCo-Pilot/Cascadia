@@ -13,8 +13,10 @@ public class PanelTester extends JFrame{
         setSize(WIDTH,HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
-        TestPanel tp = new TestPanel();
-        this.add(tp);
+        /*TestPanel tp = new TestPanel();
+        this.add(tp);*/
+        EndPanel ep = new EndPanel();
+        this.add(ep);
         setVisible(true);
     }
 }

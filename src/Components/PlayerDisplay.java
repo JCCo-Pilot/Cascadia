@@ -84,7 +84,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         g.setColor(Color.BLACK);
         Polygon p = new Polygon();
         players.get(0).drawInventory(g);
-        cgg.paintAll(g);
+        //cgg.paintAll(g);
         paintComponents(g);
     }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
@@ -92,20 +92,22 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        System.out.println("Mouse: "+e.getX()+", "+e.getY());
+        periodic();
         for(int i =0;i<players.get(0).getHexagons().size();i++){
-            if(true){
+            if(players.get(0).getHexagons().get(i).isPointInsideHexagon(e)){
                 if (token!=null){
-                    if (true){
-                        players.get(0).getGraph().addToken(token, new MathPoint(e.getX(), e.getY()));
-                        HabitatTiles placedOn = players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY()));
+                    if (players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY())).canPick(token)){
+                        players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY())).addToken(token);
                         AllowPickEvent ape = new AllowPickEvent(this, true);
                         listener.process(ape);
                         token =null;
-                        if (placedOn.isKeystone){
+                        if (players.get(0).getHexagons().get(i).isKeystone){
                             players.get(0).incrementNature();
                         }
                         players.add(players.remove(0));
+                        current = null;
+                        AllowPickEvent apes = new AllowPickEvent(this, players.get(0));
+                        listener.process(apes);
                     }  
                 }
             }
@@ -120,28 +122,15 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                     temp.setX(cgg.getHexs().get(i).getXPos());
                     temp.setY(cgg.getHexs().get(i).getYPos());
                     current = temp;
-                    //players.get(0).addTile(current);
+                    players.get(0).addTile(current, new MathPoint(e.getX(), e.getY()));
                     temp = null;
                 }
             }
         }
-
-        /*System.out.println("token is "+token);
-        System.out.println("current tile is "+current);
-
-        if(token!=null){
-            HabitatTiles toAddOn = players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY()));
-            if(toAddOn.getToken()==null){
-                toAddOn.addToken(token);
-            }
-        }else if(current!=null){
-            players.get(0).addTile(current, new MathPoint(e.getX(), e.getY()));
-        }*/
         repaint();
     }
     public boolean canPlace(int x, int y){
-        return true;
-        /*Double r3 = 1.7320508075688772935;
+        Double r3 = 1.7320508075688772935;
         Double ySpace = 1.5;
         Double r32 = 0.86602540378;
         ArrayList<HabitatTiles>temp = players.get(0).getHexagons();
@@ -201,7 +190,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             }
         }
         //out.println(counter>0);
-        return counter>0;*/
+        return counter>0;
     }
     public void addListener(AllowPickEventListener apel){listener = apel;}
     public void mouseReleased(MouseEvent e) {}
@@ -214,14 +203,12 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public void actionPerformed(ActionEvent e){
         periodic();
         if (e.getSource()==rotateButton&&current!=null){
-            current.rotate();;
+            current.rotate();
             players.get(0).findAndReplace(current);
             repaint();
         }
         if (e.getSource()==rotateCButton&&current!=null){
-            for(int i = 0; i>5; i++){
-                current.rotate();
-            }
+            current.rotateC();
             players.get(0).findAndReplace(current);
             repaint();
         }
@@ -233,6 +220,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             switchTrigger = true;
             current= null;
             temp = null;
+            periodic();
             //players.add(players.remove(0));
             repaint();
         }else if (e.getToken()!=null){
@@ -271,7 +259,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             rotateButton.setVisible(false);
             rotateCButton.setVisible(false);
         }
-        if (current!=null){
+        else if (current!=null){
             rotateButton.setVisible(true);
             rotateCButton.setVisible(true);
         }

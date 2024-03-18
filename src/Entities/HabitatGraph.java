@@ -17,7 +17,7 @@ public class HabitatGraph{
 
     public HabitatGraph(StarterTile s){
         root = s.down_right;
-        root.setCoordinate(new MathPoint(499, 490));
+        root.setCoordinate(new MathPoint(500, 490));
         root.add(s.down_left, HabitatTiles.LEFT);
         root.add(s.up, HabitatTiles.UP_LEFT);
         System.out.println(iterate().toString());
@@ -30,6 +30,7 @@ public class HabitatGraph{
     }
 
     public void drawGraph(Graphics g){
+        System.out.println("DrawGraph method called");
         for(HabitatTiles h: iterate()){
             h.drawHexagon(g);
             System.out.println(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
@@ -113,6 +114,7 @@ public class HabitatGraph{
         connectTilesToNonConnectedAdjacents();
         toAdd.replaceNullConnectionsWithEmpty();
         this.fixStackedTileLocation();
+        //CoordFix();
     }
 
     public Boolean addToken(WildlifeTokens t, MathPoint clickPoint){
@@ -128,19 +130,28 @@ public class HabitatGraph{
     }
 
     public HabitatTiles bfs(MathPoint p){
-        Queue<HabitatTiles> toVisit = new LinkedList<HabitatTiles>();
+        System.out.println("bfs "+p);
+        /*Queue<HabitatTiles> toVisit = new LinkedList<HabitatTiles>();
         Queue<HabitatTiles> visited = new LinkedList<HabitatTiles>();
         toVisit.add(root);
         while(!toVisit.isEmpty()){
-            HabitatTiles current = toVisit.remove();
+            HabitatTiles current = toVisit.poll();
             if(!visited.contains(current)){
-                visited.add(current);
+                visited.offer(current);
                 if(current.isPointInsideHexagon(p)){
+                    System.out.println("bfs found "+current+" at "+p);
                     return current;
                 }
                 for(HabitatTiles h: current.getConnections().values()){
                     toVisit.add(h);
                 }
+            }
+        }
+        System.out.println("bfs found null at "+p);
+        return null;*/
+        for(HabitatTiles h:iterate()){
+            if(h.isPointInsideHexagon(p)){
+                return h;
             }
         }
         return null;
@@ -150,22 +161,23 @@ public class HabitatGraph{
         System.out.println("/////////// FIX STACKED BEGIN");
         //HashMap<HabitatTiles, HashSet<HabitatTiles>> checkedPairs = new HashMap<HabitatTiles, HabitatTiles>();
         for(HabitatTiles i:this.iterate()){
-            System.out.println("Fix stacked i "+i +" Coordinates: "+i.getCoordinate());
+            
             for(HabitatTiles j:this.iterate()){
-                System.out.println("Fix stacked j "+j+" Coordinates: "+j.getCoordinate());
                 if(i!=j){//||checkedPairs.get(j).equals(i)){
                     //checkedPairs.put(i, j);
-                    if(i.isPointInsideHexagon(j.getCoordinate())||false){//(i.getXPos()==j.getXPos()&&i.getYPos()==j.getYPos())){
-                        System.out.println(i+" : "+i.getCoordinate().toString()+", "+j+" : "+j.getCoordinate().toString());
+                    //System.out.println("Fix stacked i "+i +" Coordinates: "+i.getCoordinate());
+                    //System.out.println("Fix stacked j "+j+" Coordinates: "+j.getCoordinate());
+                    if(i.isPointInsideHexagon(j.getCoordinate())||i.getCoordinate().equals(j.getCoordinate())){//(i.getXPos()==j.getXPos()&&i.getYPos()==j.getYPos())){
+                        //System.out.println(i+" : "+i.getCoordinate().toString()+", "+j+" : "+j.getCoordinate().toString());
                         if(i.isEmpty()){
                             i.replaceWith(j);
-                            System.out.println(i+" removed because i empty");
+                            //System.out.println(i+" removed because i empty");
                         }else if(j.isEmpty()){
                             j.replaceWith(i);
-                            System.out.println(j+" removed because j empty");
+                            //System.out.println(j+" removed because j empty");
                         }else{
                             j.replaceWith(i);
-                            System.out.println(j+" removed because both empty");
+                            //System.out.println(j+" removed because both empty");
                         }
                     }
                 }
@@ -178,12 +190,13 @@ public class HabitatGraph{
         for(HabitatTiles h:iterate()){
             for(int i = 0; i<6; i++){
                 if(h.get(i)==null){
-                    try {
-                        HabitatTiles adjacent = bfs(h.getAdjacentTileOffset(i));
+                    
+                    HabitatTiles adjacent = bfs(h.getAdjacentTileOffset(i));
+                    if(adjacent!=null){
                         h.add(adjacent, i);
-                    } catch (Exception e) {
-                        // TODO: handle exception
                     }
+                        
+                   
                 }
             }
         }
@@ -195,7 +208,7 @@ public class HabitatGraph{
         HashSet<HashSet<HabitatTiles>> groups = new HashSet<HashSet<HabitatTiles>>();
         for(HabitatTiles tile:validStarts){
             HashSet<HabitatTiles> group = new HashSet<HabitatTiles>();
-            addToContiguousGroup(target, tile, group, visitedTiles);
+            findContiguousGroup(target, tile, group, visitedTiles);
             groups.add(group);
         }
         Integer max = 0;
@@ -208,7 +221,7 @@ public class HabitatGraph{
         return max;
     }
 
-    private void addToContiguousGroup(Habitats target, HabitatTiles tile, HashSet<HabitatTiles> group, HashSet<HabitatTiles> visitedTiles){
+    private void findContiguousGroup(Habitats target, HabitatTiles tile, HashSet<HabitatTiles> group, HashSet<HabitatTiles> visitedTiles){
         if(visitedTiles.contains(tile)||tile==null){
             return;
         }
@@ -217,7 +230,7 @@ public class HabitatGraph{
         for(Integer i:tile.getHabitats().keySet()){
             if(tile.getHabitats().get(i)==target){
                 if(tile.habitatMatch(i)){
-                    addToContiguousGroup(target, tile.get(i), group, visitedTiles);
+                    findContiguousGroup(target, tile.get(i), group, visitedTiles);
                 }
             }
         }

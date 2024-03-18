@@ -197,7 +197,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
 
         //randomize adding starter tiles for each players
         Collections.shuffle(sTiles);
-        //issues here @jasper
+        //issues here @JC-Copilot
         for (int i =0;i<players.size();i++){
             players.get(i).add(sTiles.get(i));
             Player temp = players.get(i);

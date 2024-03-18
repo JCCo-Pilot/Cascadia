@@ -23,8 +23,12 @@ public class Player implements Comparable{
         return graph;
     }
 
-    public HashSet<HabitatTiles>getHexagons(){
-        return graph.iterate();
+    public ArrayList<HabitatTiles>getHexagons(){
+        ArrayList<HabitatTiles> ret = new ArrayList<HabitatTiles>();
+        for(HabitatTiles h:graph.iterate()){
+            ret.add(h);
+        }
+        return ret;
     }
 
     public void addTile(HabitatTiles t, MathPoint p){

@@ -37,7 +37,7 @@ public class HabitatTiles extends PointGenerator{
 
     //CONSTRUCTORS*******************************************************************************************************
     public HabitatTiles(){
-        super(0, 0, 0);
+        super(0, 0, 70.0);
         imageName = "empty";
     }
 
@@ -212,9 +212,7 @@ public class HabitatTiles extends PointGenerator{
         Graphics2D g2d = (Graphics2D) g;
         if(imageName.equals("empty")){
             super.drawHexagon(g);
-            int xoff = (int)(Math.random()*6)-3;
-            int yoff = (int)(Math.random()*6)-3;
-            g.drawString("Empty", super.getXPos()+xoff, super.getYPos()+yoff);
+            //g.drawString("Empty", super.getXPos(), super.getYPos());
         }else{
             Double offset = super.getSize();
             int yOffset = (int)(Math.round(offset));
