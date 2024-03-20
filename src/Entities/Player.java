@@ -91,7 +91,7 @@ public class Player implements Comparable{
         
     }
 
-    public void drawInventory(Graphics g){
+    public void drawInventory(Graphics g, Boolean drawEmptys){
         // will implement a draw inventory based graph
         /*for (int i =0;i<tiles.size();i++){
             tiles.get(i).drawHexagon(g);
@@ -99,7 +99,7 @@ public class Player implements Comparable{
         if (st!=null){
             st.paintStarter(g);
         }*/
-        graph.drawGraph(g);
+        graph.drawGraph(g, drawEmptys);
     }
     
     public void addAll(ArrayList<HabitatTiles>ht){
