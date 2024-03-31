@@ -49,7 +49,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         out.println(players.size());
         for (int i =0;i<players.size();i++){
             JButton temp = new JButton("Player "+(i+1));
-            temp.setBounds(1010,670+(i*40),555,40);
+            temp.setBounds(1010,687+(i*40),555,40);
             temp.setVisible(true);
             playerButtons.add(temp);
         }
@@ -82,8 +82,11 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         paintCards(g);
     }
     public void paintCards(Graphics g){
-        g.drawImage(bearCard.getImage(),1020,20,250,230,null);
+        g.drawImage(bearCard.getImage(),1020,10,250,230,null);
         g.drawImage(foxCard.getImage(),1300,20,250,230,null);
+        g.drawImage(hawkCard.getImage(),1020,230,250,230,null);
+        g.drawImage(salmonCard.getImage(),1300,250,250,230,null);
+        g.drawImage(elkCard.getImage(),1020,450,250,230,null);
     }
     //painting all the scores of the different players
     public void Painting(Graphics g){
@@ -164,6 +167,12 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         for (int i =0;i<size;i++){
             g.drawString("60",760+(60*i),375+77+240);
         }
+        //nature token bonus
+        for (int i =0;i<size;i++){
+            g.drawString("1",765+(60*i),375+77+240+65);
+        }
+        //overall total
+
     }
     private void testCreateCards(){
         CardTypes type = CardTypes.CARD_A;

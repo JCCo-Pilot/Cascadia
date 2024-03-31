@@ -121,16 +121,4 @@ public class PointGenerator {
         radius = sz;
         unitCirclePoints(x, y, (int)(Math.round(sz)));
     }
-
-    public void setSize(Double size){
-        setPos(xPos, yPos, size);
-    }
-
-    public void setPos(int x, int y){
-        setPos(x, y, radius);
-    }
-
-    public Polygon getPolygon(){
-        return myPoly;
-    }
 }

@@ -79,10 +79,8 @@ public class coordinateGraphGeneration {
     }
 
     public void paintAll(Graphics g){
-        g.setColor(new Color(200, 200, 200));
         for (int i =0;i<hexagons.size();i++){
             hexagons.get(i).drawHexagon(g);
         }
-        g.setColor(Color.BLACK);
     }
 }
