@@ -75,7 +75,8 @@ public class PointGenerator {
     }
     //end of removal
     private void drawLine(Graphics g, MathPoint p, MathPoint a){
-        g.drawLine(p.xPoint,p.yPoint,a.xPoint,a.yPoint);
+        //commented this out so that there is no more red lines
+        //g.drawLine(p.xPoint,p.yPoint,a.xPoint,a.yPoint);
     }
     public boolean isPointInsideHexagon(MouseEvent e){
         return myPoly.contains(e.getX(), e.getY());
