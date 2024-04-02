@@ -34,11 +34,17 @@ public class HabitatTiles extends PointGenerator{
     public Boolean isKeystone;
     public Integer x, y;
     public WildlifeTokens token = null;
+    private static int emptyCnt;
 
     //CONSTRUCTORS*******************************************************************************************************
+    public HabitatTiles(double size){
+        super(0, 0, (int)size);
+        imageName = "empty"+ ++emptyCnt;
+    }
+
     public HabitatTiles(){
-        super(0, 0, 70.0);
-        imageName = "empty";
+        super(0, 0, 0);
+        imageName = "empty empty";
     }
 
     public HabitatTiles(String imageName,int x, int y, Double size){
@@ -210,10 +216,14 @@ public class HabitatTiles extends PointGenerator{
     @Override
     public void drawHexagon(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
-        if(imageName.equals("empty")){
-            super.drawHexagon(g);
-            //g.drawString("Empty", super.getXPos(), super.getYPos());
+        if(isEmpty()){
+            //super.drawHexagon(g);
+            //g.drawString(imageName, super.getXPos()+(int)(Math.random()*5), super.getYPos()+(int)(Math.random()*5));
+            g.setColor(new Color(255, 255, 143));
+            g.fillPolygon(super.getPolygon());
+            g.setColor(Color.BLACK);
         }else{
+            super.drawHexagon(g);
             Double offset = super.getSize();
             int yOffset = (int)(Math.round(offset));
             Double yo = -1*Math.sqrt(3)/2.0*offset;
@@ -227,7 +237,8 @@ public class HabitatTiles extends PointGenerator{
             int size = (int)Math.round(Math.sqrt(3)/2.0)*2*(int)(Math.round(70.0));
             int sz = (int)Math.round(super.getSize()/2);
             if (super.getXPos()!=0&&super.getYPos()!=0){
-                g.drawImage(newImage, xPos+xOffset,yPos-yOffset,121,140,null);
+                g.drawImage(newImage, xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
+                //g.drawImage(newImage, xPos+xOffset,yPos-yOffset,(int)(50*Math.sqrt(3)),(int)(50*2),null);
                 if (super.getTokens()!=null){
                     g.drawImage(super.getTokens().getImage(),xPos-sz,yPos-sz,sz*2,sz*2,null);
                 }   
@@ -269,7 +280,7 @@ public class HabitatTiles extends PointGenerator{
     public void replaceNullConnectionsWithEmpty(){
         for(int i = 0; i<6; i++){
             if(connections.get(i)==null){
-                add(new HabitatTiles(), i);
+                add(new HabitatTiles(super.getSize()), i);
             }
         }
     }
@@ -378,7 +389,8 @@ public class HabitatTiles extends PointGenerator{
     }
 
     public HabitatTiles replaceWith(HabitatTiles h){
-        HabitatTiles removed = new HabitatTiles();
+        HabitatTiles removed = new HabitatTiles(super.getSize());
+        h.setCoordinate(this.getCoordinate());
         for(HabitatTiles t:this.connections.values()){
             removed = t.unsafeAdd(h, t.getSideOf(this));
             h.unsafeAdd(t, this.getSideOf(t));
@@ -387,7 +399,7 @@ public class HabitatTiles extends PointGenerator{
     }
 
     public Boolean isEmpty(){
-        return imageName.equals("empty");
+        return imageName.contains("empty");
     }
 
     public HabitatTiles findFirstWithSpecificToken(CardAnimals token){
@@ -456,7 +468,7 @@ public class HabitatTiles extends PointGenerator{
             y -= -1*size*3/2.0;
         }
 
-        System.out.println(direction + " offset of "+this+" is "+x+", "+y);
+        //System.out.println(direction + " offset of "+this+" is "+x+", "+y);
 
         Integer xPoint = (int)(double)x;
         Integer yPoint = (int)(double)y;

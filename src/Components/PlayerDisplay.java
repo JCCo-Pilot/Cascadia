@@ -25,6 +25,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private JButton rotateButton;
     private JButton rotateCButton;
     private boolean switchTrigger;
+    private boolean showEmptyTiles = true;
     private ArrayList<Player>players;
     public PlayerDisplay(int x, int y, int xS, int yS, ArrayList<Player>play){
         super();
@@ -80,11 +81,12 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         g.fillRect(0, 0, xPos, yPos);
     }
     public void paint(Graphics g){
+        //super.paint(g);
         periodic();
         g.setColor(Color.BLACK);
         Polygon p = new Polygon();
-        players.get(0).drawInventory(g);
         //cgg.paintAll(g);
+        players.get(0).drawInventory(g, showEmptyTiles);
         paintComponents(g);
     }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
@@ -92,41 +94,46 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
+        //System.out.println("******************************************* PLAYER DISPLAY CLICK "+e.getX()+", "+e.getY());
         periodic();
-        for(int i =0;i<players.get(0).getHexagons().size();i++){
-            if(players.get(0).getHexagons().get(i).isPointInsideHexagon(e)){
+        //for(int i =0;i<players.get(0).getHexagons().size();i++){
+            //if(players.get(0).getHexagons().get(i).isPointInsideHexagon(e)){
                 if (token!=null){
-                    if (players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY())).canPick(token)){
-                        players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY())).addToken(token);
+                    HabitatTiles toAddTo = players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY()));
+                    if (players.get(0).getGraph().addToken(token, new MathPoint(e.getX(), e.getY()))){
                         AllowPickEvent ape = new AllowPickEvent(this, true);
                         listener.process(ape);
                         token =null;
-                        if (players.get(0).getHexagons().get(i).isKeystone){
+                        if (toAddTo.isKeystone){
                             players.get(0).incrementNature();
                         }
+                        players.get(0).getGraph().update();
                         players.add(players.remove(0));
+                        showEmptyTiles = true;
                         current = null;
                         AllowPickEvent apes = new AllowPickEvent(this, players.get(0));
                         listener.process(apes);
                     }  
                 }
-            }
-        }
+            //}
+        //}
 
-        for (int i =0;i<cgg.getHexs().size();i++){
-            if (cgg.getHexs().get(i).isPointInsideHexagon(e)&&temp!=null){
-                if (canPlace(cgg.getHexs().get(i).getXPos(), cgg.getHexs().get(i).getYPos())){
+        //for (int i =0;i<cgg.getHexs().size();i++){
+            if(temp!=null){
+            //if (cgg.getHexs().get(i).isPointInsideHexagon(e)&&temp!=null){
+                //if (canPlace(cgg.getHexs().get(i).getXPos(), cgg.getHexs().get(i).getYPos())){
                     //out.println(cgg.getHexs().get(i).getXPos());
                     //out.println(cgg.getHexs().get(i).getYPos());
                     
-                    temp.setX(cgg.getHexs().get(i).getXPos());
-                    temp.setY(cgg.getHexs().get(i).getYPos());
+                    //temp.setX(cgg.getHexs().get(i).getXPos());
+                    //temp.setY(cgg.getHexs().get(i).getYPos());
                     current = temp;
                     players.get(0).addTile(current, new MathPoint(e.getX(), e.getY()));
                     temp = null;
-                }
+                    showEmptyTiles = false;
+               // }
             }
-        }
+        //}
         repaint();
     }
     public boolean canPlace(int x, int y){
@@ -218,10 +225,12 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             repaint();
         }else if (e.switchTurns()){
             switchTrigger = true;
+            showEmptyTiles = true;
             current= null;
             temp = null;
             periodic();
-            //players.add(players.remove(0));
+            players.get(0).getGraph().update();
+            players.add(players.remove(0));
             repaint();
         }else if (e.getToken()!=null){
             token = e.getToken();
