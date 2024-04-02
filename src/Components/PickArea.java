@@ -476,5 +476,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             spendToken.setVisible(false);
             jcb.setVisible(false);
         }
+        if (isOverpopulated3()){
+            overpopButton.setVisible(true);
+        }else if (!isOverpopulated3()){
+            overpopButton.setVisible(false);
+        }
     }
 }
