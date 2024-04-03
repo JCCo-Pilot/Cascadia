@@ -4,6 +4,7 @@ import javax.swing.*;
 import Components.*;
 import EventAndListener.*;
 import Panels.*;
+import Entities.*;
 import static java.lang.System.*;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
@@ -51,28 +52,36 @@ public class App extends JFrame implements GameListener{
                 case 10://player pop ups 1.2.3.4
                     this.remove(mpanel);
                     add(pPanel);
-                    pPanel.currentPlayer(mpanel.getPlayers().get(0));
+                    pPanel.currentPlayer(getNumero(1, mpanel.getPlayers()));
                     repaint();
                 break;
                 case 20:
                     this.remove(mpanel);
                     add(pPanel);
-                    pPanel.currentPlayer(mpanel.getPlayers().get(1));
+                    pPanel.currentPlayer(getNumero(2, mpanel.getPlayers()));
                     repaint();
                 break; 
                 case 30:
                     this.remove(mpanel);
                     add(pPanel);
-                    pPanel.currentPlayer(mpanel.getPlayers().get(2));
+                    pPanel.currentPlayer(getNumero(3, mpanel.getPlayers()));
                     repaint();
                 break;
                 case 40:
                     this.remove(mpanel);
                     add(pPanel);
-                    pPanel.currentPlayer(mpanel.getPlayers().get(3));
+                    pPanel.currentPlayer(getNumero(4, mpanel.getPlayers()));
                     repaint();
                 break;
             }
         }
+    }
+    public Player getNumero(int find,ArrayList<Player>players){
+        for(int i =0;i<players.size();i++){
+            if (players.get(i).getName().equals("Player "+find)){
+                return players.get(i);
+            }
+        }
+        return null;
     }
 }
