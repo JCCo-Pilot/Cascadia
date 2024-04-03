@@ -113,7 +113,12 @@ public class Player implements Comparable{
         System.out.println("downright="+s.down_right);
         graph = new HabitatGraph(s);
     }
-
+    public void decrement() {
+    	turns--;
+    }
+    public int getTurn() {
+    	return turns;
+    }
     @Override
     public int compareTo(Object o) {
         Player p = (Player)o;
