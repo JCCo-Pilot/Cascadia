@@ -442,6 +442,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             allowPick=true;
             limitedSelection =-1;
             Player temp = players.remove(0);
+            temp.decrement();
             //need to decrement turns
             players.add(temp);
             PickEvent ee = new PickEvent(this, "PickArea");
