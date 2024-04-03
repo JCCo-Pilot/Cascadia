@@ -10,7 +10,7 @@ import java.awt.image.*;
 import MathHelper.*;
 import static java.lang.System.*;
 public class PopPanel extends JComponent implements MouseListener{
-    private ArrayList<Player>players;
+    private Player p;
     private int state = -1;
     public PopPanel(){
         super();
@@ -20,11 +20,10 @@ public class PopPanel extends JComponent implements MouseListener{
     public void paint(Graphics g){
         super.paint(g);
         g.setColor(Color.BLACK);
-        g.fillRect(0, 0, 1600, 900);
+        p.drawInventory(g, false);
     }
-    public void currentPlayer(int i){
-        state =i;
-        out.println(i);
+    public void currentPlayer(Player pl){
+        p = pl;
     }
     public void playerTesting(){
         Player pl = new Player(0);
@@ -37,4 +36,5 @@ public class PopPanel extends JComponent implements MouseListener{
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
 }
+
 

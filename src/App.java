@@ -43,29 +43,33 @@ public class App extends JFrame implements GameListener{
             this.add(epanel);
             //epanel.repaint();
         }else{
+            //Find the correct player here
+        	for(int i = 0; i < mpanel.getPlayers().size(); i++) {
+        		int findPlayer = 0;
+        	}
             switch (e.getState()) {
                 case 10://player pop ups 1.2.3.4
                     this.remove(mpanel);
                     add(pPanel);
-                    pPanel.currentPlayer(1);
+                    pPanel.currentPlayer(mpanel.getPlayers().get(0));
                     repaint();
                 break;
                 case 20:
                     this.remove(mpanel);
                     add(pPanel);
-                    pPanel.currentPlayer(2);
+                    pPanel.currentPlayer(mpanel.getPlayers().get(1));
                     repaint();
                 break; 
                 case 30:
                     this.remove(mpanel);
                     add(pPanel);
-                    pPanel.currentPlayer(3);
+                    pPanel.currentPlayer(mpanel.getPlayers().get(2));
                     repaint();
                 break;
                 case 40:
                     this.remove(mpanel);
                     add(pPanel);
-                    pPanel.currentPlayer(4);
+                    pPanel.currentPlayer(mpanel.getPlayers().get(3));
                     repaint();
                 break;
             }

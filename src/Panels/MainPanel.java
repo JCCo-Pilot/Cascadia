@@ -149,6 +149,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
             players.add(new Player(i));
         }
     }
+    public ArrayList<Player> getPlayers(){
+        return players;
+    }
     //construct the starter tiles
     private void constructStarters(){
         ArrayList<HabitatTiles>tiles = new ArrayList<>();
