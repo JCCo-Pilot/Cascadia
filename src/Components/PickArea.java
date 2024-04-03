@@ -434,14 +434,16 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }else if (e.getSource()==clearToken){
             if(limitedSelection!=-1){
                 out.println("here to replace");
-                
+
             }
             out.println("End Turn Button");
             out.println("Limited selection ="+limitedSelection);
             out.println("Allow Pick="+allowPick);
             allowPick=true;
             limitedSelection =-1;
-            players.add(players.remove(0));
+            Player temp = players.remove(0);
+            //need to decrement turns
+            players.add(temp);
             PickEvent ee = new PickEvent(this, "PickArea");
             listener.process(ee);
             //hexagons[limitedSelection].setX(56+69);
