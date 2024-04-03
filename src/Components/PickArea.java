@@ -36,7 +36,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private ArrayList<Player>players = new ArrayList<>();
    
     private JButton overpopButton = new JButton("Over-Population");
-    private JButton clearToken = new JButton("ClearTokens");
+    private JButton clearToken = new JButton("End Turn");
 
     private JComboBox<String>jcb;
     private JButton spendToken = new JButton("Spend");
@@ -403,7 +403,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public void process(AllowPickEvent e){
         if (e.allowed()){
             allowPick= true;
-            out.println("Line 401");
+            out.println("Line 406");
             //players.add(players.remove(0));
             repaint();
         }else if (e.movedOn()!=null){
@@ -432,6 +432,13 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             removeOverpopulation();
             ((JComponent) e.getSource()).setVisible(false);
         }else if (e.getSource()==clearToken){
+            if(limitedSelection!=-1){
+                out.println("here to replace");
+                
+            }
+            out.println("End Turn Button");
+            out.println("Limited selection ="+limitedSelection);
+            out.println("Allow Pick="+allowPick);
             allowPick=true;
             limitedSelection =-1;
             players.add(players.remove(0));
