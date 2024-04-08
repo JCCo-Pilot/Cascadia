@@ -443,6 +443,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             limitedSelection =-1;
             Player temp = players.remove(0);
             temp.decrement();
+            out.println("Head in the toilet");
             //need to decrement turns
             players.add(temp);
             PickEvent ee = new PickEvent(this, "PickArea");
@@ -478,6 +479,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         repaint();
     }
     private void periodic(){
+        out.println("Players turns"+players.get(0).getTurn());
         if (players.get(0).getNatureTokens()>0&&!removeTrigger){
             spendToken.setVisible(true);
             jcb.setVisible(true);

@@ -108,7 +108,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                             players.get(0).incrementNature();
                         }
                         players.get(0).getGraph().update();
-                        players.add(players.remove(0));
+                        Player temp = players.get(0);
+                        temp.decrement();
+                        players.add(temp);
                         showEmptyTiles = true;
                         current = null;
                         AllowPickEvent apes = new AllowPickEvent(this, players.get(0));
@@ -231,6 +233,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             periodic();
             players.get(0).getGraph().update();
             Player temp = players.remove(0);
+            out.println("Skibidi toilet dop dop");
             temp.decrement();
             players.add(temp);
             repaint();

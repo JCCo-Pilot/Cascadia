@@ -4,6 +4,7 @@ import java.awt.*;
 import Entities.Enums.CardAnimals;
 import Entities.Enums.Habitats;
 import MathHelper.MathPoint;
+import static java.lang.System.*;
 public class Player implements Comparable{
     private int natureTokens;
     private int turns;
@@ -114,7 +115,8 @@ public class Player implements Comparable{
         graph = new HabitatGraph(s);
     }
     public void decrement() {
-    	turns--;
+    	turns = turns-1;
+        out.println("Decremented");
     }
     public int getTurn() {
     	return turns;
