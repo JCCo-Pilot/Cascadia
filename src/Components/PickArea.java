@@ -180,6 +180,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                 numHawk++;
             }
         }
+        //testing stuff
         out.println("Bears -"+numBear);
         out.println("Elks -"+numElk);
         out.println("Salmon -"+numSalmon);
