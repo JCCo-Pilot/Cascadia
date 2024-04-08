@@ -108,7 +108,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                             players.get(0).incrementNature();
                         }
                         players.get(0).getGraph().update();
-                        Player temp = players.get(0);
+                        Player temp = players.remove(0);
                         temp.decrement();
                         players.add(temp);
                         showEmptyTiles = true;

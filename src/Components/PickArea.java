@@ -480,6 +480,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     }
     private void periodic(){
         out.println("Players turns"+players.get(0).getTurn());
+        if (players.get(0).getTurn()==0){
+            //trigger end game events
+            out.println("pls generate end game event for listener");
+        }
         if (players.get(0).getNatureTokens()>0&&!removeTrigger){
             spendToken.setVisible(true);
             jcb.setVisible(true);
