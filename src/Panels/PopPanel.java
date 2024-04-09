@@ -9,13 +9,21 @@ import javax.imageio.ImageIO;
 import java.awt.image.*;
 import MathHelper.*;
 import static java.lang.System.*;
-public class PopPanel extends JComponent implements MouseListener{
+public class PopPanel extends JComponent implements MouseListener, ActionListener{
     private Player p;
     private int state = -1;
+    private JButton back = new JButton("Back Button");
+    private boolean goBack;
+    private GameListener listener;
     public PopPanel(){
         super();
-        repaint();
         this.setVisible(true);
+        back.setBounds(1400,800,200,100);
+        back.addActionListener(this);
+        back.setVisible(true);
+        add(back);
+        goBack = false;
+        System.out.println(goBack);
     }
     public void paint(Graphics g){
         super.paint(g);
@@ -27,6 +35,19 @@ public class PopPanel extends JComponent implements MouseListener{
     }
     public void playerTesting(){
         Player pl = new Player(0);
+    }
+    public boolean getBack() {
+    	return goBack;
+    }
+    public void setListener(GameListener g){
+        listener = g;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        goBack = true;
+        this.setVisible(false);
+        GameStateEvent gse = new  GameStateEvent(back, 50);
+        listener.process(gse);
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {

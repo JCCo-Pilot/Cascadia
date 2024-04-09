@@ -13,7 +13,7 @@ import Components.*;
 import Entities.WildlifeScoringCards.*;
 import Entities.Enums.*;
 import static java.lang.System.*;
-public class MainPanel extends JPanel implements MouseListener,ActionListener,EndGameListener{
+public class MainPanel extends JPanel implements MouseListener,ActionListener{
     private GameListener listener;
     private PickArea pa;
     private PlayerDisplay pd;
@@ -39,7 +39,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         add(pd);
 
         pa = new PickArea(l,0,0,310,870);
-        pa.setReginaPerez(this);
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         pa.addListener(pd);
         add(pa);
@@ -150,9 +149,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             players.add(new Player(i));
         }
     }
-    public ArrayList<Player> getPlayers(){
-        return players;
-    }
     //construct the starter tiles
     private void constructStarters(){
         ArrayList<HabitatTiles>tiles = new ArrayList<>();
@@ -227,6 +223,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         g.drawImage(elkCard.getImage(), 1213,200+180,175,170,null);
         g.drawImage(hawkCard.getImage(), 1213+180,200+180,175,170,null);
         g.drawImage(salmonCard.getImage(), 1213,200+180+180,175,170,null);
+    }
+    public ArrayList<Player> getPlayers(){
+    	return players;
     }
     public void setListener(GameListener g){
         listener = g;

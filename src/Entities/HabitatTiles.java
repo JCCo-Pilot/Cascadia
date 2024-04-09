@@ -374,14 +374,7 @@ public class HabitatTiles extends PointGenerator{
     }
 
     public Image getImage(){
-        //TODO: idk how the images will be stored so
-        try {
-            return ImageIO.read(new File(imageName+".png"));
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-        return null;
+        return image;
     }
 
     public HashMap<Integer, HabitatTiles> getConnections(){

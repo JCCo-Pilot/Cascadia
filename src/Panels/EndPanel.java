@@ -82,8 +82,11 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         paintCards(g);
     }
     public void paintCards(Graphics g){
-        g.drawImage(bearCard.getImage(),1020,20,250,230,null);
-        g.drawImage(foxCard.getImage(),1300,20,250,230,null);
+        g.drawImage(bearCard.getImage(),1020,10,250,230,null);
+        g.drawImage(elkCard.getImage(),1300,10,250,230,null);
+        g.drawImage(salmonCard.getImage(), 1020, 240, 250, 230, null);
+        g.drawImage(hawkCard.getImage(), 1300, 240, 250, 230, null);
+        g.drawImage(foxCard.getImage(), 1020, 470, 250, 230, null);
     }
     //painting all the scores of the different players
     public void Painting(Graphics g){

@@ -6,6 +6,8 @@ import EventAndListener.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
+import javax.management.timer.Timer;
+
 import java.awt.image.*;
 import MathHelper.*;
 import static java.lang.System.*;
@@ -208,6 +210,15 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         //out.println(counter>0);
         return counter>0;
     }
+
+    public HabitatTiles getCurrentTile(){
+        return temp;
+    }
+
+    public WildlifeTokens getCurrentToken(){
+        return token;
+    }
+
     public void addListener(AllowPickEventListener apel){listener = apel;}
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
@@ -218,6 +229,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public int getYSize(){return ySize;}
     public void setupNew(){
         showEmptyTiles = true;
+        temp = null;
+        token = null;
+        current = null;
     }
     public void actionPerformed(ActionEvent e){
         periodic();
@@ -237,9 +251,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             repaint();
         }else if (e.switchTurns()){
             switchTrigger = true;
-            showEmptyTiles = true;
-            current= null;
-            temp = null;
+            setupNew();
             periodic();
             players.get(0).getGraph().update();
             Player p = players.remove(0);

@@ -2,9 +2,9 @@ import java.util.*;
 import javax.swing.*;
 
 import Components.*;
+import Entities.Player;
 import EventAndListener.*;
 import Panels.*;
-import Entities.*;
 import static java.lang.System.*;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
@@ -45,34 +45,40 @@ public class App extends JFrame implements GameListener{
             //epanel.repaint();
         }else{
             //Find the correct player here
-        	for(int i = 0; i < mpanel.getPlayers().size(); i++) {
-        		int findPlayer = 0;
-        	}
             switch (e.getState()) {
                 case 10://player pop ups 1.2.3.4
                     this.remove(mpanel);
                     add(pPanel);
                     pPanel.currentPlayer(getNumero(1, mpanel.getPlayers()));
+                    pPanel.setListener(this);
                     repaint();
                 break;
                 case 20:
                     this.remove(mpanel);
                     add(pPanel);
                     pPanel.currentPlayer(getNumero(2, mpanel.getPlayers()));
+                    pPanel.setListener(this);
                     repaint();
                 break; 
                 case 30:
                     this.remove(mpanel);
                     add(pPanel);
                     pPanel.currentPlayer(getNumero(3, mpanel.getPlayers()));
+                    pPanel.setListener(this);
                     repaint();
                 break;
                 case 40:
                     this.remove(mpanel);
                     add(pPanel);
                     pPanel.currentPlayer(getNumero(4, mpanel.getPlayers()));
+                    pPanel.setListener(this);
                     repaint();
                 break;
+                case 50:
+                	this.remove(pPanel);
+                	add(mpanel);
+                	mpanel.setListener(this);
+                	repaint();
             }
         }
     }

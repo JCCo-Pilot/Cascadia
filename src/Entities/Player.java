@@ -4,7 +4,6 @@ import java.awt.*;
 import Entities.Enums.CardAnimals;
 import Entities.Enums.Habitats;
 import MathHelper.MathPoint;
-import static java.lang.System.*;
 public class Player implements Comparable{
     private int natureTokens;
     private int turns;
@@ -12,7 +11,7 @@ public class Player implements Comparable{
     private HabitatGraph graph;
     private HashMap<CardAnimals, Integer> animalScores = new HashMap<CardAnimals, Integer>();
     private HashMap<Habitats, Integer> habitatScores = new HashMap<Habitats, Integer>();
-    private HashMap<Habitats, Integer> habitatBonuses = new HashMap<Habitats, Integer>();
+    private HashMap<Habitats, Integer> habitatBonuses = new HashMap<Habitats, Integer>(); 
 
     public Player(int i){
         name= "Player "+i;
@@ -33,9 +32,9 @@ public class Player implements Comparable{
         return ret;
     }
 
-    /*public void addTile(HabitatTiles t, MathPoint p){
-        graph.add(t, p);
-    }*/
+    public Boolean addTile(HabitatTiles t, MathPoint p){
+        return graph.add(t, p);
+    }
 
     public void setScore(CardAnimals c, Integer i){
         animalScores.put(c, i);
@@ -108,11 +107,6 @@ public class Player implements Comparable{
         //tiles.addAll(ht);
     }
 
-    public Boolean addTile(HabitatTiles t, MathPoint p){
-        return graph.add(t, p);
-    }
-
-
     public void add(StarterTile s){
         System.out.println("StarterTile add method called");
         System.out.println("up="+s.up);
@@ -122,7 +116,7 @@ public class Player implements Comparable{
     }
     public void decrement() {
     	turns = turns-1;
-        out.println("Decremented");
+        System.out.println("Decremented");
     }
     public int getTurn() {
     	return turns;
