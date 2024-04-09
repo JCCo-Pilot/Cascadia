@@ -130,9 +130,11 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                     //temp.setX(cgg.getHexs().get(i).getXPos());
                     //temp.setY(cgg.getHexs().get(i).getYPos());
                     current = temp;
-                    players.get(0).addTile(current, new MathPoint(e.getX(), e.getY()));
-                    temp = null;
-                    showEmptyTiles = false;
+                    if(players.get(0).addTile(current, new MathPoint(e.getX(), e.getY()))){
+                        temp = null;
+                        showEmptyTiles = false;
+                    }
+                    
                // }
             }
         //}
@@ -232,10 +234,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             temp = null;
             periodic();
             players.get(0).getGraph().update();
-            Player temp = players.remove(0);
-            out.println("Skibidi toilet dop dop");
-            temp.decrement();
-            players.add(temp);
+            players.add(players.remove(0));
             repaint();
         }else if (e.getToken()!=null){
             token = e.getToken();
@@ -273,7 +272,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             rotateButton.setVisible(false);
             rotateCButton.setVisible(false);
         }
-        else if (current!=null){
+        else if (current!=null&&showEmptyTiles==false){
             rotateButton.setVisible(true);
             rotateCButton.setVisible(true);
         }

@@ -214,8 +214,11 @@ public class HabitatGraph{
         }
     }
 
-    public void add(HabitatTiles toAdd, MathPoint clickPoint){
+    public Boolean add(HabitatTiles toAdd, MathPoint clickPoint){
         HabitatTiles toReplace = bfs(clickPoint);
+        if(toReplace==null){
+            return false;
+        }
         toAdd.setPos(0, 0, size+0.0);
         if(toReplace.isEmpty()){
             toReplace.replaceWith(toAdd);
@@ -223,7 +226,10 @@ public class HabitatGraph{
             toAdd.replaceNullConnectionsWithEmpty();
             this.fixStackedTileLocation();
             connectTilesToNonConnectedAdjacents();
+        }else{
+            return false;
         }
+        return true;
     }
 
     public Boolean addToken(WildlifeTokens t, MathPoint clickPoint){

@@ -32,9 +32,9 @@ public class Player implements Comparable{
         return ret;
     }
 
-    public void addTile(HabitatTiles t, MathPoint p){
+    /*public void addTile(HabitatTiles t, MathPoint p){
         graph.add(t, p);
-    }
+    }*/
 
     public void setScore(CardAnimals c, Integer i){
         animalScores.put(c, i);
@@ -106,6 +106,11 @@ public class Player implements Comparable{
     public void addAll(ArrayList<HabitatTiles>ht){
         //tiles.addAll(ht);
     }
+
+    public Boolean addTile(HabitatTiles t, MathPoint p){
+        return graph.add(t, p);
+    }
+
 
     public void add(StarterTile s){
         System.out.println("StarterTile add method called");
