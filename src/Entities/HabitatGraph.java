@@ -281,7 +281,7 @@ public class HabitatGraph{
     }
 
     public void fixStackedTileLocation(){
-        System.out.println("/////////// FIX STACKED BEGIN");
+        //System.out.println("/////////// FIX STACKED BEGIN");
         HashMap<HabitatTiles, HashSet<HabitatTiles>> checkedPairs = new HashMap<HabitatTiles, HashSet<HabitatTiles>>();
         for(HabitatTiles i:this.iterate()){
             if(!checkedPairs.containsKey(i)){
@@ -312,7 +312,7 @@ public class HabitatGraph{
                 }
             }
         }
-        System.out.println("/////////// FIX STACKED END");
+        //System.out.println("/////////// FIX STACKED END");
     }
 
     public void connectTilesToNonConnectedAdjacents(){

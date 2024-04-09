@@ -254,7 +254,7 @@ public class HabitatTiles extends PointGenerator{
     public void setCoordinate(MathPoint m){
         super.setX(m.xPoint);
         super.setY(m.yPoint);
-        System.out.println("Coords of "+this+" set to "+m.xPoint+", "+m.yPoint);
+        //System.out.println("Coords of "+this+" set to "+m.xPoint+", "+m.yPoint);
     }
     //rotational stuff
     public static BufferedImage rotate(BufferedImage image, double angle) {
