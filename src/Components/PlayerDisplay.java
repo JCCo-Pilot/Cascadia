@@ -108,9 +108,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                             players.get(0).incrementNature();
                         }
                         players.get(0).getGraph().update();
-                        Player temp = players.remove(0);
-                        temp.decrement();
-                        players.add(temp);
+                        players.add(players.remove(0));
                         showEmptyTiles = true;
                         current = null;
                         AllowPickEvent apes = new AllowPickEvent(this, players.get(0));
@@ -211,6 +209,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public int getYPos(){return yPos;}
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
+    public void setupNew(){
+        showEmptyTiles = true;
+    }
     public void actionPerformed(ActionEvent e){
         periodic();
         if (e.getSource()==rotateButton&&current!=null){
@@ -235,6 +236,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             periodic();
             players.get(0).getGraph().update();
             players.add(players.remove(0));
+            ((PickArea)listener).jasperisadumbass();
             repaint();
         }else if (e.getToken()!=null){
             token = e.getToken();
