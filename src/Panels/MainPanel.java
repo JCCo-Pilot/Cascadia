@@ -13,7 +13,7 @@ import Components.*;
 import Entities.WildlifeScoringCards.*;
 import Entities.Enums.*;
 import static java.lang.System.*;
-public class MainPanel extends JPanel implements MouseListener,ActionListener{
+public class MainPanel extends JPanel implements MouseListener,ActionListener,EndGameListener{
     private GameListener listener;
     private PickArea pa;
     private PlayerDisplay pd;
@@ -39,6 +39,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
         add(pd);
 
         pa = new PickArea(l,0,0,310,870);
+        pa.setReginaPerez(this);
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         pa.addListener(pd);
         add(pa);
@@ -239,6 +240,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener{
                 listener.process(gse);
             }
         }
+    }
+    public void endGameTime(EndGameEvent e){
+        System.out.println("Skbidi on that toilet");
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {

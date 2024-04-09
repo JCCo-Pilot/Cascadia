@@ -14,8 +14,8 @@ public class PopPanel extends JComponent implements MouseListener{
     private int state = -1;
     public PopPanel(){
         super();
+        repaint();
         this.setVisible(true);
-        
     }
     public void paint(Graphics g){
         super.paint(g);

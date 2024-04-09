@@ -23,6 +23,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private int xPos,yPos;
     private boolean allowPick;
 
+    private EndGameListener egl;
+
+    private Boolean tokenTaken = false;
+
     private Boolean tokenPlaced = false;
     private Boolean tilePlaced = false;
 
@@ -39,7 +43,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private ArrayList<Player>players = new ArrayList<>();
    
     private JButton overpopButton = new JButton("Over-Population");
-    private JButton clearToken = new JButton("ClearTokens");
+    private JButton clearToken = new JButton("End Turn");
 
     private JComboBox<String>jcb;
     private JButton spendToken = new JButton("Spend");
@@ -65,7 +69,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
 
         clearToken.setBounds(27,745,140,30);
         clearToken.addActionListener(this);
-        clearToken.setVisible(true);
+        clearToken.setVisible(false);
         this.add(clearToken);
         //795
         spendToken.setBounds(27,775,70,30);
@@ -323,6 +327,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                 for (int i =0;i<4;i++){
                     if(pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
                         PickEvent evnet = new PickEvent(e, removeAndReplaceToken(i));
+                        tokenTaken = true;
                         listener.process(evnet);
                         hexagons[pickedHex].setX(56+69);
                         hexagons[pickedHex].setY(175+(146*pickedHex));
@@ -373,6 +378,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             if (hexagons[limitedSelection].getXPos()==0&&hexagons[limitedSelection].getYPos()==0){
                 if(pointIsInside(200, 250+(146*limitedSelection)-100, 70, 70, e)&&allowPick){
                     PickEvent evnet = new PickEvent(e, removeAndReplaceToken(limitedSelection));
+                    tokenTaken = true;
                     listener.process(evnet);
                     hexagons[limitedSelection].setX(56+69);
                     hexagons[limitedSelection].setY(175+(146*limitedSelection));
@@ -435,13 +441,14 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
     public void jasperisadumbass(){
-        System.out.println("Skibidi Raghav Ahuja");
+        //System.out.println("Skibidi Raghav Ahuja");
         stopDoublePick = false;
         allowPick=true;
         limitedSelection =-1;
         pickedHex = 0;
         tokenPlaced = false;
         tilePlaced = false;
+        clearToken.setVisible(false);
         periodic();
     }
     public void placement(Boolean b){
@@ -450,10 +457,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             tokenPlaced = true;
             spendToken.setVisible(false);
             jcb.setVisible(false);
-            System.out.println("tokenPlaced = true");
+            //System.out.println("tokenPlaced = true");
         }else{
             tilePlaced = true;
-            System.out.println("tilePlaced = true");
+            //System.out.println("tilePlaced = true");
         }
         repaint();
     }
@@ -502,7 +509,15 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
         repaint();
     }
+    public void setReginaPerez(EndGameListener eg){
+        egl = eg;
+    }
     private void periodic(){
+        //end game after 20 turns
+        if (players.get(0).getTurn()==0){
+            EndGameEvent ege = new EndGameEvent(this, true);
+            egl.endGameTime(ege);
+        }
         if (players.get(0).getNatureTokens()>0&&!removeTrigger){
             spendToken.setVisible(true);
             jcb.setVisible(true);
@@ -514,6 +529,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         if(tilePlaced){
             spendToken.setVisible(false);
             jcb.setVisible(false);
+        }
+        if(tilePlaced&tokenTaken){
+            clearToken.setVisible(true);
         }
         if(isOverpopulated4()){
             removeOverpopulation();
