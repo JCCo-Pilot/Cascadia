@@ -242,6 +242,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }
     }
     public void endGameTime(EndGameEvent e){
+        GameStateEvent gse = new GameStateEvent(this,players.get(0));
+        listener.process(gse);
         System.out.println("Skbidi on that toilet");
     }
     public void mouseClicked(MouseEvent e) {}
