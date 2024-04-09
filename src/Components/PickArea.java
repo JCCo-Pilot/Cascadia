@@ -23,6 +23,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private int xPos,yPos;
     private boolean allowPick;
 
+    private Boolean tokenPlaced = false;
+    private Boolean tilePlaced = false;
+
     private boolean removeTrigger;
     private ArrayList<Integer>removal = new ArrayList<>();
 
@@ -432,11 +435,27 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
     public void jasperisadumbass(){
-        periodic();
+        System.out.println("Skibidi Raghav Ahuja");
         stopDoublePick = false;
         allowPick=true;
         limitedSelection =-1;
         pickedHex = 0;
+        tokenPlaced = false;
+        tilePlaced = false;
+        periodic();
+    }
+    public void placement(Boolean b){
+        //true is token, false is tile
+        if(b){
+            tokenPlaced = true;
+            spendToken.setVisible(false);
+            jcb.setVisible(false);
+            System.out.println("tokenPlaced = true");
+        }else{
+            tilePlaced = true;
+            System.out.println("tilePlaced = true");
+        }
+        repaint();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -488,7 +507,11 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             spendToken.setVisible(true);
             jcb.setVisible(true);
         }
-        if (players.get(0).getNatureTokens()<=0&&!removeTrigger){
+        if ((players.get(0).getNatureTokens()<=0&&!removeTrigger)){
+            spendToken.setVisible(false);
+            jcb.setVisible(false);
+        }
+        if(tilePlaced){
             spendToken.setVisible(false);
             jcb.setVisible(false);
         }

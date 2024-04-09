@@ -113,6 +113,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                         current = null;
                         AllowPickEvent apes = new AllowPickEvent(this, players.get(0));
                         listener.process(apes);
+                        ((PickArea)listener).placement(true);
+                        ((PickArea)listener).jasperisadumbass();;
                     }  
                 }
             //}
@@ -131,6 +133,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                     if(players.get(0).addTile(current, new MathPoint(e.getX(), e.getY()))){
                         temp = null;
                         showEmptyTiles = false;
+                        ((PickArea)listener).placement(false);
                     }
                     
                // }
