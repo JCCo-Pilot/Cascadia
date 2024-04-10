@@ -9,17 +9,24 @@ import javax.imageio.ImageIO;
 import java.awt.image.*;
 import MathHelper.*;
 import static java.lang.System.*;
-public class Selected extends JFrame{
+public class Selected extends JFrame implements ActionListener{
     private JPanel panel;
+    private JPanel buttonPanel;
     private JLabel tileLabel;
     private JLabel tokenLabel;
+    private static Point location;
     public Selected(){
         super("Player Selection");
         this.setSize(500, 250);
+        if(location == null){
+            location = new Point(0, 0);
+        }
+        this.setLocation(location);
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setResizable(false);
         this.setAlwaysOnTop(true);
+        this.setLayout(new BorderLayout());
         panel = new JPanel();
         //this.setLayout(new BorderLayout());
         panel.setBackground(Color.BLACK);
@@ -73,5 +80,12 @@ public class Selected extends JFrame{
             tokenLabel.setIcon(null);
             tokenLabel.setBackground(Color.darkGray);
         }
+        location = this.getLocation();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 }

@@ -88,10 +88,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         jcb.setVisible(false);
         add(jcb);
 
-        showSelected.setBounds(33,745,270,30);
-        showSelected.addActionListener(this);
-        showSelected.setVisible(false);
-        add(showSelected);
+        
         confirmButton.setBounds(33,745,270,30);
         confirmButton.addActionListener(this);
         confirmButton.setVisible(false);
@@ -421,6 +418,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             //hexagons[i].setY(275+(146*i)-100);
             
         }
+        periodic();
         repaint();
     }
     public void process(AllowPickEvent e){
@@ -467,6 +465,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
         for(Selected s:selectionPanels){
             s.dispose();
+            selectionPanels.remove(s);
         }
         periodic();
     }
@@ -525,14 +524,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             confirmButton.setVisible(false);   
             removal.clear();
             tokens.addAll(wt);
-        }else if(e.getSource() == showSelected){
-            for(Selected s:selectionPanels){
-                s.dispose();
-            }
-            Selected selection = new Selected();
-            selection.push(((PlayerDisplay)listener).getCurrentTile(), ((PlayerDisplay)listener).getCurrentToken());
-            selection.setVisible(true);
-            selectionPanels.add(selection);
         }
         repaint();
     }
@@ -559,21 +550,27 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
         if(tilePlaced&tokenTaken){
             clearToken.setVisible(true);
-            showSelected.setBounds(33,775,270,30);
+            //showSelected.setBounds(33,775,270,30);
 
         }
         if(tileTaken){
             overpopButton.setVisible(false);
-            showSelected.setVisible(true);
+            //showSelected.setVisible(true);
         }
         if(tilePlaced&&tokenPlaced){
-            showSelected.setVisible(false);
+            //showSelected.setVisible(false);
         }
         if(!tileTaken&&!tokenTaken){
-            showSelected.setVisible(false);
+            //showSelected.setVisible(false);
         }
         if(isOverpopulated4()){
             removeOverpopulation();
+        }
+        if(selectionPanels.size()==0&&!(((PlayerDisplay)listener).getCurrentTile() == null&&((PlayerDisplay)listener).getCurrentToken() == null)){
+            Selected s = new Selected();
+            s.push(((PlayerDisplay)listener).getCurrentTile(), ((PlayerDisplay)listener).getCurrentToken());
+            selectionPanels.add(s);
+            s.setVisible(true);
         }
         for(Selected s:selectionPanels){
             s.push(((PlayerDisplay)listener).getCurrentTile(), ((PlayerDisplay)listener).getCurrentToken());
