@@ -4,6 +4,11 @@ import Entities.Enums.CardAnimals;
 
 import java.util.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
 import EventAndListener.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -45,13 +50,13 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private BufferedImage natureToken;
     private ArrayList<Player>players = new ArrayList<>();
    
-    private JButton overpopButton = new JButton("Over-Population");
-    private JButton clearToken = new JButton("End Turn Without Placing Token");
+    private JButton overpopButton = constructButton("Over-Population");
+    private JButton clearToken = constructButton("End Turn Without Placing Token");
 
     private JComboBox<String>jcb;
-    private JButton spendToken = new JButton("Spend");
-    private JButton confirmButton = new JButton("Confirm Token Removal");
-    private JButton showSelected = new JButton("Show Selection");
+    private JButton spendToken = constructButton("Spend");
+    private JButton confirmButton = constructButton("Confirm Token Removal");
+    //private JButton showSelected = new JButton("Show Selection");
 
     private HabitatTiles[]hexagons = new HabitatTiles[4];
     private ArrayList<HabitatTiles>ht = new ArrayList<>();
@@ -530,6 +535,16 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     }
     public void setReginaPerez(EndGameListener eg){
         egl = eg;
+    }
+    private static JButton constructButton(String text) {
+        JButton button = new JButton(text);
+        button.setForeground(Color.BLACK);
+        //button.setBackground(Color.LIGHT_GRAY);
+        Border line = new LineBorder(Color.BLACK);
+        Border margin = new EmptyBorder(5, 15, 5, 15);
+        Border compound = new CompoundBorder(line, margin);
+        button.setBorder(compound);
+        return button;
     }
     private void periodic(){
         //out.println("Turns Left: "+players.get(0).getTurn());

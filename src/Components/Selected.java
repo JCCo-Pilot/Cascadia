@@ -8,6 +8,8 @@ import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
 import MathHelper.*;
+import Panels.MainPanel;
+
 import static java.lang.System.*;
 public class Selected extends JFrame implements ActionListener{
     private JPanel panel;
@@ -15,7 +17,6 @@ public class Selected extends JFrame implements ActionListener{
     private JLabel tileLabel;
     private JLabel tokenLabel;
     private static Component centerOn;
-    private static Boolean movePopUp = false;
     private static HashMap<Player, Point> locationPreferences = new HashMap<Player, Point>();
     public Selected(){
         super("Player Selection");
@@ -49,12 +50,6 @@ public class Selected extends JFrame implements ActionListener{
         panel.add(tokenLabel);
         JFrame frame = new JFrame();
         frame.setLocationRelativeTo(centerOn);
-        if(!movePopUp){
-            frame.setVisible(true);
-            Integer i = JOptionPane.showConfirmDialog(frame, "Players, you can move around the Player Selection Panel to your liking \nand it will reappear where you last left it on your turn.", "Player Selection Panel Information", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            frame.dispose();
-            movePopUp = true;
-        }
         //this.setVisible(true);
     }
 
@@ -91,6 +86,7 @@ public class Selected extends JFrame implements ActionListener{
 
     public void push(Player p){
         locationPreferences.put(p, this.getLocation());
+        repaint();
     }
 
     public static void push(Component c){
