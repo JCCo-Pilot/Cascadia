@@ -49,7 +49,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         out.println(players.size());
         for (int i =0;i<players.size();i++){
             JButton temp = new JButton("Player "+(i+1));
-            temp.setBounds(1010,670+(i*40),555,40);
+            temp.setBounds(1010,710+(i*40),555,40);
             temp.setVisible(true);
             playerButtons.add(temp);
         }

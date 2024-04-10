@@ -539,7 +539,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         egl = eg;
     }
     private void periodic(){
-        out.println("Turns Left: "+players.get(0).getTurn());
+        //out.println("Turns Left: "+players.get(0).getTurn());
         if (players.get(0).getTurn()==0){
             EndGameEvent ege = new EndGameEvent(this, true);
             egl.endGameTime(ege);
