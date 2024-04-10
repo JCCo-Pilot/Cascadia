@@ -54,6 +54,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }catch(Exception e){
             out.println("Unable to pull");
         }
+        sc = new SelectedScoringCard();
         pa.setPlayers(players);
         this.setVisible(true);
         addMouseListener(this);
@@ -256,7 +257,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         if (x>1213&&x<1213+180){
             //first row
             if (y>200&&y<370){
-            	sc = new SelectedScoringCard();
             	sc.addScoringCard(bearCard);
             }
             //second row
