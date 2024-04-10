@@ -116,7 +116,7 @@ public class Player implements Comparable{
     }
     public void decrement() {
     	turns = turns-1;
-        System.out.println("Decremented");
+        //System.out.println("Decremented");
     }
     public int getTurn() {
     	return turns;

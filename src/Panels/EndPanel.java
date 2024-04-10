@@ -177,7 +177,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         salmonCard = new SalmonCard(type);
     }
     private void addAll(ArrayList<JButton>comps){
-        System.out.println("Line 59"+comps.size());
+        //System.out.println("Line 59"+comps.size());
         for (int i =0;i<comps.size();i++){
             this.add(comps.get(i));
         }

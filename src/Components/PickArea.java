@@ -425,7 +425,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public void process(AllowPickEvent e){
         if (e.allowed()){
             allowPick= true;
-            out.println("Line 401");
+            //out.println("Line 401");
             //players.add(players.remove(0));
             repaint();
         }else if (e.movedOn()!=null){
@@ -449,7 +449,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
     public void jasperisadumbass(){
-        System.out.println("Skibidi Raghav Ahuja");
+        //System.out.println("Skibidi Raghav Ahuja");
         stopDoublePick = false;
         allowPick=true;
         limitedSelection =-1;
