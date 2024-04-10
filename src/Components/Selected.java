@@ -14,14 +14,12 @@ public class Selected extends JFrame implements ActionListener{
     private JPanel buttonPanel;
     private JLabel tileLabel;
     private JLabel tokenLabel;
-    private static Point location;
+    private static Component centerOn;
+    private static HashMap<Player, Point> locationPreferences = new HashMap<Player, Point>();
     public Selected(){
         super("Player Selection");
         this.setSize(500, 250);
-        if(location == null){
-            location = new Point(0, 0);
-        }
-        this.setLocation(location);
+        this.setLocationRelativeTo(centerOn);
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setResizable(false);
@@ -80,7 +78,22 @@ public class Selected extends JFrame implements ActionListener{
             tokenLabel.setIcon(null);
             tokenLabel.setBackground(Color.darkGray);
         }
-        location = this.getLocation();
+    }
+
+    public void push(Player p){
+        locationPreferences.put(p, this.getLocation());
+    }
+
+    public static void push(Component c){
+        centerOn = c;
+    }
+
+    public void pullLocation(Player p){
+        try {
+            this.setLocation(locationPreferences.get(p));
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 
     @Override

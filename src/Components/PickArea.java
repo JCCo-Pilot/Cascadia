@@ -57,7 +57,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private ArrayList<HabitatTiles>ht = new ArrayList<>();
     public PickArea(int i,int x, int y , int xS, int yS){
         super();
-
         ht = new TileCreator().getTiles();
 
         construct(x,y,xS,yS);
@@ -484,6 +483,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        periodic();
         if ("Overpopulation".equals(e.getActionCommand())){
             removeOverpopulation();
             ((JComponent) e.getSource()).setVisible(false);
@@ -571,10 +571,12 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             Selected s = new Selected();
             s.push(((PlayerDisplay)listener).getCurrentTile(), ((PlayerDisplay)listener).getCurrentToken());
             selectionPanels.add(s);
+            s.pullLocation(((PlayerDisplay)listener).currentPlayer());
             s.setVisible(true);
         }
         for(Selected s:selectionPanels){
             s.push(((PlayerDisplay)listener).getCurrentTile(), ((PlayerDisplay)listener).getCurrentToken());
+            s.push(((PlayerDisplay)listener).currentPlayer());
         }
     }
 }
