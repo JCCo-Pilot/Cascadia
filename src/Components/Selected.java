@@ -16,7 +16,8 @@ public class Selected extends JFrame{
     public Selected(){
         super("Player Selection");
         this.setSize(500, 250);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setResizable(false);
         this.setAlwaysOnTop(true);
         panel = new JPanel();
