@@ -46,7 +46,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private ArrayList<Player>players = new ArrayList<>();
    
     private JButton overpopButton = new JButton("Over-Population");
-    private JButton clearToken = new JButton("End Turn Without Placing Tile");
+    private JButton clearToken = new JButton("End Turn Without Placing Token");
 
     private JComboBox<String>jcb;
     private JButton spendToken = new JButton("Spend");

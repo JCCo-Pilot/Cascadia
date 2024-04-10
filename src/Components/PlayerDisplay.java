@@ -102,6 +102,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             //if(players.get(0).getHexagons().get(i).isPointInsideHexagon(e)){
                 if (token!=null){
                     HabitatTiles toAddTo = players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY()));
+                    //add a check method here
                     if (players.get(0).getGraph().addToken(token, new MathPoint(e.getX(), e.getY()))){
                         AllowPickEvent ape = new AllowPickEvent(this, true);
                         listener.process(ape);

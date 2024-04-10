@@ -15,13 +15,13 @@ public class SelectedScoringCard extends JFrame{
     private JLabel label;
     public SelectedScoringCard(){
         super("Scoring Card Pop Up");
-        this.setSize(500,500);
+        this.setSize(1000,500);
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setResizable(false);
         this.setAlwaysOnTop(true);
         panel = new JPanel();
         panel.setBackground(Color.BLACK);
-        panel.setLayout(new GridLayout(1,1,0,0));
+        panel.setLayout(new GridLayout(1,5,5,0));
 
         label = new JLabel();
         label.setBackground(Color.WHITE);
