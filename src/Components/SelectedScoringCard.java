@@ -52,6 +52,6 @@ public class SelectedScoringCard extends JFrame{
     }
 
     public void processImage(BufferedImage ig){
-
+        label.setIcon(new ImageIcon(ig.getScaledInstance(500,500,Image.SCALE_SMOOTH)));
     }
 }
