@@ -1,4 +1,3 @@
-package Panels;
 import java.util.*;
 import javax.swing.*;
 import EventAndListener.*;
@@ -26,9 +25,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private HawkCard hawkCard;
     private FoxCard foxCard;
     private BufferedImage bg;
-
-    private ArrayList<SelectedScoringCard>ssc = new ArrayList<>();
-
     public MainPanel(int l, Character diffcult){
         setLayout(null);
 
@@ -56,9 +52,10 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }catch(Exception e){
             out.println("Unable to pull");
         }
-
+        
         pa.setPlayers(players);
         this.setVisible(true);
+        addMouseListener(this);
     }
     private void constructScoring(Character diff){
         switch(diff){
@@ -251,35 +248,40 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         listener.process(gse);
         //System.out.println("Skbidi on that toilet");
     }
-    public void mouseClicked(MouseEvent e) {}
-    public void mousePressed(MouseEvent e) {
-        int x = e.getX();
+    public void mouseClicked(MouseEvent e) {
+    	int x = e.getX();
         int y = e.getY();
+        SelectedScoringCard sc = new SelectedScoringCard();
         //left side
         if (x>1213&&x<1213+180){
             //first row
             if (y>200&&y<370){
-
+            	sc.addScoringCard(bearCard);
             }
             //second row
             if (y>380&&y<380+170){
-
+            	sc.addScoringCard(elkCard);
             }
             //third row
             if (y>380+180+180&&y<380+180+180+170){
-
+            	sc.addScoringCard(salmonCard);
             }
         }
         //right side
         if (x>1213+180&&x<1213+180+175){
             //first row
             if (y>200&&y<370){
-
+            	sc.addScoringCard(foxCard);
             }
             //second row
-            
+            if(y>380&&y<380+170) {
+            	sc.addScoringCard(hawkCard);
+            }
         }
         repaint();
+    }
+    public void mousePressed(MouseEvent e) {
+    	
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
