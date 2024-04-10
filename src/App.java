@@ -42,7 +42,7 @@ public class App extends JFrame implements GameListener{
             this.remove(mpanel);
             epanel = new EndPanel();
             this.add(epanel);
-            //epanel.repaint();
+            epanel.repaint();
         }else{
             //Find the correct player here
             switch (e.getState()) {
