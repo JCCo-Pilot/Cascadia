@@ -26,6 +26,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private HawkCard hawkCard;
     private FoxCard foxCard;
     private BufferedImage bg;
+
+    private ArrayList<SelectedScoringCard>ssc = new ArrayList<>();
+
     public MainPanel(int l, Character diffcult){
         setLayout(null);
 
@@ -254,10 +257,26 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         int y = e.getY();
         //left side
         if (x>1213&&x<1213+180){
+            //first row
+            if (y>200&&y<370){
 
+            }
+            //second row
+            if (y>380&&y<380+170){
+
+            }
+            //third row
+            if (y>380+180+180&&y<380+180+180+170){
+
+            }
         }
         //right side
         if (x>1213+180&&x<1213+180+175){
+            //first row
+            if (y>200&&y<370){
+
+            }
+            //second row
             
         }
         repaint();
