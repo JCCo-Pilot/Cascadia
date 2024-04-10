@@ -15,6 +15,10 @@ public class SelectedScoringCard extends JFrame{
     public SelectedScoringCard(){
         super("Scoring Card Pop Up");
         this.setSize(500,500);
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        this.setResizable(false);
+        this.setAlwaysOnTop(true);
+        panel = new JPanel();
     }
 
     public void addScoringCard(BearCard bc){
@@ -30,6 +34,6 @@ public class SelectedScoringCard extends JFrame{
 
     }
     public void addScoringCard(SalmonCard sc){
-        
+
     }
 }
