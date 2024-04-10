@@ -256,6 +256,10 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         if (x>1213&&x<1213+180){
 
         }
+        //right side
+        if (x>1213+180&&x<1213+180+175){
+            
+        }
         repaint();
     }
     public void mouseReleased(MouseEvent e) {}
