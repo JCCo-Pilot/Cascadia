@@ -15,6 +15,7 @@ public class Selected extends JFrame implements ActionListener{
     private JLabel tileLabel;
     private JLabel tokenLabel;
     private static Component centerOn;
+    private static Boolean movePopUp = false;
     private static HashMap<Player, Point> locationPreferences = new HashMap<Player, Point>();
     public Selected(){
         super("Player Selection");
@@ -46,6 +47,14 @@ public class Selected extends JFrame implements ActionListener{
         this.add(panel);
         panel.add(tileLabel);
         panel.add(tokenLabel);
+        JFrame frame = new JFrame();
+        frame.setLocationRelativeTo(centerOn);
+        if(!movePopUp){
+            frame.setVisible(true);
+            Integer i = JOptionPane.showConfirmDialog(frame, "Players, you can move around the Player Selection Panel to your liking \nand it will reappear where you last left it on your turn.", "Player Selection Panel Information", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            frame.dispose();
+            movePopUp = true;
+        }
         //this.setVisible(true);
     }
 
@@ -92,7 +101,7 @@ public class Selected extends JFrame implements ActionListener{
         try {
             this.setLocation(locationPreferences.get(p));
         } catch (Exception e) {
-            // TODO: handle exception
+            
         }
     }
 
