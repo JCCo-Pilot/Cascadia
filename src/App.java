@@ -1,4 +1,6 @@
 import java.util.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import Components.*;
@@ -6,6 +8,8 @@ import Entities.Player;
 import EventAndListener.*;
 import Panels.*;
 import static java.lang.System.*;
+
+import java.io.File;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
         App  ap = new App("Team Aditya Chen");

@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
+import java.io.File;
+import java.io.IOException;
+
 import MathHelper.*;
 import Panels.MainPanel;
 
@@ -27,6 +30,11 @@ public class Selected extends JFrame implements ActionListener{
         super.setBackground(Color.BLACK);
         this.setSize(250, 170);
         this.setLocationRelativeTo(centerOn);
+        try {
+            this.setIconImage(ImageIO.read(new File("src/Entities/Images/Philip.png")));
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setResizable(false);
