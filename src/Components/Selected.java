@@ -18,13 +18,14 @@ public class Selected extends JFrame implements ActionListener{
     private JLabel tokenLabel;
     private static Component centerOn;
     private Player currentPlayer;
-    JButton hide = new JButton("Hide");
-    JButton hidePermanent = new JButton("Hide Permanently");
+    JButton hide = new JButton("Hide for this Turn");
+    JButton hidePermanent = new JButton("Hide Permanently for Current Player");
     private static HashMap<Player, Point> locationPreferences = new HashMap<Player, Point>();
     private static HashMap<Player, Boolean> visible = new HashMap<Player, Boolean>();
     public Selected(){
         super("Selection");
-        this.setSize(250, 175);
+        super.setBackground(Color.BLACK);
+        this.setSize(250, 170);
         this.setLocationRelativeTo(centerOn);
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -32,7 +33,7 @@ public class Selected extends JFrame implements ActionListener{
         this.setAlwaysOnTop(true);
         this.setLayout(new BorderLayout());
         panel = new JPanel();
-        panel.setSize(250, 125);
+        panel.setSize(250, 135);
         this.setLayout(new BorderLayout());
         panel.setBackground(Color.BLACK);
         panel.setLayout(new GridLayout(1, 2, 3, 10));
@@ -55,10 +56,12 @@ public class Selected extends JFrame implements ActionListener{
         panel.add(tokenLabel);
         hide.addActionListener(this);
         hidePermanent.addActionListener(this);
+        hidePermanent.setFont(new Font(hidePermanent.getFont().getName(), hidePermanent.getFont().getStyle(),hidePermanent.getFont().getSize()-1));
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
         buttonPanel.add(hide);
         buttonPanel.add(hidePermanent);
         this.add(buttonPanel, BorderLayout.SOUTH);
+        hidePermanent.setSize(buttonPanel.getWidth(), 75);
         buttonPanel.setVisible(true);
         hide.setVisible(true);
         hidePermanent.setVisible(true);
@@ -93,6 +96,7 @@ public class Selected extends JFrame implements ActionListener{
             tokenLabel.setIcon(null);
             tokenLabel.setBackground(Color.darkGray);
         }
+        panel.repaint();
     }
 
     public void push(Player p){
