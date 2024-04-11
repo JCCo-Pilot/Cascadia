@@ -26,6 +26,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private HawkCard hawkCard;
     private FoxCard foxCard;
     private BufferedImage bg;
+    private SelectedScoringCard sc;
     public MainPanel(int l, Character diffcult){
         setLayout(null);
 
@@ -33,7 +34,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         constructStarters();
 
         constructScoring(diffcult);
-
+        
         pd = new PlayerDisplay(310, 15, 905, 830,players);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
@@ -53,7 +54,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }catch(Exception e){
             out.println("Unable to pull");
         }
-        
+        sc = new SelectedScoringCard();
         pa.setPlayers(players);
         this.setVisible(true);
         addMouseListener(this);
@@ -252,7 +253,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     public void mouseClicked(MouseEvent e) {
     	int x = e.getX();
         int y = e.getY();
-        SelectedScoringCard sc = new SelectedScoringCard();
         //left side
         if (x>1213&&x<1213+180){
             //first row

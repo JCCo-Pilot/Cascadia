@@ -31,7 +31,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private ArrayList<Player>players;
     public PlayerDisplay(int x, int y, int xS, int yS, ArrayList<Player>play){
         super();
-
+        Selected.push(this);
         switchTrigger = false;
         players = play;
         
@@ -56,6 +56,10 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         addMouseListener(this);
 
         testConstruct();
+    }
+
+    public Player currentPlayer(){
+        return players.get(0);
     }
     private void testConstruct(){
         cgg = new coordinateGraphGeneration(xSize,ySize);
