@@ -28,7 +28,7 @@ public class Selected extends JFrame implements ActionListener{
     public Selected(){
         super("Selection");
         super.setBackground(Color.BLACK);
-        this.setSize(250, 170);
+        this.setSize(400, 240);
         this.setLocationRelativeTo(centerOn);
         try {
             this.setIconImage(ImageIO.read(new File("src/Entities/Images/Philip.png")));
@@ -41,12 +41,13 @@ public class Selected extends JFrame implements ActionListener{
         this.setAlwaysOnTop(true);
         this.setLayout(new BorderLayout());
         panel = new JPanel();
-        panel.setSize(250, 135);
+        panel.setSize(350, 200);
         this.setLayout(new BorderLayout());
         panel.setBackground(Color.BLACK);
         panel.setLayout(new GridLayout(1, 2, 3, 10));
         tileLabel = new JLabel();
         tokenLabel = new JLabel();
+        //tileLabel.setSize(190, 190);
         tileLabel.setBackground(Color.WHITE);    
         tileLabel.setOpaque(true);
         tokenLabel.setBackground(Color.WHITE);
@@ -90,7 +91,7 @@ public class Selected extends JFrame implements ActionListener{
         tokenLabel.setHorizontalAlignment(JLabel.CENTER);
 
         if(h!=null){
-            tileLabel.setIcon(new ImageIcon(h.getImage().getScaledInstance((int)(83*0.8), (int)(100*0.8),
+            tileLabel.setIcon(new ImageIcon(h.getImage().getScaledInstance((int)(83*1.5), (int)(100*1.5),
             Image.SCALE_SMOOTH)));
         }else{
             tileLabel.setIcon(null);
@@ -98,7 +99,7 @@ public class Selected extends JFrame implements ActionListener{
         }
 
         if(t!=null){
-            tokenLabel.setIcon(new ImageIcon(t.getImage().getScaledInstance(80, 80,
+            tokenLabel.setIcon(new ImageIcon(t.getImage().getScaledInstance(150, 150,
             Image.SCALE_SMOOTH)));
         }else{
             tokenLabel.setIcon(null);
