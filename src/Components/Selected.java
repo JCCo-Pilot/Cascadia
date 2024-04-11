@@ -20,9 +20,9 @@ public class Selected extends JFrame implements ActionListener{
     private JLabel tileLabel;
     private JLabel tokenLabel;
     private static Component centerOn;
-    private Player currentPlayer;
+    public static Player currentPlayer;
     JButton hide = new JButton("Hide for this Turn");
-    JButton hidePermanent = new JButton("Hide Permanently for Current Player");
+    JButton hidePermanent = new JButton("Hide Permanently for "+currentPlayer.getName());
     private static HashMap<Player, Point> locationPreferences = new HashMap<Player, Point>();
     private static HashMap<Player, Boolean> visible = new HashMap<Player, Boolean>();
     public Selected(){

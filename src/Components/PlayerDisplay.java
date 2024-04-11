@@ -34,7 +34,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         Selected.push(this);
         switchTrigger = false;
         players = play;
-        
+        Selected.currentPlayer = currentPlayer();
         
         rotateButton = new JButton("RotateC");
         rotateButton.setBounds(790, 770, 105, 40);
@@ -104,7 +104,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         periodic();
         //for(int i =0;i<players.get(0).getHexagons().size();i++){
             //if(players.get(0).getHexagons().get(i).isPointInsideHexagon(e)){
-                if (token!=null){
+                if (token!=null&&temp==null){
                     HabitatTiles toAddTo = players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY()));
                     //add a check method here
                     if (players.get(0).getGraph().addToken(token, new MathPoint(e.getX(), e.getY()))){

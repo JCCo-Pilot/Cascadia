@@ -582,6 +582,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         if(isOverpopulated4()){
             removeOverpopulation();
         }
+        Selected.currentPlayer = ((PlayerDisplay)listener).currentPlayer();
         if(selectionPanels.size()==0&&!(((PlayerDisplay)listener).getCurrentTile() == null&&((PlayerDisplay)listener).getCurrentToken() == null)){
             Selected s = new Selected();
             s.push(((PlayerDisplay)listener).getCurrentTile(), ((PlayerDisplay)listener).getCurrentToken());
@@ -593,5 +594,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             s.push(((PlayerDisplay)listener).getCurrentTile(), ((PlayerDisplay)listener).getCurrentToken());
             s.push(((PlayerDisplay)listener).currentPlayer());
         }
+        
     }
 }
