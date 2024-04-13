@@ -56,6 +56,7 @@ public class App extends JFrame implements GameListener{
                     pPanel.currentPlayer(getNumero(1, mpanel.getPlayers()));
                     pPanel.setListener(this);
                     repaint();
+                    this.setVisible(true);
                 break;
                 case 20:
                     this.remove(mpanel);
@@ -63,6 +64,7 @@ public class App extends JFrame implements GameListener{
                     pPanel.currentPlayer(getNumero(2, mpanel.getPlayers()));
                     pPanel.setListener(this);
                     repaint();
+                    this.setVisible(true);
                 break; 
                 case 30:
                     this.remove(mpanel);
@@ -70,6 +72,7 @@ public class App extends JFrame implements GameListener{
                     pPanel.currentPlayer(getNumero(3, mpanel.getPlayers()));
                     pPanel.setListener(this);
                     repaint();
+                    this.setVisible(true);
                 break;
                 case 40:
                     this.remove(mpanel);
@@ -77,12 +80,15 @@ public class App extends JFrame implements GameListener{
                     pPanel.currentPlayer(getNumero(4, mpanel.getPlayers()));
                     pPanel.setListener(this);
                     repaint();
+                    this.setVisible(true);
                 break;
                 case 50:
                 	this.remove(pPanel);
                 	add(mpanel);
                 	mpanel.setListener(this);
                 	repaint();
+                    this.setVisible(true);
+                break;
             }
         }
     }
