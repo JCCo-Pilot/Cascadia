@@ -27,7 +27,12 @@ public class App extends JFrame implements GameListener{
         spanel = new StartPanel();
         spanel.setListener(this);
         add(spanel);
-
+        //troll comments
+        try {
+            this.setIconImage(ImageIO.read(new File("src/Entities/Images/Philip.png")));
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
         pPanel = new PopPanel();
 
 

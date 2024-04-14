@@ -15,7 +15,7 @@ public class Player implements Comparable{
 
     public Player(int i){
         name= "Player "+i;
-        turns = 20;
+        turns = 5;
         //turns = 20;
     }
     public void setName(String s){name = s;}
