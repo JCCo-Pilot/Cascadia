@@ -93,8 +93,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         Polygon p = new Polygon();
         //cgg.paintAll(g);
         players.get(0).drawInventory(g, showEmptyTiles);
-        /*g.setFont(new Font("Arial",100,30));
-        g.drawString("Turns Left: "+players.get(0).getTurn(),30,50);*/
+        g.setFont(new Font("Arial",100,30));
+        g.drawString("Turns Left: "+players.get(0).getTurn(),30,50);
         paintComponents(g);
     }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
