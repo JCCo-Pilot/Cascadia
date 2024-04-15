@@ -58,6 +58,13 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }catch(Exception e){
             out.println("Unable to pull");
         }
+        ArrayList<ScoringCard> cards = new ArrayList<ScoringCard>();
+            cards.add(bearCard);
+            cards.add(elkCard);
+            cards.add(salmonCard);
+            cards.add(hawkCard);
+            cards.add(foxCard);
+        ScoreTesterPanel p = new ScoreTesterPanel(players, cards);
         sc = new SelectedScoringCard();
         pa.setPlayers(players);
         this.setVisible(true);
