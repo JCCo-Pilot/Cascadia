@@ -19,6 +19,8 @@ import java.awt.image.*;
 import java.io.File;
 
 import MathHelper.*;
+import Panels.ScoreTesterPanel;
+
 import static java.lang.System.*;
 public class PickArea extends JComponent implements MouseListener, ActionListener,AllowPickEventListener{
 
@@ -478,6 +480,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             s.dispose();
             selectionPanels.remove(s);
         }
+        ScoreTesterPanel.update();
         periodic();
     }
     public void placement(Boolean b){

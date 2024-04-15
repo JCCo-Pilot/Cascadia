@@ -33,12 +33,14 @@ public class Scorer implements Runnable{
                 Scorer s = new Scorer(p, h);
                 Thread t = new Thread(s);
                 habitatThreads.add(t);
+                //s.scorePlayer();
                 t.start();
             }
             for(ScoringCard card:scoringCards){
                 Scorer s = new Scorer(p, card);
                 Thread t = new Thread(s);
                 wildlifeThreads.add(t);
+                //s.scorePlayer();
                 t.start();
             }
         }
@@ -118,23 +120,33 @@ public class Scorer implements Runnable{
 
         }
         
-        ArrayList<Player> finalPlayers = new ArrayList<Player>();
-        Collections.copy(finalPlayers,players);
+        /*ArrayList<Player> finalPlayers = new ArrayList<Player>();
+        Collections.copy(finalPlayers,players);*/
         HashMap<Integer, Player> finalOrder = new HashMap<Integer, Player>();
-        for(int i = 1; i<=players.size(); i++){
+        /*for(int i = 1; i<=players.size(); i++){
             finalOrder.put((Integer)i, finalPlayers.remove(finalPlayers.indexOf(Collections.max(finalPlayers))));
-        }
+        }*/
         return finalOrder;
     }
 
     @Override
     public void run() {
-        this.scorePlayer();
+        try {
+            this.scorePlayer();
+        } catch (Exception e) {
+            if(habitat==null){
+                System.out.println("Score "+player.getName()+", "+scoringCard.getAnimal());
+            }else{
+                System.out.println("Score "+player.getName()+", "+habitat);
+            }
+        }
     }
 
     public void scorePlayer(){
         if(habitat!=null){
             player.setScore(habitat, player.getGraph().getLargestContiguousGroup(habitat));
+            System.out.println(player+", "+habitat+" set to "+player.getGraph().getLargestContiguousGroup(habitat));
+            System.out.println(player+", "+habitat+" retrieves "+player.getScore(habitat));
         }else if(scoringCard!=null){
             player.setScore(scoringCard.getAnimal(), scoringCard.score(player));
         }

@@ -70,6 +70,7 @@ public class HabitatGraph{
                 filterReturn.add(h);
             }
         }
+        System.out.println("Filter for "+hab+" returns "+filterReturn.toString());
         return filterReturn;
     }
 
@@ -340,27 +341,35 @@ public class HabitatGraph{
             groups.add(group);
         }
         Integer max = 0;
+        groups.remove(null);
         for(HashSet<HabitatTiles> group:groups){
+            System.out.println(target+" group size "+group.size());
             group.remove(null);
             if(group.size()>max){
                 max = group.size();
             }
         }
+        System.out.println(target + " returns "+max);
         return max;
     }
 
     private void findContiguousGroup(Habitats target, HabitatTiles tile, HashSet<HabitatTiles> group, HashSet<HabitatTiles> visitedTiles){
-        if(visitedTiles.contains(tile)||tile==null){
-            return;
-        }
-        group.add(tile);
-        visitedTiles.add(tile);
-        for(Integer i:tile.getHabitats().keySet()){
-            if(tile.getHabitats().get(i)==target){
-                if(tile.habitatMatch(i)){
-                    findContiguousGroup(target, tile.get(i), group, visitedTiles);
+        Queue<HabitatTiles> q = new LinkedList<HabitatTiles>();
+        q.add(tile);
+        while(!q.isEmpty()){
+            HabitatTiles current = q.remove();
+            if(!visitedTiles.contains(current)){
+                group.add(current);
+                visitedTiles.add(current);
+                System.out.println(current+" added to group of "+target);
+                for(int i = 0; i<6; i++){
+                    HabitatTiles next = current.get(i);
+                    if(current.habitatMatch(i)&&current.getHabitats().get(i)==target&&!next.isEmpty()){
+                        q.add(next);
+                    }
                 }
             }
         }
+        //System.out.println(target+" group size = "+group.size());
     }
 }

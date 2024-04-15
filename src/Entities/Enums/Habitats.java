@@ -19,7 +19,14 @@ public enum Habitats {
             return WETLAND;
             case "river":
             return RIVER;
+            case "lake":
+            return RIVER;
+            case "desert":
+            return PRAIRIE;
+            case "swamp":
+            return WETLAND;
         }
+        System.out.println("Habitats toHabitat "+s+" returns null");
         return null;
     }
 }

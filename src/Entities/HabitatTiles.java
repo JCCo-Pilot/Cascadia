@@ -201,7 +201,13 @@ public class HabitatTiles extends PointGenerator{
 
     public Boolean habitatMatch(Integer connection){
         HabitatTiles c = this.get(connection);
-        return this.habitatSides.get(connection).equals(c.habitatSides.get(c.getSideOf(this)));
+        //System.out.println("HabitatSides this "+habitatSides.toString());
+        //System.out.println("HabitatSides c "+c.getHabitats().toString());
+        try {
+            return this.habitatSides.get(connection).equals(c.getHabitats().get(c.getSideOf(this)));
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public Integer getNumberOf(CardAnimals i){
