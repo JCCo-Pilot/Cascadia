@@ -153,7 +153,7 @@ public class BearCard implements ScoringCard{
     }
 
     private void addBearToGroup(HabitatTiles bear, HashSet<HabitatTiles> visitedBears, HashSet<HabitatTiles> bearGroup){
-        if(bear.tokenAnimal()!=CardAnimals.BEAR||visitedBears.contains(bear)){
+        if(bear.getToken()==null||bear.tokenAnimal()!=CardAnimals.BEAR||visitedBears.contains(bear)){
             return;
         }else{
             visitedBears.add(bear);

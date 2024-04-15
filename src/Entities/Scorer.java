@@ -131,7 +131,7 @@ public class Scorer implements Runnable{
 
     @Override
     public void run() {
-        try {
+        /*try {
             this.scorePlayer();
         } catch (Exception e) {
             if(habitat==null){
@@ -139,7 +139,8 @@ public class Scorer implements Runnable{
             }else{
                 System.out.println("Score "+player.getName()+", "+habitat);
             }
-        }
+        }*/
+        this.scorePlayer();
     }
 
     public void scorePlayer(){

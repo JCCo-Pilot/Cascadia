@@ -56,7 +56,7 @@ public class HabitatGraph{
     public HashSet<HabitatTiles> filter(CardAnimals i){
         HashSet<HabitatTiles> filterReturn = new HashSet<HabitatTiles>();
         for(HabitatTiles h:iterate()){
-            if(h.tokenAnimal()==i){
+            if(h.getToken()!=null&&h.tokenAnimal()==i){
                 filterReturn.add(h);
             }
         }
@@ -70,7 +70,7 @@ public class HabitatGraph{
                 filterReturn.add(h);
             }
         }
-        System.out.println("Filter for "+hab+" returns "+filterReturn.toString());
+        //System.out.println("Filter for "+hab+" returns "+filterReturn.toString());
         return filterReturn;
     }
 
@@ -343,13 +343,13 @@ public class HabitatGraph{
         Integer max = 0;
         groups.remove(null);
         for(HashSet<HabitatTiles> group:groups){
-            System.out.println(target+" group size "+group.size());
+            //System.out.println(target+" group size "+group.size());
             group.remove(null);
             if(group.size()>max){
                 max = group.size();
             }
         }
-        System.out.println(target + " returns "+max);
+        //System.out.println(target + " returns "+max);
         return max;
     }
 
@@ -361,7 +361,7 @@ public class HabitatGraph{
             if(!visitedTiles.contains(current)){
                 group.add(current);
                 visitedTiles.add(current);
-                System.out.println(current+" added to group of "+target);
+                //System.out.println(current+" added to group of "+target);
                 for(int i = 0; i<6; i++){
                     HabitatTiles next = current.get(i);
                     if(current.habitatMatch(i)&&current.getHabitats().get(i)==target&&!next.isEmpty()){
