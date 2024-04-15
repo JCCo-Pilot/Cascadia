@@ -23,6 +23,8 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     private HawkCard hawkCard;
     private FoxCard foxCard;
 
+    private int numPlayers;
+
     private HashMap<Integer,ArrayList<Integer>>scores = new HashMap<>();
 
     private ArrayList<Player>players = new ArrayList<>();
@@ -30,9 +32,9 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     public EndPanel(){
         setLayout(null);
         repaint();
-        for (int i =0;i<4;i++){
+        /*for (int i =0;i<4;i++){
             players.add(new Player(i));
-        }
+        }*/
         construct();
         pullImages();
         setVisible(true);
@@ -56,8 +58,23 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         addAll(playerButtons);
         //testCreateCards();
     }
+    public void setNumPlayers(int i){
+        numPlayers = i;
+    }
+    public void setPlayers(ArrayList<Player>p){
+        players = p;
+    }
     private void score(){
-        for (int i =0;i<players.size();i++){
+        switch(numPlayers){
+            case 4:
+
+            case 3:
+            
+            case 2:
+                
+            break;
+        }
+        /*for (int i =0;i<players.size();i++){
             ArrayList<Integer>temp = new ArrayList<>();
             Player current = players.get(i);
             //bear
@@ -72,13 +89,16 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
             temp.add(foxCard.score(current));
             //total
             //put it into the hashMap
-        }
+        }*/
+    }
+    private ArrayList<Integer> scorePlayer(Player p){
+        return null;
     }
     public void paint(Graphics g){
         //g.fillRect(0, 0, 1590, 865);
         g.drawImage(bg, 0,0, 1585, 865,null);
         paintComponents(g);
-        Painting(g);
+        //Painting(g);
         paintCards(g);
     }
     public void paintCards(Graphics g){

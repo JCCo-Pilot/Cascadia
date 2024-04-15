@@ -58,6 +58,9 @@ public class App extends JFrame implements GameListener{
             epanel.setHawkCard(mpanel.getHawkCard());
             epanel.setFoxCard(mpanel.getFoxCard());
 
+            epanel.setNumPlayers(mpanel.getNumPlayers());
+            epanel.setPlayers(mpanel.getPlayers());
+
             epanel.repaint();
         }else{
             //Find the correct player here
