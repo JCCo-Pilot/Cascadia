@@ -99,6 +99,7 @@ public class App extends JFrame implements GameListener{
                 break;
                 case 50:
                 	this.remove(pPanel);
+                    pPanel = new PopPanel();
                 	add(mpanel);
                 	mpanel.setListener(this);
                 	repaint();
