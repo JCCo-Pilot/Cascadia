@@ -310,4 +310,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     public FoxCard getFoxCard(){
         return foxCard;
     }
+    public Integer getNumPlayers(){
+        return players.size();
+    }
+    
 }
