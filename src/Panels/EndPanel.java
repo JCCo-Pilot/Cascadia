@@ -54,7 +54,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
             playerButtons.add(temp);
         }
         addAll(playerButtons);
-        testCreateCards();
+        //testCreateCards();
     }
     private void score(){
         for (int i =0;i<players.size();i++){
