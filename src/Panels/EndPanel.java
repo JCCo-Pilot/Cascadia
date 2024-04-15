@@ -65,11 +65,23 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         players = p;
     }
     private void score(){
+        ArrayList<ScoringCard> cards = new ArrayList<ScoringCard>();
+        //add all the cards to this
+        cards.add(bearCard);
+        cards.add(foxCard);
+        cards.add(elkCard);
+        cards.add(hawkCard);
+        cards.add(salmonCard);
+        //use the player.getScore() method to return the final score
+        //use the player.getScore(CardAnimals) for a card
+        //use player.getScore(Habitats) for a habitat
+        //use player.getBonus(Habitats) for a habitat bonus
+        Scorer.score(players, cards);
         switch(numPlayers){
             case 4:
 
             case 3:
-            
+
             case 2:
                 
             break;

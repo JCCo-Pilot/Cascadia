@@ -507,7 +507,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             allowPick=true;
             limitedSelection =-1;
             pickedHex = -1;
-            players.add(players.remove(0));
+            Player temp = players.remove(0);
+            temp.decrement();
+            players.add(temp);
             PickEvent ee = new PickEvent(this, "PickArea");
             
             listener.process(ee);

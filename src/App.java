@@ -29,7 +29,7 @@ public class App extends JFrame implements GameListener{
         add(spanel);
         //troll comments
         try {
-            this.setIconImage(ImageIO.read(new File("src/Entities/Images/Philip.png")));
+            this.setIconImage(ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg")));
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -99,6 +99,7 @@ public class App extends JFrame implements GameListener{
                 break;
                 case 50:
                 	this.remove(pPanel);
+                    pPanel = new PopPanel();
                 	add(mpanel);
                 	mpanel.setListener(this);
                 	repaint();
