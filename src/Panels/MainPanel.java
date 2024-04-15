@@ -26,6 +26,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private HawkCard hawkCard;
     private FoxCard foxCard;
     private BufferedImage bg;
+
+    private BufferedImage troll;
+
     private SelectedScoringCard sc;
     public MainPanel(int l, Character diffcult){
         setLayout(null);
@@ -51,6 +54,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
 
         try{
             bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
+            troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
         }catch(Exception e){
             out.println("Unable to pull");
         }
@@ -228,6 +232,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         g.drawImage(elkCard.getImage(), 1213,200+180,175,170,null);
         g.drawImage(hawkCard.getImage(), 1213+180,200+180,175,170,null);
         g.drawImage(salmonCard.getImage(), 1213,200+180+180,175,170,null);
+        //g.drawImage(troll,0,0,1600,900,null);
     }
     public ArrayList<Player> getPlayers(){
     	return players;
