@@ -287,4 +287,20 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
+    //getter methods
+    public BearCard getBearCard(){
+        return bearCard;
+    }
+    public ElkCard getElkCard(){
+        return elkCard;
+    }
+    public SalmonCard getSalmonCard(){
+        return salmonCard;
+    }
+    public HawkCard getHawkCard(){
+        return hawkCard;
+    }
+    public FoxCard getFoxCard(){
+        return foxCard;
+    }
 }
