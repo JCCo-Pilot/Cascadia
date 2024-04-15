@@ -192,4 +192,21 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     public void mouseReleased(MouseEvent e) {}    
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
+    //setter methods
+    public void setBearCard(BearCard bc){
+        bearCard = bc;
+    }
+    public void setElkCard(ElkCard ec){
+        elkCard = ec;
+    }
+    public void setSalmonCard(SalmonCard sc){
+        salmonCard = sc;
+    }
+    public void setHawkCard(HawkCard hc){
+        hawkCard = hc;
+    }
+    public void setFoxCard(FoxCard fc){
+        foxCard = fc;
+    }
+
 }
