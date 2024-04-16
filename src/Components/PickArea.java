@@ -115,6 +115,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
 
         setVisible(true);
     }
+
+
     public void setPlayers(ArrayList<Player>play){
         players = play;
     }
