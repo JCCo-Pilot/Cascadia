@@ -26,8 +26,6 @@ public class ScoreTesterPanel extends JFrame{
         ScoreTesterPanel.cards = cards;
         this.setSize(500, 100);
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        this.add(new testerPanel());
-        this.setVisible(true);
     }
 
     public static void update(){
@@ -39,16 +37,6 @@ public class ScoreTesterPanel extends JFrame{
             for(Habitats h:Habitats.values()){
                 System.out.println(p.getName()+", "+h+": "+p.getScore(h));
             }
-        }
-    }
-
-    private class testerPanel extends JPanel{
-        testerPanel(){
-            super();
-            this.setLayout(new GridLayout(5, 15));
-        }
-        void paint(){
-            
         }
     }
 }
