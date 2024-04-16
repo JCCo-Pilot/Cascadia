@@ -20,6 +20,7 @@ import java.io.File;
 
 import MathHelper.*;
 import Panels.ScoreTesterPanel;
+import Panels.*;
 
 import static java.lang.System.*;
 public class PickArea extends JComponent implements MouseListener, ActionListener,AllowPickEventListener{
@@ -608,6 +609,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             s.push(((PlayerDisplay)listener).getCurrentTile(), ((PlayerDisplay)listener).getCurrentToken());
             s.push(((PlayerDisplay)listener).currentPlayer());
         }
+        ((MainPanel)egl).updateButtons();
         
     }
 }

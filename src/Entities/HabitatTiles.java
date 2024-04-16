@@ -322,7 +322,10 @@ public class HabitatTiles extends PointGenerator{
     }
 
     public void setOffset(int r){
-        rotation = r;
+        int offsetBy = r-rotation;
+        for(int i = 0; i<offsetBy; i+=60){
+            rotate();
+        }
     }
 
     public void rotate(){
@@ -335,18 +338,20 @@ public class HabitatTiles extends PointGenerator{
         if (rotation>360){
             rotation-=360;
         }
+        System.out.println(imageName+" rotated: "+habitatSides.toString());
         //out.println("Rotation- "+getRotation());
     }
     public void rotateC(){
         rotation+=300;
         HashMap<Integer, Habitats> temp = new HashMap<Integer, Habitats>();
         for(int i = 0; i<6; i++){
-            temp.put(previousInt(i), habitatSides.get(i));
+            temp.put(nextInt(i), habitatSides.get(i));
         }
         habitatSides = temp;
         if (rotation>360){
             rotation-=360;
         }
+        System.out.println(imageName+" rotated: "+habitatSides.toString());
         //out.println("Rotation- "+getRotation());
     }
 
@@ -361,14 +366,17 @@ public class HabitatTiles extends PointGenerator{
 
     public static Integer previousInt(Integer i){
         //gets number representing previous side, going clockwise.
-        return (i-1) % 6;
+        for(int j = 0; j<5; j++){
+            i = nextInt(i);
+        }
+        return i;
     }
 
     public static Integer next(Integer i, Integer increment){
         //gets number representing next [increment] side, going clockwise.
         Integer ret = i;
         for(int c = 0; c<increment; c++){
-            ret = (ret+1) % 6;
+            ret = nextInt(ret);
         }
         return ret;
     }
@@ -377,7 +385,7 @@ public class HabitatTiles extends PointGenerator{
         //gets number representing previous [increment] side, going clockwise.
         Integer ret = i;
         for(int c = 0; c<decrement; c++){
-            ret = (ret-1) % 6;
+            ret = previousInt(ret);
         }
         return ret;
     }

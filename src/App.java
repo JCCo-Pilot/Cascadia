@@ -12,7 +12,7 @@ import static java.lang.System.*;
 import java.io.File;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
-        App  ap = new App("Team Aditya Chen",true);
+        App  ap = new App("Team Aditya Chen");
         //PanelTester pt = new PanelTester("lmao");
     }
     private StartPanel spanel;
@@ -134,4 +134,6 @@ public class App extends JFrame implements GameListener{
         }
         return null;
     }
+
+    
 }

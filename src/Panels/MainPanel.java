@@ -42,6 +42,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
 
+        pd.addMainPanel(this);
+
         pa = new PickArea(l,0,0,310,870);
 
         pa.setReginaPerez(this);
@@ -198,7 +200,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private void construct(int limit){
         //buttons.add(new JButton("Scoring Cards"));
         for (int i= 0;i<limit;i++){
-            buttons.add(new JButton("Player "+(i+1)));
+            buttons.add(new JButton("Player "+(i+1)+" [0]"));
         }
         for (int i= 0;i<buttons.size();i++){
             buttons.get(i).setBounds(1213,19+40*i,352,40);
@@ -212,6 +214,40 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             players.add(new Player(i));
         }
     }
+
+    public void updateButtons(){
+        ArrayList<ScoringCard> cards = new ArrayList<ScoringCard>();
+            cards.add(bearCard);
+            cards.add(elkCard);
+            cards.add(salmonCard);
+            cards.add(hawkCard);
+            cards.add(foxCard);
+        Scorer.score(players, cards);
+        for(int i = 0; i<buttons.size(); i++){
+            buttons.get(i).setText("Player "+(i+1)+" ["+findPlayer(i+1, players).getScore()+"]");
+        }
+        for(Player p:players){
+            for(CardAnimals c:CardAnimals.values()){
+                System.out.println(p.getName()+", "+c+": "+p.getScore(c));
+            }
+            for(Habitats h:Habitats.values()){
+                System.out.println(p.getName()+", "+h+" SCORE: "+p.getScore(h));
+                System.out.println(p.getName()+", "+h+" BONUS: "+p.getBonus(h));
+            }
+            System.out.println(p.getName()+"NATURE TOKENS: "+p.getNatureTokens());
+            System.out.println(p.getName()+"SCORE: "+p.getScore());
+        }
+    }
+
+    public static Player findPlayer(int find,ArrayList<Player>players){
+        for(int i =0;i<players.size();i++){
+            if (players.get(i).getName().equals("Player "+find)){
+                return players.get(i);
+            }
+        }
+        return null;
+    }
+
     //construct the starter tiles
     private void constructStarters(){
         ArrayList<HabitatTiles>tiles = new ArrayList<>();
@@ -287,7 +323,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         g.drawImage(hawkCard.getImage(), 1213+180,200+180,175,170,null);
         g.drawImage(salmonCard.getImage(), 1213,200+180+180,175,170,null);
         
-        g.drawImage(troll,0,0,1600,900,null);
+        //g.drawImage(troll,0,0,1600,900,null);
     }
     public ArrayList<Player> getPlayers(){
     	return players;

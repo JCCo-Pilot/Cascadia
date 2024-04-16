@@ -10,6 +10,8 @@ import javax.management.timer.Timer;
 
 import java.awt.image.*;
 import MathHelper.*;
+import Panels.MainPanel;
+
 import static java.lang.System.*;
 public class PlayerDisplay extends JComponent implements MouseListener,PickListener,ActionListener{
     private int xSize,ySize;
@@ -21,6 +23,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private HabitatTiles current;
 
     private HabitatTiles temp;
+
+    private MainPanel mainPanel;
 
     private coordinateGraphGeneration cgg;
     
@@ -56,6 +60,11 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         addMouseListener(this);
 
         testConstruct();
+    }
+
+    public void addMainPanel(MainPanel p){
+        //what the fuck is a listener anyways
+        mainPanel = p;
     }
 
     public Player currentPlayer(){
@@ -252,6 +261,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             players.get(0).findAndReplace(current);
             repaint();
         }
+        mainPanel.updateButtons();
     }
     public void process(PickEvent e){
         if(e.getString()!=null){
