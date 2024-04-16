@@ -64,7 +64,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             cards.add(salmonCard);
             cards.add(hawkCard);
             cards.add(foxCard);
-        ScoreTesterPanel p = new ScoreTesterPanel(players, cards);
+        //commented this out for the sake of no testing
+        //ScoreTesterPanel p = new ScoreTesterPanel(players, cards);
         sc = new SelectedScoringCard();
         pa.setPlayers(players);
         this.setVisible(true);
@@ -239,7 +240,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         g.drawImage(elkCard.getImage(), 1213,200+180,175,170,null);
         g.drawImage(hawkCard.getImage(), 1213+180,200+180,175,170,null);
         g.drawImage(salmonCard.getImage(), 1213,200+180+180,175,170,null);
-        g.drawImage(troll,0,0,1600,900,null);
+        //g.drawImage(troll,0,0,1600,900,null);
     }
     public ArrayList<Player> getPlayers(){
     	return players;
