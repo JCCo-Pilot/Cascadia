@@ -69,6 +69,7 @@ public class SalmonCard implements ScoringCard{
         for(HabitatTiles s:salmon){
             salmonRuns.add(findSalmonRun(s, visitedSalmon));
         }
+        salmonRuns.remove(null);
         switch(cardLetter){
             case CARD_A:
                 Integer points0 = 0;
