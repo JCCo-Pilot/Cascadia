@@ -71,6 +71,52 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         this.setVisible(true);
         addMouseListener(this);
     }
+    //test mode
+    public MainPanel(Character diffcult){
+        setLayout(null);
+
+        construct(1);
+        constructStarters();
+
+        constructScoring(diffcult);
+        
+        pd = new PlayerDisplay(310, 15, 905, 830,players);
+        pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
+        add(pd);
+
+        pa = new PickArea(1,0,0,310,870);
+
+        pa.setReginaPerez(this);
+
+        pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
+        pa.addListener(pd);
+        add(pa);
+
+        pd.addListener(pa);
+
+        try{
+            bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
+            troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
+        }catch(Exception e){
+            out.println("Unable to pull");
+        }
+        ArrayList<ScoringCard> cards = new ArrayList<ScoringCard>();
+            cards.add(bearCard);
+            cards.add(elkCard);
+            cards.add(salmonCard);
+            cards.add(hawkCard);
+            cards.add(foxCard);
+        //commented this out for the sake of no testing
+        //ScoreTesterPanel p = new ScoreTesterPanel(players, cards);
+        for(int i =0;i<1000;i++){
+            players.get(0).incrementNature();
+        }
+        sc = new SelectedScoringCard();
+        pa.setPlayers(players);
+        this.setVisible(true);
+        addMouseListener(this);
+    }
+    //end of test
     private void constructScoring(Character diff){
         switch(diff){
             case 'a':
