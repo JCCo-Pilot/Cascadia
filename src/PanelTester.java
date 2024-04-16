@@ -1,6 +1,5 @@
 import java.util.*;
 import javax.swing.*;
-
 import Components.*;
 import EventAndListener.*;
 import Panels.*;
@@ -15,8 +14,9 @@ public class PanelTester extends JFrame{
         setResizable(false);
         /*TestPanel tp = new TestPanel();
         this.add(tp);*/
-        EndPanel ep = new EndPanel();
-        this.add(ep);
-        setVisible(true);
+        PlayThroughPanel ptp = new PlayThroughPanel();
+        this.add(ptp);
+        repaint();
+        this.setVisible(true);
     }
 }

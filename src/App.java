@@ -12,8 +12,13 @@ import static java.lang.System.*;
 import java.io.File;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
+<<<<<<< HEAD
         App  ap = new App("Team Aditya Chen");
         //PanelTester pt = new PanelTester("lmao");
+=======
+        //App  ap = new App("Team Aditya Chen",true);
+        PanelTester pt = new PanelTester("lmao");
+>>>>>>> 48b4e0a480a3cccb3d5428e53b9f5b454e573b5c
     }
     private StartPanel spanel;
     private MainPanel mpanel;
