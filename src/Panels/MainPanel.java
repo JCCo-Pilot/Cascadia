@@ -1,5 +1,7 @@
 package Panels;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.*;
 import EventAndListener.*;
 import MathHelper.*;
@@ -28,6 +30,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private BufferedImage bg;
 
     private BufferedImage troll;
+    
 
     private SelectedScoringCard sc;
     public MainPanel(int l, Character diffcult){
@@ -214,6 +217,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             players.add(new Player(i));
         }
     }
+
 
     public void updateButtons(){
         ArrayList<ScoringCard> cards = new ArrayList<ScoringCard>();

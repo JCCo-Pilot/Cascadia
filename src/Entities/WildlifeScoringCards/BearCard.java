@@ -59,7 +59,7 @@ public class BearCard implements ScoringCard{
     }
 
     public Integer bearScore(HabitatGraph h){
-        System.out.println("bearScore");
+        //System.out.println("bearScore");
         HashSet<HabitatTiles> bears = h.filter(CardAnimals.BEAR);
         System.out.println(bears.toString());
         HashSet<HabitatTiles> visitedBears = new HashSet<HabitatTiles>();
@@ -146,7 +146,7 @@ public class BearCard implements ScoringCard{
     private HashSet<HabitatTiles> findBearGroup(HabitatTiles bear, HashSet<HabitatTiles> visitedBears){
         HashSet<HabitatTiles> bearGroup = new HashSet<HabitatTiles>();
         addBearToGroup(bear, visitedBears, bearGroup);
-        System.out.println("Bear Group Size = "+bearGroup.size());
+        //System.out.println("Bear Group Size = "+bearGroup.size());
         if(bearGroup.size()>0){
             return bearGroup;
         }else{

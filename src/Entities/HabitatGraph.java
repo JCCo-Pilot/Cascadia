@@ -364,7 +364,7 @@ public class HabitatGraph{
                 //System.out.println(current+" added to group of "+target);
                 for(int i = 0; i<6; i++){
                     HabitatTiles next = current.get(i);
-                    System.out.println("HabitatMatch between "+current.getHabitats()+", "+next.getHabitats()+" at "+i+" returns "+ current.habitatMatch(i));
+                    //System.out.println("HabitatMatch between "+current.getHabitats()+", "+next.getHabitats()+" at "+i+" returns "+ current.habitatMatch(i));
                     if(current.habitatMatch(i)&&current.getHabitats().get(i)==target&&!next.isEmpty()){
                         q.add(next);
                     }

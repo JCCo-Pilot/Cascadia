@@ -216,7 +216,7 @@ public class HabitatTiles extends PointGenerator{
     public Integer getNumberOf(CardAnimals i){
         Integer count = 0;
         for(int c: connections.keySet()){
-            if(connections.get(c).tokenAnimal()==i){
+            if(connections.get(c).tokenAnimal()!=null&&connections.get(c).tokenAnimal()==i){
                 count++;
             }
         }
@@ -414,7 +414,7 @@ public class HabitatTiles extends PointGenerator{
 
     public HabitatTiles findFirstWithSpecificToken(CardAnimals token){
         for(Integer i:connections.keySet()){
-            if(connections.get(i).tokenAnimal().equals(token)){
+            if(connections.get(i).tokenAnimal()!=null&&connections.get(i).tokenAnimal().equals(token)){
                 return connections.get(i);
             }
         }
