@@ -21,11 +21,25 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
     private ArrayList<Player>players = new ArrayList<>();
     private ArrayList<JButton>buttons = new ArrayList<>();
 
+    private JTextArea jta = new JTextArea();
+
+    private int limited = -1;
+    private HabitatTiles taken;
+    private WildlifeTokens takenToken;
+
     private int state;
     public PlayThroughPanel(){
         setLayout(null);
 
         state = 1;
+
+        jta.setBounds(1240,100,300,300);
+        jta.setText("Please select a highlighted habitat tile");
+        jta.setEditable(false);
+        jta.setLineWrap(true);
+        jta.setWrapStyleWord(true);
+        jta.setFont(new Font("Times New Roman",10,20));
+        this.add(jta);
 
         players.add(new Player(1));
         habitatTiles= new TileCreator().getTiles();
@@ -73,49 +87,7 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         tiles.add(new HabitatTiles("mountain+desert-bear-fox", new String[]{"mountain","desert"}, new String[]{"fox","bear"}, false, 310, 205, size,true));//300
         tiles.get(2).setOffset(300);
         sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
-        tiles.clear();
-        //tile 2
-        tiles.add(new HabitatTiles("forest-elk-key", new String[]{"forest"}, new String[]{"elk"}, true, 250, 100, size,true));
-        tiles.add(new HabitatTiles("lake+mountain-hawk-elk-bear", new String[]{"lake","mountain"}, new String[]{"bear","elk","hawk"}, false, 190, 205, size,true));//240
-        tiles.get(1).setOffset(240);
-        tiles.add(new HabitatTiles("desert+swamp-fox-salmon", new String[]{"desert","swamp"}, new String[]{"fox","salmon"}, false, 310, 205, size,true));//300
-        tiles.get(2).setOffset(300);
-        sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
-        tiles.clear();
-        //tile 3
-        tiles.add(new HabitatTiles("forest-elk-key", new String[]{"forest"}, new String[]{"elk"}, true, 250, 100, size,true));
-        tiles.add(new HabitatTiles("lake+mountain-hawk-elk-bear", new String[]{"lake","mountain"}, new String[]{"bear","elk","hawk"}, false, 190, 205, size,true));//240
-        tiles.get(1).setOffset(240);
-        tiles.add(new HabitatTiles("desert+swamp-fox-salmon", new String[]{"desert","swamp"}, new String[]{"fox","salmon"}, false, 310, 205, size,true));//300
-        tiles.get(2).setOffset(300);
-        sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
-        tiles.clear();
-        //tile 4
-        tiles.add(new HabitatTiles("desert-fox-key", new String[]{"desert"}, new String[]{"fox"}, true, 250, 100, size,true));
-        tiles.add(new HabitatTiles("swamp+lake-salmon-fox-hawk", new String[]{"swamp","lake"}, new String[]{"salmon","fox","hawk"}, false, 190, 205, size,true));//240
-        tiles.get(1).setOffset(60);
-        tiles.add(new HabitatTiles("mountain+forest-bear-elk", new String[]{"mountain","forest"}, new String[]{"bear","elk"}, false, 310, 205, size,true));//300
-        tiles.get(2).setOffset(300);
-        sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
-        tiles.clear();
-        //tile 5
-        tiles.add(new HabitatTiles("mountain-bear-key", new String[]{"mountain"}, new String[]{"bear"}, true, 250, 100, size,true));
-        tiles.add(new HabitatTiles("forest+swamp-hawk-elk-fox", new String[]{"forest","swamp"}, new String[]{"hawk","elk","fox"}, false, 190, 205, size,true));//240
-        tiles.get(1).setOffset(60);
-        tiles.add(new HabitatTiles("desert+lake-salmon-bear", new String[]{"mountain","lake"}, new String[]{"salmon","bear"}, false, 310, 205, size,true));//300
-        tiles.get(2).setOffset(300);
-        sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
-        tiles.clear();
-
-        //randomize adding starter tiles for each players
-        Collections.shuffle(sTiles);
-        //issues here @JC-Copilot
-        for (int i =0;i<players.size();i++){
-            players.get(i).add(sTiles.get(i));
-            Player temp = players.get(i);
-            temp.addAll(sTiles.get(i).getTiles());
-            players.set(i,temp);
-        }
+        players.get(0).add(sTiles.get(0));
     }
     
     public void paint(Graphics g){
@@ -129,7 +101,8 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
                 g.setColor(new Color(255, 255, 143));
                 g.fillRect(56+69-70,175-80,140,600);
             break;
-            case 2: //choosing a nature token
+            case 2: //choosing an animal token
+                g.setColor(new Color(255, 255, 143));
             break;
             case 3://wait for player to place
             break;
@@ -138,60 +111,60 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         for(int i =0;i<4;i++){
             hexagons[i].drawHexagon(g);
         }
-        
+        updateString();
         paintComponents(g);
     }
 
-    public void drawString(Graphics g){
-
+    public void updateString(){
+        switch(state){
+            case 1:
+                jta.setText("Please select a highlighted habitat tile");
+            break;
+            case 2:
+                jta.setText("Please select an animal token");
+            break;
+            case 3:
+            break;
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+       
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'mouseClicked'");
+       
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'mousePressed'");
+       
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
+       
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'mouseEntered'");
+       
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
+       
     }
 
     @Override
     public void endGameTime(EndGameEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'endGameTime'");
     }
 
     @Override
     public void process(AllowPickEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'process'");
+       
     }
     
 }
