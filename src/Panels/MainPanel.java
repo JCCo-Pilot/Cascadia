@@ -64,7 +64,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             cards.add(salmonCard);
             cards.add(hawkCard);
             cards.add(foxCard);
-        ScoreTesterPanel p = new ScoreTesterPanel(players, cards);
+        //commented this out for the sake of no testing
+        //ScoreTesterPanel p = new ScoreTesterPanel(players, cards);
         sc = new SelectedScoringCard();
         pa.setPlayers(players);
         this.setVisible(true);
