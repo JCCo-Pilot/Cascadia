@@ -1,5 +1,7 @@
 package Panels;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.*;
 import EventAndListener.*;
 import MathHelper.*;
@@ -28,6 +30,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private BufferedImage bg;
 
     private BufferedImage troll;
+    
 
     private SelectedScoringCard sc;
     public MainPanel(int l, Character diffcult){
@@ -215,6 +218,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }
     }
 
+
     public void updateButtons(){
         ArrayList<ScoringCard> cards = new ArrayList<ScoringCard>();
             cards.add(bearCard);
@@ -228,14 +232,14 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }
         for(Player p:players){
             for(CardAnimals c:CardAnimals.values()){
-                System.out.println(p.getName()+", "+c+": "+p.getScore(c));
+                //System.out.println(p.getName()+", "+c+": "+p.getScore(c));
             }
             for(Habitats h:Habitats.values()){
-                System.out.println(p.getName()+", "+h+" SCORE: "+p.getScore(h));
-                System.out.println(p.getName()+", "+h+" BONUS: "+p.getBonus(h));
+                //System.out.println(p.getName()+", "+h+" SCORE: "+p.getScore(h));
+                //System.out.println(p.getName()+", "+h+" BONUS: "+p.getBonus(h));
             }
-            System.out.println(p.getName()+"NATURE TOKENS: "+p.getNatureTokens());
-            System.out.println(p.getName()+"SCORE: "+p.getScore());
+            //System.out.println(p.getName()+"NATURE TOKENS: "+p.getNatureTokens());
+            //System.out.println(p.getName()+"SCORE: "+p.getScore());
         }
     }
 
@@ -323,11 +327,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         g.drawImage(hawkCard.getImage(), 1213+180,200+180,175,170,null);
         g.drawImage(salmonCard.getImage(), 1213,200+180+180,175,170,null);
         
-<<<<<<< HEAD
         //g.drawImage(troll,0,0,1600,900,null);
-=======
         //g.drawImage(troll,0,0,2500,900,null);
->>>>>>> 48b4e0a480a3cccb3d5428e53b9f5b454e573b5c
     }
     public ArrayList<Player> getPlayers(){
     	return players;

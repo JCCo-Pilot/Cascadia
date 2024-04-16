@@ -261,7 +261,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             players.get(0).findAndReplace(current);
             repaint();
         }
-        mainPanel.updateButtons();
+        
     }
     public void process(PickEvent e){
         if(e.getString()!=null){
@@ -316,6 +316,12 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         else if (current!=null&&showEmptyTiles==false){
             rotateButton.setVisible(true);
             rotateCButton.setVisible(true);
+        }
+        try {
+            System.out.println("update buttons called by player display");
+            mainPanel.updateButtons();
+        } catch (Exception e) {
+            // TODO: handle exception
         }
     }
 }

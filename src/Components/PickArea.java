@@ -609,6 +609,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             s.push(((PlayerDisplay)listener).getCurrentTile(), ((PlayerDisplay)listener).getCurrentToken());
             s.push(((PlayerDisplay)listener).currentPlayer());
         }
+        System.out.println("update Buttons called by pickarea");
         ((MainPanel)egl).updateButtons();
         
     }
