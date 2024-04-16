@@ -12,13 +12,31 @@ import static java.lang.System.*;
 import java.io.File;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
-        App  ap = new App("Team Aditya Chen");
+        App  ap = new App("Team Aditya Chen",true);
         //PanelTester pt = new PanelTester("lmao");
     }
     private StartPanel spanel;
     private MainPanel mpanel;
     private EndPanel epanel;
     private PopPanel pPanel;
+    //testing constructor
+    public App(String s,Boolean b){
+        super(s);
+        this.setSize(1600,900);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setResizable(false);
+        mpanel = new MainPanel('a');
+        mpanel.setListener(this);
+        add(mpanel);
+        //troll comments
+        try {
+            this.setIconImage(ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg")));
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        this.setVisible(true);
+    }
+    //real constructor
     public App(String s){
         super(s);
         this.setSize(1600,900);
