@@ -151,49 +151,49 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         }
         //Sum Coordinates
         for (int i =0;i<size;i++){
-            g.drawString("",760+(60*i),375);
+            g.drawString(""+players.get(i).getTotalAnimalScore(),760+(60*i),375);
         }
         //Next Section of stuff
         g.setFont(new Font("Arial",10,25));
         //Mountain scoring
         for (int i =0;i<size;i++){
-            g.drawString("",755+(60*i),375+55);
+            g.drawString(""+players.get(i).getScore(Entities.Enums.Habitats.MOUNTAIN),755+(60*i),375+55);
         }
         //Scoring Bonuses
         for (int i =0;i<size;i++){
-            g.drawString("",785+(60*i),375+77);
+            g.drawString(""+players.get(i).getBonus(Entities.Enums.Habitats.MOUNTAIN),785+(60*i),375+77);
         }
         //Forest scoring
         for (int i =0;i<size;i++){
-            g.drawString("",755+(60*i),375+55+50);
+            g.drawString(""+players.get(i).getScore(Entities.Enums.Habitats.FOREST),755+(60*i),375+55+50);
         }
         //Scoring Bonus
         for (int i =0;i<size;i++){
-            g.drawString("",785+(60*i),375+77+50);
+            g.drawString(""+players.get(i).getBonus(Entities.Enums.Habitats.FOREST),785+(60*i),375+77+50);
         }
         //Desert scoring
         for (int i =0;i<size;i++){
-            g.drawString("",755+(60*i),375+55+100);
+            g.drawString(""+players.get(i).getScore(Entities.Enums.Habitats.PRAIRIE),755+(60*i),375+55+100);
         }
         //Scoring Bonus
         for (int i =0;i<size;i++){
-            g.drawString("",785+(60*i),375+77+100);
+            g.drawString(""+players.get(i).getBonus(Entities.Enums.Habitats.PRAIRIE),785+(60*i),375+77+100);
         }
         //Swamp scoring
         for (int i =0;i<size;i++){
-            g.drawString("",755+(60*i),375+55+150);
+            g.drawString(""+players.get(i).getScore(Entities.Enums.Habitats.WETLAND),755+(60*i),375+55+150);
         }
         //Scoring Bonus
         for (int i =0;i<size;i++){
-            g.drawString("",785+(60*i),375+77+150);
+            g.drawString(""+players.get(i).getBonus(Entities.Enums.Habitats.WETLAND),785+(60*i),375+77+150);
         }
         //River scoring
         for (int i =0;i<size;i++){
-            g.drawString("",755+(60*i),375+55+200);
+            g.drawString(""+players.get(i).getScore(Entities.Enums.Habitats.RIVER),755+(60*i),375+55+200);
         }
         //Scoring Bonus
         for (int i =0;i<size;i++){
-            g.drawString("",785+(60*i),375+77+200);
+            g.drawString(""+players.get(i).getBonus(Entities.Enums.Habitats.RIVER),785+(60*i),375+77+200);
         }
         //total of habitat tile
         g.setFont(new Font("Arial", 10, 30));

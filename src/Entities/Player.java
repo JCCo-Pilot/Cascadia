@@ -47,16 +47,24 @@ public class Player implements Comparable{
     public void setScore(Habitats h, Integer i){
         habitatScores.put(h, i);
     }
-
     public Integer getScore(Habitats h){
         return habitatScores.get(h);
     }
-
+    public Integer getTotalAnimalScore() {
+    	int sum = 0;
+    	for(Integer i:animalScores.values()){
+            sum += i;
+        }
+    	return sum;
+    }
     public void setBonus(Habitats h, Integer i){
         habitatBonuses.put(h, i);
     }
 
     public Integer getBonus(Habitats h){
+    	if(habitatBonuses.get(h) == null) {
+    		return 0;
+    	}
         return habitatBonuses.get(h);
     }
 
