@@ -17,6 +17,6 @@ public class PanelTester extends JFrame{
         PlayThroughPanel ptp = new PlayThroughPanel();
         this.add(ptp);
         repaint();
-        setVisible(true);
+        this.setVisible(true);
     }
 }
