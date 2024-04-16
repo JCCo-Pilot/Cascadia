@@ -45,16 +45,7 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
 
-        pa = new PickArea(1,0,0,310,870);
-        pa.setPlayers(players);
-
-        pa.setReginaPerez(this);
-
-        pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
-        pa.addListener(pd);
-        add(pa);
-
-        pd.addListener(pa);
+        
 
         this.setVisible(true);
     }
