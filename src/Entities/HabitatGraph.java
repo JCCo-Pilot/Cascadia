@@ -47,7 +47,7 @@ public class HabitatGraph{
         /*for(HabitatTiles h:iterate()){
             for(HabitatTiles con:h.getConnections().values()){
                 g.setColor(Color.RED);
-                g.drawLine(h.getXPos(), h.getYPos(), con.getXPos(), con.getYPos());
+                g.drawLine(h.getXPos(), h.getYPos(), con.getXPos(), con.getYPos()w2);
             }
             g.setColor(Color.BLACK);
         }*/

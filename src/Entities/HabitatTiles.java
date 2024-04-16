@@ -33,7 +33,6 @@ public class HabitatTiles extends PointGenerator{
     private String imageName;
     public Boolean isKeystone;
     public Integer x, y;
-    public WildlifeTokens token = null;
     private static int emptyCnt;
 
     //CONSTRUCTORS*******************************************************************************************************
@@ -180,23 +179,27 @@ public class HabitatTiles extends PointGenerator{
     
     //WILDLIFE TOKEN METHODS*******************************************************************************************************
     public WildlifeTokens getToken(){
-        return token;
+        return super.getTokens();
     }
 
     public void setToken(WildlifeTokens w){
-        token = w;
+        super.addToken(w);
     }
 
     public void setToken(CardAnimals i){
-        token = new WildlifeTokens(i);
+        super.addToken(new WildlifeTokens(i));
     }
 
     public String tokenString(){
-        return token.toString();
+        return super.getTokens().toString();
     }
 
     public CardAnimals tokenAnimal(){
-        return token.getType();
+        if (super.getTokens()!=null) {
+            return super.getTokens().getType();
+        } else {
+            return null;
+        }
     }
 
     public Boolean habitatMatch(Integer connection){
@@ -421,7 +424,7 @@ public class HabitatTiles extends PointGenerator{
 
     public boolean canPick(WildlifeTokens tk){
         //out.println("canPick method:"+tk.toString());
-        if (super.getTokens()==null&&token==null&&tk!=null){
+        if (super.getTokens()==null&&super.getTokens()==null&&tk!=null){
             /*if(animals.contains(CardAnimals.StringToAnimal(tk.getName()))){
                 System.out.println("Called");
                 return true;

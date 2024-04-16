@@ -146,8 +146,6 @@ public class Scorer implements Runnable{
     public void scorePlayer(){
         if(habitat!=null){
             player.setScore(habitat, player.getGraph().getLargestContiguousGroup(habitat));
-            System.out.println(player+", "+habitat+" set to "+player.getGraph().getLargestContiguousGroup(habitat));
-            System.out.println(player+", "+habitat+" retrieves "+player.getScore(habitat));
         }else if(scoringCard!=null){
             player.setScore(scoringCard.getAnimal(), scoringCard.score(player));
         }

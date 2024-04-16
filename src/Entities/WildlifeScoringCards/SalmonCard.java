@@ -181,7 +181,7 @@ public class SalmonCard implements ScoringCard{
     }
 
     private void addSalmonToRun(HabitatTiles salmon, HashSet<HabitatTiles> visitedSalmon, HashSet<HabitatTiles> salmonRun){
-        if(salmon.tokenAnimal()!=CardAnimals.SALMON||visitedSalmon.contains(salmon)||salmon.getNumberOf(CardAnimals.SALMON)>2){
+        if(salmon.tokenAnimal()==null||salmon.tokenAnimal()!=CardAnimals.SALMON||visitedSalmon.contains(salmon)||salmon.getNumberOf(CardAnimals.SALMON)>2){
             return;
         }else{
             visitedSalmon.add(salmon);
