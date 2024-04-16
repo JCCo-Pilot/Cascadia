@@ -328,10 +328,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         g.drawImage(salmonCard.getImage(), 1213,200+180+180,175,170,null);
         
         //g.drawImage(troll,0,0,1600,900,null);
-<<<<<<< HEAD
-        //g.drawImage(troll,0,0,2500,900,null);
-=======
->>>>>>> d96ac6a06fc9256844ab950d9b58a71833ce346e
     }
     public ArrayList<Player> getPlayers(){
     	return players;
