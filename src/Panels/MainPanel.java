@@ -232,14 +232,14 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }
         for(Player p:players){
             for(CardAnimals c:CardAnimals.values()){
-                //System.out.println(p.getName()+", "+c+": "+p.getScore(c));
+                System.out.println(p.getName()+", "+c+": "+p.getScore(c));
             }
             for(Habitats h:Habitats.values()){
-                //System.out.println(p.getName()+", "+h+" SCORE: "+p.getScore(h));
-                //System.out.println(p.getName()+", "+h+" BONUS: "+p.getBonus(h));
+                System.out.println(p.getName()+", "+h+" SCORE: "+p.getScore(h));
+                System.out.println(p.getName()+", "+h+" BONUS: "+p.getBonus(h));
             }
-            //System.out.println(p.getName()+"NATURE TOKENS: "+p.getNatureTokens());
-            //System.out.println(p.getName()+"SCORE: "+p.getScore());
+            System.out.println(p.getName()+"NATURE TOKENS: "+p.getNatureTokens());
+            System.out.println(p.getName()+"SCORE: "+p.getScore());
         }
     }
 
