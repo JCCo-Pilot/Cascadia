@@ -122,7 +122,8 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     }
     //painting all the scores of the different players
     public void Painting(Graphics g){
-        int size = 4;//players.size();
+        int size = players.size();
+        score();
         //Player Numbers
         g.setFont(new Font("Arial", 10, 30));
         for (int i =0;i<size;i++){
@@ -130,74 +131,74 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         }
         //Bear drawing stuff
         for (int i =0;i<size;i++){
-            g.drawString("10",760+(60*i),130);
+            g.drawString(""+players.get(i).getScore(Entities.Enums.CardAnimals.BEAR),760+(60*i),130);
         }
         //Elk Drawing stuff
         for (int i =0;i<size;i++){
-            g.drawString("20",760+(60*i),175);
+            g.drawString(""+players.get(i).getScore(Entities.Enums.CardAnimals.ELK),760+(60*i),175);
         }
         //Salmon Coordinates
         for (int i =0;i<size;i++){
-            g.drawString("30",760+(60*i),225);
+            g.drawString(""+players.get(i).getScore(Entities.Enums.CardAnimals.SALMON),760+(60*i),225);
         }
         //Hawk Coordinates
         for (int i =0;i<size;i++){
-            g.drawString("40",760+(60*i),275);
+            g.drawString(""+players.get(i).getScore(Entities.Enums.CardAnimals.HAWK),760+(60*i),275);
         }
         //Fox Coordinates
         for (int i =0;i<size;i++){
-            g.drawString("50",760+(60*i),325);
+            g.drawString(""+players.get(i).getScore(Entities.Enums.CardAnimals.FOX),760+(60*i),325);
         }
         //Sum Coordinates
         for (int i =0;i<size;i++){
-            g.drawString("60",760+(60*i),375);
+            g.drawString("",760+(60*i),375);
         }
         //Next Section of stuff
         g.setFont(new Font("Arial",10,25));
         //Mountain scoring
         for (int i =0;i<size;i++){
-            g.drawString("10",755+(60*i),375+55);
+            g.drawString("",755+(60*i),375+55);
         }
         //Scoring Bonuses
         for (int i =0;i<size;i++){
-            g.drawString("1",785+(60*i),375+77);
+            g.drawString("",785+(60*i),375+77);
         }
         //Forest scoring
         for (int i =0;i<size;i++){
-            g.drawString("20",755+(60*i),375+55+50);
+            g.drawString("",755+(60*i),375+55+50);
         }
         //Scoring Bonus
         for (int i =0;i<size;i++){
-            g.drawString("2",785+(60*i),375+77+50);
+            g.drawString("",785+(60*i),375+77+50);
         }
         //Desert scoring
         for (int i =0;i<size;i++){
-            g.drawString("30",755+(60*i),375+55+100);
+            g.drawString("",755+(60*i),375+55+100);
         }
         //Scoring Bonus
         for (int i =0;i<size;i++){
-            g.drawString("3",785+(60*i),375+77+100);
+            g.drawString("",785+(60*i),375+77+100);
         }
         //Swamp scoring
         for (int i =0;i<size;i++){
-            g.drawString("40",755+(60*i),375+55+150);
+            g.drawString("",755+(60*i),375+55+150);
         }
         //Scoring Bonus
         for (int i =0;i<size;i++){
-            g.drawString("4",785+(60*i),375+77+150);
+            g.drawString("",785+(60*i),375+77+150);
         }
         //River scoring
         for (int i =0;i<size;i++){
-            g.drawString("50",755+(60*i),375+55+200);
+            g.drawString("",755+(60*i),375+55+200);
         }
         //Scoring Bonus
         for (int i =0;i<size;i++){
-            g.drawString("5",785+(60*i),375+77+200);
+            g.drawString("",785+(60*i),375+77+200);
         }
         //total of habitat tile
         g.setFont(new Font("Arial", 10, 30));
         for (int i =0;i<size;i++){
-            g.drawString("60",760+(60*i),375+77+240);
+            g.drawString("",760+(60*i),375+77+240);
         }
     }
     private void testCreateCards(){
