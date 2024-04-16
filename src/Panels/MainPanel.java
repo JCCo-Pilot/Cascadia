@@ -287,7 +287,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         g.drawImage(hawkCard.getImage(), 1213+180,200+180,175,170,null);
         g.drawImage(salmonCard.getImage(), 1213,200+180+180,175,170,null);
         
-        g.drawImage(troll,0,0,1600,900,null);
+        //g.drawImage(troll,0,0,2500,900,null);
     }
     public ArrayList<Player> getPlayers(){
     	return players;
