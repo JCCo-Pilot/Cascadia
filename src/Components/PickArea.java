@@ -69,6 +69,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
 
         construct(x,y,xS,yS);
         this.setVisible(true);
+        
         createTokens();
         //sumChecker();
         randShuffle();

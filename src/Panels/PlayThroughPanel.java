@@ -14,9 +14,12 @@ import Entities.WildlifeScoringCards.*;
 import Entities.Enums.*;
 import static java.lang.System.*;
 public class PlayThroughPanel extends JPanel implements MouseListener,ActionListener,EndGameListener,AllowPickEventListener{
+    private Color highligheter = new Color(255, 255, 143);
+    
     private BufferedImage background;
     private PlayerDisplay pd;
-    public ArrayList<HabitatTiles>habitatTiles = new ArrayList<>();
+    private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
+    private ArrayList<HabitatTiles>habitatTiles = new ArrayList<>();
     public HabitatTiles[]hexagons = new HabitatTiles[4];
     private ArrayList<Player>players = new ArrayList<>();
     private ArrayList<JButton>buttons = new ArrayList<>();
@@ -30,6 +33,10 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
     private int state;
     public PlayThroughPanel(){
         setLayout(null);
+        this.addMouseListener(this);
+
+        createTokens();
+        randShuffle();
 
         state = 1;
 
@@ -75,7 +82,21 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
 
         this.setVisible(true);
     }
-
+    private void createTokens(){
+        for (int i =0;i<20;i++){
+            tokens.add(new WildlifeTokens(CardAnimals.BEAR));
+            tokens.add(new WildlifeTokens(CardAnimals.ELK));
+            tokens.add(new WildlifeTokens(CardAnimals.SALMON));
+            tokens.add(new WildlifeTokens(CardAnimals.HAWK));
+            tokens.add(new WildlifeTokens(CardAnimals.FOX));
+        }
+    }
+    private void randShuffle(){
+        int numTime = (int)(Math.random()*90)+10;
+        for (int i = 0;i<numTime;i++){
+            Collections.shuffle(tokens);
+        }
+    }
     private void constructStarters(){
         ArrayList<HabitatTiles>tiles = new ArrayList<>();
         ArrayList<StarterTile>sTiles = new ArrayList<>();
@@ -98,11 +119,11 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         //start painting stuff here
         switch(state){
             case 1: //choosing a habitat tile
-                g.setColor(new Color(255, 255, 143));
+                g.setColor(highligheter);
                 g.fillRect(56+69-70,175-80,140,600);
             break;
             case 2: //choosing an animal token
-                g.setColor(new Color(255, 255, 143));
+                g.setColor(highligheter);
             break;
             case 3://wait for player to place
             break;
@@ -110,6 +131,10 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         
         for(int i =0;i<4;i++){
             hexagons[i].drawHexagon(g);
+        }
+        for (int i = 0;i<4;i++){
+            g.drawImage(tokens.get(i).getImage(),131+69,250+(146*i)-100,70,70,null);
+            //g.fillOval(131, 200+25+(106)*i, 50, 50);
         }
         updateString();
         paintComponents(g);
@@ -140,7 +165,24 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
 
     @Override
     public void mousePressed(MouseEvent e) {
-       
+        out.println("Mouse Pressed");
+        switch(state){
+            case 1://check to see if the player clicked on any hexagons
+                for (int i= 0;i<4;i++){
+                    if (hexagons[i].isPointInsideHexagon(e)){
+                        taken = hexagons[i];
+                        hexagons[i]= habitatTiles.remove(0);
+                        out.println("taken");
+                        state =2;
+                    }
+                }
+            break;
+            case 2:
+            break;
+            case 3:
+            break;
+        }
+        repaint();
     }
 
     @Override
