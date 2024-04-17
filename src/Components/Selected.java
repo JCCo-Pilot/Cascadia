@@ -29,7 +29,7 @@ public class Selected extends JFrame implements ActionListener{
         super("Selection");
         super.setBackground(Color.BLACK);
         this.setSize(400, 240);
-        this.setLocationRelativeTo(centerOn);
+        this.setLocation(0, 0);
         try {
             this.setIconImage(ImageIO.read(new File("src/Entities/Images/Philip.png")));
         } catch (Exception e) {

@@ -203,7 +203,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private void construct(int limit){
         //buttons.add(new JButton("Scoring Cards"));
         for (int i= 0;i<limit;i++){
-            buttons.add(new JButton("Player "+(i+1)+" [0]"));
+            JButton j = new JButton("Player "+(i+1)+" [0]");
+            j.setFont(new Font("Arial", Font.BOLD, 19));
+            buttons.add(j);
         }
         for (int i= 0;i<buttons.size();i++){
             buttons.get(i).setBounds(1213,19+40*i,352,40);
@@ -293,7 +295,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         tiles.add(new HabitatTiles("mountain-bear-key", new String[]{"mountain"}, new String[]{"bear"}, true, 250, 100, size,true));
         tiles.add(new HabitatTiles("forest+swamp-hawk-elk-fox", new String[]{"forest","swamp"}, new String[]{"hawk","elk","fox"}, false, 190, 205, size,true));//240
         tiles.get(1).setOffset(60);
-        tiles.add(new HabitatTiles("desert+lake-salmon-bear", new String[]{"mountain","lake"}, new String[]{"salmon","bear"}, false, 310, 205, size,true));//300
+        tiles.add(new HabitatTiles("desert+lake-salmon-bear", new String[]{"desert","lake"}, new String[]{"salmon","bear"}, false, 310, 205, size,true));//300
         tiles.get(2).setOffset(300);
         sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
         tiles.clear();
