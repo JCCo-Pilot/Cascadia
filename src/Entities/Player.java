@@ -67,7 +67,16 @@ public class Player implements Comparable{
     	}
         return habitatBonuses.get(h);
     }
-
+    public Integer getTotalHabitatScore() {
+    	int sum = 0;
+    	for(Integer i:habitatScores.values()){
+            sum += i;
+        }
+    	for(Integer i:habitatBonuses.values()){
+            sum += i;
+        }
+    	return sum;
+    }
     public Integer getScore(){
         Integer sum = 0+ natureTokens;
         for(Integer i:animalScores.values()){
