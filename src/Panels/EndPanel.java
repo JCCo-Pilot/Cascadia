@@ -200,6 +200,14 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         for (int i =0;i<size;i++){
             g.drawString("",760+(60*i),375+77+240);
         }
+        //Nature Tokens
+        for (int i =0;i<size;i++){
+            g.drawString(""+players.get(i).getNatureTokens(),755+(60*i),375+77+300);
+        }
+        //Total Score
+        for (int i =0;i<size;i++){
+            g.drawString(""+players.get(i).getScore(),755+(60*i),375+77+360);
+        }
     }
     private void testCreateCards(){
         CardTypes type = CardTypes.CARD_A;

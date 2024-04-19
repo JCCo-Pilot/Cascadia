@@ -15,7 +15,7 @@ import Entities.Enums.*;
 import static java.lang.System.*;
 public class PlayThroughPanel extends JPanel implements MouseListener,ActionListener,EndGameListener,AllowPickEventListener{
     private Color highligheter = new Color(255, 255, 143);
-    
+    private GameListener listener;
     private BufferedImage background;
     private PlayerDisplay pd;
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
@@ -184,7 +184,9 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         }
         repaint();
     }
-
+    public void setListener(GameListener g){
+        listener = g;
+    }
     @Override
     public void mouseReleased(MouseEvent e) {
        

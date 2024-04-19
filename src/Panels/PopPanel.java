@@ -21,12 +21,12 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     public PopPanel(){
         super();
         this.setVisible(true);
-        back.setBounds(1000,500,150,50);
+        pullImages();
+        back.setBounds(500,700,150,50);
         back.addActionListener(this);
         back.setVisible(true);
         add(back);
         goBack = false;
-        pullImages();
     }
     public void paint(Graphics g){
         super.paint(g);
@@ -68,5 +68,3 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
 }
-
-
