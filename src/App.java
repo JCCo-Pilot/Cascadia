@@ -60,7 +60,7 @@ public class App extends JFrame implements GameListener{
         if(e.getSource()==spanel){
             if(e.getState() == 100) {
         		this.remove(spanel);
-        		ptp = new PlayThroughPanel();
+        		PlayThroughPanel ptp = new PlayThroughPanel();
         		this.add(ptp);
         		ptp.setListener(this);
         		repaint();
