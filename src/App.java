@@ -58,13 +58,23 @@ public class App extends JFrame implements GameListener{
     }
     public void process(GameStateEvent e) {
         if(e.getSource()==spanel){
-            this.remove(spanel);
-            mpanel = new MainPanel(e.getState()+1,e.getDifficulty());
-            this.add(mpanel);
-            mpanel.setListener(this);
-            repaint();
-            this.setVisible(true);
-            //out.println("Switched");
+            if(e.getState() == 100) {
+        		this.remove(spanel);
+        		PlayThroughPanel ptp = new PlayThroughPanel();
+        		this.add(ptp);
+        		ptp.setListener(this);
+        		repaint();
+        		this.setVisible(true);
+        	}
+        	else {
+                this.remove(spanel);
+                mpanel = new MainPanel(e.getState()+1,e.getDifficulty());
+                this.add(mpanel);
+                mpanel.setListener(this);
+                repaint();
+                this.setVisible(true);
+                //out.println("Switched");
+        	}
         }else if (e.getSource()==mpanel){
             this.remove(mpanel);
             epanel = new EndPanel();
