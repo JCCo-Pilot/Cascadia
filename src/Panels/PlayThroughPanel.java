@@ -33,7 +33,8 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
     private int state;
     public PlayThroughPanel(){
         setLayout(null);
-        this.addMouseListener(this);
+        addMouseListener(this);
+        out.println("Added listener");
 
         createTokens();
         randShuffle();
@@ -124,6 +125,8 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
             break;
             case 2: //choosing an animal token
                 g.setColor(highligheter);
+                out.println("case 2 achieved");
+                g.fillRect(200,95,70,600);
             break;
             case 3://wait for player to place
             break;
@@ -178,6 +181,9 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
                 }
             break;
             case 2:
+                for (int i =0;i<4;i++){
+                    
+                }
             break;
             case 3:
             break;
