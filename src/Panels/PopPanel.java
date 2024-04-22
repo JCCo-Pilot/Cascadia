@@ -33,6 +33,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
         g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
         g.setColor(Color.BLACK);
         p.drawInventory(g, false);
+        paintComponents(g);
     }
     public void pullImages(){
         try{
