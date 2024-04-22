@@ -16,6 +16,7 @@ import static java.lang.System.*;
 public class PlayThroughPanel extends JPanel implements MouseListener,ActionListener,EndGameListener,AllowPickEventListener{
     private Color highligheter = new Color(255, 255, 143);
     private GameListener listener;
+    private PickListener pListener;
     private BufferedImage background;
     private PlayerDisplay pd;
     private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
@@ -27,6 +28,7 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
     private JTextArea jta = new JTextArea();
 
     private int limited = -1;
+    private int pickedHex = -1;
     private HabitatTiles taken;
     private WildlifeTokens takenToken;
 
@@ -80,6 +82,8 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         add(pd);
 
         pd.addListener(this);
+
+        this.pListener(pd);
 
         this.setVisible(true);
     }
@@ -152,6 +156,13 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
                 jta.setText("Please select an animal token");
             break;
             case 3:
+                jta.setText("Place the habitat tile and animal token down");
+            break;
+            case 4:
+            break;
+            case 5:
+            break;
+            case 6:
             break;
         }
     }
@@ -175,6 +186,7 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
                     if (hexagons[i].isPointInsideHexagon(e)){
                         taken = hexagons[i];
                         hexagons[i]= habitatTiles.remove(0);
+                        pickedHex = i;
                         out.println("taken");
                         state =2;
                     }
@@ -182,7 +194,14 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
             break;
             case 2:
                 for (int i =0;i<4;i++){
-                    
+                    if(pointIsInside(200, 250+(146*i)-100, 70, 70, e)&&i == pickedHex){
+                        PickEvent evnet = new PickEvent(e, removeAndReplaceToken(i));
+                        pListener.process(evnet);
+                        hexagons[pickedHex].setX(56+69);
+                        hexagons[pickedHex].setY(175+(146*pickedHex));
+                        pickedHex = 0;
+                        state = 3;
+                    } 
                 }
             break;
             case 3:
@@ -190,8 +209,26 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         }
         repaint();
     }
+    private boolean pointIsInside(int x, int y, int xSize, int ySize,MouseEvent e){
+        if (e.getX()>x&&e.getX()<x+xSize){
+            if (e.getY()>y&&e.getY()<y+ySize){
+                return true;
+            }
+        }
+        return false;
+    }
+    public WildlifeTokens removeAndReplaceToken(Integer index){
+        if(index<=3&&index>=0){
+            int rand = (int) (Math.random()*tokens.size());
+            return tokens.set(index, tokens.remove(rand));
+        }
+        return null;
+    }
     public void setListener(GameListener g){
         listener = g;
+    }
+    public void pListener(PickListener pL){
+        pListener = pL;
     }
     @Override
     public void mouseReleased(MouseEvent e) {
