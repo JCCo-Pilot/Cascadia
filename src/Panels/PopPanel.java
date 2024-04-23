@@ -75,7 +75,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
         g.drawString(""+p.getBonus(Entities.Enums.Habitats.RIVER),985,375+77+200);
         //total of habitat tile
         g.setFont(new Font("Arial", 10, 30));
-        g.drawString("",760,375+77+240);
+        g.drawString(""+p.getTotalHabitatScore(),950,375+77+240);
         //Nature Tokens
         g.drawString(""+p.getNatureTokens(),945,375+77+300);
         //Total Score
