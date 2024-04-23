@@ -137,6 +137,7 @@ public class App extends JFrame implements GameListener{
                 case 60:
                 	this.remove(mpanel);
                 	add(pPanel2);
+                    pPanel.currentPlayers(mpanel.getPlayers());
                 	pPanel2.setListener(this);
                 	repaint();
                 	this.setVisible(true);
