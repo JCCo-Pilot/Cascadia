@@ -24,7 +24,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
         super();
         this.setVisible(true);
         pullImages();
-        back.setBounds(500,700,150,50);
+        back.setBounds(690,790,150,50);
         back.addActionListener(this);
         back.setVisible(true);
         add(back);
