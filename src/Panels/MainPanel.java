@@ -232,7 +232,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             cards.add(hawkCard);
             cards.add(foxCard);
         Scorer.score(players, cards);
-        for(int i = 0; i<buttons.size(); i++){
+        for(int i = 0; i<buttons.size()-1; i++){
             buttons.get(i).setText("Player "+(i+1)+" ["+findPlayer(i+1, players).getScore()+"]");
         }
         for(Player p:players){
