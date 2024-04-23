@@ -207,6 +207,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             j.setFont(new Font("Arial", Font.BOLD, 19));
             buttons.add(j);
         }
+        JButton j = new JButton("Show all Players");
+        j.setFont(new Font("Arial", Font.BOLD, 19));
+        buttons.add(j);
         for (int i= 0;i<buttons.size();i++){
             buttons.get(i).setBounds(1213,19+40*i,352,40);
             buttons.get(i).addActionListener(this);
