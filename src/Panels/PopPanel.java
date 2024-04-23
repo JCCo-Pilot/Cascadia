@@ -21,6 +21,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     private boolean goBack;
     private GameListener listener;
     private BufferedImage bg;
+    private BufferedImage bg2;
     public PopPanel(){
         super();
         this.setVisible(true);
@@ -33,55 +34,62 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     }
     public void paint(Graphics g){
         super.paint(g);
-        g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
-        g.setColor(Color.BLACK);
-        p.drawInventory(g, false);
-        score();
-        //Player Numbers
-        g.setFont(new Font("Arial", 10, 30));
-        g.drawString(""+p.getName().charAt(p.getName().length()-1),950,75);
-        //Bear drawing stuff
-        g.drawString(""+p.getScore(Entities.Enums.CardAnimals.BEAR),950,130);
-        //Elk Drawing stuff
-        g.drawString(""+p.getScore(Entities.Enums.CardAnimals.ELK),950,180);
-        //Salmon Coordinates
-        g.drawString(""+p.getScore(Entities.Enums.CardAnimals.SALMON),950,230);
-        //Hawk Coordinates
-        g.drawString(""+p.getScore(Entities.Enums.CardAnimals.HAWK),950,275);
-        //Fox Coordinates
-        g.drawString(""+p.getScore(Entities.Enums.CardAnimals.FOX),950,325);
-        //Sum Coordinates
-        g.drawString(""+p.getTotalAnimalScore(),950,375);
-        //Next Section of stuff
-        g.setFont(new Font("Arial",10,25));
-        //Mountain scoring
-        g.drawString(""+p.getScore(Entities.Enums.Habitats.MOUNTAIN),945,375+55);
-        //Scoring Bonuses
-        g.drawString(""+p.getBonus(Entities.Enums.Habitats.MOUNTAIN),985,375+77);
-        //Forest scoring
-        g.drawString(""+p.getScore(Entities.Enums.Habitats.FOREST),945,375+55+50);
-        //Scoring Bonus
-        g.drawString(""+p.getBonus(Entities.Enums.Habitats.FOREST),985,375+77+50);
-        //Desert scoring
-        g.drawString(""+p.getScore(Entities.Enums.Habitats.PRAIRIE),945,375+55+100);
-        //Scoring Bonus
-        g.drawString(""+p.getBonus(Entities.Enums.Habitats.PRAIRIE),985,375+77+100);
-        //Swamp scoring
-        g.drawString(""+p.getScore(Entities.Enums.Habitats.WETLAND),945,375+55+150);
-        //Scoring Bonus
-        g.drawString(""+p.getBonus(Entities.Enums.Habitats.WETLAND),985,375+77+150);
-        //River scoring
-        g.drawString(""+p.getScore(Entities.Enums.Habitats.RIVER),945,375+55+200);
-        //Scoring Bonus
-        g.drawString(""+p.getBonus(Entities.Enums.Habitats.RIVER),985,375+77+200);
-        //total of habitat tile
-        g.setFont(new Font("Arial", 10, 30));
-        g.drawString(""+p.getTotalHabitatScore(),950,375+77+240);
-        //Nature Tokens
-        g.drawString(""+p.getNatureTokens(),945,375+77+300);
-        //Total Score
-        g.drawString(""+p.getScore(),945,375+77+360);
-        paintComponents(g);
+        if(state == 1) {
+        	g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
+            g.setColor(Color.BLACK);
+        	p.drawInventory(g, false);
+            score();
+            //Player Numbers
+            g.setFont(new Font("Arial", 10, 30));
+            g.drawString(""+p.getName().charAt(p.getName().length()-1),950,75);
+            //Bear drawing stuff
+            g.drawString(""+p.getScore(Entities.Enums.CardAnimals.BEAR),950,130);
+            //Elk Drawing stuff
+            g.drawString(""+p.getScore(Entities.Enums.CardAnimals.ELK),950,180);
+            //Salmon Coordinates
+            g.drawString(""+p.getScore(Entities.Enums.CardAnimals.SALMON),950,230);
+            //Hawk Coordinates
+            g.drawString(""+p.getScore(Entities.Enums.CardAnimals.HAWK),950,275);
+            //Fox Coordinates
+            g.drawString(""+p.getScore(Entities.Enums.CardAnimals.FOX),950,325);
+            //Sum Coordinates
+            g.drawString(""+p.getTotalAnimalScore(),950,375);
+            //Next Section of stuff
+            g.setFont(new Font("Arial",10,25));
+            //Mountain scoring
+            g.drawString(""+p.getScore(Entities.Enums.Habitats.MOUNTAIN),945,375+55);
+            //Scoring Bonuses
+            g.drawString(""+p.getBonus(Entities.Enums.Habitats.MOUNTAIN),985,375+77);
+            //Forest scoring
+            g.drawString(""+p.getScore(Entities.Enums.Habitats.FOREST),945,375+55+50);
+            //Scoring Bonus
+            g.drawString(""+p.getBonus(Entities.Enums.Habitats.FOREST),985,375+77+50);
+            //Desert scoring
+            g.drawString(""+p.getScore(Entities.Enums.Habitats.PRAIRIE),945,375+55+100);
+            //Scoring Bonus
+            g.drawString(""+p.getBonus(Entities.Enums.Habitats.PRAIRIE),985,375+77+100);
+            //Swamp scoring
+            g.drawString(""+p.getScore(Entities.Enums.Habitats.WETLAND),945,375+55+150);
+            //Scoring Bonus
+            g.drawString(""+p.getBonus(Entities.Enums.Habitats.WETLAND),985,375+77+150);
+            //River scoring
+            g.drawString(""+p.getScore(Entities.Enums.Habitats.RIVER),945,375+55+200);
+            //Scoring Bonus
+            g.drawString(""+p.getBonus(Entities.Enums.Habitats.RIVER),985,375+77+200);
+            //total of habitat tile
+            g.setFont(new Font("Arial", 10, 30));
+            g.drawString(""+p.getTotalHabitatScore(),950,375+77+240);
+            //Nature Tokens
+            g.drawString(""+p.getNatureTokens(),945,375+77+300);
+            //Total Score
+            g.drawString(""+p.getScore(),945,375+77+360);
+            paintComponents(g);
+        }
+        else if(state == 2) {
+        	g.drawImage(bg2, 0, 0, getWidth(), getHeight(), null);
+            g.setColor(Color.BLACK);
+        	paintComponents(g);
+        }
     }
     private void score(){
         ArrayList<Entities.Enums.CardAnimals> cards = new ArrayList<Entities.Enums.CardAnimals>();
@@ -115,6 +123,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     public void pullImages(){
         try{
             bg = ImageIO.read(new File("src/Panels/Background/PopPanelBackground.png"));
+            bg2 = ImageIO.read(new File("src/Panels/Background/PopPanelBackground2.png"));
         }catch(Exception e){
             out.println("Error in pulling images in PopPanel class");
         }
