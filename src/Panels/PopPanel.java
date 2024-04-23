@@ -38,7 +38,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
         score();
         //Player Numbers
         g.setFont(new Font("Arial", 10, 30));
-        g.drawString("",765,75);
+        g.drawString(""+p.getName().charAt(p.getName().length()-1),950,75);
         //Bear drawing stuff
         g.drawString(""+p.getScore(Entities.Enums.CardAnimals.BEAR),950,130);
         //Elk Drawing stuff
