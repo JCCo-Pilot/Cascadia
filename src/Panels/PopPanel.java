@@ -15,6 +15,7 @@ import MathHelper.*;
 import static java.lang.System.*;
 public class PopPanel extends JComponent implements MouseListener, ActionListener{
     private Player p;
+    private ArrayList<Player> players;
     private int state = -1;
     private JButton back = new JButton("Back Button");
     private boolean goBack;
@@ -120,6 +121,9 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     }
     public void currentPlayer(Player pl){
         p = pl;
+    }
+    public void currentPlayers(ArrayList<Player> pls) {
+    	players = pls;
     }
     public void playerTesting(){
         Player pl = new Player(0);
