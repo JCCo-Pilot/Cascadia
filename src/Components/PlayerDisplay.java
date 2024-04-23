@@ -26,6 +26,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
 
     private MainPanel mainPanel;
 
+    private boolean tutorial = false;
+
     private coordinateGraphGeneration cgg;
     
     private JButton rotateButton;
@@ -61,6 +63,37 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
 
         testConstruct();
     }
+    //testing stuff
+    public PlayerDisplay(int x, int y, int xS, int yS, ArrayList<Player>play,boolean b){
+        super();
+        Selected.push(this);
+        switchTrigger = false;
+        players = play;
+        Selected.currentPlayer = currentPlayer();
+        
+        rotateButton = new JButton("RotateC");
+        rotateButton.setBounds(790, 770, 105, 40);
+        rotateButton.setVisible(false);
+        rotateButton.addActionListener(this);
+        this.add(rotateButton);
+
+        rotateCButton = new JButton("RotateCC");
+        rotateCButton.setBounds(685, 770, 105, 40);
+        rotateCButton.setVisible(false);
+        rotateCButton.addActionListener(this);
+        this.add(rotateCButton);
+        
+        this.setVisible(true);
+        xPos = x; yPos = y;
+        xSize = xS; ySize = yS;
+        constructHexagons();
+        enableInputMethods(true);
+        addMouseListener(this);
+
+        testConstruct();
+        tutorial = b;
+    }
+
 
     public void addMainPanel(MainPanel p){
         //what the fuck is a listener anyways
@@ -135,8 +168,12 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                         current = null;
                         AllowPickEvent apes = new AllowPickEvent(this, players.get(0));
                         listener.process(apes);
-                        ((PickArea)listener).placement(true);
-                        ((PickArea)listener).jasperisadumbass();;
+                        if (tutorial!=true){
+                            ((PickArea)listener).placement(true);
+                            ((PickArea)listener).jasperisadumbass();
+                        }
+                        //((PickArea)listener).placement(true);
+                        //((PickArea)listener).jasperisadumbass();
                     }  
                 }
             //}
@@ -155,7 +192,11 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                     if(players.get(0).addTile(current, new MathPoint(e.getX(), e.getY()))){
                         temp = null;
                         showEmptyTiles = false;
-                        ((PickArea)listener).placement(false);
+                        if (tutorial!=true){
+                            ((PickArea)listener).placement(false);
+                        }
+                        //((PickArea)listener).placement(false);
+                        
                     }
                     
                // }
