@@ -323,11 +323,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         this.paintComponents(g);
         //pa.paint(g);
         //g.fillRect(700, 100, 500, 500);
-        g.drawImage(bearCard.getImage(), 1213,200,175,170,null);
-        g.drawImage(foxCard.getImage(), 1213+180,200,175,170,null);
-        g.drawImage(elkCard.getImage(), 1213,200+180,175,170,null);
-        g.drawImage(hawkCard.getImage(), 1213+180,200+180,175,170,null);
-        g.drawImage(salmonCard.getImage(), 1213,200+180+180,175,170,null);
+        g.drawImage(bearCard.getImage(), 1213,250,175,170,null);
+        g.drawImage(foxCard.getImage(), 1213+180,250,175,170,null);
+        g.drawImage(elkCard.getImage(), 1213,250+180,175,170,null);
+        g.drawImage(hawkCard.getImage(), 1213+180,250+180,175,170,null);
+        g.drawImage(salmonCard.getImage(), 1213,250+180+180,175,170,null);
         
         //g.drawImage(troll,0,0,1600,900,null);
     }
