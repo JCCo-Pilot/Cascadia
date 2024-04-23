@@ -77,7 +77,7 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
             this.add(buttons.get(i));
         }
         //player display
-        pd = new PlayerDisplay(310, 15, 905, 830,players);
+        pd = new PlayerDisplay(310, 15, 905, 830,players,true);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
         add(pd);
 
@@ -201,6 +201,8 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
                         hexagons[pickedHex].setY(175+(146*pickedHex));
                         pickedHex = 0;
                         state = 3;
+                        PickEvent pe = new PickEvent(this, taken);
+                        pListener.process(pe);
                     } 
                 }
             break;
