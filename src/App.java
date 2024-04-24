@@ -52,8 +52,8 @@ public class App extends JFrame implements GameListener{
         } catch (Exception e) {
             // TODO: handle exception
         }
-        //pPanel = new PopPanel(1);
-        //pPanel2 = new PopPanel(2);
+        pPanel = new PopPanel(1);
+        pPanel2 = new PopPanel(2);
 
         this.setVisible(true);
     }
