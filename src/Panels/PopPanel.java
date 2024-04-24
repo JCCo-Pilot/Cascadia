@@ -105,11 +105,20 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
         }
     }
     public void paintCards(Graphics g){
-        g.drawImage(bearCard.getImage(),1020,10,250,230,null);
-        g.drawImage(elkCard.getImage(),1300,10,250,230,null);
-        g.drawImage(salmonCard.getImage(), 1020, 240, 250, 230, null);
-        g.drawImage(hawkCard.getImage(), 1300, 240, 250, 230, null);
-        g.drawImage(foxCard.getImage(), 1020, 470, 250, 230, null);
+        if(state == 1) {
+    		g.drawImage(bearCard.getImage(),1020,10,250,230,null);
+            g.drawImage(elkCard.getImage(),1300,10,250,230,null);
+            g.drawImage(salmonCard.getImage(), 1020, 240, 250, 230, null);
+            g.drawImage(hawkCard.getImage(), 1300, 240, 250, 230, null);
+            g.drawImage(foxCard.getImage(), 1020, 470, 250, 230, null);
+    	}
+	    if(state == 2) {
+	    	g.drawImage(bearCard.getImage(), 1208,70,175,170,null);
+	        g.drawImage(foxCard.getImage(), 1208+180,70,175,170,null);
+	        g.drawImage(elkCard.getImage(), 1208,70+180,175,170,null);
+	        g.drawImage(hawkCard.getImage(), 1208+180,70+180,175,170,null);
+	        g.drawImage(salmonCard.getImage(), 1208,70+180+180,175,170,null);
+	    }
     }
     public void pullImages(){
         try{
