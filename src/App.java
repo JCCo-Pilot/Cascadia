@@ -128,7 +128,7 @@ public class App extends JFrame implements GameListener{
                 break;
                 case 50:
                 	this.remove(pPanel);
-                    //pPanel = new PopPanel(1);
+                    pPanel = new PopPanel(1);
                 	add(mpanel);
                 	mpanel.setListener(this);
                 	repaint();
