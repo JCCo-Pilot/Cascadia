@@ -22,7 +22,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     private GameListener listener;
     private BufferedImage bg;
     private BufferedImage bg2;
-    public PopPanel(){
+    public PopPanel(int a){
         super();
         this.setVisible(true);
         pullImages();
@@ -31,6 +31,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
         back.setVisible(true);
         add(back);
         goBack = false;
+        state = a;
     }
     public void paint(Graphics g){
         super.paint(g);
