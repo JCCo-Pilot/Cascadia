@@ -39,7 +39,6 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
         	g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
             g.setColor(Color.BLACK);
         	p.drawInventory(g, false);
-            score();
             //Player Numbers
             g.setFont(new Font("Arial", 10, 30));
             g.drawString(""+p.getName().charAt(p.getName().length()-1),950,75);
@@ -92,35 +91,6 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
             back.setBounds(1050,790,150,50);
         	paintComponents(g);
         }
-    }
-    private void score(){
-        ArrayList<Entities.Enums.CardAnimals> cards = new ArrayList<Entities.Enums.CardAnimals>();
-        //add all the cards to this
-        cards.add(Entities.Enums.CardAnimals.BEAR);
-        cards.add(Entities.Enums.CardAnimals.BEAR);
-        cards.add(Entities.Enums.CardAnimals.BEAR);
-        cards.add(Entities.Enums.CardAnimals.BEAR);
-        cards.add(Entities.Enums.CardAnimals.BEAR);
-        //use the player.getScore() method to return the final score
-        //use the player.getScore(CardAnimals) for a card
-        //use player.getScore(Habitats) for a habitat
-        //use player.getBonus(Habitats) for a habitat bonus
-        /*for (int i =0;i<players.size();i++){
-            ArrayList<Integer>temp = new ArrayList<>();
-            Player current = players.get(i);
-            //bear
-            temp.add(bearCard.score(current));
-            //elk
-            temp.add(elkCard.score(current));
-            //salmon
-            temp.add(salmonCard.score(current));
-            //hawk
-            temp.add(hawkCard.score(current));
-            //fox
-            temp.add(foxCard.score(current));
-            //total
-            //put it into the hashMap
-        }*/
     }
     public void pullImages(){
         try{
