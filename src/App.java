@@ -19,6 +19,7 @@ public class App extends JFrame implements GameListener{
     private MainPanel mpanel;
     private EndPanel epanel;
     private PopPanel pPanel;
+    private PopPanel pPanel2;
     //testing constructor
     public App(String s,Boolean b){
         super(s);
@@ -51,8 +52,8 @@ public class App extends JFrame implements GameListener{
         } catch (Exception e) {
             // TODO: handle exception
         }
-        pPanel = new PopPanel();
-
+        //pPanel = new PopPanel(1);
+        //pPanel2 = new PopPanel(2);
 
         this.setVisible(true);
     }
@@ -127,11 +128,19 @@ public class App extends JFrame implements GameListener{
                 break;
                 case 50:
                 	this.remove(pPanel);
-                    pPanel = new PopPanel();
+                    //pPanel = new PopPanel(1);
                 	add(mpanel);
                 	mpanel.setListener(this);
                 	repaint();
                     this.setVisible(true);
+                break;
+                case 60:
+                	this.remove(mpanel);
+                	add(pPanel2);
+                    pPanel.currentPlayers(mpanel.getPlayers());
+                	pPanel2.setListener(this);
+                	repaint();
+                	this.setVisible(true);
                 break;
             }
         }

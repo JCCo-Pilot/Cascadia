@@ -198,7 +198,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         //total of habitat tile
         g.setFont(new Font("Arial", 10, 30));
         for (int i =0;i<size;i++){
-            g.drawString("",760+(60*i),375+77+240);
+            g.drawString(""+players.get(i).getTotalHabitatScore(),760+(60*i),375+77+240);
         }
         //Nature Tokens
         for (int i =0;i<size;i++){

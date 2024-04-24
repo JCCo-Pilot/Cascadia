@@ -207,6 +207,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             j.setFont(new Font("Arial", Font.BOLD, 19));
             buttons.add(j);
         }
+        JButton j = new JButton("Show all Players");
+        j.setFont(new Font("Arial", Font.BOLD, 19));
+        buttons.add(j);
         for (int i= 0;i<buttons.size();i++){
             buttons.get(i).setBounds(1213,19+40*i,352,40);
             buttons.get(i).addActionListener(this);
@@ -229,7 +232,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             cards.add(hawkCard);
             cards.add(foxCard);
         Scorer.score(players, cards);
-        for(int i = 0; i<buttons.size(); i++){
+        for(int i = 0; i<buttons.size()-1; i++){
             buttons.get(i).setText("Player "+(i+1)+" ["+findPlayer(i+1, players).getScore()+"]");
         }
         for(Player p:players){
@@ -323,11 +326,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         this.paintComponents(g);
         //pa.paint(g);
         //g.fillRect(700, 100, 500, 500);
-        g.drawImage(bearCard.getImage(), 1213,200,175,170,null);
-        g.drawImage(foxCard.getImage(), 1213+180,200,175,170,null);
-        g.drawImage(elkCard.getImage(), 1213,200+180,175,170,null);
-        g.drawImage(hawkCard.getImage(), 1213+180,200+180,175,170,null);
-        g.drawImage(salmonCard.getImage(), 1213,200+180+180,175,170,null);
+        g.drawImage(bearCard.getImage(), 1213,250,175,170,null);
+        g.drawImage(foxCard.getImage(), 1213+180,250,175,170,null);
+        g.drawImage(elkCard.getImage(), 1213,250+180,175,170,null);
+        g.drawImage(hawkCard.getImage(), 1213+180,250+180,175,170,null);
+        g.drawImage(salmonCard.getImage(), 1213,250+180+180,175,170,null);
         
         //g.drawImage(troll,0,0,1600,900,null);
     }
@@ -339,12 +342,16 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     }
     public void actionPerformed(ActionEvent e){
         out.println("Errors in clicking buttons");
-        for (int i =0;i<buttons.size();i++){
+        for (int i =0;i<buttons.size()-1;i++){
             if (e.getSource()==buttons.get(i)){
                 //out.println("Fuck ");
                 GameStateEvent gse = new  GameStateEvent(buttons.get(i), 10*(i+1));
                 listener.process(gse);
             }
+        }
+        if(e.getSource()==buttons.get(buttons.size()-1)) {
+        	GameStateEvent gse = new  GameStateEvent(buttons.get(buttons.size()-1), 60);
+            listener.process(gse);
         }
     }
     public void endGameTime(EndGameEvent e){
