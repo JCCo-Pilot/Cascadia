@@ -39,7 +39,6 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
         	g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
             g.setColor(Color.BLACK);
         	p.drawInventory(g, false);
-            score();
             //Player Numbers
             g.setFont(new Font("Arial", 10, 30));
             g.drawString(""+p.getName().charAt(p.getName().length()-1),950,75);
@@ -60,28 +59,28 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
             //Mountain scoring
             g.drawString(""+p.getScore(Entities.Enums.Habitats.MOUNTAIN),945,375+55);
             //Scoring Bonuses
-            g.drawString(""+p.getBonus(Entities.Enums.Habitats.MOUNTAIN),985,375+77);
+            g.drawString(""+p.getBonus(Entities.Enums.Habitats.MOUNTAIN),978,375+73);
             //Forest scoring
             g.drawString(""+p.getScore(Entities.Enums.Habitats.FOREST),945,375+55+50);
             //Scoring Bonus
-            g.drawString(""+p.getBonus(Entities.Enums.Habitats.FOREST),985,375+77+50);
+            g.drawString(""+p.getBonus(Entities.Enums.Habitats.FOREST),978,375+73+50);
             //Desert scoring
             g.drawString(""+p.getScore(Entities.Enums.Habitats.PRAIRIE),945,375+55+100);
             //Scoring Bonus
-            g.drawString(""+p.getBonus(Entities.Enums.Habitats.PRAIRIE),985,375+77+100);
+            g.drawString(""+p.getBonus(Entities.Enums.Habitats.PRAIRIE),978,375+73+100);
             //Swamp scoring
             g.drawString(""+p.getScore(Entities.Enums.Habitats.WETLAND),945,375+55+150);
             //Scoring Bonus
-            g.drawString(""+p.getBonus(Entities.Enums.Habitats.WETLAND),985,375+77+150);
+            g.drawString(""+p.getBonus(Entities.Enums.Habitats.WETLAND),978,375+73+150);
             //River scoring
             g.drawString(""+p.getScore(Entities.Enums.Habitats.RIVER),945,375+55+200);
             //Scoring Bonus
-            g.drawString(""+p.getBonus(Entities.Enums.Habitats.RIVER),985,375+77+200);
+            g.drawString(""+p.getBonus(Entities.Enums.Habitats.RIVER),978,375+73+200);
             //total of habitat tile
             g.setFont(new Font("Arial", 10, 30));
-            g.drawString(""+p.getTotalHabitatScore(),950,375+77+240);
+            g.drawString(""+p.getTotalHabitatScore(),950,375+73+240);
             //Nature Tokens
-            g.drawString(""+p.getNatureTokens(),945,375+77+300);
+            g.drawString(""+p.getNatureTokens(),950,375+73+300);
             //Total Score
             g.drawString(""+p.getScore(),945,375+77+360);
             paintComponents(g);
@@ -92,35 +91,6 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
             back.setBounds(1050,790,150,50);
         	paintComponents(g);
         }
-    }
-    private void score(){
-        ArrayList<Entities.Enums.CardAnimals> cards = new ArrayList<Entities.Enums.CardAnimals>();
-        //add all the cards to this
-        cards.add(Entities.Enums.CardAnimals.BEAR);
-        cards.add(Entities.Enums.CardAnimals.BEAR);
-        cards.add(Entities.Enums.CardAnimals.BEAR);
-        cards.add(Entities.Enums.CardAnimals.BEAR);
-        cards.add(Entities.Enums.CardAnimals.BEAR);
-        //use the player.getScore() method to return the final score
-        //use the player.getScore(CardAnimals) for a card
-        //use player.getScore(Habitats) for a habitat
-        //use player.getBonus(Habitats) for a habitat bonus
-        /*for (int i =0;i<players.size();i++){
-            ArrayList<Integer>temp = new ArrayList<>();
-            Player current = players.get(i);
-            //bear
-            temp.add(bearCard.score(current));
-            //elk
-            temp.add(elkCard.score(current));
-            //salmon
-            temp.add(salmonCard.score(current));
-            //hawk
-            temp.add(hawkCard.score(current));
-            //fox
-            temp.add(foxCard.score(current));
-            //total
-            //put it into the hashMap
-        }*/
     }
     public void pullImages(){
         try{
