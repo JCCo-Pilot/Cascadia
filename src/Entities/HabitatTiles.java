@@ -243,10 +243,37 @@ public class HabitatTiles extends PointGenerator{
             
             BufferedImage newImage = rotate(image, Math.toRadians(rotation%360));
 
-            int size = (int)Math.round(Math.sqrt(3)/2.0)*2*(int)(Math.round(70.0));
+            int size = (int)Math.round(Math.sqrt(3)/2.0)*2*(int)(Math.round(super.getSize()));
             int sz = (int)Math.round(super.getSize()/2);
             if (super.getXPos()!=0&&super.getYPos()!=0){
                 g.drawImage(newImage, xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
+                //g.drawImage(newImage, xPos+xOffset,yPos-yOffset,(int)(50*Math.sqrt(3)),(int)(50*2),null);
+                if (super.getTokens()!=null){
+                    g.drawImage(super.getTokens().getImage(),xPos-sz,yPos-sz,sz*2,sz*2,null);
+                }   
+            }
+        }
+        
+    }
+
+    public void drawHexagon(Graphics g, Double radius, int x, int y){
+        Graphics2D g2d = (Graphics2D) g;
+        if(isEmpty()){
+        }else{
+            Double offset = radius+0.0;
+            int yOffset = (int)(Math.round(offset));
+            Double yo = -1*Math.sqrt(3)/2.0*offset;
+            int xOffset = (int)(Math.round(yo));
+
+            int xPos = x;
+            int yPos = y;
+            
+            BufferedImage newImage = rotate(image, Math.toRadians(rotation%360));
+
+            int size = (int)Math.round(Math.sqrt(3)/2.0)*2*(int)(Math.round(radius));
+            int sz = (int)Math.round(radius/2);
+            if (x!=0&&y!=0){
+                g.drawImage(newImage, xPos+xOffset,yPos-yOffset,(int)(radius*Math.sqrt(3)),(int)(radius*2),null);
                 //g.drawImage(newImage, xPos+xOffset,yPos-yOffset,(int)(50*Math.sqrt(3)),(int)(50*2),null);
                 if (super.getTokens()!=null){
                     g.drawImage(super.getTokens().getImage(),xPos-sz,yPos-sz,sz*2,sz*2,null);
