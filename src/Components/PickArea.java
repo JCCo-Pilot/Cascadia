@@ -521,14 +521,14 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             jasperisadumbass();
             //hexagons[limitedSelection].setX(56+69);
             //hexagons[limitedSelection].setY(175+(146*limitedSelection));
-        }else if(e.getSource()==spendToken&&jcb.getSelectedIndex()==1){
+        }else if(e.getSource()==spendToken&&jcb.getSelectedIndex()==1&&!pickCombo){//fixes the infinte spend abilities
             //clicked spend on any combo of tiles+tokens
             pickCombo = true;
             players.get(0).spendNT();
             spendToken.setVisible(false);
             jcb.setVisible(false);
             out.println("438");
-        }else if (e.getSource()==spendToken&&jcb.getSelectedIndex()==2){
+        }else if (e.getSource()==spendToken&&jcb.getSelectedIndex()==2&&!removeTrigger){
             //clicked on remove the stuff
             spendToken.setVisible(false);
             jcb.setVisible(false);
