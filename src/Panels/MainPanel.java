@@ -30,6 +30,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private BufferedImage bg;
 
     private BufferedImage troll;
+    private UpdateEventListener uListener;
     
 
     private SelectedScoringCard sc;
@@ -410,6 +411,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     }
     public Integer getNumPlayers(){
         return players.size();
+    }
+    public void setUListener(UpdateEventListener uel){
+        uListener = uel;
     }
     
 }

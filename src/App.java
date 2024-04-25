@@ -202,7 +202,7 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
     }
     private int numClick;
     public void update(UpdateEvent e){
-        out.println(numClick++);
+        //out.println(numClick++);
     }
     
 }
