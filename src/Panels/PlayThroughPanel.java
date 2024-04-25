@@ -32,6 +32,8 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
     private HabitatTiles taken;
     private WildlifeTokens takenToken;
 
+    private JButton suicideButton = new JButton("Return to game");
+
     private int state;
     public PlayThroughPanel(){
         setLayout(null);
@@ -50,6 +52,10 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         jta.setWrapStyleWord(true);
         jta.setFont(new Font("Times New Roman",10,20));
         this.add(jta);
+
+        suicideButton.setBounds(1215,780,352,40);
+        suicideButton.addActionListener(this);
+        this.add(suicideButton);
 
         players.add(new Player(1));
         habitatTiles= new TileCreator().getTiles();
@@ -70,7 +76,7 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
             buttons.add(new JButton("Player "+(i+1)));
         }
         for (int i= 0;i<buttons.size();i++){
-            buttons.get(i).setBounds(1213,19+40*i,352,40);
+            buttons.get(i).setBounds(1215,19+40*i,352,40);
             buttons.get(i).addActionListener(this);
             buttons.get(i).setVisible(true);
             buttons.get(i).setFocusable(false);
@@ -169,7 +175,12 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       
+        if (e.getSource()==suicideButton){
+            GameStateEvent gse = new GameStateEvent(this, "Brain Rot");
+            if (listener!=null){
+                listener.process(gse);
+            }
+        }
     }
 
     @Override

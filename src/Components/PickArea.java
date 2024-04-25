@@ -339,7 +339,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     hexagons[i] =ht.remove(0); 
                     PickEvent pe = new PickEvent(this, temp);
                     tileTaken = true;
-                    listener.process(pe);
+                    if (listener!=null){
+                        listener.process(pe);
+                    }
                     pickedHex = i;
                     stopDoublePick = true;
                 }
@@ -353,7 +355,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     if(pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
                         PickEvent evnet = new PickEvent(e, removeAndReplaceToken(i));
                         tokenTaken = true;
-                        listener.process(evnet);
+                        if (listener!=null){
+                            listener.process(evnet);
+                        }
                         hexagons[pickedHex].setX(56+69);
                         hexagons[pickedHex].setY(175+(146*pickedHex));
                         pickedHex = 0;
@@ -394,7 +398,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     hexagons[i] =ht.remove(0); 
                     PickEvent pe = new PickEvent(this, temp);
                     tileTaken = true;
-                    listener.process(pe);
+                    if (listener!=null){
+                        listener.process(pe);
+                    }
                     limitedSelection = i;
                     stopDoublePick = true;
                     //allowPick=false;
@@ -406,7 +412,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                 if(pointIsInside(200, 250+(146*limitedSelection)-100, 70, 70, e)&&allowPick){
                     PickEvent evnet = new PickEvent(e, removeAndReplaceToken(limitedSelection));
                     tokenTaken = true;
-                    listener.process(evnet);
+                    if (listener!=null){
+                        listener.process(evnet);
+                    }
                     hexagons[limitedSelection].setX(56+69);
                     hexagons[limitedSelection].setY(175+(146*limitedSelection));
                     limitedSelection = -1;

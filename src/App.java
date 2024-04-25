@@ -10,7 +10,7 @@ import Panels.*;
 import static java.lang.System.*;
 
 import java.io.File;
-public class App extends JFrame implements GameListener{
+public class App extends JFrame implements GameListener,UpdateEventListener{
     public static void main(String[] args) throws Exception {
         App  ap = new App("Team Aditya Chen");
         //Spotify s = new Spotify();
@@ -22,6 +22,7 @@ public class App extends JFrame implements GameListener{
     private EndPanel epanel;
     private PopPanel pPanel;
     private PopPanel pPanel2;
+    private PlayThroughPanel ptp;
     //testing constructor
     public App(String s,Boolean b){
         super(s);
@@ -60,10 +61,19 @@ public class App extends JFrame implements GameListener{
         this.setVisible(true);
     }
     public void process(GameStateEvent e) {
-        if(e.getSource()==spanel){
+        if (e.getSource()==ptp){
+            //out.println("Recieved issues");
+            this.remove(ptp);
+            spanel = new StartPanel();
+            this.add(spanel);
+            spanel.setListener(this);
+            repaint();
+            this.setVisible(true);
+        }
+        else if(e.getSource()==spanel){
             if(e.getState() == 100) {
         		this.remove(spanel);
-        		PlayThroughPanel ptp = new PlayThroughPanel();
+        		ptp = new PlayThroughPanel();
         		this.add(ptp);
         		ptp.setListener(this);
         		repaint();
@@ -186,6 +196,8 @@ public class App extends JFrame implements GameListener{
         }
         return null;
     }
+    public void update(UpdateEvent e){
 
+    }
     
 }
