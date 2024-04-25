@@ -10,7 +10,7 @@ public class Spotify {
         music = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
         song = AudioSystem.getClip();
         song.open(music);
-        song.loop(Clip.LOOP_CONTINUOUSLY);
+        //song.loop();
     } 
     public void play(){
         song.start();

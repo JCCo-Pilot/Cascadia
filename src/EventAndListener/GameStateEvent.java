@@ -5,6 +5,11 @@ public class GameStateEvent extends EventObject{
     private int state;
     private Player play;
     private Character difficulty;
+    private String justForFun;
+    public GameStateEvent(Object source, String panelName){
+        super(source);
+        justForFun = panelName;
+    }
     public GameStateEvent(Object source, int s){
         super(source);
         state = s;
@@ -37,5 +42,8 @@ public class GameStateEvent extends EventObject{
     }
     public Character getDifficulty(){
         return difficulty;
+    }
+    public String getPanel(){
+        return justForFun;
     }
 }

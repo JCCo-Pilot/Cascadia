@@ -22,6 +22,7 @@ public class App extends JFrame implements GameListener{
     private EndPanel epanel;
     private PopPanel pPanel;
     private PopPanel pPanel2;
+    private PlayThroughPanel ptp;
     //testing constructor
     public App(String s,Boolean b){
         super(s);
@@ -60,10 +61,13 @@ public class App extends JFrame implements GameListener{
         this.setVisible(true);
     }
     public void process(GameStateEvent e) {
-        if(e.getSource()==spanel){
+        if (e.getSource()==ptp){
+
+        }
+        else if(e.getSource()==spanel){
             if(e.getState() == 100) {
         		this.remove(spanel);
-        		PlayThroughPanel ptp = new PlayThroughPanel();
+        		ptp = new PlayThroughPanel();
         		this.add(ptp);
         		ptp.setListener(this);
         		repaint();
