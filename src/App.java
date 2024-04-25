@@ -62,7 +62,13 @@ public class App extends JFrame implements GameListener{
     }
     public void process(GameStateEvent e) {
         if (e.getSource()==ptp){
-
+            out.println("Recieved issues");
+            this.remove(ptp);
+            spanel = new StartPanel();
+            this.add(spanel);
+            spanel.setListener(this);
+            repaint();
+            this.setVisible(true);
         }
         else if(e.getSource()==spanel){
             if(e.getState() == 100) {
