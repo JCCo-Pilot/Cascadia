@@ -17,6 +17,7 @@ import Entities.Enums.*;
 import static java.lang.System.*;
 public class MainPanel extends JPanel implements MouseListener,ActionListener,EndGameListener{
     private GameListener listener;
+    private UpdateEventListener uListener;
     private PickArea pa;
     private PlayerDisplay pd;
     private ArrayList<Player> players = new ArrayList<>();
@@ -341,7 +342,10 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         listener = g;
     }
     public void actionPerformed(ActionEvent e){
-        out.println("Errors in clicking buttons");
+        //out.println("Errors in clicking buttons");
+        if (uListener!=null){
+            uListener.update(new UpdateEvent(this,e));
+        }
         for (int i =0;i<buttons.size()-1;i++){
             if (e.getSource()==buttons.get(i)){
                 //out.println("Fuck ");
@@ -360,6 +364,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         //System.out.println("Skbidi on that toilet");
     }
     public void mouseClicked(MouseEvent e) {
+        if (uListener!=null){
+            uListener.update(new UpdateEvent(this,e));
+        }
     	int x = e.getX();
         int y = e.getY();
         //left side
@@ -414,6 +421,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     }
     public Integer getNumPlayers(){
         return players.size();
+    }
+    public void setUListener(UpdateEventListener uel){
+        uListener = uel;
     }
     
 }

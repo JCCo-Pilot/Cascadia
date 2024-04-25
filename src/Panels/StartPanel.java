@@ -13,6 +13,7 @@ import java.io.File;
 import static java.lang.System.*;
 public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private GameListener listener;
+    private UpdateEventListener uListener;
     private BufferedImage bg,starter,difficult;
     private JButton start;
     private JButton instructions;
@@ -145,6 +146,9 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         }
     }
     public void actionPerformed(ActionEvent e){
+        if (uListener!=null){
+            uListener.update(new UpdateEvent(this,e));
+        }
         if (e.getSource()==start){
             //GameStateEvent gse = new GameStateEvent(this, 1);
             //listener.process(gse);
@@ -160,6 +164,9 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
+        if (uListener!=null){
+            uListener.update(new UpdateEvent(this, e));
+        }
         if (state==-1){
             if (hexagons.get(0).isPointInsideHexagon(e)){
                 state =100;
@@ -215,5 +222,8 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     public void mouseExited(MouseEvent e) {}
     public void setListener(GameListener gl){
         listener = gl;
+    }
+    public void setUListener(UpdateEventListener uel){
+        uListener = uel;
     }
 }
