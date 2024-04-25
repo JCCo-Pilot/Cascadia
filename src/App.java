@@ -1,5 +1,5 @@
-import java.util.*;
 
+import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -10,7 +10,7 @@ import Panels.*;
 import static java.lang.System.*;
 
 import java.io.File;
-public class App extends JFrame implements GameListener,UpdateEventListener{
+public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
         App  ap = new App("Team Aditya Chen");
         //Spotify s = new Spotify();
@@ -48,7 +48,6 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
         this.setResizable(false);
         spanel = new StartPanel();
         spanel.setListener(this);
-        spanel.setUListener(this);
         add(spanel);
         //troll comments
         try {
@@ -57,9 +56,7 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
             // TODO: handle exception
         }
         pPanel = new PopPanel(1);
-        pPanel.setUListener(this);
         pPanel2 = new PopPanel(2);
-        pPanel2.setUListener(this);
 
         this.setVisible(true);
     }
@@ -70,7 +67,6 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
             spanel = new StartPanel();
             this.add(spanel);
             spanel.setListener(this);
-            spanel.setUListener(this);
             repaint();
             this.setVisible(true);
         }
@@ -80,14 +76,12 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
         		ptp = new PlayThroughPanel();
         		this.add(ptp);
         		ptp.setListener(this);
-                
         		repaint();
         		this.setVisible(true);
         	}
         	else {
                 this.remove(spanel);
                 mpanel = new MainPanel(e.getState()+1,e.getDifficulty());
-                mpanel.setUListener(this);
                 this.add(mpanel);
                 mpanel.setListener(this);
                 repaint();
@@ -107,7 +101,6 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
 
             epanel.setNumPlayers(mpanel.getNumPlayers());
             epanel.setPlayers(mpanel.getPlayers());
-
             epanel.repaint();
         }else{
             //Find the correct player here
@@ -167,7 +160,6 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
                 case 50:
                 	this.remove(pPanel);
                     pPanel = new PopPanel(1);
-                    pPanel.setUListener(this);
                 	add(mpanel);
                 	mpanel.setListener(this);
                 	pPanel.setBearCard(mpanel.getBearCard());
@@ -181,7 +173,6 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
                 case 60:
                 	this.remove(mpanel);
                     pPanel2 = new PopPanel(2);
-                    pPanel2.setUListener(this);
                 	add(pPanel2);
                     pPanel2.currentPlayers(mpanel.getPlayers());
                 	pPanel2.setListener(this);
@@ -204,9 +195,8 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
         }
         return null;
     }
-    private int numClick;
-    public void update(UpdateEvent e){
-        //out.println(numClick++);
-    }
+    /*public void update(UpdateEvent e){
+
+    }*/
     
 }
