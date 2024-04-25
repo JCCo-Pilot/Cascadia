@@ -349,10 +349,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
                 listener.process(gse);
             }
         }
-        if(e.getSource()==buttons.get(buttons.size())) {
-        	GameStateEvent gse = new  GameStateEvent(buttons.get(buttons.size()), 60);
-            listener.process(gse);
-        }
     }
     public void endGameTime(EndGameEvent e){
         GameStateEvent gse = new GameStateEvent(this,players.get(0));
