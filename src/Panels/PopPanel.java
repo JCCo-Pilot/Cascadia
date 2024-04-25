@@ -32,6 +32,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     private SalmonCard salmonCard;
     private HawkCard hawkCard;
     private FoxCard foxCard;
+    private UpdateEventListener uListener;
     public PopPanel(int a){
         super();
         this.setVisible(true);
@@ -173,4 +174,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
+    public void setUListener(UpdateEventListener uel){
+        uListener = uel;
+    }
 }

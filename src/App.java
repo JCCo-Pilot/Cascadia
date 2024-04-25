@@ -57,7 +57,9 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
             // TODO: handle exception
         }
         pPanel = new PopPanel(1);
+        pPanel.setUListener(this);
         pPanel2 = new PopPanel(2);
+        pPanel2.setUListener(this);
 
         this.setVisible(true);
     }
@@ -165,6 +167,7 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
                 case 50:
                 	this.remove(pPanel);
                     pPanel = new PopPanel(1);
+                    pPanel.setUListener(this);
                 	add(mpanel);
                 	mpanel.setListener(this);
                 	pPanel.setBearCard(mpanel.getBearCard());
@@ -178,6 +181,7 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
                 case 60:
                 	this.remove(mpanel);
                     pPanel2 = new PopPanel(2);
+                    pPanel2.setUListener(this);
                 	add(pPanel2);
                     pPanel2.currentPlayers(mpanel.getPlayers());
                 	pPanel2.setListener(this);
