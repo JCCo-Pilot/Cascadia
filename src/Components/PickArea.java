@@ -49,6 +49,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
 
     private HashSet<Selected> selectionPanels = new HashSet<Selected>();
 
+    private final String[] choices = {"Choose an option:","Any Combination of Tiles+Tokens","Select Tokens To Remove"};
+    
     private PickListener listener;
     private BufferedImage natureToken;
     private ArrayList<Player>players = new ArrayList<>();
@@ -89,7 +91,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         spendToken.setVisible(false);
         add(spendToken);
 
-        String[] choices = {"Choose an option:","Any Combination of Tiles+Tokens","Select Tokens To Remove"};
         jcb = new JComboBox<>(choices);
         jcb.setBounds(103,775,200,20);
         jcb.addActionListener(this);
@@ -544,6 +545,11 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             removeTrigger = true;
             players.get(0).spendNT();
             repaint();
+            jcb = new JComboBox<>(choices);
+            jcb.setBounds(103,775,200,20);
+            jcb.addActionListener(this);
+            jcb.setVisible(false);
+            add(jcb);
             //out.println("398");
         }else if (e.getSource()==confirmButton&&removeTrigger){
             ArrayList<WildlifeTokens>wt = new ArrayList<>();
