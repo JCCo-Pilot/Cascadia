@@ -48,6 +48,7 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
         this.setResizable(false);
         spanel = new StartPanel();
         spanel.setListener(this);
+        spanel.setUListener(this);
         add(spanel);
         //troll comments
         try {
@@ -67,6 +68,7 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
             spanel = new StartPanel();
             this.add(spanel);
             spanel.setListener(this);
+            spanel.setUListener(this);
             repaint();
             this.setVisible(true);
         }
@@ -76,12 +78,14 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
         		ptp = new PlayThroughPanel();
         		this.add(ptp);
         		ptp.setListener(this);
+                
         		repaint();
         		this.setVisible(true);
         	}
         	else {
                 this.remove(spanel);
                 mpanel = new MainPanel(e.getState()+1,e.getDifficulty());
+                mpanel.setUListener(this);
                 this.add(mpanel);
                 mpanel.setListener(this);
                 repaint();
@@ -196,8 +200,9 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
         }
         return null;
     }
+    private int numClick;
     public void update(UpdateEvent e){
-
+        out.println(numClick++);
     }
     
 }
