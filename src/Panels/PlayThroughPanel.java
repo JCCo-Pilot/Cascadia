@@ -177,7 +177,9 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==suicideButton){
             GameStateEvent gse = new GameStateEvent(this, "Brain Rot");
-            listener.process(gse);
+            if (listener!=null){
+                listener.process(gse);
+            }
         }
     }
 
