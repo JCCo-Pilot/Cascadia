@@ -10,7 +10,7 @@ import Panels.*;
 import static java.lang.System.*;
 
 import java.io.File;
-public class App extends JFrame implements GameListener{
+public class App extends JFrame implements GameListener,UpdateEventListener{
     public static void main(String[] args) throws Exception {
         App  ap = new App("Team Aditya Chen");
         //Spotify s = new Spotify();
@@ -196,6 +196,8 @@ public class App extends JFrame implements GameListener{
         }
         return null;
     }
+    public void update(UpdateEvent e){
 
+    }
     
 }
