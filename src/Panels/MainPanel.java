@@ -17,7 +17,6 @@ import Entities.Enums.*;
 import static java.lang.System.*;
 public class MainPanel extends JPanel implements MouseListener,ActionListener,EndGameListener{
     private GameListener listener;
-    private UpdateEventListener uListener;
     private PickArea pa;
     private PlayerDisplay pd;
     private ArrayList<Player> players = new ArrayList<>();
@@ -212,7 +211,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         //j.setFont(new Font("Arial", Font.BOLD, 19));
         //buttons.add(j);
         for (int i= 0;i<buttons.size();i++){
-            buttons.get(i).setBounds(1215,19+40*i,352,40);
+            buttons.get(i).setBounds(1213,19+40*i,352,40);
             buttons.get(i).addActionListener(this);
             buttons.get(i).setVisible(true);
             buttons.get(i).setFocusable(false);
@@ -233,7 +232,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             cards.add(hawkCard);
             cards.add(foxCard);
         Scorer.score(players, cards);
-        for(int i = 0; i<buttons.size()-1; i++){
+        for(int i = 0; i<buttons.size(); i++){
             buttons.get(i).setText("Player "+(i+1)+" ["+findPlayer(i+1, players).getScore()+"]");
         }
         for(Player p:players){
@@ -342,19 +341,16 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         listener = g;
     }
     public void actionPerformed(ActionEvent e){
-        //out.println("Errors in clicking buttons");
-        if (uListener!=null){
-            uListener.update(new UpdateEvent(this,e));
-        }
-        for (int i =0;i<buttons.size()-1;i++){
+        out.println("Errors in clicking buttons");
+        for (int i =0;i<buttons.size();i++){
             if (e.getSource()==buttons.get(i)){
                 //out.println("Fuck ");
                 GameStateEvent gse = new  GameStateEvent(buttons.get(i), 10*(i+1));
                 listener.process(gse);
             }
         }
-        if(e.getSource()==buttons.get(buttons.size()-1)) {
-        	GameStateEvent gse = new  GameStateEvent(buttons.get(buttons.size()-1), 60);
+        if(e.getSource()==buttons.get(buttons.size())) {
+        	GameStateEvent gse = new  GameStateEvent(buttons.get(buttons.size()), 60);
             listener.process(gse);
         }
     }
@@ -364,9 +360,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         //System.out.println("Skbidi on that toilet");
     }
     public void mouseClicked(MouseEvent e) {
-        if (uListener!=null){
-            uListener.update(new UpdateEvent(this,e));
-        }
     	int x = e.getX();
         int y = e.getY();
         //left side
@@ -421,9 +414,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     }
     public Integer getNumPlayers(){
         return players.size();
-    }
-    public void setUListener(UpdateEventListener uel){
-        uListener = uel;
     }
     
 }
