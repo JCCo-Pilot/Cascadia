@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import Components.*;
 import Entities.Player;
+import Entities.Enums.*;
 import EventAndListener.*;
 import Panels.*;
 import static java.lang.System.*;
@@ -12,7 +13,7 @@ import static java.lang.System.*;
 import java.io.File;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
-        App  ap = new App("Team Aditya Chen",true);
+        App  ap = new App("Team Aditya Chen");
         //Spotify s = new Spotify();
         //s.play();
         //PanelTester pt = new PanelTester("lmao");
