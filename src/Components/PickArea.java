@@ -367,7 +367,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                         }
                         hexagons[pickedHex].setX(56+69);
                         hexagons[pickedHex].setY(175+(146*pickedHex));
-                        pickedHex = 0;
+                        //chat it works/////////////////////////////////////////////////////////////////
+                        pickedHex = -1;
+                        pickCombo=false;
+                        //////////////////////////////////////////////////
                         //stopDoublePick = true;
                         //PickEvent ev = new PickEvent(this, true);
                         //listener.process(ev);
