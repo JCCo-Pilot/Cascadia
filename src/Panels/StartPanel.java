@@ -164,6 +164,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
+        //out.println(uListener==null);
         if (uListener!=null){
             uListener.update(new UpdateEvent(this, e));
         }

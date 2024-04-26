@@ -1,5 +1,5 @@
-import java.util.*;
 
+import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -10,9 +10,9 @@ import Panels.*;
 import static java.lang.System.*;
 
 import java.io.File;
-public class App extends JFrame implements GameListener,UpdateEventListener{
+public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
-        App  ap = new App("Team Aditya Chen");
+        App  ap = new App("Team Aditya Chen",true);
         //Spotify s = new Spotify();
         //s.play();
         //PanelTester pt = new PanelTester("lmao");
@@ -101,7 +101,6 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
 
             epanel.setNumPlayers(mpanel.getNumPlayers());
             epanel.setPlayers(mpanel.getPlayers());
-
             epanel.repaint();
         }else{
             //Find the correct player here
@@ -196,8 +195,8 @@ public class App extends JFrame implements GameListener,UpdateEventListener{
         }
         return null;
     }
-    public void update(UpdateEvent e){
+    /*public void update(UpdateEvent e){
 
-    }
+    }*/
     
 }

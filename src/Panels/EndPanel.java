@@ -37,7 +37,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         }*/
         construct();
         pullImages();
-        setVisible(true);
+        this.setVisible(true);
     }
     public void pullImages(){
         try{
@@ -48,14 +48,18 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     }
     public void construct(){
         //coordinates for buttons x - 1020 y - 690, 740, 790, 840 w - 560 h- 50
-        out.println(players.size());
+        //out.println(players.size());
         for (int i =0;i<players.size();i++){
             JButton temp = new JButton("Player "+(i+1));
-            temp.setBounds(1010,710+(i*40),555,40);
+            temp.setBounds(1010,700+(i*50),560,50);
             temp.setVisible(true);
+            temp.addActionListener(this);
+            temp.setFocusable(false);
+            this.add(temp);
             playerButtons.add(temp);
         }
-        addAll(playerButtons);
+        //this.addAll(playerButtons);
+        this.setVisible(true);
         //testCreateCards();
     }
     public void setNumPlayers(int i){
@@ -63,6 +67,17 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     }
     public void setPlayers(ArrayList<Player>p){
         players = p;
+        construct();
+    }
+    public Player findMax() {
+    	Player max = players.get(0);
+    	for(int i = 0; i < players.size(); i++) {
+    		if(players.get(i).compareTo(max) > 0) {
+    			max = players.get(i);
+    		}
+    	}
+    	System.out.println(max.getName());
+    	return max;
     }
     private void score(){
         ArrayList<ScoringCard> cards = new ArrayList<ScoringCard>();
@@ -109,9 +124,13 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     public void paint(Graphics g){
         //g.fillRect(0, 0, 1590, 865);
         g.drawImage(bg, 0,0, 1585, 865,null);
-        paintComponents(g);
-        //Painting(g);
+        Painting(g);
         paintCards(g);
+        paintComponents(g);
+        g.setFont(new Font("Arial", 10, 100));
+        String w = findMax().getName();
+        g.drawString(w, 80, 400);
+        out.println("Painted");
     }
     public void paintCards(Graphics g){
         g.drawImage(bearCard.getImage(),1020,10,250,230,null);
