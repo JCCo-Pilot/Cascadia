@@ -312,9 +312,15 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     }
 
     public WildlifeTokens removeAndReplaceToken(Integer index){
-        if(index<=3&&index>=0){
+        /*if(index<=3&&index>=0){
             int rand = (int) (Math.random()*tokens.size());
             return tokens.set(index, tokens.remove(rand));
+        }*/
+        if (index<4&&index>-1){
+            WildlifeTokens temp = tokens.get(index);
+            tokens.set(index,tokens.remove(4));
+            return temp;
+
         }
         return null;
     }
