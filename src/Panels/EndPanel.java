@@ -69,6 +69,16 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         players = p;
         construct();
     }
+    public Player findMax() {
+    	Player max = players.get(0);
+    	for(int i = 0; i < players.size(); i++) {
+    		if(players.get(i).compareTo(max) > 0) {
+    			max = players.get(i);
+    		}
+    	}
+    	System.out.println(max.getName());
+    	return max;
+    }
     private void score(){
         ArrayList<ScoringCard> cards = new ArrayList<ScoringCard>();
         //add all the cards to this
@@ -117,6 +127,9 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         Painting(g);
         paintCards(g);
         paintComponents(g);
+        g.setFont(new Font("Arial", 10, 100));
+        String w = findMax().getName();
+        g.drawString(w, 80, 400);
         out.println("Painted");
     }
     public void paintCards(Graphics g){
