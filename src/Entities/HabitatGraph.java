@@ -166,7 +166,7 @@ public class HabitatGraph{
             }
         }
         int newXOffset = (highestX+lowestX)/2-450;
-        int newYOffset = (highestY+lowestY)/2-450;
+        int newYOffset = (highestY+lowestY)/2-350;
 
         setCoordinate(root.getXPos()-newXOffset, root.getYPos()-newYOffset);
         int xDifference = highestX - lowestX;
