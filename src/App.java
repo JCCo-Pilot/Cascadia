@@ -35,7 +35,8 @@ public class App extends JFrame implements GameListener{
         add(mpanel);
         //troll comments
         try {
-            this.setIconImage(ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg")));
+            this.setIconImage(ImageIO.read(App.class.getResource("Entities/Images/IMG_5104.jpg")));
+            //this.setIconImage(ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg")));
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -52,7 +53,8 @@ public class App extends JFrame implements GameListener{
         add(spanel);
         //troll comments
         try {
-            this.setIconImage(ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg")));
+            this.setIconImage(ImageIO.read(App.class.getResource("Entities/Images/IMG_5104.jpg")));
+            //this.setIconImage(ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg")));
         } catch (Exception e) {
             // TODO: handle exception
         }
