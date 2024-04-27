@@ -41,7 +41,8 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     }
     public void pullImages(){
         try{
-            bg = ImageIO.read(new File("src/Panels/Background/EndScreenbg.png"));
+            bg = ImageIO.read(EndPanel.class.getResource("/Panels/Background/EndScreenbg.png"));
+            //bg = ImageIO.read(new File("src/Panels/Background/EndScreenbg.png"));
         }catch(Exception e){
             out.println("Error in pulling images in EndPanel class");
         }
