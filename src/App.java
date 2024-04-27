@@ -24,6 +24,7 @@ public class App extends JFrame implements GameListener{
     private PopPanel pPanel;
     private PopPanel pPanel2;
     private PlayThroughPanel ptp;
+    private boolean gameEnd = false;
     //testing constructor
     public App(String s,Boolean b){
         super(s);
@@ -72,8 +73,26 @@ public class App extends JFrame implements GameListener{
             spanel.setListener(this);
             repaint();
             this.setVisible(true);
-        }
-        else if(e.getSource()==spanel){
+        }else if (e.getSource()==pPanel&&gameEnd){
+            out.println("no");
+            this.remove(pPanel);
+            this.add(epanel);
+            repaint();
+            this.setVisible(true);
+        }else if (e.getSource()==epanel){
+            out.println("Yes");
+            this.remove(epanel);
+            this.add(pPanel);
+            pPanel.currentPlayer(e.getPlayer());
+            pPanel.setListener(this);
+            pPanel.setBearCard(mpanel.getBearCard());
+            pPanel.setElkCard(mpanel.getElkCard());
+            pPanel.setSalmonCard(mpanel.getSalmonCard());
+            pPanel.setHawkCard(mpanel.getHawkCard());
+            pPanel.setFoxCard(mpanel.getFoxCard());
+            repaint();
+            this.setVisible(true);
+        }else if(e.getSource()==spanel){
             if(e.getState() == 100) {
         		this.remove(spanel);
         		ptp = new PlayThroughPanel();
@@ -95,6 +114,7 @@ public class App extends JFrame implements GameListener{
             this.remove(mpanel);
             epanel = new EndPanel();
             this.add(epanel);
+            epanel.setListener(this);
             
             epanel.setBearCard(mpanel.getBearCard());
             epanel.setElkCard(mpanel.getElkCard());
@@ -104,8 +124,9 @@ public class App extends JFrame implements GameListener{
 
             epanel.setNumPlayers(mpanel.getNumPlayers());
             epanel.setPlayers(mpanel.getPlayers());
+            gameEnd = true;
             epanel.repaint();
-        }else{
+        }else if (!gameEnd){
             //Find the correct player here
             switch (e.getState()) {
                 case 10://player pop ups 1.2.3.4

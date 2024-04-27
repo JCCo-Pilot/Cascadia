@@ -148,10 +148,12 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        goBack = true;
-        this.setVisible(false);
-        GameStateEvent gse = new  GameStateEvent(back, 50);
-        listener.process(gse);
+        if (e.getSource()==back){
+            goBack = true;
+            //this.setVisible(false);
+            GameStateEvent gse = new  GameStateEvent(this, 50);
+            listener.process(gse);
+        }
     }
   //setter methods
     public void setBearCard(BearCard bc){

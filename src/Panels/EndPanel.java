@@ -4,6 +4,8 @@ import javax.swing.*;
 
 import Components.*;
 import Entities.WildlifeScoringCards.*;
+import EventAndListener.GameListener;
+import EventAndListener.GameStateEvent;
 import Entities.*;
 import Entities.Enums.CardTypes;
 
@@ -24,6 +26,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     private FoxCard foxCard;
 
     private int numPlayers;
+    private GameListener listener;
 
     private HashMap<Integer,ArrayList<Integer>>scores = new HashMap<>();
 
@@ -248,6 +251,12 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     }
     public void actionPerformed(ActionEvent e){
         //buttons logic here
+        for (int i =0;i<playerButtons.size();i++){
+            if (e.getSource()==playerButtons.get(i)){
+                GameStateEvent gse = new GameStateEvent(this, players.get(i));
+                listener.process(gse);
+            }
+        }
     }
     public void mouseClicked(MouseEvent e) {
         repaint();
@@ -272,5 +281,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     public void setFoxCard(FoxCard fc){
         foxCard = fc;
     }
-
+    public void setListener(GameListener gsl){
+        listener = gsl;
+    }
 }
