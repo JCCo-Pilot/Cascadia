@@ -61,9 +61,14 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     }
     private void pullImages(){
         try{
-            bg = ImageIO.read(new File("src/Panels/Background/StartBG.png"));
+            //ImageIO.read(Reworking.class.getResource("/Image/BackgroundStart.png"));
+            bg = ImageIO.read(StartPanel.class.getResource("/Panels/Background/StartBG.png"));
+            starter = ImageIO.read(StartPanel.class.getResource("/Panels/Background/PlayerSelection.png"));
+            difficult = ImageIO.read(StartPanel.class.getResource("/Panels/Background/DiffcultySelection.png"));
+            /*bg = ImageIO.read(new File("src/Panels/Background/StartBG.png"));
             starter = ImageIO.read(new File("src/Panels/Background/PlayerSelection.png"));
             difficult = ImageIO.read(new File("src/Panels/Background/DiffcultySelection.png"));
+            */
         }catch(Exception e){
             out.println("Errors in pulling instruction images");
         }
