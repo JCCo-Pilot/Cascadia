@@ -43,7 +43,8 @@ public class FoxCard implements ScoringCard{
             break;
         }
         try{
-            image = ImageIO.read(new File("src/Entities/ScoringCardsPics/FoxScore"+choice+".png"));
+            //image = ImageIO.read(new File("src/Entities/ScoringCardsPics/FoxScore"+choice+".png"));
+            image = ImageIO.read(FoxCard.class.getResource("/Entities/ScoringCardsPics/FoxScore"+choice+".png"));
         }catch(Exception e){
             e.printStackTrace();
         }

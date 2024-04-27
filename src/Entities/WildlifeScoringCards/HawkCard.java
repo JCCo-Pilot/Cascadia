@@ -40,7 +40,8 @@ public class HawkCard implements ScoringCard{
             break;
         }
         try{
-            image = ImageIO.read(new File("src/Entities/ScoringCardsPics/HawkScore"+choice+".png"));
+            //image = ImageIO.read(new File("src/Entities/ScoringCardsPics/HawkScore"+choice+".png"));
+            image = ImageIO.read(HawkCard.class.getResource("/Entities/ScoringCardsPics/HawkScore"+choice+".png"));
         }catch(Exception e){
             e.printStackTrace();
         }
