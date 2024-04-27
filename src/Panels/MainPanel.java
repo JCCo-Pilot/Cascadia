@@ -59,8 +59,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         pd.addListener(pa);
 
         try{
-            bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
-            troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
+            //ImageIO.read(Reworking.class.getResource("/Image/BackgroundStart.png"));
+            bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/MainPanelBG.png"));
+            troll = ImageIO.read(MainPanel.class.getResource("/Entities/Images/IMG_5104.jpg"));
+            //bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
+            //troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
         }catch(Exception e){
             out.println("Unable to pull");
         }
