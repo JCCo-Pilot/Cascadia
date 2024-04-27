@@ -78,7 +78,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         super.paint(g);
         setBackground(Color.WHITE);
         switch (state) {
-            case 1:
+            /*case 1:
                 g.drawImage(images.get(0), 0, 0, width, height, null);
             break;
             case 2:
@@ -112,7 +112,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             case 9:
                 g.drawImage(images.get(14), 0, 0, width, height, null);
                 g.drawImage(images.get(15), width/2, 0, width, height, null);
-            break;
+            break;*/
             case 10:
                 g.drawImage(starter, 0, 0, 1590, 865, null);
                 /*for(int i=0;i<playerOptions.size();i++){
