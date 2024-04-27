@@ -123,8 +123,10 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     }
     public void pullImages(){
         try{
-            bg = ImageIO.read(new File("src/Panels/Background/PopPanelBackground.png"));
-            bg2 = ImageIO.read(new File("src/Panels/Background/PopPanelBackground2.png"));
+            bg = ImageIO.read(PopPanel.class.getResource("/Panels/Background/PopPanelBackground.png"));
+            bg2 = ImageIO.read(PopPanel.class.getResource("/Panels/Background/PopPanelBackground2.png"));
+            //bg = ImageIO.read(new File("src/Panels/Background/PopPanelBackground.png"));
+            //bg2 = ImageIO.read(new File("src/Panels/Background/PopPanelBackground2.png"));
         }catch(Exception e){
             out.println("Error in pulling images in PopPanel class");
         }
