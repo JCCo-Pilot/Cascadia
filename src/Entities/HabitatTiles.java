@@ -50,7 +50,8 @@ public class HabitatTiles extends PointGenerator{
         super(x,y,size);
         //imageName = imageName.substring(5);
         try{
-            image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
+            //image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
+            image = ImageIO.read(HabitatTiles.class.getResource("/Entities/Images/"+imageName+".png"));
         }catch(Exception e){
             out.println("Shit fucked up");
         }
