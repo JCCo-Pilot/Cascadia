@@ -41,7 +41,8 @@ public class ElkCard implements ScoringCard{
             break;
         }
         try{
-            image = ImageIO.read(new File("src/Entities/ScoringCardsPics/ElkScore"+choice+".png"));
+            //image = ImageIO.read(new File("src/Entities/ScoringCardsPics/ElkScore"+choice+".png"));
+            image = ImageIO.read(ElkCard.class.getResource("/Entities/ScoringCardsPics/ElkScore"+choice+".png"));
         }catch(Exception e){
             e.printStackTrace();
         }
