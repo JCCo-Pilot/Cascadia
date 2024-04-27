@@ -67,9 +67,10 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
 
         constructStarters();
         try{
-            background = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
+            //background = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
+            background = ImageIO.read(PlayThroughPanel.class.getResource("/Panels/Background/MainPanelBG.png"));
         }catch(Exception e){
-
+            out.println("line 72 of the playthrough panel");
         }
         //button creation
         for (int i= 0;i<1;i++){
