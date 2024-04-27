@@ -52,7 +52,10 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         //out.println(players.size());
         for (int i =0;i<players.size();i++){
             JButton temp = new JButton("Player "+(i+1));
-            temp.setBounds(1010,700+(i*50),560,50);
+            int x = 1010; int yBonus = 0;
+            if (i%2==1){x= 1290;}else{x = 1010;}
+            if (i<2){yBonus = 0;}else{yBonus = 50;}
+            temp.setBounds(x,700+(yBonus),275,50);
             temp.setVisible(true);
             temp.addActionListener(this);
             temp.setFocusable(false);
@@ -244,7 +247,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         }
     }
     public void actionPerformed(ActionEvent e){
-        
+        //buttons logic here
     }
     public void mouseClicked(MouseEvent e) {
         repaint();
