@@ -35,6 +35,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private boolean switchTrigger;
     private boolean showEmptyTiles = true;
     private ArrayList<Player>players;
+
+    private UpdateEventListener uListener;
     public PlayerDisplay(int x, int y, int xS, int yS, ArrayList<Player>play){
         super();
         Selected.push(this);
@@ -202,6 +204,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                // }
             }
         //}
+        uListener.update(new UpdateEvent(this, players));
         repaint();
     }
     public boolean canPlace(int x, int y){
@@ -302,7 +305,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             players.get(0).findAndReplace(current);
             repaint();
         }
-        
+        uListener.update(new UpdateEvent(this, players));
     }
     public void process(PickEvent e){
         if(e.getString()!=null){
@@ -366,6 +369,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         }
     }
     public void setUListener(UpdateEventListener uel){
-        
+        uListener = uel;
     }
 }

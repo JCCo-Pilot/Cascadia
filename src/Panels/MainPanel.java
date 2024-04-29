@@ -435,11 +435,15 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         return players.size();
     }
     public void update(UpdateEvent e){
-
+        ArrayList<Player>temp = e.getPlayers();
+        for (int i =0;i<temp.size()&&i<maps.size();i++){
+            maps.get(i).setPlayer(getNumero(i, temp));
+            maps.get(i).repaint();
+        }
     }
     private Player getNumero(int find , ArrayList<Player>play){
         for (int i =0;i<play.size();i++){
-            if (play.get(i).getName().equals("Player "+(i+1))){
+            if (play.get(i).getName().equals("Player "+(find+1))){
                 return play.get(i);
             }
         }
