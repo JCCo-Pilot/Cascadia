@@ -53,6 +53,10 @@ public class TileCreator {
             tile = new HabitatTiles(imageName, habitats, animals, isKeyStone, x, y, size);
         }
 
+        public void create(){
+            tile = new HabitatTiles(imageName, habitats, animals, isKeyStone, x, y, size);
+        }
+
         public static HabitatTiles rizzWithDaWamen(String imageName, String[] habitats, String[] animals, boolean isKeyStone, Integer x, Integer y, Double size){
             Raghav r = new Raghav(imageName, habitats, animals, isKeyStone, x, y, size);
             r.run();
