@@ -32,6 +32,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private BufferedImage troll;
     private UpdateEventListener uListener;
     
+    //additional fixes
+    private ArrayList<miniMap>maps = new ArrayList<>();
 
     private SelectedScoringCard sc;
     public MainPanel(int l, Character diffcult){
@@ -77,6 +79,40 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         //ScoreTesterPanel p = new ScoreTesterPanel(players, cards);
         sc = new SelectedScoringCard();
         pa.setPlayers(players);
+        //additional maths
+        /*mm = new miniMap(1590, 0);
+        mm.setPlayer(players.get(1));
+        mm.setBounds(mm.getXPos(),mm.getYPos(),mm.getPreferredSize().width,mm.getPreferredSize().height);
+        out.println("XPos:"+mm.getXPos());
+        out.println("YPos:"+mm.getYPos());
+        out.println("XBounds"+mm.getXSize());
+        out.println("YBounds"+mm.getYSize());
+        add(mm);
+        mm.setVisible(true);*/
+        miniMap temp = null;
+        switch(players.size()){
+            case 2:
+                temp = new miniMap(1590, 0);
+                temp.setPlayer(players.get(0));
+                temp.setYSize(430);
+                maps.add(temp);
+                temp = new miniMap(1590, 430);
+                temp.setPlayer(players.get(1));
+                temp.setYSize(430);
+                maps.add(temp);
+            break;
+            case 3:
+            break;
+            case 4:
+            break;
+        }
+        for (int i =0;i<maps.size();i++){
+            this.add(maps.get(i));
+            maps.get(i).setBounds(maps.get(i).getXPos(),maps.get(i).getYPos(),maps.get(i).getPreferredSize().width,maps.get(i).getPreferredSize().height);
+            maps.get(i).setVisible(true);
+        }
+        repaint();
+        
         this.setVisible(true);
         addMouseListener(this);
     }
@@ -337,7 +373,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         g.drawImage(elkCard.getImage(), 1213,250+180,175,170,null);
         g.drawImage(hawkCard.getImage(), 1213+180,250+180,175,170,null);
         g.drawImage(salmonCard.getImage(), 1213,250+180+180,175,170,null);
-        
+        //g.fillRect(1600, 0, 300, 270);
         //g.drawImage(troll,0,0,1600,900,null);
     }
     public ArrayList<Player> getPlayers(){
