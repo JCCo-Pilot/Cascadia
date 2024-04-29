@@ -104,6 +104,7 @@ public class App extends JFrame implements GameListener{
         	else {
                 this.remove(spanel);
                 mpanel = new MainPanel(e.getState()+1,e.getDifficulty());
+                this.setSize(1900,900);
                 this.add(mpanel);
                 mpanel.setListener(this);
                 repaint();
@@ -112,6 +113,7 @@ public class App extends JFrame implements GameListener{
         	}
         }else if (e.getSource()==mpanel){
             this.remove(mpanel);
+            this.setSize(1600,900);
             epanel = new EndPanel();
             this.add(epanel);
             epanel.setListener(this);
@@ -131,6 +133,7 @@ public class App extends JFrame implements GameListener{
             switch (e.getState()) {
                 case 10://player pop ups 1.2.3.4
                     this.remove(mpanel);
+                    this.setSize(1600,900);
                     add(pPanel);
                     pPanel.currentPlayer(getNumero(1, mpanel.getPlayers()));
                     pPanel.setListener(this);
@@ -144,6 +147,7 @@ public class App extends JFrame implements GameListener{
                 break;
                 case 20:
                     this.remove(mpanel);
+                    this.setSize(1600,900);
                     add(pPanel);
                     pPanel.currentPlayer(getNumero(2, mpanel.getPlayers()));
                     pPanel.setListener(this);
@@ -157,6 +161,7 @@ public class App extends JFrame implements GameListener{
                 break; 
                 case 30:
                     this.remove(mpanel);
+                    this.setSize(1600,900);
                     add(pPanel);
                     pPanel.currentPlayer(getNumero(3, mpanel.getPlayers()));
                     pPanel.setListener(this);
@@ -170,6 +175,7 @@ public class App extends JFrame implements GameListener{
                 break;
                 case 40:
                     this.remove(mpanel);
+                    this.setSize(1600,900);
                     add(pPanel);
                     pPanel.currentPlayer(getNumero(4, mpanel.getPlayers()));
                     pPanel.setListener(this);
@@ -185,6 +191,7 @@ public class App extends JFrame implements GameListener{
                 	this.remove(pPanel);
                     pPanel = new PopPanel(1);
                 	add(mpanel);
+                    this.setSize(1900,900);
                 	mpanel.setListener(this);
                 	pPanel.setBearCard(mpanel.getBearCard());
                     pPanel.setElkCard(mpanel.getElkCard());
