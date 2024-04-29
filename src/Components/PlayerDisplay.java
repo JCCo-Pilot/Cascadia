@@ -365,4 +365,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             // TODO: handle exception
         }
     }
+    public void setUListener(UpdateEventListener uel){
+        
+    }
 }

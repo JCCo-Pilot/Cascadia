@@ -15,7 +15,7 @@ import Components.*;
 import Entities.WildlifeScoringCards.*;
 import Entities.Enums.*;
 import static java.lang.System.*;
-public class MainPanel extends JPanel implements MouseListener,ActionListener,EndGameListener{
+public class MainPanel extends JPanel implements MouseListener,ActionListener,EndGameListener,UpdateEventListener{
     private GameListener listener;
     private PickArea pa;
     private PlayerDisplay pd;
@@ -30,7 +30,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private BufferedImage bg;
 
     private BufferedImage troll;
-    private UpdateEventListener uListener;
     
     //additional fixes
     private ArrayList<miniMap>maps = new ArrayList<>();
@@ -49,10 +48,12 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         add(pd);
 
         pd.addMainPanel(this);
+        pd.setUListener(this);
 
         pa = new PickArea(l,0,0,310,870);
 
         pa.setReginaPerez(this);
+        pa.setUListener(this);
 
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         pa.addListener(pd);
@@ -80,15 +81,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         sc = new SelectedScoringCard();
         pa.setPlayers(players);
         //additional maths
-        /*mm = new miniMap(1590, 0);
-        mm.setPlayer(players.get(1));
-        mm.setBounds(mm.getXPos(),mm.getYPos(),mm.getPreferredSize().width,mm.getPreferredSize().height);
-        out.println("XPos:"+mm.getXPos());
-        out.println("YPos:"+mm.getYPos());
-        out.println("XBounds"+mm.getXSize());
-        out.println("YBounds"+mm.getYSize());
-        add(mm);
-        mm.setVisible(true);*/
         miniMap temp = null;
         for (int i =0;i<players.size();i++){
             temp = new miniMap(1590, 0+(215*i));
@@ -99,27 +91,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             add(temp);
             maps.add(temp);
         }
-        /*switch(players.size()){
-            case 2:
-                temp = new miniMap(1590, 0);
-                temp.setPlayer(players.get(0));
-                temp.setYSize(215);
-                maps.add(temp);
-                temp = new miniMap(1590, 215);
-                temp.setPlayer(players.get(1));
-                temp.setYSize(215);
-                maps.add(temp);
-            break;
-            case 3:
-            break;
-            case 4:
-            break;
-        }*/
-        /*for (int i =0;i<maps.size();i++){
-            this.add(maps.get(i));
-            maps.get(i).setBounds(maps.get(i).getXPos(),maps.get(i).getYPos(),maps.get(i).getPreferredSize().width,maps.get(i).getPreferredSize().height);
-            maps.get(i).setVisible(true);
-        }*/
+        
         repaint();
         
         this.setVisible(true);
@@ -462,8 +434,16 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     public Integer getNumPlayers(){
         return players.size();
     }
-    public void setUListener(UpdateEventListener uel){
-        uListener = uel;
+    public void update(UpdateEvent e){
+
+    }
+    private Player getNumero(int find , ArrayList<Player>play){
+        for (int i =0;i<play.size();i++){
+            if (play.get(i).getName().equals("Player "+(i+1))){
+                return play.get(i);
+            }
+        }
+        return null;
     }
     
 }
