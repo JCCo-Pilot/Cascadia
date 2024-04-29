@@ -83,7 +83,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         //additional maths
         miniMap temp = null;
         for (int i =0;i<players.size();i++){
-            temp = new miniMap(1590, 0+(215*i));
+            temp = new miniMap(1590, 20+(215*i));
             temp.setPlayer(players.get(i));
             temp.setYSize(215);
             temp.setBounds(temp.getXPos(),temp.getYPos(),temp.getPreferredSize().width,temp.getPreferredSize().height);
