@@ -42,7 +42,8 @@ public class SalmonCard implements ScoringCard{
             break;
         }
         try{
-            image = ImageIO.read(new File("src/Entities/ScoringCardsPics/SalmonScore"+choice+".png"));
+            //image = ImageIO.read(new File("src/Entities/ScoringCardsPics/SalmonScore"+choice+".png"));
+            image = ImageIO.read(SalmonCard.class.getResource("/Entities/ScoringCardsPics/SalmonScore"+choice+".png"));
         }catch(Exception e){
             e.printStackTrace();
         }

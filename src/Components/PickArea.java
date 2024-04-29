@@ -65,6 +65,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
 
     private HabitatTiles[]hexagons = new HabitatTiles[4];
     private ArrayList<HabitatTiles>ht = new ArrayList<>();
+
+    private UpdateEventListener uListener;
     public PickArea(int i,int x, int y , int xS, int yS){
         super();
         ht = new TileCreator().getTiles();
@@ -168,6 +170,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         for (int i =0;i<4&&i<removal.size();i++){
             g.drawRect(200,(250+(146*removal.get(i)))-100,70,70);
         }
+        uListener.update(new UpdateEvent(this, players));
     }
     @Override
     public void paintComponent(Graphics g){
@@ -453,6 +456,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             //hexagons[i].setY(275+(146*i)-100);
             
         }
+        uListener.update(new UpdateEvent(this, players));
         periodic();
         repaint();
     }
@@ -570,6 +574,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             removal.clear();
             tokens.addAll(wt);
         }
+        uListener.update(new UpdateEvent(this, players));
         repaint();
     }
     public void setReginaPerez(EndGameListener eg){
@@ -633,5 +638,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             s.push(((PlayerDisplay)listener).getCurrentTile(), ((PlayerDisplay)listener).getCurrentToken());
             s.push(((PlayerDisplay)listener).currentPlayer());
         }        
+    }
+    public void setUListener(UpdateEventListener uel){
+        uListener = uel;
     }
 }

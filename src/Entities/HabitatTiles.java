@@ -50,9 +50,10 @@ public class HabitatTiles extends PointGenerator{
         super(x,y,size);
         //imageName = imageName.substring(5);
         try{
-            image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
+            //image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
+            image = ImageIO.read(HabitatTiles.class.getResource("/Entities/StarterTilePics/"+imageName+".png"));
         }catch(Exception e){
-            out.println("Shit fucked up");
+            out.println("Shit fucked up56");
         }
     }   
 
@@ -111,9 +112,10 @@ public class HabitatTiles extends PointGenerator{
         }
 
         try{
-            image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
+            //image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
+            image = ImageIO.read(HabitatTiles.class.getResource("/Entities/StarterTilePics/"+imageName+".png"));
         }catch(Exception e){
-            out.println("Shit fucked up");
+            out.println("Shit fucked up118");
         }
     }
 
@@ -141,14 +143,16 @@ public class HabitatTiles extends PointGenerator{
         }
 
         try{
-            image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
+            //image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
+            image = ImageIO.read(HabitatTiles.class.getResource("/Entities/Images/"+imageName+".png"));
         }catch(Exception e){
-            out.println("Shit fucked up");
+            out.println("Shit fucked up149");
         }
     }
 
     public HabitatTiles(String imageName, String[] habitats, String[] animals, boolean isKeyStone, Integer x, Integer y, Double size,boolean isStarter){
         super(x, y, size);
+        out.println("Called");
         this.imageName = imageName;
         this.isKeystone = isKeyStone;
 
@@ -171,9 +175,10 @@ public class HabitatTiles extends PointGenerator{
         }
 
         try{
-            image = ImageIO.read(new File("src/Entities/StarterTilePics/"+imageName+".png"));
+            //image = ImageIO.read(new File("src/Entities/StarterTilePics/"+imageName+".png"));
+            image = ImageIO.read(HabitatTiles.class.getResource("/Entities/StarterTilePics/"+imageName+".png"));
         }catch(Exception e){
-            out.println("Shit fucked up");
+            out.println("Shit fucked up181");
         }
     }
     

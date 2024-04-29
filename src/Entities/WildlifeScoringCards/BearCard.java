@@ -38,7 +38,8 @@ public class BearCard implements ScoringCard{
             break;
         }
         try{
-            image = ImageIO.read(new File("src/Entities/ScoringCardsPics/BearScore"+choice+".png"));
+            //image = ImageIO.read(new File("src/Entities/ScoringCardsPics/BearScore"+choice+".png"));
+            image = ImageIO.read(BearCard.class.getResource("/Entities/ScoringCardsPics/BearScore"+choice+".png"));
         }catch(Exception e){
             e.printStackTrace();
         }

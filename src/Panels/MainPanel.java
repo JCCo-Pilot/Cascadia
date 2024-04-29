@@ -15,7 +15,7 @@ import Components.*;
 import Entities.WildlifeScoringCards.*;
 import Entities.Enums.*;
 import static java.lang.System.*;
-public class MainPanel extends JPanel implements MouseListener,ActionListener,EndGameListener{
+public class MainPanel extends JPanel implements MouseListener,ActionListener,EndGameListener,UpdateEventListener{
     private GameListener listener;
     private PickArea pa;
     private PlayerDisplay pd;
@@ -30,8 +30,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private BufferedImage bg;
 
     private BufferedImage troll;
-    private UpdateEventListener uListener;
     
+    //additional fixes
+    private ArrayList<miniMap>maps = new ArrayList<>();
 
     private SelectedScoringCard sc;
     public MainPanel(int l, Character diffcult){
@@ -47,10 +48,12 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         add(pd);
 
         pd.addMainPanel(this);
+        pd.setUListener(this);
 
         pa = new PickArea(l,0,0,310,870);
 
         pa.setReginaPerez(this);
+        pa.setUListener(this);
 
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         pa.addListener(pd);
@@ -59,8 +62,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         pd.addListener(pa);
 
         try{
-            bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
-            troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
+            //ImageIO.read(Reworking.class.getResource("/Image/BackgroundStart.png"));
+            bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/MainPanelBG.png"));
+            troll = ImageIO.read(MainPanel.class.getResource("/Entities/Images/IMG_5104.jpg"));
+            //bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
+            //troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
         }catch(Exception e){
             out.println("Unable to pull");
         }
@@ -74,6 +80,20 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         //ScoreTesterPanel p = new ScoreTesterPanel(players, cards);
         sc = new SelectedScoringCard();
         pa.setPlayers(players);
+        //additional maths
+        miniMap temp = null;
+        for (int i =0;i<players.size();i++){
+            temp = new miniMap(1590, 0+(215*i));
+            temp.setPlayer(players.get(i));
+            temp.setYSize(215);
+            temp.setBounds(temp.getXPos(),temp.getYPos(),temp.getPreferredSize().width,temp.getPreferredSize().height);
+            temp.setVisible(true);
+            add(temp);
+            maps.add(temp);
+        }
+        
+        repaint();
+        
         this.setVisible(true);
         addMouseListener(this);
     }
@@ -101,8 +121,10 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         pd.addListener(pa);
 
         try{
-            bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
-            troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
+            bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/MainPanelBG.png"));
+            troll = ImageIO.read(MainPanel.class.getResource("/Entities/Images/IMG_5104.jpg"));
+            //bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
+            //troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
         }catch(Exception e){
             out.println("Unable to pull");
         }
@@ -332,7 +354,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         g.drawImage(elkCard.getImage(), 1213,250+180,175,170,null);
         g.drawImage(hawkCard.getImage(), 1213+180,250+180,175,170,null);
         g.drawImage(salmonCard.getImage(), 1213,250+180+180,175,170,null);
-        
+        //g.fillRect(1600, 0, 300, 270);
         //g.drawImage(troll,0,0,1600,900,null);
     }
     public ArrayList<Player> getPlayers(){
@@ -412,8 +434,20 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     public Integer getNumPlayers(){
         return players.size();
     }
-    public void setUListener(UpdateEventListener uel){
-        uListener = uel;
+    public void update(UpdateEvent e){
+        ArrayList<Player>temp = e.getPlayers();
+        for (int i =0;i<temp.size()&&i<maps.size();i++){
+            maps.get(i).setPlayer(getNumero(i, temp));
+            maps.get(i).repaint();
+        }
+    }
+    private Player getNumero(int find , ArrayList<Player>play){
+        for (int i =0;i<play.size();i++){
+            if (play.get(i).getName().equals("Player "+(find+1))){
+                return play.get(i);
+            }
+        }
+        return null;
     }
     
 }
