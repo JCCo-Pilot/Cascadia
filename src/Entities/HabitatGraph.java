@@ -53,6 +53,29 @@ public class HabitatGraph{
         }*/
     }
 
+    public void drawGraph(Graphics g, int x1, int y1, int xLength, int yLength){
+        int lowest = Math.min(xLength, yLength);
+        double radius = ((lowest+0.0)/(900.0))*root.getSize();
+        MathPoint center = new MathPoint(x1+xLength/2, y1+yLength/2);
+        double ratio = (lowest+0.0)/(900.0);
+
+        for(HabitatTiles h: iterate()){
+            if(h.isEmpty()){
+                
+            }else{
+                int xCartesian = h.getCoordinate().xPoint-450;
+                int yCartesian = h.getCoordinate().yPoint-450;
+
+                int xNew = (int) (xCartesian*ratio) + center.xPoint;
+                int yNew = (int) (yCartesian*ratio) + center.yPoint;
+
+                h.drawHexagon(g, radius, xNew, yNew);
+            }
+            //System.out.println(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
+        }
+        
+    }
+
     public HashSet<HabitatTiles> filter(CardAnimals i){
         HashSet<HabitatTiles> filterReturn = new HashSet<HabitatTiles>();
         for(HabitatTiles h:iterate()){
@@ -166,7 +189,7 @@ public class HabitatGraph{
             }
         }
         int newXOffset = (highestX+lowestX)/2-450;
-        int newYOffset = (highestY+lowestY)/2-350;
+        int newYOffset = (highestY+lowestY)/2-450;
 
         setCoordinate(root.getXPos()-newXOffset, root.getYPos()-newYOffset);
         int xDifference = highestX - lowestX;
