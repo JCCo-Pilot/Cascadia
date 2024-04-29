@@ -34,7 +34,7 @@ public class miniMap extends JComponent {
         if (player!=null){
             g.drawString(player.getName(),0,10);
             //g.fillRect(0,0,xSize,ySize);
-            player.getGraph().drawGraph(g, null);
+            player.getGraph().drawGraph(g, 0, 0, xSize, ySize);;
         }
     }
     @Override
