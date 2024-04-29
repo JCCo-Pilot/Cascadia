@@ -84,7 +84,7 @@ public class HabitatGraph{
         int xDifference = highestX - lowestX;
         int yDifference = highestY - lowestY;
 
-        int lowestDifference = Math.min(xDifference, yDifference);
+        int lowestDifference = (int)(ratio*Math.min(xDifference, yDifference));
         
         double ratio2 = lowest/lowestDifference;
 
@@ -95,8 +95,8 @@ public class HabitatGraph{
                 int xCartesian = h.getCoordinate().xPoint-450;
                 int yCartesian = h.getCoordinate().yPoint-450;
 
-                int xNew = (int) (xCartesian*ratio) + center.xPoint;
-                int yNew = (int) (yCartesian*ratio) + center.yPoint;
+                int xNew = (int) (xCartesian*ratio*ratio2) + center.xPoint;
+                int yNew = (int) (yCartesian*ratio*ratio2) + center.yPoint;
 
                 h.drawHexagon(g, radius, xNew, yNew);
             }
