@@ -63,7 +63,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
 
         try{
             //ImageIO.read(Reworking.class.getResource("/Image/BackgroundStart.png"));
-            bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/MainPanelBG.png"));
+            bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/RealMainPanelBG.png"));
             troll = ImageIO.read(MainPanel.class.getResource("/Entities/Images/IMG_5104.jpg"));
             //bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
             //troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
@@ -121,7 +121,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         pd.addListener(pa);
 
         try{
-            bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/MainPanelBG.png"));
+            bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/RealMainPanelBG.png"));
             troll = ImageIO.read(MainPanel.class.getResource("/Entities/Images/IMG_5104.jpg"));
             //bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
             //troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
@@ -340,7 +340,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     @Override
     public void paint(Graphics g){
         super.paint(g);
-        g.drawImage(bg, 0, 0, 1590,865,null);
+        g.drawImage(bg, 0, 0, 1890,865,null);
         /*g.setColor(Color.GREEN);
         for (int i=0;i<4;i++){
             g.drawRect(1213, 19+(40*i), 352, 40);
