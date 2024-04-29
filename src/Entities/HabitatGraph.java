@@ -59,6 +59,35 @@ public class HabitatGraph{
         MathPoint center = new MathPoint(x1+xLength/2, y1+yLength/2);
         double ratio = (lowest+0.0)/(900.0);
 
+        int highestX = 0;
+        int lowestX = 900;
+        int highestY = 0;
+        int lowestY = 900;
+        for(HabitatTiles h:iterate()){
+            if(h.getAdjacentTileOffset(HabitatTiles.LEFT).xPoint<lowestX){
+                lowestX = h.getAdjacentTileOffset(HabitatTiles.LEFT).xPoint;
+            }
+
+            if(h.getAdjacentTileOffset(HabitatTiles.RIGHT).xPoint>highestX){
+                highestX = h.getAdjacentTileOffset(HabitatTiles.RIGHT).xPoint;
+            }
+
+            if(h.getAdjacentTileOffset(HabitatTiles.UP_LEFT).yPoint<lowestY){
+                lowestY = h.getAdjacentTileOffset(HabitatTiles.UP_LEFT).yPoint;
+            }
+
+            if(h.getAdjacentTileOffset(HabitatTiles.DOWN_LEFT).yPoint>highestY){
+                highestY = h.getAdjacentTileOffset(HabitatTiles.DOWN_LEFT).yPoint;
+            }
+        }
+
+        int xDifference = highestX - lowestX;
+        int yDifference = highestY - lowestY;
+
+        int lowestDifference = Math.min(xDifference, yDifference);
+        
+        double ratio2 = lowest/lowestDifference;
+
         for(HabitatTiles h: iterate()){
             if(h.isEmpty()){
                 
