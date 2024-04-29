@@ -32,7 +32,8 @@ public class miniMap extends JComponent {
     }
     public void paint(Graphics g){
         if (player!=null){
-            g.fillRect(0,0,xSize,ySize);
+            g.drawString(player.getName(),0,10);
+            //g.fillRect(0,0,xSize,ySize);
             //player.drawInventory(g, false);
         }
     }

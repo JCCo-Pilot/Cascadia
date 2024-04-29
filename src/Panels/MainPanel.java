@@ -90,27 +90,36 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         add(mm);
         mm.setVisible(true);*/
         miniMap temp = null;
-        switch(players.size()){
+        for (int i =0;i<players.size();i++){
+            temp = new miniMap(1590, 0+(215*i));
+            temp.setPlayer(players.get(i));
+            temp.setYSize(215);
+            temp.setBounds(temp.getXPos(),temp.getYPos(),temp.getPreferredSize().width,temp.getPreferredSize().height);
+            temp.setVisible(true);
+            add(temp);
+            maps.add(temp);
+        }
+        /*switch(players.size()){
             case 2:
                 temp = new miniMap(1590, 0);
                 temp.setPlayer(players.get(0));
-                temp.setYSize(430);
+                temp.setYSize(215);
                 maps.add(temp);
-                temp = new miniMap(1590, 430);
+                temp = new miniMap(1590, 215);
                 temp.setPlayer(players.get(1));
-                temp.setYSize(430);
+                temp.setYSize(215);
                 maps.add(temp);
             break;
             case 3:
             break;
             case 4:
             break;
-        }
-        for (int i =0;i<maps.size();i++){
+        }*/
+        /*for (int i =0;i<maps.size();i++){
             this.add(maps.get(i));
             maps.get(i).setBounds(maps.get(i).getXPos(),maps.get(i).getYPos(),maps.get(i).getPreferredSize().width,maps.get(i).getPreferredSize().height);
             maps.get(i).setVisible(true);
-        }
+        }*/
         repaint();
         
         this.setVisible(true);
