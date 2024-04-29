@@ -18,7 +18,7 @@ import MathHelper.*;
 import Panels.ScoreTesterPanel;
 import Panels.*;
 import static java.lang.System.*;
-public class miniMap extends JComponent {
+public class miniMap extends JComponent implements MouseListener{
     private final int xSize = 295;
     private int ySize = 270;
     private Player player;
@@ -53,4 +53,11 @@ public class miniMap extends JComponent {
     public void setPlayer(Player p){
         player = p;
     }
+    public void mouseClicked(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+        
+    }
+    public void mouseReleased(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
 }
