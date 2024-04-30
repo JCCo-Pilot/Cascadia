@@ -4,7 +4,7 @@ public class TileCreator {
     private ArrayList<HabitatTiles>tile;
     public TileCreator(){
         tile = new ArrayList<>();
-        //construct();
+        construct();
         construct2();
         setFullX(0);
         setFullY(0);
