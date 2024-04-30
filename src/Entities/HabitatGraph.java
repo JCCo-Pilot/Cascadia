@@ -32,15 +32,70 @@ public class HabitatGraph{
         this.fixStackedTileLocation();
     }
 
+    private static class Philip{
+        private enum ActionVar{
+            DRAW,
+            DRAWPOSITION,
+        }
+
+        private Philip(ActionVar a, Object[] arr){
+            switch(a){
+                case DRAW:
+                    DrawingPhilip d = new DrawingPhilip((Graphics)arr[0], (HabitatTiles)arr[1]);
+                    d.run();
+                    break;
+                case DRAWPOSITION:
+                    PositionalPhilip p = new PositionalPhilip((Graphics)arr[0], (HabitatTiles)arr[1], (double)arr[2], (int)arr[3], (int)arr[4]);
+                    p.run();
+                    break;
+                default:
+                    break;
+                
+            }
+        }
+
+        private class DrawingPhilip extends Thread{
+            Graphics graphics;
+            HabitatTiles tile;
+            private DrawingPhilip(Graphics g, HabitatTiles toDraw){
+                graphics = g;
+                tile = toDraw;
+            }
+
+            public void run(){
+                tile.drawHexagon(graphics);
+            }
+        }
+
+        private class PositionalPhilip extends Thread{
+            Graphics graphics;
+            HabitatTiles tile;
+            double radius;
+            int x;
+            int y;
+            private PositionalPhilip(Graphics g, HabitatTiles toDraw, double rad, int xPos, int yPos){
+                graphics = g;
+                tile = toDraw;
+                radius = rad;
+                x = xPos;
+                y = yPos;
+            }
+
+            public void run(){
+                tile.drawHexagon(graphics, radius, x, y);
+            }
+        }
+    }
+
     public void drawGraph(Graphics g, Boolean drawEmptys){
         //System.out.println("DrawGraph method called");
         for(HabitatTiles h: iterate()){
             if(h.isEmpty()){
                 if(drawEmptys){
-                    h.drawHexagon(g);
+                    new Philip(Philip.ActionVar.DRAW, new Object[]{g, h});
                 }
             }else{
-                h.drawHexagon(g);
+                new Philip(Philip.ActionVar.DRAW, new Object[]{g, h});
             }
             //System.out.println(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
         }
@@ -98,7 +153,8 @@ public class HabitatGraph{
                 int xNew = (int) (xCartesian*ratio*ratio2) + center.xPoint;
                 int yNew = (int) (yCartesian*ratio*ratio2) + center.yPoint;
 
-                h.drawHexagon(g, radius, xNew, yNew);
+                //h.drawHexagon(g, radius, xNew, yNew);
+                new Philip(Philip.ActionVar.DRAWPOSITION, new Object[]{g, h, radius, xNew, yNew});
             }
             //System.out.println(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
         }
