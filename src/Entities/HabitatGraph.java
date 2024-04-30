@@ -374,14 +374,7 @@ public class HabitatGraph{
     public void connectTilesToNonConnectedAdjacents(){
         for(HabitatTiles h:iterate()){
             for(int i = 0; i<6; i++){
-                if(h.get(i)==null){
-                    HabitatTiles adjacent = bfs(h.getAdjacentTileOffset(i));
-                    if(adjacent!=null){
-                        h.add(adjacent, i);
-                    }
-                        
-                   
-                }
+                new Philip(Philip.ActionVar.CONNECT, new Object[]{h});
             }
         }
     }
@@ -429,10 +422,11 @@ public class HabitatGraph{
         //System.out.println(target+" group size = "+group.size());
     }
 
-    private static class Philip{
+    private class Philip{
         private enum ActionVar{
             DRAW,
             DRAWPOSITION,
+            CONNECT,
         }
 
         private Philip(ActionVar a, Object[] arr){
@@ -445,6 +439,8 @@ public class HabitatGraph{
                     PositionalPhilip p = new PositionalPhilip((Graphics)arr[0], (HabitatTiles)arr[1], (double)arr[2], (int)arr[3], (int)arr[4]);
                     p.run();
                     break;
+                case CONNECT:
+                    ConnectionPhilip c = new ConnectionPhilip((HabitatTiles)arr[0]);
                 default:
                     break;
                 
@@ -481,6 +477,26 @@ public class HabitatGraph{
             public void run(){
                 tile.drawHexagon(graphics, radius, x, y);
             }
+        }
+
+        private class ConnectionPhilip extends Thread{
+            HabitatTiles h;
+            private ConnectionPhilip(HabitatTiles tile){
+                h = tile;
+            }
+
+            public void run(){
+                for(int i = 0; i<6; i++){
+                    if(h.get(i)==null){
+                        HabitatTiles adjacent = bfs(h.getAdjacentTileOffset(i));
+                        if(adjacent!=null){
+                            h.add(adjacent, i);
+                        }
+                    }
+                }
+            }
+
+
         }
     }
 }
