@@ -181,7 +181,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                 }
             //}
         //}
-
+        
         //for (int i =0;i<cgg.getHexs().size();i++){
             if(temp!=null){
             //if (cgg.getHexs().get(i).isPointInsideHexagon(e)&&temp!=null){
@@ -205,7 +205,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                // }
             }
         //}
-        uListener.update(new UpdateEvent(this, players));
+        if (uListener!=null) {
+            	uListener.update(new UpdateEvent(this, players));
+        }
         repaint();
     }
     public boolean canPlace(int x, int y){
