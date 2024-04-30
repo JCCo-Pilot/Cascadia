@@ -405,19 +405,7 @@ public class HabitatGraph{
         Queue<HabitatTiles> q = new LinkedList<HabitatTiles>();
         q.add(tile);
         while(!q.isEmpty()){
-            HabitatTiles current = q.remove();
-            if(!visitedTiles.contains(current)){
-                group.add(current);
-                visitedTiles.add(current);
-                //System.out.println(current+" added to group of "+target);
-                for(int i = 0; i<6; i++){
-                    HabitatTiles next = current.get(i);
-                    //System.out.println("HabitatMatch between "+current.getHabitats()+", "+next.getHabitats()+" at "+i+" returns "+ current.habitatMatch(i));
-                    if(current.habitatMatch(i)&&current.getHabitats().get(i)==target&&!next.isEmpty()){
-                        q.add(next);
-                    }
-                }
-            }
+            new Philip(Philip.ActionVar.GROUP, new Object[]{target, q, group, visitedTiles});
         }
         //System.out.println(target+" group size = "+group.size());
     }
@@ -427,6 +415,7 @@ public class HabitatGraph{
             DRAW,
             DRAWPOSITION,
             CONNECT,
+            GROUP,
         }
 
         private Philip(ActionVar a, Object[] arr){
@@ -441,6 +430,12 @@ public class HabitatGraph{
                     break;
                 case CONNECT:
                     ConnectionPhilip c = new ConnectionPhilip((HabitatTiles)arr[0]);
+                    c.run();
+                    break;
+                case GROUP:
+                    GroupingPhilip g = new GroupingPhilip((Habitats)arr[0],(Queue<HabitatTiles>)arr[1], (HashSet<HabitatTiles>)arr[2], (HashSet<HabitatTiles>)arr[3]);
+                    g.run();
+                    break;
                 default:
                     break;
                 
@@ -451,6 +446,7 @@ public class HabitatGraph{
             Graphics graphics;
             HabitatTiles tile;
             private DrawingPhilip(Graphics g, HabitatTiles toDraw){
+                //System.out.println("DrawingPhilip");
                 graphics = g;
                 tile = toDraw;
             }
@@ -467,6 +463,7 @@ public class HabitatGraph{
             int x;
             int y;
             private PositionalPhilip(Graphics g, HabitatTiles toDraw, double rad, int xPos, int yPos){
+                //System.out.println("PositionalPhilip");
                 graphics = g;
                 tile = toDraw;
                 radius = rad;
@@ -482,6 +479,7 @@ public class HabitatGraph{
         private class ConnectionPhilip extends Thread{
             HabitatTiles h;
             private ConnectionPhilip(HabitatTiles tile){
+                //System.out.println("ConnectionPhilip");
                 h = tile;
             }
 
@@ -497,6 +495,37 @@ public class HabitatGraph{
             }
 
 
+        }
+
+        private class GroupingPhilip extends Thread{
+            Queue<HabitatTiles> q;
+            HashSet<HabitatTiles> group;
+            HashSet<HabitatTiles> visitedTiles;
+            Habitats target;
+            private GroupingPhilip(Habitats h, Queue<HabitatTiles> queue, HashSet<HabitatTiles> g, HashSet<HabitatTiles> v){
+                target = h;
+                q = queue;
+                group = g;
+                visitedTiles = v;
+            }
+
+            public void run(){
+                while(!q.isEmpty()){
+                    HabitatTiles current = q.remove();
+                    if(!visitedTiles.contains(current)){
+                        group.add(current);
+                        visitedTiles.add(current);
+                        //System.out.println(current+" added to group of "+target);
+                        for(int i = 0; i<6; i++){
+                            HabitatTiles next = current.get(i);
+                            //System.out.println("HabitatMatch between "+current.getHabitats()+", "+next.getHabitats()+" at "+i+" returns "+ current.habitatMatch(i));
+                            if(current.habitatMatch(i)&&current.getHabitats().get(i)==target&&!next.isEmpty()){
+                                q.add(next);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
