@@ -295,19 +295,19 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         tiles.clear();
         //tile 2
         //fix this here/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /*tiles.add(new HabitatTiles("forest-elk-key", new String[]{"forest"}, new String[]{"elk"}, true, 250, 100, size,true));
-        tiles.add(new HabitatTiles("lake+mountain-hawk-elk-bear", new String[]{"lake","mountain"}, new String[]{"bear","elk","hawk"}, false, 190, 205, size,true));//240
-        tiles.get(1).setOffset(240);
-        tiles.add(new HabitatTiles("desert+swamp-fox-salmon", new String[]{"desert","swamp"}, new String[]{"fox","salmon"}, false, 310, 205, size,true));//300
-        tiles.get(2).setOffset(300);
-        sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));*/
-        tiles.clear();
-        //tile 3
         tiles.add(new HabitatTiles("forest-elk-key", new String[]{"forest"}, new String[]{"elk"}, true, 250, 100, size,true));
         tiles.add(new HabitatTiles("lake+mountain-hawk-elk-bear", new String[]{"lake","mountain"}, new String[]{"bear","elk","hawk"}, false, 190, 205, size,true));//240
         tiles.get(1).setOffset(240);
         tiles.add(new HabitatTiles("desert+swamp-fox-salmon", new String[]{"desert","swamp"}, new String[]{"fox","salmon"}, false, 310, 205, size,true));//300
         tiles.get(2).setOffset(300);
+        sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
+        tiles.clear();
+        //tile 3
+        tiles.add(new HabitatTiles("lake-salmon-key", new String[]{"lake"}, new String[]{"salmon"}, true, 250, 100, size,true));
+        tiles.add(new HabitatTiles("forest+desert-salmon-elk-bear", new String[]{"forest","desert"}, new String[]{"bear","elk","salmon"}, false, 190, 205, size,true));//240
+        tiles.get(1).setOffset(240);
+        tiles.add(new HabitatTiles("mountain+swamp-fox-hawk", new String[]{"mountain","swamp"}, new String[]{"fox","hawk"}, false, 310, 205, size,true));//300
+        tiles.get(2).setOffset(120);
         sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
         tiles.clear();
         //tile 4
