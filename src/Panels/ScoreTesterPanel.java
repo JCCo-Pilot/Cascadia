@@ -14,21 +14,27 @@ import Entities.WildlifeScoringCards.*;
 import Entities.Enums.*;
 import static java.lang.System.*;
 
-public class ScoreTesterPanel extends JFrame{
+public class ScoreTesterPanel extends Thread{
     private static ArrayList<Player> players = new ArrayList<>();
     private static ArrayList<ScoringCard> cards = new ArrayList<>();
     private static HashSet<ScoreTesterPanel> panels = new HashSet<ScoreTesterPanel>();
 
     
     public ScoreTesterPanel(ArrayList<Player> players, ArrayList<ScoringCard> cards){
-        super("Score Tester Panel");
         ScoreTesterPanel.players = players;
         ScoreTesterPanel.cards = cards;
-        this.setSize(500, 100);
-        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+    }
+
+    public ScoreTesterPanel(){
+
     }
 
     public static void update(){
+        ScoreTesterPanel s = new ScoreTesterPanel();
+        s.run();
+    }
+
+    public void run(){
         Scorer.score(players, cards);
         for(Player p:players){
             for(ScoringCard c:cards){
