@@ -576,6 +576,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
         uListener.update(new UpdateEvent(this, players));
         repaint();
+        periodic();
     }
     public void setReginaPerez(EndGameListener eg){
         egl = eg;
