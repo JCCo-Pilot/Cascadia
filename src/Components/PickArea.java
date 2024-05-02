@@ -624,8 +624,11 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         if(!tileTaken&&!tokenTaken){
             //showSelected.setVisible(false);
         }
-        if(isOverpopulated4()){
+        while(isOverpopulated4()){
             removeOverpopulation();
+        }
+        if(isOverpopulated3()){
+            overpopButton.setVisible(true);
         }
         Selected.currentPlayer = ((PlayerDisplay)listener).currentPlayer();
         if(selectionPanels.size()==0&&!(((PlayerDisplay)listener).getCurrentTile() == null&&((PlayerDisplay)listener).getCurrentToken() == null)){
