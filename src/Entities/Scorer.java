@@ -135,9 +135,9 @@ public class Scorer implements Runnable{
             this.scorePlayer();
         } catch (Exception e) {
             if(habitat==null){
-                System.out.println("Score "+player.getName()+", "+scoringCard.getAnimal());
+                PrintTester.print("Score "+player.getName()+", "+scoringCard.getAnimal());
             }else{
-                System.out.println("Score "+player.getName()+", "+habitat);
+                PrintTester.print("Score "+player.getName()+", "+habitat);
             }
         }*/
         this.scorePlayer();

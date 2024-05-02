@@ -336,11 +336,11 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         //131+69,250+(146*i)-100,70,70,
-       // System.out.println("Some fucking nerd tried to get a token. lmao. ");
-        //System.out.println("Skibidi stop double pick = "+stopDoublePick);
-        //System.out.println("Ohio allow pick = "+allowPick);
-        //System.out.println("Raghav Ahuja limited selection = "+limitedSelection);
-        //System.out.println("Picked hex = "+pickedHex);
+       // PrintTester.print("Some fucking nerd tried to get a token. lmao. ");
+        //PrintTester.print("Skibidi stop double pick = "+stopDoublePick);
+        //PrintTester.print("Ohio allow pick = "+allowPick);
+        //PrintTester.print("Raghav Ahuja limited selection = "+limitedSelection);
+        //PrintTester.print("Picked hex = "+pickedHex);
         if (pickCombo&&pickedHex!=-1&&!stopDoublePick){
             for (int i = 0;i<4;i++){
                 if (hexagons[i].isPointInsideHexagon(e)){
@@ -487,7 +487,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
     public void jasperisadumbass(){
-        //System.out.println("Skibidi Raghav Ahuja");
+        //PrintTester.print("Skibidi Raghav Ahuja");
         stopDoublePick = false;
         allowPick=true;
         limitedSelection =-1;
@@ -515,10 +515,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             tokenPlaced = true;
             spendToken.setVisible(false);
             jcb.setVisible(false);
-            //System.out.println("tokenPlaced = true");
+            //PrintTester.print("tokenPlaced = true");
         }else{
             tilePlaced = true;
-            //System.out.println("tilePlaced = true");
+            //PrintTester.print("tilePlaced = true");
         }
         repaint();
     }

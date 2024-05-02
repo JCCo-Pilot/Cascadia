@@ -125,15 +125,15 @@ public class Player implements Comparable{
     }
 
     public void add(StarterTile s){
-        System.out.println("StarterTile add method called");
-        System.out.println("up="+s.up);
-        System.out.println("downleft="+s.down_left);
-        System.out.println("downright="+s.down_right);
+        PrintTester.print("StarterTile add method called");
+        PrintTester.print("up="+s.up);
+        PrintTester.print("downleft="+s.down_left);
+        PrintTester.print("downright="+s.down_right);
         graph = new HabitatGraph(s);
     }
     public void decrement() {
     	turns = turns-1;
-        //System.out.println("Decremented");
+        //PrintTester.print("Decremented");
     }
     public int getTurn() {
     	return turns;

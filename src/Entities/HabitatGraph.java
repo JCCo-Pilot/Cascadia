@@ -22,20 +22,20 @@ public class HabitatGraph{
         root.setCoordinate(new MathPoint(500, 490));
         root.add(s.down_left, HabitatTiles.LEFT);
         root.add(s.up, HabitatTiles.UP_LEFT);
-        System.out.println(iterate().toString());
+        PrintTester.print(iterate().toString());
         for(HabitatTiles h:this.iterate()){
             connectTilesToNonConnectedAdjacents();
             h.replaceNullConnectionsWithEmpty();
         }
         connectTilesToNonConnectedAdjacents();
-        System.out.println(iterate().toString());
+        PrintTester.print(iterate().toString());
         this.fixStackedTileLocation();
     }
 
 
 
     public void drawGraph(Graphics g, Boolean drawEmptys){
-        //System.out.println("DrawGraph method called");
+        //PrintTester.print("DrawGraph method called");
         for(HabitatTiles h: iterate()){
             if(h.isEmpty()){
                 if(drawEmptys){
@@ -44,7 +44,7 @@ public class HabitatGraph{
             }else{
                 new Philip(Philip.ActionVar.DRAW, new Object[]{g, h});
             }
-            //System.out.println(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
+            //PrintTester.print(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
         }
         /*for(HabitatTiles h:iterate()){
             for(HabitatTiles con:h.getConnections().values()){
@@ -103,7 +103,7 @@ public class HabitatGraph{
                 //h.drawHexagon(g, radius, xNew, yNew);
                 new Philip(Philip.ActionVar.DRAWPOSITION, new Object[]{g, h, radius, xNew, yNew});
             }
-            //System.out.println(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
+            //PrintTester.print(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
         }
         
     }
@@ -125,7 +125,7 @@ public class HabitatGraph{
                 filterReturn.add(h);
             }
         }
-        //System.out.println("Filter for "+hab+" returns "+filterReturn.toString());
+        //PrintTester.print("Filter for "+hab+" returns "+filterReturn.toString());
         return filterReturn;
     }
 
@@ -140,7 +140,7 @@ public class HabitatGraph{
             return;
         }else{
             s.add(h);
-            System.out.println("iterate " + h);
+            PrintTester.print("iterate " + h);
             for(int i = 0; i>6; i++){
                 iterate(h.get(i), s);
             }
@@ -301,7 +301,7 @@ public class HabitatGraph{
     }
 
     public HabitatTiles bfs(MathPoint p){
-        //System.out.println("bfs "+p);
+        //PrintTester.print("bfs "+p);
         /*Queue<HabitatTiles> toVisit = new LinkedList<HabitatTiles>();
         Queue<HabitatTiles> visited = new LinkedList<HabitatTiles>();
         toVisit.add(root);
@@ -310,7 +310,7 @@ public class HabitatGraph{
             if(!visited.contains(current)){
                 visited.offer(current);
                 if(current.isPointInsideHexagon(p)){
-                    System.out.println("bfs found "+current+" at "+p);
+                    PrintTester.print("bfs found "+current+" at "+p);
                     return current;
                 }
                 for(HabitatTiles h: current.getConnections().values()){
@@ -318,7 +318,7 @@ public class HabitatGraph{
                 }
             }
         }
-        System.out.println("bfs found null at "+p);
+        PrintTester.print("bfs found null at "+p);
         return null;*/
         for(HabitatTiles h:iterate()){
             if(h.isPointInsideHexagon(p)||h.getCoordinate().equals(p)){
@@ -337,7 +337,7 @@ public class HabitatGraph{
     }
 
     public void fixStackedTileLocation(){
-        //System.out.println("/////////// FIX STACKED BEGIN");
+        //PrintTester.print("/////////// FIX STACKED BEGIN");
         HashMap<HabitatTiles, HashSet<HabitatTiles>> checkedPairs = new HashMap<HabitatTiles, HashSet<HabitatTiles>>();
         for(HabitatTiles i:this.iterate()){
             if(!checkedPairs.containsKey(i)){
@@ -353,22 +353,22 @@ public class HabitatGraph{
                     checkedPairs.get(i).add(j);
                     checkedPairs.get(j).add(i);
                     if(i.isPointInsideHexagon(j.getCoordinate())||i.getCoordinate().equals(j.getCoordinate())){//(i.getXPos()==j.getXPos()&&i.getYPos()==j.getYPos())){
-                        System.out.println(i+" : "+i.getCoordinate().toString()+", "+j+" : "+j.getCoordinate().toString());
+                        PrintTester.print(i+" : "+i.getCoordinate().toString()+", "+j+" : "+j.getCoordinate().toString());
                         if(i.isEmpty()){
                             i.replaceWith(j);
-                            System.out.println(i+" removed because i empty");
+                            PrintTester.print(i+" removed because i empty");
                         }else if(j.isEmpty()){
                             j.replaceWith(i);
-                            System.out.println(j+" removed because j empty");
+                            PrintTester.print(j+" removed because j empty");
                         }else{
                             j.replaceWith(i);
-                            System.out.println(j+" removed because both empty");
+                            PrintTester.print(j+" removed because both empty");
                         }
                     }
                 }
             }
         }
-        //System.out.println("/////////// FIX STACKED END");
+        //PrintTester.print("/////////// FIX STACKED END");
     }
 
     public void connectTilesToNonConnectedAdjacents(){
@@ -391,13 +391,13 @@ public class HabitatGraph{
         Integer max = 0;
         groups.remove(null);
         for(HashSet<HabitatTiles> group:groups){
-            //System.out.println(target+" group size "+group.size());
+            //PrintTester.print(target+" group size "+group.size());
             group.remove(null);
             if(group.size()>max){
                 max = group.size();
             }
         }
-        //System.out.println(target + " returns "+max);
+        //PrintTester.print(target + " returns "+max);
         return max;
     }
 
@@ -407,7 +407,7 @@ public class HabitatGraph{
         while(!q.isEmpty()){
             new Philip(Philip.ActionVar.GROUP, new Object[]{target, q, group, visitedTiles});
         }
-        //System.out.println(target+" group size = "+group.size());
+        //PrintTester.print(target+" group size = "+group.size());
     }
 
     private class Philip{
@@ -446,7 +446,7 @@ public class HabitatGraph{
             Graphics graphics;
             HabitatTiles tile;
             private DrawingPhilip(Graphics g, HabitatTiles toDraw){
-                //System.out.println("DrawingPhilip");
+                //PrintTester.print("DrawingPhilip");
                 graphics = g;
                 tile = toDraw;
             }
@@ -463,7 +463,7 @@ public class HabitatGraph{
             int x;
             int y;
             private PositionalPhilip(Graphics g, HabitatTiles toDraw, double rad, int xPos, int yPos){
-                //System.out.println("PositionalPhilip");
+                //PrintTester.print("PositionalPhilip");
                 graphics = g;
                 tile = toDraw;
                 radius = rad;
@@ -479,7 +479,7 @@ public class HabitatGraph{
         private class ConnectionPhilip extends Thread{
             HabitatTiles h;
             private ConnectionPhilip(HabitatTiles tile){
-                //System.out.println("ConnectionPhilip");
+                //PrintTester.print("ConnectionPhilip");
                 h = tile;
             }
 
@@ -515,10 +515,10 @@ public class HabitatGraph{
                     if(!visitedTiles.contains(current)){
                         group.add(current);
                         visitedTiles.add(current);
-                        //System.out.println(current+" added to group of "+target);
+                        //PrintTester.print(current+" added to group of "+target);
                         for(int i = 0; i<6; i++){
                             HabitatTiles next = current.get(i);
-                            //System.out.println("HabitatMatch between "+current.getHabitats()+", "+next.getHabitats()+" at "+i+" returns "+ current.habitatMatch(i));
+                            //PrintTester.print("HabitatMatch between "+current.getHabitats()+", "+next.getHabitats()+" at "+i+" returns "+ current.habitatMatch(i));
                             if(current.habitatMatch(i)&&current.getHabitats().get(i)==target&&!next.isEmpty()){
                                 q.add(next);
                             }

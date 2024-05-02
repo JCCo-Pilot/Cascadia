@@ -83,7 +83,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     			max = players.get(i);
     		}
     	}
-    	System.out.println(max.getName());
+    	PrintTester.print(max.getName());
     	return max;
     }
     private void score(){
@@ -244,7 +244,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         salmonCard = new SalmonCard(type);
     }
     private void addAll(ArrayList<JButton>comps){
-        //System.out.println("Line 59"+comps.size());
+        //PrintTester.print("Line 59"+comps.size());
         for (int i =0;i<comps.size();i++){
             this.add(comps.get(i));
         }

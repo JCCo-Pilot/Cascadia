@@ -147,7 +147,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        //System.out.println("******************************************* PLAYER DISPLAY CLICK "+e.getX()+", "+e.getY());
+        //PrintTester.print("******************************************* PLAYER DISPLAY CLICK "+e.getX()+", "+e.getY());
         periodic();
         //for(int i =0;i<players.get(0).getHexagons().size();i++){
             //if(players.get(0).getHexagons().get(i).isPointInsideHexagon(e)){
@@ -365,7 +365,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             rotateCButton.setVisible(true);
         }
         try {
-            System.out.println("update buttons called by player display");
+            PrintTester.print("update buttons called by player display");
             mainPanel.updateButtons();
         } catch (Exception e) {
             // TODO: handle exception

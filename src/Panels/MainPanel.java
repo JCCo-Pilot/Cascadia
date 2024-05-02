@@ -260,14 +260,14 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }
         for(Player p:players){
             for(CardAnimals c:CardAnimals.values()){
-                System.out.println(p.getName()+", "+c+": "+p.getScore(c));
+                PrintTester.print(p.getName()+", "+c+": "+p.getScore(c));
             }
             for(Habitats h:Habitats.values()){
-                System.out.println(p.getName()+", "+h+" SCORE: "+p.getScore(h));
-                System.out.println(p.getName()+", "+h+" BONUS: "+p.getBonus(h));
+                PrintTester.print(p.getName()+", "+h+" SCORE: "+p.getScore(h));
+                PrintTester.print(p.getName()+", "+h+" BONUS: "+p.getBonus(h));
             }
-            System.out.println(p.getName()+"NATURE TOKENS: "+p.getNatureTokens());
-            System.out.println(p.getName()+"SCORE: "+p.getScore());
+            PrintTester.print(p.getName()+"NATURE TOKENS: "+p.getNatureTokens());
+            PrintTester.print(p.getName()+"SCORE: "+p.getScore());
         }
     }
 
@@ -378,7 +378,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     public void endGameTime(EndGameEvent e){
         GameStateEvent gse = new GameStateEvent(this,players.get(0));
         listener.process(gse);
-        //System.out.println("Skbidi on that toilet");
+        //PrintTester.print("Skbidi on that toilet");
     }
     public void mouseClicked(MouseEvent e) {
     	int x = e.getX();

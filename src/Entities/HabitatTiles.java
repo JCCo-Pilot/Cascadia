@@ -209,8 +209,8 @@ public class HabitatTiles extends PointGenerator{
 
     public Boolean habitatMatch(Integer connection){
         HabitatTiles c = this.get(connection);
-        //System.out.println("HabitatSides this "+habitatSides.toString());
-        //System.out.println("HabitatSides c "+c.getHabitats().toString());
+        //PrintTester.print("HabitatSides this "+habitatSides.toString());
+        //PrintTester.print("HabitatSides c "+c.getHabitats().toString());
         try {
             return this.habitatSides.get(connection).equals(c.getHabitats().get(c.getSideOf(this)));
         } catch (Exception e) {
@@ -295,7 +295,7 @@ public class HabitatTiles extends PointGenerator{
     public void setCoordinate(MathPoint m){
         super.setX(m.xPoint);
         super.setY(m.yPoint);
-        //System.out.println("Coords of "+this+" set to "+m.xPoint+", "+m.yPoint);
+        //PrintTester.print("Coords of "+this+" set to "+m.xPoint+", "+m.yPoint);
     }
     //rotational stuff
     public static BufferedImage rotate(BufferedImage image, double angle) {
@@ -370,7 +370,7 @@ public class HabitatTiles extends PointGenerator{
         if (rotation>360){
             rotation-=360;
         }
-        System.out.println(imageName+" rotated: "+habitatSides.toString());
+        PrintTester.print(imageName+" rotated: "+habitatSides.toString());
         //out.println("Rotation- "+getRotation());
     }
     public void rotateC(){
@@ -383,7 +383,7 @@ public class HabitatTiles extends PointGenerator{
         if (rotation>360){
             rotation-=360;
         }
-        System.out.println(imageName+" rotated: "+habitatSides.toString());
+        PrintTester.print(imageName+" rotated: "+habitatSides.toString());
         //out.println("Rotation- "+getRotation());
     }
 
@@ -466,7 +466,7 @@ public class HabitatTiles extends PointGenerator{
         //out.println("canPick method:"+tk.toString());
         if (super.getTokens()==null&&super.getTokens()==null&&tk!=null){
             /*if(animals.contains(CardAnimals.StringToAnimal(tk.getName()))){
-                System.out.println("Called");
+                PrintTester.print("Called");
                 return true;
             }*/
             //out.println("Name"+tk.getName());
@@ -510,7 +510,7 @@ public class HabitatTiles extends PointGenerator{
             y -= -1*size*3/2.0;
         }
 
-        //System.out.println(direction + " offset of "+this+" is "+x+", "+y);
+        //PrintTester.print(direction + " offset of "+this+" is "+x+", "+y);
 
         Integer xPoint = (int)(double)x;
         Integer yPoint = (int)(double)y;

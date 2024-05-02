@@ -38,10 +38,10 @@ public class ScoreTesterPanel extends Thread{
         Scorer.score(players, cards);
         for(Player p:players){
             for(ScoringCard c:cards){
-                System.out.println(p.getName()+", "+c.getAnimal()+": "+p.getScore(c.getAnimal()));
+                PrintTester.print(p.getName()+", "+c.getAnimal()+": "+p.getScore(c.getAnimal()));
             }
             for(Habitats h:Habitats.values()){
-                System.out.println(p.getName()+", "+h+": "+p.getScore(h));
+                PrintTester.print(p.getName()+", "+h+": "+p.getScore(h));
             }
         }
     }
