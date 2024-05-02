@@ -294,7 +294,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         sTiles.add(new StarterTile(tiles).setPos(438, 456, 70.0));
         tiles.clear();
         //tile 2
-        //fix this here/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         tiles.add(new HabitatTiles("forest-elk-key", new String[]{"forest"}, new String[]{"elk"}, true, 250, 100, size,true));
         tiles.add(new HabitatTiles("lake+mountain-hawk-elk-bear", new String[]{"lake","mountain"}, new String[]{"bear","elk","hawk"}, false, 190, 205, size,true));//240
         tiles.get(1).setOffset(240);
