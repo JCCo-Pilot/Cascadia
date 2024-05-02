@@ -39,10 +39,10 @@ public class HabitatGraph{
         for(HabitatTiles h: iterate()){
             if(h.isEmpty()){
                 if(drawEmptys){
-                    new Philip(Philip.ActionVar.DRAW, new Object[]{g, h});
+                    new TaskThreadManager(TaskThreadManager.ActionVar.DRAW, new Object[]{g, h});
                 }
             }else{
-                new Philip(Philip.ActionVar.DRAW, new Object[]{g, h});
+                new TaskThreadManager(TaskThreadManager.ActionVar.DRAW, new Object[]{g, h});
             }
             //PrintTester.print(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
         }
@@ -101,7 +101,7 @@ public class HabitatGraph{
                 int yNew = (int) (yCartesian*ratio*ratio2) + center.yPoint;
 
                 //h.drawHexagon(g, radius, xNew, yNew);
-                new Philip(Philip.ActionVar.DRAWPOSITION, new Object[]{g, h, radius, xNew, yNew});
+                new TaskThreadManager(TaskThreadManager.ActionVar.DRAWPOSITION, new Object[]{g, h, radius, xNew, yNew});
             }
             //PrintTester.print(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
         }
@@ -374,7 +374,7 @@ public class HabitatGraph{
     public void connectTilesToNonConnectedAdjacents(){
         for(HabitatTiles h:iterate()){
             for(int i = 0; i<6; i++){
-                new Philip(Philip.ActionVar.CONNECT, new Object[]{h});
+                new TaskThreadManager(TaskThreadManager.ActionVar.CONNECT, new Object[]{h});
             }
         }
     }
@@ -405,12 +405,12 @@ public class HabitatGraph{
         Queue<HabitatTiles> q = new LinkedList<HabitatTiles>();
         q.add(tile);
         while(!q.isEmpty()){
-            new Philip(Philip.ActionVar.GROUP, new Object[]{target, q, group, visitedTiles});
+            new TaskThreadManager(TaskThreadManager.ActionVar.GROUP, new Object[]{target, q, group, visitedTiles});
         }
         //PrintTester.print(target+" group size = "+group.size());
     }
 
-    private class Philip{
+    private class TaskThreadManager{
         private enum ActionVar{
             DRAW,
             DRAWPOSITION,
@@ -418,22 +418,26 @@ public class HabitatGraph{
             GROUP,
         }
 
-        private Philip(ActionVar a, Object[] arr){
+        private TaskThreadManager(ActionVar a, Object[] arr){
             switch(a){
                 case DRAW:
-                    DrawingPhilip d = new DrawingPhilip((Graphics)arr[0], (HabitatTiles)arr[1]);
+                    DrawingTaskThreadManager d = new DrawingTaskThreadManager((Graphics)arr[0], (HabitatTiles)arr[1]);
+                    d.setPriority(6);
                     d.run();
                     break;
                 case DRAWPOSITION:
-                    PositionalPhilip p = new PositionalPhilip((Graphics)arr[0], (HabitatTiles)arr[1], (double)arr[2], (int)arr[3], (int)arr[4]);
+                    PositionalTaskThreadManager p = new PositionalTaskThreadManager((Graphics)arr[0], (HabitatTiles)arr[1], (double)arr[2], (int)arr[3], (int)arr[4]);
+                    p.setPriority(1);
                     p.run();
                     break;
                 case CONNECT:
-                    ConnectionPhilip c = new ConnectionPhilip((HabitatTiles)arr[0]);
+                    ConnectionTaskThreadManager c = new ConnectionTaskThreadManager((HabitatTiles)arr[0]);
+                    c.setPriority(7);
                     c.run();
                     break;
                 case GROUP:
-                    GroupingPhilip g = new GroupingPhilip((Habitats)arr[0],(Queue<HabitatTiles>)arr[1], (HashSet<HabitatTiles>)arr[2], (HashSet<HabitatTiles>)arr[3]);
+                    GroupingTaskThreadManager g = new GroupingTaskThreadManager((Habitats)arr[0],(Queue<HabitatTiles>)arr[1], (HashSet<HabitatTiles>)arr[2], (HashSet<HabitatTiles>)arr[3]);
+                    g.setPriority(1);
                     g.run();
                     break;
                 default:
@@ -442,11 +446,11 @@ public class HabitatGraph{
             }
         }
 
-        private class DrawingPhilip extends Thread{
+        private class DrawingTaskThreadManager extends Thread{
             Graphics graphics;
             HabitatTiles tile;
-            private DrawingPhilip(Graphics g, HabitatTiles toDraw){
-                //PrintTester.print("DrawingPhilip");
+            private DrawingTaskThreadManager(Graphics g, HabitatTiles toDraw){
+                //PrintTester.print("DrawingTaskThreadManager");
                 graphics = g;
                 tile = toDraw;
             }
@@ -456,14 +460,14 @@ public class HabitatGraph{
             }
         }
 
-        private class PositionalPhilip extends Thread{
+        private class PositionalTaskThreadManager extends Thread{
             Graphics graphics;
             HabitatTiles tile;
             double radius;
             int x;
             int y;
-            private PositionalPhilip(Graphics g, HabitatTiles toDraw, double rad, int xPos, int yPos){
-                //PrintTester.print("PositionalPhilip");
+            private PositionalTaskThreadManager(Graphics g, HabitatTiles toDraw, double rad, int xPos, int yPos){
+                //PrintTester.print("PositionalTaskThreadManager");
                 graphics = g;
                 tile = toDraw;
                 radius = rad;
@@ -476,10 +480,10 @@ public class HabitatGraph{
             }
         }
 
-        private class ConnectionPhilip extends Thread{
+        private class ConnectionTaskThreadManager extends Thread{
             HabitatTiles h;
-            private ConnectionPhilip(HabitatTiles tile){
-                //PrintTester.print("ConnectionPhilip");
+            private ConnectionTaskThreadManager(HabitatTiles tile){
+                //PrintTester.print("ConnectionTaskThreadManager");
                 h = tile;
             }
 
@@ -497,12 +501,12 @@ public class HabitatGraph{
 
         }
 
-        private class GroupingPhilip extends Thread{
+        private class GroupingTaskThreadManager extends Thread{
             Queue<HabitatTiles> q;
             HashSet<HabitatTiles> group;
             HashSet<HabitatTiles> visitedTiles;
             Habitats target;
-            private GroupingPhilip(Habitats h, Queue<HabitatTiles> queue, HashSet<HabitatTiles> g, HashSet<HabitatTiles> v){
+            private GroupingTaskThreadManager(Habitats h, Queue<HabitatTiles> queue, HashSet<HabitatTiles> g, HashSet<HabitatTiles> v){
                 target = h;
                 q = queue;
                 group = g;

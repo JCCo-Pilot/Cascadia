@@ -488,6 +488,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public int getYSize(){return ySize;}
     public void jasperisadumbass(){
         //PrintTester.print("Skibidi Raghav Ahuja");
+        Thread.currentThread().setPriority(10);
         stopDoublePick = false;
         allowPick=true;
         limitedSelection =-1;
@@ -508,6 +509,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
         ScoreTesterPanel.update();
         periodic();
+        Thread.currentThread().setPriority(5);
     }
     public void placement(Boolean b){
         //true is token, false is tile

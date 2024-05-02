@@ -32,6 +32,7 @@ public class Scorer implements Runnable{
             for(Habitats h: Habitats.values()){
                 Scorer s = new Scorer(p, h);
                 Thread t = new Thread(s);
+                t.setPriority(3);
                 habitatThreads.add(t);
                 //s.scorePlayer();
                 t.start();
@@ -39,6 +40,7 @@ public class Scorer implements Runnable{
             for(ScoringCard card:scoringCards){
                 Scorer s = new Scorer(p, card);
                 Thread t = new Thread(s);
+                t.setPriority(2);
                 wildlifeThreads.add(t);
                 //s.scorePlayer();
                 t.start();
