@@ -9,12 +9,16 @@ public class PrintTester extends Thread{
     private static PrintTester printer = new PrintTester();
     private static HashMap<String, Long> requestTimeStamps = new HashMap<String, Long>();
     private static Long threshold = (long) 500;
+    private static Boolean awake = false;
 
     
 
     public static void print(String s){
-        Long submissionTime = System.currentTimeMillis();
-        submitPrintRequest(s, submissionTime);
+        if(awake){
+            Long submissionTime = System.currentTimeMillis();
+            submitPrintRequest(s, submissionTime);
+        }
+        
     }
 
     public static void submitPrintRequest(String s, Long time){
