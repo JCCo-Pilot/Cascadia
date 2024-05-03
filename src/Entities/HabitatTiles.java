@@ -152,7 +152,7 @@ public class HabitatTiles extends PointGenerator{
 
     public HabitatTiles(String imageName, String[] habitats, String[] animals, boolean isKeyStone, Integer x, Integer y, Double size,boolean isStarter){
         super(x, y, size);
-        out.println("Called");
+        PrintTester.print("Called");
         this.imageName = imageName;
         this.isKeystone = isKeyStone;
 

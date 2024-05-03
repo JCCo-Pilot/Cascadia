@@ -1,5 +1,7 @@
 package Panels;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.*;
 import EventAndListener.*;
 import MathHelper.*;
@@ -18,6 +20,8 @@ public class ScoreTesterPanel extends Thread{
     private static ArrayList<Player> players = new ArrayList<>();
     private static ArrayList<ScoringCard> cards = new ArrayList<>();
     private static HashSet<ScoreTesterPanel> panels = new HashSet<ScoreTesterPanel>();
+    private static Boolean running = false;
+
 
     
     public ScoreTesterPanel(ArrayList<Player> players, ArrayList<ScoringCard> cards){
@@ -30,8 +34,14 @@ public class ScoreTesterPanel extends Thread{
     }
 
     public static void update(){
-        ScoreTesterPanel s = new ScoreTesterPanel();
-        s.run();
+        if(running){
+
+        }else{
+            running = true;
+            ScoreTesterPanel s = new ScoreTesterPanel();
+            s.run();
+        }
+        
     }
 
     public void run(){
@@ -44,5 +54,6 @@ public class ScoreTesterPanel extends Thread{
                 PrintTester.print(p.getName()+", "+h+": "+p.getScore(h));
             }
         }
+        running = false;
     }
 }
