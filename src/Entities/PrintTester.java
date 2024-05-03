@@ -8,8 +8,8 @@ public class PrintTester extends Thread{
     private static Queue<String> printQueue = new LinkedList<String>();
     private static PrintTester printer = new PrintTester();
     private static HashMap<String, Long> requestTimeStamps = new HashMap<String, Long>();
-    private static Long threshold = (long) 500;
-    private static Boolean awake = false;
+    private static Long threshold = (long) 2000;
+    private static Boolean awake = true;
 
     
 
