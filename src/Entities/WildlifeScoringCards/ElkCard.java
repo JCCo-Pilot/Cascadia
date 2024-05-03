@@ -99,6 +99,11 @@ public class ElkCard implements ScoringCard{
                         }
                     }
                 }   
+                /*for(HabitatTiles e:elk){
+                    if(e.getNumberOf(CardAnimals.ELK)==0){
+
+                    }
+                }*/
                 resolveConnectedElkGroups(groupPoints0);
                 Integer points0 = 0;
                 for(Integer points:groupPoints0.values()){

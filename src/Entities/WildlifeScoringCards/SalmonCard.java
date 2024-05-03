@@ -159,7 +159,7 @@ public class SalmonCard implements ScoringCard{
                     //TODO: if the empty animal token ever gets changed to avoid null errors, change what it is here
                     for(HabitatTiles salmonTile: run){
                         for(HabitatTiles connection: salmonTile.getConnections().values()){
-                            if(connection.getToken()!=null){
+                            if(connection.tokenAnimal()!=null){
                                 adjacentTokens.add(connection);
                             }
                         }
