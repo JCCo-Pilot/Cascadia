@@ -91,10 +91,14 @@ public class FoxCard implements ScoringCard{
                     }
                     histogram.remove(null);
                     histogram.remove(CardAnimals.FOX);//cant be other pairs of foxes
+                    HashSet<CardAnimals> remove = new HashSet<CardAnimals>();
                     for(CardAnimals animal:histogram.keySet()){
                         if(histogram.get(animal)!=2){
-                            histogram.remove(animal);
+                            remove.add(animal);
                         }
+                    }
+                    for(CardAnimals animal:remove){
+                        histogram.remove(animal);
                     }
                     switch(histogram.size()){
                         case 1:
@@ -159,10 +163,14 @@ public class FoxCard implements ScoringCard{
                     }
                     histogram.remove(null);
                     histogram.remove(CardAnimals.FOX);
+                    HashSet<CardAnimals> remove = new HashSet<CardAnimals>();
                     for(CardAnimals animal:histogram.keySet()){
                         if(histogram.get(animal)!=2){
-                            histogram.remove(animal);
+                            remove.add(animal);
                         }
+                    }
+                    for(CardAnimals animal:remove){
+                        histogram.remove(animal);
                     }
                     switch(histogram.keySet().size()){
                         case 1:
