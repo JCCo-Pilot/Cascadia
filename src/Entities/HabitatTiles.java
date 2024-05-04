@@ -236,6 +236,7 @@ public class HabitatTiles extends PointGenerator{
             g.setColor(new Color(255, 255, 143));
             g.fillPolygon(super.getPolygon());
             g.setColor(Color.BLACK);
+            //g.drawString(imageName, super.getXPos(), super.getYPos());
         }else{
             super.drawHexagon(g);
             Double offset = super.getSize();
@@ -257,6 +258,7 @@ public class HabitatTiles extends PointGenerator{
                     g.drawImage(super.getTokens().getImage(),xPos-sz,yPos-sz,sz*2,sz*2,null);
                 }   
             }
+            //g.drawString(imageName, xPos, yPos);
         }
         
     }

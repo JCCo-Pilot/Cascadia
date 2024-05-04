@@ -9,7 +9,7 @@ public class PrintTester extends Thread{
     private static PrintTester printer = new PrintTester();
     private static HashMap<String, Long> requestTimeStamps = new HashMap<String, Long>();
     private static Long threshold = (long) 10000;
-    private static Boolean awake = true;
+    private static Boolean awake = false;
 
     
 

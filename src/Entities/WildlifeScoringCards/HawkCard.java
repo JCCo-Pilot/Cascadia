@@ -65,7 +65,8 @@ public class HawkCard implements ScoringCard{
         HashSet<HabitatTiles> hawks = h.filter(CardAnimals.HAWK);
         HashMap<HabitatTiles, HashSet<HashSet<HabitatTiles>>> linesOfSightByHawk = new HashMap<HabitatTiles, HashSet<HashSet<HabitatTiles>>>();
         for(HabitatTiles hawk:hawks){
-            linesOfSightByHawk.put(hawk, findHawkLinesOfSight(hawk));
+            HashSet<HashSet<HabitatTiles>> lines = findHawkLinesOfSight(hawk);
+            linesOfSightByHawk.put(hawk, lines);
         }
         switch(cardLetter){
             case CARD_A:
@@ -187,9 +188,20 @@ public class HawkCard implements ScoringCard{
     private HashSet<HashSet<HabitatTiles>> findHawkLinesOfSight(HabitatTiles hawk){
         HashSet<HashSet<HabitatTiles>> linesOfSight = new HashSet<HashSet<HabitatTiles>>();
         for(int dir = 0; dir<6; dir++){
-            HashSet<HabitatTiles> lineOfSight = new HashSet<HabitatTiles>();
+            HashSet<HabitatTiles> lineOfSight = new HashSet<HabitatTiles>();        
+            lineOfSight = new HashSet<HabitatTiles>();
             lineOfSight.add(hawk);
+            //System.out.println("Pushed Direction: "+dir);
             addToLineOfSight(hawk.get(dir), dir, lineOfSight);
+            int hawkCounter = 0;
+            for(HabitatTiles h:lineOfSight){
+                if(h.tokenAnimal()!=null&&h.tokenAnimal()==CardAnimals.HAWK){
+                    hawkCounter++;
+                }
+            }
+            if(hawkCounter==2){
+                linesOfSight.add(lineOfSight);
+            }
         }
         return linesOfSight;
     }
@@ -198,11 +210,15 @@ public class HawkCard implements ScoringCard{
         if(inLine==null){
             return;
         }else{
+            //System.out.println("inLine = "+inLine.toString());
+            //System.out.println("dir = "+direction);
             lineOfSight.add(inLine);
-            if(inLine.tokenAnimal()!=CardAnimals.HAWK){//ensure that coming across a hawk would end the line 
+            if(inLine.tokenAnimal()!=CardAnimals.HAWK&&inLine.get(direction)!=null){//ensure that coming across a hawk would end the line 
                 addToLineOfSight(inLine.get(direction), direction, lineOfSight);
+                //System.out.println(inLine.get(direction).toString()+" added to line of sight");
             }
         }
+        //System.out.println("Line of Sight = "+lineOfSight);
     }
 
     private void removeDuplicateLinesOfSight(HashSet<HashSet<HabitatTiles>> totalLOS){
