@@ -25,25 +25,15 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
     private ArrayList<PointGenerator>hexagons = new ArrayList<>();
     private ArrayList<PointGenerator>playerOptions = new ArrayList<>();
     private ArrayList<PointGenerator>difficultyOptions = new ArrayList<>();
-    public StartPanel(){
-        //setSize(1600,900);
+
+    private boolean difficultyLimit;
+    public StartPanel(Boolean b){
         setLayout(null);
-        /*start = new JButton("Start");
-        start.addActionListener(this);
-        start.setBounds(696, 550, 175, 50);
-        instructions = new JButton("Instructions");
-        instructions.setBounds(1305,700,175,50);
-        instructions.addActionListener(this);
-        instructions.setVisible(true);
-        instructions.setFocusable(false);
-        start.setVisible(true);
-        start.setFocusable(false);
-        this.add(start);
-        this.add(instructions);*/
         repaint();
         addMouseListener(this);
         makeHexagons();
         pullImages();
+        difficultyLimit = b;
         this.setVisible(true);
     }
     private void makeHexagons(){
@@ -127,7 +117,14 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 g.drawString("4", 970, 330+150);*/
             break;
             case 100:
-                g.drawImage(difficult, 0, 0, 1590, 865, null);
+                if (difficultyLimit){
+                    state = 10;
+                    difficulty = 'a';
+                    repaint();
+                }else if (!difficultyLimit){
+                    g.drawImage(difficult, 0, 0, 1590, 865, null);
+                }
+               
                 /*for (int i =0;i<difficultyOptions.size();i++){
                     difficultyOptions.get(i).drawHexagon(g);
                 }*/
@@ -184,13 +181,19 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 listener.process(gse);
             }
         }else if (state==100){
-            for(int i =0;i<difficultyOptions.size();i++){
-                if (difficultyOptions.get(i).isPointInsideHexagon(e)){
-                    translate(i);
-                    state =10;
-                    repaint();
+            if (!difficultyLimit){
+                for(int i =0;i<difficultyOptions.size();i++){
+                    if (difficultyOptions.get(i).isPointInsideHexagon(e)){
+                        translate(i);
+                        state =10;
+                        repaint();
+                    }
                 }
+            }else if (difficultyLimit){
+                state = 10;
+                
             }
+            
         }else if (state==10){
             if(playerOptions.get(0).isPointInsideHexagon(e)){
                 GameStateEvent gse = new GameStateEvent(this, 1,difficulty);
