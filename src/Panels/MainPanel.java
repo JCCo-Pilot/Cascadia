@@ -29,6 +29,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private FoxCard foxCard;
     private BufferedImage bg;
 
+    private BufferedImage instructions;
+    private Boolean instructBoolean = true;
+
     private BufferedImage troll;
     
     //additional fixes
@@ -65,6 +68,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             //ImageIO.read(Reworking.class.getResource("/Image/BackgroundStart.png"));
             bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/RealMainPanelBG.png"));
             troll = ImageIO.read(MainPanel.class.getResource("/Entities/Images/IMG_5104.jpg"));
+            instructions = ImageIO.read(MainPanel.class.getResource("/Panels/Background/Instructions.png"));
             //bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
             //troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
         }catch(Exception e){
@@ -340,23 +344,29 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     @Override
     public void paint(Graphics g){
         super.paint(g);
-        g.drawImage(bg, 0, 0, 1890,865,null);
-        /*g.setColor(Color.GREEN);
-        for (int i=0;i<4;i++){
-            g.drawRect(1213, 19+(40*i), 352, 40);
-        }*/
-        //g.fillRect(310,0,905,870);
-        this.paintComponents(g);
-        //pa.paint(g);
-        //g.fillRect(700, 100, 500, 500);
-        g.drawImage(bearCard.getImage(), 1213,250,175,170,null);
-        g.drawImage(foxCard.getImage(), 1213+180,250,175,170,null);
-        g.drawImage(elkCard.getImage(), 1213,250+180,175,170,null);
-        g.drawImage(hawkCard.getImage(), 1213+180,250+180,175,170,null);
-        g.drawImage(salmonCard.getImage(), 1213,250+180+180,175,170,null);
-        //g.fillRect(1600, 0, 300, 270);
-        //just for the trolls
-        //g.drawImage(troll,0,0,1900,900,null);
+        if (instructBoolean){
+            g.drawImage(instructions, 0,0, 1890,865,null);
+            //g.drawRect(1780,40,45,45);
+            checkVis();
+        }else{
+            g.drawImage(bg, 0, 0, 1890,865,null);
+            /*g.setColor(Color.GREEN);
+            for (int i=0;i<4;i++){
+                g.drawRect(1213, 19+(40*i), 352, 40);
+            }*/
+            //g.fillRect(310,0,905,870);
+            this.paintComponents(g);
+            //pa.paint(g);
+            //g.fillRect(700, 100, 500, 500);
+            g.drawImage(bearCard.getImage(), 1213,250,175,170,null);
+            g.drawImage(foxCard.getImage(), 1213+180,250,175,170,null);
+            g.drawImage(elkCard.getImage(), 1213,250+180,175,170,null);
+            g.drawImage(hawkCard.getImage(), 1213+180,250+180,175,170,null);
+            g.drawImage(salmonCard.getImage(), 1213,250+180+180,175,170,null);
+            //g.fillRect(1600, 0, 300, 270);
+            //just for the trolls
+            //g.drawImage(troll,0,0,1900,900,null);
+        }
     }
     public ArrayList<Player> getPlayers(){
     	return players;
@@ -411,7 +421,24 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         repaint();
     }
     public void mousePressed(MouseEvent e) {
-    	
+    	if (instructBoolean){
+            int x = e.getX();
+            int y = e.getY();
+            if(x>1780&&x<1825){
+                if (y>40&&y<95){
+                    instructBoolean = false;
+                    checkVis();
+                    repaint();
+                }
+            }
+        }
+    }
+    private void checkVis(){
+        pa.setVisible(!instructBoolean);
+        pd.setVisible(!instructBoolean);
+        for (int i =0;i<buttons.size();i++){
+            buttons.get(i).setVisible(!instructBoolean);
+        }
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
