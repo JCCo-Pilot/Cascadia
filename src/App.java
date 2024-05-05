@@ -25,6 +25,8 @@ public class App extends JFrame implements GameListener{
     private PopPanel pPanel2;
     private PlayThroughPanel ptp;
     private boolean gameEnd = false;
+    //stuff
+    private static final boolean onlyACards= false;
     //testing constructor
     public App(String s,Boolean b){
         super(s);
@@ -49,7 +51,7 @@ public class App extends JFrame implements GameListener{
         this.setSize(1600,900);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
-        spanel = new StartPanel();
+        spanel = new StartPanel(onlyACards);
         spanel.setListener(this);
         add(spanel);
         //troll comments
@@ -68,7 +70,7 @@ public class App extends JFrame implements GameListener{
         if (e.getSource()==ptp){
             //out.println("Recieved issues");
             this.remove(ptp);
-            spanel = new StartPanel();
+            spanel = new StartPanel(onlyACards);
             this.add(spanel);
             spanel.setListener(this);
             repaint();
