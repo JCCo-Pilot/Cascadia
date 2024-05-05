@@ -29,6 +29,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private FoxCard foxCard;
     private BufferedImage bg;
 
+    private JButton instructButton = new JButton("Instructions");
+
     private BufferedImage instructions;
     private Boolean instructBoolean = true;
 
@@ -63,6 +65,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         add(pa);
 
         pd.addListener(pa);
+
+        instructButton.setVisible(!instructBoolean);
+        instructButton.setBounds(1217,800,352,40);
+        this.add(instructButton);
+        instructButton.addActionListener(this);
 
         try{
             //ImageIO.read(Reworking.class.getResource("/Image/BackgroundStart.png"));
@@ -375,7 +382,12 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         listener = g;
     }
     public void actionPerformed(ActionEvent e){
-        out.println("Errors in clicking buttons");
+        if (e.getSource()==instructButton){
+            out.println("Yes sir");
+            instructBoolean = true;
+            checkVis();
+            repaint();
+        }
         for (int i =0;i<buttons.size();i++){
             if (e.getSource()==buttons.get(i)){
                 //out.println("Fuck ");
@@ -436,6 +448,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private void checkVis(){
         pa.setVisible(!instructBoolean);
         pd.setVisible(!instructBoolean);
+        instructButton.setVisible(!instructBoolean);
         for (int i =0;i<buttons.size();i++){
             buttons.get(i).setVisible(!instructBoolean);
         }
