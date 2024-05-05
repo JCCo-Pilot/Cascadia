@@ -23,11 +23,13 @@ public class miniMap extends JComponent implements MouseListener{
     private int ySize = 270;
     private Player player;
     private int xPos,yPos;
+    private UpdateEventListener uListener;
     public miniMap(int x, int y){
         super();
         xPos = x;
         yPos = y;
         this.setVisible(true);
+        this.addMouseListener(this);
         enableInputMethods(true);
     }
     public void paint(Graphics g){
@@ -55,9 +57,14 @@ public class miniMap extends JComponent implements MouseListener{
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        
+        out.println("Clicked");
+        UpdateEvent ue = new UpdateEvent(this,e);
+        uListener.update(ue);
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
+    public void setUListener(UpdateEventListener ul){
+        uListener = ul;
+    }
 }

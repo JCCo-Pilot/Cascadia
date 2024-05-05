@@ -12,6 +12,7 @@ public class UpdateEvent extends EventObject{
     }
     public UpdateEvent(Object source, MouseEvent e){
         super(source);
+        mEvent = e;
     }
     public UpdateEvent(Object source, ActionEvent e){
         super(source);
@@ -22,5 +23,8 @@ public class UpdateEvent extends EventObject{
     }
     public ArrayList<Player>getPlayers(){
         return players;
+    }
+    public MouseEvent getMouseEvent(){
+        return mEvent;
     }
 }

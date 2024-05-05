@@ -95,6 +95,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         miniMap temp = null;
         for (int i =0;i<players.size();i++){
             temp = new miniMap(1590, 20+(215*i));
+            temp.setUListener(this);
             temp.setPlayer(players.get(i));
             temp.setYSize(215);
             temp.setBounds(temp.getXPos(),temp.getYPos(),temp.getPreferredSize().width,temp.getPreferredSize().height);
@@ -452,6 +453,9 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         for (int i =0;i<buttons.size();i++){
             buttons.get(i).setVisible(!instructBoolean);
         }
+        for (int i =0;i<maps.size();i++){
+            maps.get(i).setVisible(!instructBoolean);
+        }
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
@@ -476,11 +480,21 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         return players.size();
     }
     public void update(UpdateEvent e){
-        ArrayList<Player>temp = e.getPlayers();
-        for (int i =0;i<temp.size()&&i<maps.size();i++){
-            maps.get(i).setPlayer(getNumero(i, temp));
-            maps.get(i).repaint();
+        if (e.getPlayers()!=null){
+            ArrayList<Player>temp = e.getPlayers();
+            for (int i =0;i<temp.size()&&i<maps.size();i++){
+                maps.get(i).setPlayer(getNumero(i, temp));
+                maps.get(i).repaint();
+            }
+        }else if (e.getPlayers()==null&&e.getMouseEvent()!=null){
+            out.println("line 490");
+            for (int i =0;i<maps.size();i++){
+                if (e.getSource()==maps.get(i)){
+                    buttons.get(i).doClick();
+                }
+            }
         }
+        
     }
     private Player getNumero(int find , ArrayList<Player>play){
         for (int i =0;i<play.size();i++){
