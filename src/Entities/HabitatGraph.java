@@ -432,7 +432,7 @@ public class HabitatGraph{
                     break;
                 case CONNECT:
                     ConnectionTaskThreadManager c = new ConnectionTaskThreadManager((HabitatTiles)arr[0]);
-                    c.setPriority(7);
+                    //c.setPriority(7);
                     c.run();
                     break;
                 case GROUP:
@@ -480,7 +480,7 @@ public class HabitatGraph{
             }
         }
 
-        private class ConnectionTaskThreadManager extends Thread{
+        private class ConnectionTaskThreadManager{
             HabitatTiles h;
             private ConnectionTaskThreadManager(HabitatTiles tile){
                 //PrintTester.print("ConnectionTaskThreadManager");
