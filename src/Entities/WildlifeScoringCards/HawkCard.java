@@ -166,6 +166,7 @@ public class HawkCard implements ScoringCard{
                     for(HabitatTiles tile:line){
                         uniqueAnimals.add(tile.tokenAnimal());
                     }
+                    uniqueAnimals.remove(null);
                     switch(uniqueAnimals.size()-1){
                         case 0:
                         break;

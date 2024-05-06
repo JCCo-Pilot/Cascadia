@@ -9,7 +9,6 @@ import Entities.Enums.*;
 import EventAndListener.*;
 import Panels.*;
 import static java.lang.System.*;
-
 import java.io.File;
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
