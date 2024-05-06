@@ -110,7 +110,7 @@ public class HabitatGraph{
 
     public void highlightCompatibles(Graphics g, WildlifeTokens w){
         for(HabitatTiles h:iterate()){
-            if(h.canPick(w)){
+            if(!h.isEmpty()&&!h.canPick(w)){
                 h.drawHighlight(g);
             }
         }
