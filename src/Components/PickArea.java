@@ -52,7 +52,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private final String[] choices = {"Choose an option:","Any Combination of Tiles+Tokens","Select Tokens To Remove"};
     
     private PickListener listener;
-    private BufferedImage natureToken;
+    private boolean socialSigma;
     private ArrayList<Player>players = new ArrayList<>();
    
     private JButton overpopButton = constructButton("Over-Population");
@@ -112,11 +112,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         overpopButton.addActionListener(this);
         add(overpopButton);
         
-        try{
-            natureToken = ImageIO.read(new File("src/Entities/Tokens/NatureToken.png"));
-        }catch(Exception e){
-            out.println("Error in pulling pick area");
-        }
 
         setVisible(true);
     }

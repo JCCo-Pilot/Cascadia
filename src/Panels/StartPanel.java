@@ -47,7 +47,8 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             difficultyOptions.add(new PointGenerator(530-265+(265*i), 580, 150.0));
         }
         hexagons.add(new PointGenerator(795, 575, 150.0));
-        hexagons.add(new PointGenerator(1460, 800, 150.0));
+        //also commented out bc gay
+        //hexagons.add(new PointGenerator(1460, 800, 150.0));
     }
     private void pullImages(){
         try{
@@ -175,11 +176,11 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 state =100;
                 hexagons.clear();
                 repaint();
-            }else if (hexagons.get(1).isPointInsideHexagon(e)){
+            }/*else if (hexagons.get(1).isPointInsideHexagon(e)){ //commented out instructions bc gay
                 state =1;
                 GameStateEvent gse = new GameStateEvent(this, 100);
                 listener.process(gse);
-            }
+            }*/
         }else if (state==100){
             if (!difficultyLimit){
                 for(int i =0;i<difficultyOptions.size();i++){

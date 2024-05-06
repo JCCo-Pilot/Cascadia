@@ -29,6 +29,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private FoxCard foxCard;
     private BufferedImage bg;
 
+    private JButton instructButton = new JButton("Instructions");
+
+    private BufferedImage instructions;
+    private Boolean instructBoolean = true;
+
     private BufferedImage troll;
     
     //additional fixes
@@ -61,10 +66,16 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
 
         pd.addListener(pa);
 
+        instructButton.setVisible(!instructBoolean);
+        instructButton.setBounds(1217,800,352,40);
+        this.add(instructButton);
+        instructButton.addActionListener(this);
+
         try{
             //ImageIO.read(Reworking.class.getResource("/Image/BackgroundStart.png"));
             bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/RealMainPanelBG.png"));
             troll = ImageIO.read(MainPanel.class.getResource("/Entities/Images/IMG_5104.jpg"));
+            instructions = ImageIO.read(MainPanel.class.getResource("/Panels/Background/Instructions.png"));
             //bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
             //troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
         }catch(Exception e){
@@ -84,6 +95,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         miniMap temp = null;
         for (int i =0;i<players.size();i++){
             temp = new miniMap(1590, 20+(215*i));
+            temp.setUListener(this);
             temp.setPlayer(players.get(i));
             temp.setYSize(215);
             temp.setBounds(temp.getXPos(),temp.getYPos(),temp.getPreferredSize().width,temp.getPreferredSize().height);
@@ -340,23 +352,29 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     @Override
     public void paint(Graphics g){
         super.paint(g);
-        g.drawImage(bg, 0, 0, 1890,865,null);
-        /*g.setColor(Color.GREEN);
-        for (int i=0;i<4;i++){
-            g.drawRect(1213, 19+(40*i), 352, 40);
-        }*/
-        //g.fillRect(310,0,905,870);
-        this.paintComponents(g);
-        //pa.paint(g);
-        //g.fillRect(700, 100, 500, 500);
-        g.drawImage(bearCard.getImage(), 1213,250,175,170,null);
-        g.drawImage(foxCard.getImage(), 1213+180,250,175,170,null);
-        g.drawImage(elkCard.getImage(), 1213,250+180,175,170,null);
-        g.drawImage(hawkCard.getImage(), 1213+180,250+180,175,170,null);
-        g.drawImage(salmonCard.getImage(), 1213,250+180+180,175,170,null);
-        //g.fillRect(1600, 0, 300, 270);
-        //just for the trolls
-        //g.drawImage(troll,0,0,1900,900,null);
+        if (instructBoolean){
+            g.drawImage(instructions, 0,0, 1890,865,null);
+            //g.drawRect(1780,40,45,45);
+            checkVis();
+        }else{
+            g.drawImage(bg, 0, 0, 1890,865,null);
+            /*g.setColor(Color.GREEN);
+            for (int i=0;i<4;i++){
+                g.drawRect(1213, 19+(40*i), 352, 40);
+            }*/
+            //g.fillRect(310,0,905,870);
+            this.paintComponents(g);
+            //pa.paint(g);
+            //g.fillRect(700, 100, 500, 500);
+            g.drawImage(bearCard.getImage(), 1213,250-70,175,170,null);
+            g.drawImage(foxCard.getImage(), 1213+180,250-70,175,170,null);
+            g.drawImage(elkCard.getImage(), 1213,250+180-80,175,170,null);
+            g.drawImage(hawkCard.getImage(), 1213+180,250+180-80,175,170,null);
+            g.drawImage(salmonCard.getImage(), 1213,250+180+180-90,175,170,null);
+            //g.fillRect(1600, 0, 300, 270);
+            //just for the trolls
+            //g.drawImage(troll,0,0,1900,900,null);
+        }
     }
     public ArrayList<Player> getPlayers(){
     	return players;
@@ -365,7 +383,12 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         listener = g;
     }
     public void actionPerformed(ActionEvent e){
-        out.println("Errors in clicking buttons");
+        if (e.getSource()==instructButton){
+            out.println("Yes sir");
+            instructBoolean = true;
+            checkVis();
+            repaint();
+        }
         for (int i =0;i<buttons.size();i++){
             if (e.getSource()==buttons.get(i)){
                 //out.println("Fuck ");
@@ -411,7 +434,28 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         repaint();
     }
     public void mousePressed(MouseEvent e) {
-    	
+    	if (instructBoolean){
+            int x = e.getX();
+            int y = e.getY();
+            if(x>1780&&x<1825){
+                if (y>40&&y<95){
+                    instructBoolean = false;
+                    checkVis();
+                    repaint();
+                }
+            }
+        }
+    }
+    private void checkVis(){
+        pa.setVisible(!instructBoolean);
+        pd.setVisible(!instructBoolean);
+        instructButton.setVisible(!instructBoolean);
+        for (int i =0;i<buttons.size();i++){
+            buttons.get(i).setVisible(!instructBoolean);
+        }
+        for (int i =0;i<maps.size();i++){
+            maps.get(i).setVisible(!instructBoolean);
+        }
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
@@ -436,11 +480,21 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         return players.size();
     }
     public void update(UpdateEvent e){
-        ArrayList<Player>temp = e.getPlayers();
-        for (int i =0;i<temp.size()&&i<maps.size();i++){
-            maps.get(i).setPlayer(getNumero(i, temp));
-            maps.get(i).repaint();
+        if (e.getPlayers()!=null){
+            ArrayList<Player>temp = e.getPlayers();
+            for (int i =0;i<temp.size()&&i<maps.size();i++){
+                maps.get(i).setPlayer(getNumero(i, temp));
+                maps.get(i).repaint();
+            }
+        }else if (e.getPlayers()==null&&e.getMouseEvent()!=null){
+            out.println("line 490");
+            for (int i =0;i<maps.size();i++){
+                if (e.getSource()==maps.get(i)){
+                    buttons.get(i).doClick();
+                }
+            }
         }
+        
     }
     private Player getNumero(int find , ArrayList<Player>play){
         for (int i =0;i<play.size();i++){
