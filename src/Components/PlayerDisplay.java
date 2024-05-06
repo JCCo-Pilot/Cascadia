@@ -137,6 +137,10 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         Polygon p = new Polygon();
         //cgg.paintAll(g);
         players.get(0).drawInventory(g, showEmptyTiles);
+        if(token!=null&&temp==null){
+            players.get(0).getGraph().highlightCompatibles(g, token);
+        }
+        
         g.setFont(new Font("Arial",100,30));
         g.drawString("Turns Left: "+players.get(0).getTurn(),30,50);
         paintComponents(g);
@@ -326,6 +330,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             repaint();
         }else if (e.getToken()!=null){
             token = e.getToken();
+            repaint();
         }else if(e.getTile()!=null){
             HabitatTiles tiles = e.getTile();
             temp = tiles;

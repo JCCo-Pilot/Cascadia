@@ -263,6 +263,23 @@ public class HabitatTiles extends PointGenerator{
         
     }
 
+    public void drawHighlight(Graphics g){
+        Double offset = super.getSize();
+            int yOffset = (int)(Math.round(offset));
+            Double yo = -1*Math.sqrt(3)/2.0*offset;
+            int xOffset = (int)(Math.round(yo));
+
+            int xPos = super.getXPos();
+            int yPos = super.getYPos();
+        try {
+            g.drawImage(ImageIO.read(HabitatTiles.class.getResource("/Entities/Images/HexHighlight.png")), xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
+            PrintTester.print("Highlight Drawn");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     public void drawHexagon(Graphics g, Double radius, int x, int y){
         Graphics2D g2d = (Graphics2D) g;
         if(isEmpty()){

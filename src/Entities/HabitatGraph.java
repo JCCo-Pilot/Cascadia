@@ -108,6 +108,14 @@ public class HabitatGraph{
         
     }
 
+    public void highlightCompatibles(Graphics g, WildlifeTokens w){
+        for(HabitatTiles h:iterate()){
+            if(h.canPick(w)){
+                h.drawHighlight(g);
+            }
+        }
+    }
+
     public HashSet<HabitatTiles> filter(CardAnimals i){
         HashSet<HabitatTiles> filterReturn = new HashSet<HabitatTiles>();
         for(HabitatTiles h:iterate()){
