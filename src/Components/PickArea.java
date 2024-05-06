@@ -230,7 +230,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             if(firstFour.get(i).getType()==max){
                 
                 Integer rand = (int) (Math.random()*(tokens.size()));
-                tokens.add(firstFour.put(i, tokens.get(rand)));
+                WildlifeTokens w = tokens.get(rand);
+                tokens.remove(w);
+                tokens.add(firstFour.put(i, w));
+                
             }
         }
         for(int i = 3; i>=0; i--){
@@ -496,7 +499,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         if (isOverpopulated3()){
             overpopButton.setVisible(true);
         }else if (!isOverpopulated3()){
-            overpopButton.setVisible(false);
+            overpopButton.setVisible(false); 
         }
         for(Selected s:selectionPanels){
             s.dispose();
@@ -504,6 +507,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
         ScoreTesterPanel.update();
         periodic();
+        players.get(0).updateTypes();
         Thread.currentThread().setPriority(5);
     }
     public void placement(Boolean b){
@@ -627,6 +631,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         if(isOverpopulated3()){
             overpopButton.setVisible(true);
         }
+        ((PlayerDisplay)listener).currentPlayer().updateTypes();
         Selected.currentPlayer = ((PlayerDisplay)listener).currentPlayer();
         if(selectionPanels.size()==0&&!(((PlayerDisplay)listener).getCurrentTile() == null&&((PlayerDisplay)listener).getCurrentToken() == null)){
             Selected s = new Selected();

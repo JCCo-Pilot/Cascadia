@@ -12,6 +12,10 @@ public class Player implements Comparable{
     private HashMap<CardAnimals, Integer> animalScores = new HashMap<CardAnimals, Integer>();
     private HashMap<Habitats, Integer> habitatScores = new HashMap<Habitats, Integer>();
     private HashMap<Habitats, Integer> habitatBonuses = new HashMap<Habitats, Integer>(); 
+    private HashMap<Habitats, Integer> numHabitats = new HashMap<Habitats, Integer>();
+    private HashMap<CardAnimals, Integer> numAnimals = new HashMap<CardAnimals, Integer>();
+    private HashMap<Habitats, Integer> tempNumHabitats = new HashMap<Habitats, Integer>();
+    private HashMap<CardAnimals, Integer> tempNumAnimals = new HashMap<CardAnimals, Integer>();
 
     public Player(int i){
         name= "Player "+i;
@@ -22,6 +26,44 @@ public class Player implements Comparable{
     public String getName(){return name;}
     public HabitatGraph getGraph(){
         return graph;
+    }
+
+    public void updateTypesEndOfTurn(){
+        for(HabitatTiles h:getGraph().iterate()){
+            for(Habitats hab:h.getHabitats().values()){
+                if(numHabitats.containsKey(hab)){
+                    numHabitats.put(hab, numHabitats.get(hab)+1);
+                }else{
+                    numHabitats.put(hab, 1);
+                }
+            }
+            if(h.tokenAnimal()!=null){
+                if(numAnimals.containsKey(h.tokenAnimal())){
+                    numAnimals.put(h.tokenAnimal(), numAnimals.get(h.tokenAnimal())+1);
+                }else{
+                    numAnimals.put(h.tokenAnimal(), 1);
+                }
+            }
+        }
+    }
+
+    public void updateTypes(){
+        for(HabitatTiles h:getGraph().iterate()){
+            for(Habitats hab:h.getHabitats().values()){
+                if(tempNumHabitats.containsKey(hab)){
+                    tempNumHabitats.put(hab, tempNumHabitats.get(hab)+1);
+                }else{
+                    tempNumHabitats.put(hab, 1);
+                }
+            }
+            if(h.tokenAnimal()!=null){
+                if(tempNumAnimals.containsKey(h.tokenAnimal())){
+                    tempNumAnimals.put(h.tokenAnimal(), tempNumAnimals.get(h.tokenAnimal())+1);
+                }else{
+                    tempNumAnimals.put(h.tokenAnimal(), 1);
+                }
+            }
+        }
     }
 
     public ArrayList<HabitatTiles>getHexagons(){
