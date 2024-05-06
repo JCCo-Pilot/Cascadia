@@ -151,6 +151,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         if (players.size()>0){
             g.drawString(players.get(0).getName()+":",40,70);
         }
+        g.setFont(new Font("Arial", 100, 15));
+        g.drawString("Tokens: "+tokens.size(),200,140);
         //other more different option
         /*g.setFont(new Font("Arial",100,30));
         if (players.size()>0){
