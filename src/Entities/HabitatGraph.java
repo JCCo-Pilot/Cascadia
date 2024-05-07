@@ -81,9 +81,7 @@ public class HabitatGraph{
             if(h.getAdjacentTileOffset(HabitatTiles.DOWN_LEFT).yPoint>highestY){
                 highestY = h.getAdjacentTileOffset(HabitatTiles.DOWN_LEFT).yPoint;
             }
-        }
-
-        int xDifference = highestX - lowestX;
+        }        int xDifference = highestX - lowestX;
         int yDifference = highestY - lowestY;
 
         int lowestDifference = (int)(ratio*Math.min(xDifference, yDifference));
