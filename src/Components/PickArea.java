@@ -54,6 +54,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private PickListener listener;
     private boolean socialSigma;
     private ArrayList<Player>players = new ArrayList<>();
+    private Boolean overPopUsed = false;
    
     private JButton overpopButton = constructButton("Over-Population");
     private JButton clearToken = constructButton("End Turn Without Placing Token");
@@ -497,6 +498,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         tileTaken = false;
         tokenPlaced = false;
         tilePlaced = false;
+        overPopUsed = false;
         clearToken.setVisible(false);
         if (isOverpopulated3()){
             overpopButton.setVisible(true);
@@ -530,6 +532,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         periodic();
         if ("Overpopulation".equals(e.getActionCommand())){
             removeOverpopulation();
+            overPopUsed = false;
             ((JComponent) e.getSource()).setVisible(false);
         }else if (e.getSource()==clearToken){
             //periodic();
@@ -630,7 +633,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         while(isOverpopulated4()){
             removeOverpopulation();
         }
-        if(isOverpopulated3()){
+        if(isOverpopulated3()&&!overPopUsed){
             overpopButton.setVisible(true);
         }
         ((PlayerDisplay)listener).currentPlayer().updateTypes();
