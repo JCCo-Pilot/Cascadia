@@ -372,7 +372,7 @@ public class HabitatGraph{
                         }else{
                             j.replaceWith(i);
                             PrintTester.print(j+" removed because both empty");
-                            JOptionPane.showMessageDialog(null, j+" removed because both empty");
+                            JOptionPane.showMessageDialog(null, j+" removed over "+i);
                         }
                     }
                 }
