@@ -25,7 +25,7 @@ public class App extends JFrame implements GameListener{
     private PlayThroughPanel ptp;
     private boolean gameEnd = false;
     //stuff
-    private static final boolean onlyACards= true;
+    private static final boolean onlyACards= false;
     //testing constructor
     public App(String s,Boolean b){
         super(s);
