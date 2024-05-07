@@ -71,8 +71,8 @@ public class Scorer implements Runnable{
                 }
             }
 
-            if(playersWithSecondMax.size()>1){//no bonus points awarded if no ties for second last
-                playersWithSecondMax = new ArrayList<Player>();
+            if(playersWithSecondMax.size()>1){//no bonus points awarded if ties for second last
+                playersWithSecondMax = null;
             }
 
             switch(players.size()){

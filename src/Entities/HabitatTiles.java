@@ -31,9 +31,11 @@ public class HabitatTiles extends PointGenerator{
     private HashMap<Integer, HabitatTiles> connections = new HashMap<Integer, HabitatTiles>();
     private Integer rotation = 0;
     private String imageName;
+    private String name;
     public Boolean isKeystone;
     public Integer x, y;
     private static int emptyCnt;
+    private static int normieCnt;
 
     //CONSTRUCTORS*******************************************************************************************************
     public HabitatTiles(double size){
@@ -43,7 +45,7 @@ public class HabitatTiles extends PointGenerator{
 
     public HabitatTiles(){
         super(0, 0, 0);
-        imageName = "empty empty";
+        imageName = "empty empty" + ++emptyCnt;
     }
 
     public HabitatTiles(String imageName,int x, int y, Double size){
@@ -59,12 +61,12 @@ public class HabitatTiles extends PointGenerator{
 
     public HabitatTiles(Integer x, Integer y, Double size){
         super(x, y, size);
-        imageName = "N/A";
+        imageName = "N/A" + ++emptyCnt;
     }
 
     public HabitatTiles(String imageName,boolean isKey,int x, int y, double sz){
         super(x,y,sz);
-        this.imageName = imageName;
+        this.imageName = imageName+ ++normieCnt;
         this.isKeystone = isKey;
 
         String env = imageName.substring(0, imageName.indexOf("-"));
@@ -90,7 +92,7 @@ public class HabitatTiles extends PointGenerator{
 
     public HabitatTiles(String imageName, String[] habitats, String[] animals, Boolean isKeyStone){
         super(0, 0, 0);
-        this.imageName = imageName;
+        this.imageName = imageName+ ++normieCnt;
         this.isKeystone = isKeyStone;
 
         //map each side to a habitat
@@ -121,7 +123,7 @@ public class HabitatTiles extends PointGenerator{
 
     public HabitatTiles(String imageName, String[] habitats, String[] animals, boolean isKeyStone, Integer x, Integer y, Double size){
         super(x, y, size);
-        this.imageName = imageName;
+        this.imageName = imageName+ ++normieCnt;
         this.isKeystone = isKeyStone;
 
         //map each side to a habitat
@@ -153,7 +155,7 @@ public class HabitatTiles extends PointGenerator{
     public HabitatTiles(String imageName, String[] habitats, String[] animals, boolean isKeyStone, Integer x, Integer y, Double size,boolean isStarter){
         super(x, y, size);
         PrintTester.print("Called");
-        this.imageName = imageName;
+        this.imageName = imageName+ ++normieCnt;
         this.isKeystone = isKeyStone;
 
         //map each side to a habitat
