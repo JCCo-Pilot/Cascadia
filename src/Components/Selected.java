@@ -28,8 +28,8 @@ public class Selected extends JFrame implements ActionListener{
     public Selected(){
         super("Selection");
         super.setBackground(Color.BLACK);
-        this.setSize(400, 240);
-        this.setLocation(827, 47);
+        this.setSize(300, 160);
+        this.setLocation(907, 47);
         try {
             this.setIconImage(ImageIO.read(new File("src/Entities/Images/Philip.png")));
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class Selected extends JFrame implements ActionListener{
         this.setAlwaysOnTop(true);
         this.setLayout(new BorderLayout());
         panel = new JPanel();
-        panel.setSize(350, 200);
+        panel.setSize(200, 110);
         this.setLayout(new BorderLayout());
         panel.setBackground(Color.BLACK);
         panel.setLayout(new GridLayout(1, 2, 3, 10));
@@ -60,7 +60,7 @@ public class Selected extends JFrame implements ActionListener{
         tileLabel.setHorizontalAlignment(JLabel.CENTER);
         tokenLabel.setVerticalAlignment(JLabel.CENTER);
         tokenLabel.setHorizontalAlignment(JLabel.CENTER);
-        this.add(panel, BorderLayout.NORTH);
+        this.add(panel);
         panel.add(tileLabel);
         panel.add(tokenLabel);
         hide.addActionListener(this);
@@ -69,7 +69,7 @@ public class Selected extends JFrame implements ActionListener{
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
         buttonPanel.add(hide);
         buttonPanel.add(hidePermanent);
-        this.add(buttonPanel, BorderLayout.SOUTH);
+        //this.add(buttonPanel, BorderLayout.SOUTH);
         hidePermanent.setSize(buttonPanel.getWidth(), 75);
         buttonPanel.setVisible(true);
         hide.setVisible(true);
@@ -91,7 +91,7 @@ public class Selected extends JFrame implements ActionListener{
         tokenLabel.setHorizontalAlignment(JLabel.CENTER);
 
         if(h!=null){
-            tileLabel.setIcon(new ImageIcon(h.getImage().getScaledInstance((int)(83*1.5), (int)(100*1.5),
+            tileLabel.setIcon(new ImageIcon(h.getImage().getScaledInstance((int)(83*1.0), (int)(100*1.0),
             Image.SCALE_SMOOTH)));
         }else{
             tileLabel.setIcon(null);
@@ -99,7 +99,7 @@ public class Selected extends JFrame implements ActionListener{
         }
 
         if(t!=null){
-            tokenLabel.setIcon(new ImageIcon(t.getImage().getScaledInstance(150, 150,
+            tokenLabel.setIcon(new ImageIcon(t.getImage().getScaledInstance(100, 100,
             Image.SCALE_SMOOTH)));
         }else{
             tokenLabel.setIcon(null);

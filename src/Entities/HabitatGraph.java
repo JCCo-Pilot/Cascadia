@@ -57,14 +57,14 @@ public class HabitatGraph{
 
     public void drawGraph(Graphics g, int x1, int y1, int xLength, int yLength){
         int lowest = Math.min(xLength, yLength);
-        double radius = ((lowest+0.0)/(900.0))*root.getSize();
+        double radius = ((lowest+0.0)/(925.0))*root.getSize();
         MathPoint center = new MathPoint(x1+xLength/2, y1+yLength/2);
-        double ratio = (lowest+0.0)/(900.0);
+        double ratio = (lowest+0.0)/(925.0);
 
         int highestX = 0;
-        int lowestX = 900;
+        int lowestX = 925;
         int highestY = 0;
-        int lowestY = 900;
+        int lowestY = 925;
         for(HabitatTiles h:iterate()){
             if(h.getAdjacentTileOffset(HabitatTiles.LEFT).xPoint<lowestX){
                 lowestX = h.getAdjacentTileOffset(HabitatTiles.LEFT).xPoint;
@@ -94,11 +94,11 @@ public class HabitatGraph{
             if(h.isEmpty()){
                 
             }else{
-                int xCartesian = h.getCoordinate().xPoint-450;
-                int yCartesian = h.getCoordinate().yPoint-450;
+                int xCartesian = h.getCoordinate().xPoint-463;
+                int yCartesian = h.getCoordinate().yPoint-463;
 
-                int xNew = (int) (xCartesian*ratio*ratio2) + center.xPoint;
-                int yNew = (int) (yCartesian*ratio*ratio2) + center.yPoint;
+                int xNew = (int) (xCartesian*ratio) + center.xPoint;
+                int yNew = (int) (yCartesian*ratio) + center.yPoint;
 
                 //h.drawHexagon(g, radius, xNew, yNew);
                 new TaskThreadManager(TaskThreadManager.ActionVar.DRAWPOSITION, new Object[]{g, h, radius, xNew, yNew});
