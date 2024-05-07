@@ -131,7 +131,7 @@ public class FoxCard implements ScoringCard{
                     Integer max = 0;
                     for(Integer i:histogram.values()){
                         if(i>max){
-                            max=1;
+                            max=i;
                         }
                     }
                     points2+=max;//if 0, only adds 0
