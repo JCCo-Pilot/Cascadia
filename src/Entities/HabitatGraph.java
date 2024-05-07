@@ -81,7 +81,8 @@ public class HabitatGraph{
             if(h.getAdjacentTileOffset(HabitatTiles.DOWN_LEFT).yPoint>highestY){
                 highestY = h.getAdjacentTileOffset(HabitatTiles.DOWN_LEFT).yPoint;
             }
-        }        int xDifference = highestX - lowestX;
+        }
+        int xDifference = highestX - lowestX;
         int yDifference = highestY - lowestY;
 
         int lowestDifference = (int)(ratio*Math.min(xDifference, yDifference));
@@ -363,12 +364,15 @@ public class HabitatGraph{
                         if(i.isEmpty()){
                             i.replaceWith(j);
                             PrintTester.print(i+" removed because i empty");
+                            JOptionPane.showMessageDialog(null, i+" removed because i empty");
                         }else if(j.isEmpty()){
                             j.replaceWith(i);
                             PrintTester.print(j+" removed because j empty");
+                            JOptionPane.showMessageDialog(null, j+" removed because j empty");
                         }else{
                             j.replaceWith(i);
                             PrintTester.print(j+" removed because both empty");
+                            JOptionPane.showMessageDialog(null, j+" removed because both empty");
                         }
                     }
                 }
