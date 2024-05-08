@@ -27,6 +27,9 @@ public class Scorer implements Runnable{
 
     public static HashMap<Integer, Player> score(ArrayList<Player> players, ArrayList<ScoringCard> scoringCards){
         for(Player p: players){//add all scores to players
+            for(HabitatTiles h:p.getGraph().iterate()){
+                h.highlights = new HashSet<String>();
+            }
             for(Habitats h: Habitats.values()){
                 Scorer s = new Scorer(p, h);
                 Thread t = new Thread(s);
