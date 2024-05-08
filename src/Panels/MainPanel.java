@@ -33,6 +33,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
 
     private BufferedImage instructions;
     private Boolean instructBoolean = true;
+    private Boolean socialSigma = false;
+    private BufferedImage sigma;
 
     private BufferedImage troll;
     
@@ -76,6 +78,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/RealMainPanelBG.png"));
             troll = ImageIO.read(MainPanel.class.getResource("/Entities/Images/IMG_5104.jpg"));
             instructions = ImageIO.read(MainPanel.class.getResource("/Panels/Background/Instructions.png"));
+            sigma = ImageIO.read(MainPanel.class.getResource("/Panels/Background/sSigma.png"));
             //bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
             //troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
         }catch(Exception e){
@@ -352,7 +355,10 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     @Override
     public void paint(Graphics g){
         super.paint(g);
-        if (instructBoolean){
+        if (socialSigma){
+            g.drawImage(sigma, 0, 0,1890,865,null);
+            checkVis(bearCard, foxCard, elkCard, hawkCard, salmonCard, g);
+        }else if (instructBoolean){
             g.drawImage(instructions, 0,0, 1890,865,null);
             //g.drawRect(1780,40,45,45);
             checkVis();
@@ -403,7 +409,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         //PrintTester.print("Skbidi on that toilet");
     }
     public void mouseClicked(MouseEvent e) {
-    	int x = e.getX();
+    	/*int x = e.getX();
         int y = e.getY();
         //left side
         if (x>1213&&x<1213+180){
@@ -430,13 +436,13 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             if(y>380&&y<380+170) {
             	sc.addScoringCard(hawkCard);
             }
-        }
+        }*/
         repaint();
     }
     public void mousePressed(MouseEvent e) {
-    	if (instructBoolean){
-            int x = e.getX();
-            int y = e.getY();
+    	int x = e.getX();
+        int y = e.getY();
+        if (instructBoolean){    
             if(x>1780&&x<1825){
                 if (y>40&&y<95){
                     instructBoolean = false;
@@ -444,7 +450,55 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
                     repaint();
                 }
             }
+        }else if (socialSigma){
+            if (x>1750&&x<1750+102){
+                if(y>40&&y<142){
+                    checkVis();
+                    socialSigma = false;
+                }
+            }
+        }else{
+            if (x>1213&&x<1213+180){
+                if (y>250-70&&y<250-70+170){
+                    socialSigma = true;
+                }else if (y>250+180-80&&y<250+180-80+170){
+                    socialSigma = true;
+                }else if (y>250+180+180-90&&y<250+180+180-90+170){
+                    socialSigma = true;
+                }
+            }else if (x>1213+180&&x<1213+180+175){
+                if(y>250-70&&y<250-70+170){
+                    socialSigma = true;
+                }else if (y>250+180-80&&y<250+180-80+170){
+                    socialSigma =true;
+                }
+            }
+            repaint();
         }
+    }
+    private void checkVis(BearCard bCard,FoxCard fCard,ElkCard eCard,HawkCard hCard, SalmonCard sCard,Graphics g){
+        pa.setVisible(!socialSigma);
+        pd.setVisible(!socialSigma);
+        instructButton.setVisible(!socialSigma);
+        for (int i =0;i<buttons.size();i++){
+            buttons.get(i).setVisible(!socialSigma);
+        }
+        for (int i =0;i<maps.size();i++){
+            maps.get(i).setVisible(!socialSigma);
+        }
+        if (socialSigma){
+            int x = 200;
+            int y = 30;
+            int spacing = 400;
+            g.drawImage(bCard.getImage(), x, y,spacing,spacing,null);
+            g.drawImage(fCard.getImage(), x+=spacing+10, y,spacing,spacing,null);
+            g.drawImage(eCard.getImage(), x+=spacing+10, y,spacing,spacing,null);
+            x = 200+ spacing/2;
+            y = spacing +30;
+            g.drawImage(hCard.getImage(), x, y,spacing,spacing,null);
+            g.drawImage(sCard.getImage(), x+=spacing+10, y,spacing,spacing,null);
+        }
+        
     }
     private void checkVis(){
         pa.setVisible(!instructBoolean);
