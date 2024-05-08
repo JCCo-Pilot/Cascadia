@@ -50,6 +50,9 @@ public class animalDisplay extends JComponent implements MouseListener{
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
+    public void setAnimalToken(WildlifeTokens tk){
+        token = tk;
+    }
     public Dimension getPreferredSize() {return new Dimension(xSize, ySize);}
     public Dimension getMinimumSize() {return new Dimension(xSize, ySize );}
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
