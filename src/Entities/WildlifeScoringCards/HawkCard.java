@@ -154,6 +154,7 @@ public class HawkCard implements ScoringCard{
                 return 3*totalLinesOfSight2.size();
             case CARD_D:
                 HashSet<HashSet<HabitatTiles>> totalLinesOfSight3 = new HashSet<HashSet<HabitatTiles>>();
+                HashMap<HashSet<HabitatTiles>, Integer> groupPoints3 = new HashMap<HashSet<HabitatTiles>, Integer>();
                 for(HashSet<HashSet<HabitatTiles>> lineGroup:linesOfSightByHawk.values()){
                     for(HashSet<HabitatTiles> line: lineGroup){
                         totalLinesOfSight3.add(line);
@@ -171,19 +172,49 @@ public class HawkCard implements ScoringCard{
                         case 0:
                         break;
                         case 1:
-                            points3+=4;
+                            groupPoints3.put(line, 4);
                         break;
                         case 2:
-                            points3+=7;
+                            groupPoints3.put(line, 7);
                         break;
                         default://3 or more
-                            points3+=9;
+                            groupPoints3.put(line, 9);
                         break;
                     }
+                }
+                resolveDCard(groupPoints3);
+                for(int score:groupPoints3.values()){
+                    points3 += score;
                 }
                 return points3;
         }
         return 0;
+    }
+
+    private void resolveDCard(HashMap<HashSet<HabitatTiles>, Integer> groupPoints){
+        HashSet<HashSet<HabitatTiles>> remove = new HashSet<HashSet<HabitatTiles>>();
+        for(HashSet<HabitatTiles> line1:groupPoints.keySet()){
+            for(HashSet<HabitatTiles> line2:groupPoints.keySet()){
+                if(line1==line2){
+
+                }else{
+                    for(HabitatTiles h1:line1){
+                        for(HabitatTiles h2:line2){
+                            if(h1.tokenAnimal()!=null&&h2.tokenAnimal()!=null&&h1.tokenAnimal().equals(CardAnimals.HAWK)&&h2.tokenAnimal().equals(CardAnimals.HAWK)&&h1==h2){
+                                if(groupPoints.get(line1)>groupPoints.get(line2)){
+                                    remove.add(line2);
+                                }else{
+                                    remove.add(line1);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for(HashSet<HabitatTiles> set:remove){
+            groupPoints.remove(set);
+        }
     }
 
     private HashSet<HashSet<HabitatTiles>> findHawkLinesOfSight(HabitatTiles hawk){

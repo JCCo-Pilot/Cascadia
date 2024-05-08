@@ -34,6 +34,7 @@ public class Scorer implements Runnable{
                 habitatThreads.add(t);
                 //s.scorePlayer();
                 t.start();
+                p.setBonus(h, 0);
             }
             for(ScoringCard card:scoringCards){
                 Scorer s = new Scorer(p, card);

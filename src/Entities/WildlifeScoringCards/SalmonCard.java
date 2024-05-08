@@ -154,6 +154,7 @@ public class SalmonCard implements ScoringCard{
             case CARD_D:
                 Integer points3 = 0;
                 for(HashSet<HabitatTiles> run: salmonRuns){
+                    run.remove(null);
                     points3 += run.size();
                     HashSet<HabitatTiles> adjacentTokens = new HashSet<HabitatTiles>();//the use of a HashSet means that there is no need to manually filter out duplicates
                     //TODO: if the empty animal token ever gets changed to avoid null errors, change what it is here
@@ -164,7 +165,11 @@ public class SalmonCard implements ScoringCard{
                             }
                         }
                     }
-                    points3 += adjacentTokens.size();
+                    adjacentTokens.remove(null);
+                    if(run.size()>=1){
+                        points3 += adjacentTokens.size();
+                    }
+                    
                 }
                 return points3;
         }
