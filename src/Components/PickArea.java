@@ -532,7 +532,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         periodic();
         if ("Overpopulation".equals(e.getActionCommand())){
             removeOverpopulation();
-            overPopUsed = false;
+            overPopUsed = true;
             ((JComponent) e.getSource()).setVisible(false);
         }else if (e.getSource()==clearToken){
             //periodic();
