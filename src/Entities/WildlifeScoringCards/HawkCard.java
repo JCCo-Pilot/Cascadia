@@ -74,6 +74,7 @@ public class HawkCard implements ScoringCard{
                 for(HabitatTiles hawk:hawks){
                     if(hawk.getNumberOf(CardAnimals.HAWK)==0){
                         nonAdjacentHawks++;
+                        hawk.highlights.add("HAWK");
                     }
                 }
                 Integer points0 = 0;
@@ -111,6 +112,7 @@ public class HawkCard implements ScoringCard{
                 for(HabitatTiles hawk:hawks){
                     if(hawk.getNumberOf(CardAnimals.HAWK)==0&&linesOfSightByHawk.get(hawk).size()>0){
                         nonAdjacentLOSHawks++;
+                        hawk.highlights.add("HAWK");
                     }
                 }
                 Integer points1 = 0;
@@ -151,6 +153,7 @@ public class HawkCard implements ScoringCard{
                     }
                 }
                 removeDuplicateLinesOfSight(totalLinesOfSight2);
+                HabitatTiles.highlightGroups(totalLinesOfSight2, "HAWK");
                 return 3*totalLinesOfSight2.size();
             case CARD_D:
                 HashSet<HashSet<HabitatTiles>> totalLinesOfSight3 = new HashSet<HashSet<HabitatTiles>>();
@@ -186,6 +189,7 @@ public class HawkCard implements ScoringCard{
                 for(int score:groupPoints3.values()){
                     points3 += score;
                 }
+                HabitatTiles.highlightGroups(groupPoints3, "HAWK");
                 return points3;
         }
         return 0;

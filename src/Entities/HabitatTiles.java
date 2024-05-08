@@ -10,6 +10,8 @@ import java.io.*;
 import java.util.*;
 import java.awt.image.*;
 import javax.imageio.*;
+
+
 import java.awt.event.*;
 import java.awt.geom.*;
 
@@ -36,6 +38,8 @@ public class HabitatTiles extends PointGenerator{
     public Integer x, y;
     private static int emptyCnt;
     private static int normieCnt;
+
+    public HashSet<String> highlights = new HashSet<String>();
 
     //CONSTRUCTORS*******************************************************************************************************
     public HabitatTiles(double size){
@@ -183,6 +187,36 @@ public class HabitatTiles extends PointGenerator{
             out.println("Shit fucked up181");
         }
     }
+
+    public static void highlightGroup(HashSet<HabitatTiles> set, String s){
+        for(HabitatTiles h:set){
+            h.highlights.add(s);
+        }
+    }
+
+    public static void highlightGroups(HashSet<HashSet<HabitatTiles>> set, String s){
+        for(HashSet<HabitatTiles> group:set){
+            highlightGroup(group, s);
+        }
+    }
+
+    public static void highlightGroups(HashMap<HashSet<HabitatTiles>, Integer> map, String s){
+        for(HashSet<HabitatTiles> group:map.keySet()){
+            highlightGroup(group, s);
+        }
+    }
+
+    public static void highlightGroups(HashSet<CardAnimals> set1, HashMap<CardAnimals, HashSet<HabitatTiles>> set2, String s){
+        for(CardAnimals c:set1){
+            highlightGroup(set2.get(c), s);
+        }
+    }
+
+    public static void highlightGroups(HashMap<CardAnimals, Integer> map1, HashMap<CardAnimals, HashSet<HabitatTiles>> set2, String s){
+        for(CardAnimals c:map1.keySet()){
+            highlightGroup(set2.get(c), s);
+        }
+    }
     
     //WILDLIFE TOKEN METHODS*******************************************************************************************************
     public WildlifeTokens getToken(){
@@ -275,6 +309,23 @@ public class HabitatTiles extends PointGenerator{
             int yPos = super.getYPos();
         try {
             g.drawImage(ImageIO.read(HabitatTiles.class.getResource("/Entities/Images/HexHighlight.png")), xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
+            PrintTester.print("Highlight Drawn");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void drawScoringHighlight(Graphics g){
+        Double offset = super.getSize();
+            int yOffset = (int)(Math.round(offset));
+            Double yo = -1*Math.sqrt(3)/2.0*offset;
+            int xOffset = (int)(Math.round(yo));
+
+            int xPos = super.getXPos();
+            int yPos = super.getYPos();
+        try {
+            g.drawImage(ImageIO.read(HabitatTiles.class.getResource("/Entities/Images/ScoringHighlight.png")), xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
             PrintTester.print("Highlight Drawn");
         } catch (IOException e) {
             // TODO Auto-generated catch block

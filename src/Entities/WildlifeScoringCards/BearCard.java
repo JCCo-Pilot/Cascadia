@@ -76,6 +76,7 @@ public class BearCard implements ScoringCard{
                 Integer numPairs = 0;
                 for(HashSet<HabitatTiles> set:bearGroups){
                     if(set.size()==2){
+                        HabitatTiles.highlightGroup(set, "BEAR");
                         numPairs++;
                     }
                 }
@@ -97,6 +98,7 @@ public class BearCard implements ScoringCard{
                 Integer numGroupsOfThree = 0;
                 for(HashSet<HabitatTiles> group: bearGroups){
                     if(group.size()==3){
+                        HabitatTiles.highlightGroup(group, "BEAR");
                         numGroupsOfThree++;
                     }
                 }
@@ -111,14 +113,17 @@ public class BearCard implements ScoringCard{
                         case 1:
                         points2 += 2;
                         hasOne = true;
+                        HabitatTiles.highlightGroup(group, "BEAR");
                         break;
                         case 2:
                         points2 += 5;
                         hasTwo = true;
+                        HabitatTiles.highlightGroup(group, "BEAR");
                         break;
                         case 3:
                         points2 += 8;
                         hasThree = true;
+                        HabitatTiles.highlightGroup(group, "BEAR");
                         break;
                     }
                 }
@@ -130,12 +135,15 @@ public class BearCard implements ScoringCard{
                     switch(group.size()){
                         case 2:
                         points3 += 5;
+                        HabitatTiles.highlightGroup(group, "BEAR");
                         break;
                         case 3: 
                         points3 += 8;
+                        HabitatTiles.highlightGroup(group, "BEAR");
                         break;
                         case 4:
                         points3 += 13;
+                        HabitatTiles.highlightGroup(group, "BEAR");
                         break;
                     }
                 }
