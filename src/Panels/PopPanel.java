@@ -33,23 +33,41 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     private HawkCard hawkCard;
     private FoxCard foxCard;
     private UpdateEventListener uListener;
+    private String scoringHighlight;
+    private HashMap<Integer, String> criteriaCoords = new HashMap<Integer, String>();
+    
     public PopPanel(int a){
         super();
         this.setVisible(true);
         pullImages();
         back.setBounds(690,790,150,50);
         back.addActionListener(this);
+        addMouseListener(this);
         back.setVisible(true);
         add(back);
         goBack = false;
         state = a;
+        criteriaCoords.put(130, "BEAR");
+        criteriaCoords.put(180, "ELK");
+        criteriaCoords.put(230, "SALMON");
+        criteriaCoords.put(275, "HAWK");
+        criteriaCoords.put(325, "FOX");
+        criteriaCoords.put(430, "MOUNTAIN");
+        criteriaCoords.put(480, "FOREST");
+        criteriaCoords.put(530, "PRAIRIE");
+        criteriaCoords.put(580, "WETLAND");
+        criteriaCoords.put(630, "RIVER");
     }
     public void paint(Graphics g){
         super.paint(g);
+        
         if(state == 1) {
         	g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
             g.setColor(Color.BLACK);
         	p.drawInventory(g, false);
+            if(scoringHighlight!=null){
+                p.getGraph().drawScoringHighlight(g, scoringHighlight);
+            }
             //Player Numbers
             g.setFont(new Font("Arial", 10, 30));
 		g.drawString(p.getName(), 30, 50);
@@ -175,7 +193,21 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        
+        //880-1008
+
+        int x = e.getX();
+        int y = e.getY();
+
+        if(x<1008&&x>880){
+            for(Integer i:criteriaCoords.keySet()){
+                if(y>=i-35&&y<=i+15){
+                    scoringHighlight = criteriaCoords.get(i);
+                    System.out.println(criteriaCoords.get(i));
+                }
+            }
+        }
+
+        repaint();
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}

@@ -101,6 +101,7 @@ public class SalmonCard implements ScoringCard{
                             points0+=25;
                         break;
                     }
+                    HabitatTiles.highlightGroup(run, "SALMON");
                 }
                 return points0;
             case CARD_B:
@@ -126,6 +127,7 @@ public class SalmonCard implements ScoringCard{
                             points1+=17;
                         break;
                     }
+                    HabitatTiles.highlightGroup(run, "SALMON");
                 }
                 return points1;
             case CARD_C:
@@ -141,12 +143,15 @@ public class SalmonCard implements ScoringCard{
                         break;
                         case 3:
                             points2+=10;
+                            HabitatTiles.highlightGroup(run, "SALMON");
                         break;
                         case 4:
                             points2+=12;
+                            HabitatTiles.highlightGroup(run, "SALMON");
                         break;
                         default://5 or more
                             points2+=15;
+                            HabitatTiles.highlightGroup(run, "SALMON");
                         break;
                     }
                 }
@@ -169,7 +174,8 @@ public class SalmonCard implements ScoringCard{
                     if(run.size()>=1){
                         points3 += adjacentTokens.size();
                     }
-                    
+                    HabitatTiles.highlightGroup(run, "SALMON");
+                    HabitatTiles.highlightGroup(adjacentTokens, "SALMON");
                 }
                 return points3;
         }

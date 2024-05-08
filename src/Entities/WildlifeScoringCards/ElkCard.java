@@ -87,12 +87,15 @@ public class ElkCard implements ScoringCard{
                         HashSet<HabitatTiles> lineSet = elkIterateInDirection(end, direction);
                         switch(lineSet.size()){
                             case 2:
+                                //HabitatTiles.highlightGroup(lineSet, "ELK");
                                 groupPoints0.put(lineSet, 5);//putting in lineSet instead of s makes sure that the connected resolve alg only counts the tiles being scored 
                             break;
                             case 3:
+                                //HabitatTiles.highlightGroup(lineSet, "ELK");
                                 groupPoints0.put(lineSet, 9);
                             break;
                             case 4:
+                                //HabitatTiles.highlightGroup(lineSet, "ELK");
                                 groupPoints0.put(lineSet, 13);
                             break;
 
@@ -109,15 +112,18 @@ public class ElkCard implements ScoringCard{
                 for(Integer points:groupPoints0.values()){
                     points0+=points;
                 }
+                HabitatTiles.highlightGroups(groupPoints0, "ELK");
                 return points0;
             case CARD_B:
                 HashMap<HashSet<HabitatTiles>, Integer> groupPoints1 = new HashMap<HashSet<HabitatTiles>, Integer>();//maps each group to its number of points, will be used to clear up adjacent groups
                 for(HashSet<HabitatTiles> s:elkGroups){
                     switch(s.size()){
                         case 1://for case 1 and 2, only one possible shape so there is no need to check for the exact shape
+                            //HabitatTiles.highlightGroup(s, "ELK");
                             groupPoints1.put(s, 2);
                         break;
                         case 2:
+                            //HabitatTiles.highlightGroup(s, "ELK");
                             groupPoints1.put(s, 5);
                         break;
                         case 3:
@@ -129,6 +135,7 @@ public class ElkCard implements ScoringCard{
                             }
                             Integer direction = start3.getSideOf(start3.findFirstWithSpecificToken(CardAnimals.ELK));
                             if((start3.get(HabitatTiles.nextInt(direction)).tokenAnimal()!=null&&start3.get(HabitatTiles.nextInt(direction)).tokenAnimal().equals(CardAnimals.ELK))||(start3.get(HabitatTiles.previousInt(direction)).tokenAnimal()!=null&&start3.get(HabitatTiles.previousInt(direction)).tokenAnimal().equals(CardAnimals.ELK))){//develops redundancy since, by using a hashSet, it is possible for the numbers to not iterate in the expected way, it checks if both tiles adjacent to the one we know has an ELK have an ELK as their token
+                                //HabitatTiles.highlightGroup(s, "ELK");
                                 groupPoints1.put(s, 9);
                             }
                         break;
@@ -144,6 +151,7 @@ public class ElkCard implements ScoringCard{
                                 HabitatTiles upright = start4.get(HabitatTiles.next(HabitatTiles.UP_RIGHT, i));
                                 HabitatTiles top = upright.get(HabitatTiles.next(HabitatTiles.UP_LEFT, i));
                                 if(upleft!=null&&upright!=null&&top!=null&&upleft.tokenAnimal()!=null&&upleft.tokenAnimal().equals(CardAnimals.ELK)&&upright.tokenAnimal()!=null&&upright.tokenAnimal().equals(CardAnimals.ELK)&&top.tokenAnimal().equals(CardAnimals.ELK)){
+                                    //HabitatTiles.highlightGroup(s, "ELK");
                                     groupPoints1.put(s, 13);
                                 }
                             }
@@ -155,6 +163,7 @@ public class ElkCard implements ScoringCard{
                 for(Integer points:groupPoints1.values()){
                     points1+=points;
                 }
+                HabitatTiles.highlightGroups(groupPoints1, "ELK");
                 return points1;
             
             case CARD_C:
@@ -192,6 +201,7 @@ public class ElkCard implements ScoringCard{
                 for(Integer points:groupPoints2.values()){
                 points2+=points;
                 }
+                HabitatTiles.highlightGroups(groupPoints2, "ELK");
                 return points2;
             
             case CARD_D:
@@ -358,6 +368,7 @@ public class ElkCard implements ScoringCard{
                 for(Integer points:groupPoints3.values()){
                 points3+=points;
                 }
+                HabitatTiles.highlightGroups(groupPoints3, "ELK");
                 return points3;
             
         }

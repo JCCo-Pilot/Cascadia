@@ -9,6 +9,8 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
+
+
 import java.awt.image.*;
 import java.io.File;
 
@@ -73,8 +75,14 @@ public class FoxCard implements ScoringCard{
                     HashSet<CardAnimals> uniqueAdjacents = new HashSet<CardAnimals>();
                     for(HabitatTiles connection:fox.getConnections().values()){
                         uniqueAdjacents.add(connection.tokenAnimal());
+                        if(connection.tokenAnimal()!=null){
+                            connection.highlights.add("FOX");
+                        }
                     }
                     uniqueAdjacents.remove(null);
+                    if(uniqueAdjacents.size()>0){
+                        fox.highlights.add("FOX");
+                    }
                     points0 += uniqueAdjacents.size();
                 }
                 return points0;
@@ -82,11 +90,18 @@ public class FoxCard implements ScoringCard{
                 Integer points1 = 0;
                 for(HabitatTiles fox:foxes){
                     HashMap<CardAnimals, Integer> histogram = new HashMap<CardAnimals, Integer>();
+                    HashMap<CardAnimals, HashSet<HabitatTiles>> tracker = new HashMap<CardAnimals, HashSet<HabitatTiles>>();
                     for(HabitatTiles connection:fox.getConnections().values()){
                         if(histogram.containsKey(connection.tokenAnimal())){
                             histogram.put(connection.tokenAnimal(), histogram.get(connection.tokenAnimal())+1);
                         }else{
                             histogram.put(connection.tokenAnimal(), 1);
+                        }
+                        if(tracker.containsKey(connection.tokenAnimal())){
+                            tracker.get(connection.tokenAnimal()).add(connection);
+                        }else{
+                            tracker.put(connection.tokenAnimal(), new HashSet<HabitatTiles>());
+                            tracker.get(connection.tokenAnimal()).add(connection);
                         }
                     }
                     histogram.remove(null);
@@ -113,17 +128,26 @@ public class FoxCard implements ScoringCard{
                         default:
                         break;
                     }
+                    HabitatTiles.highlightGroups(histogram, tracker, "FOX");
                 }
+                
                 return points1;
             case CARD_C:
                 Integer points2 = 0;
                 for(HabitatTiles fox:foxes){
                     HashMap<CardAnimals, Integer> histogram = new HashMap<CardAnimals, Integer>();
+                    HashMap<CardAnimals, HashSet<HabitatTiles>> tracker = new HashMap<CardAnimals, HashSet<HabitatTiles>>();
                     for(HabitatTiles connection:fox.getConnections().values()){
                         if(histogram.containsKey(connection.tokenAnimal())){
                             histogram.put(connection.tokenAnimal(), histogram.get(connection.tokenAnimal())+1);
                         }else{
                             histogram.put(connection.tokenAnimal(), 1);
+                        }
+                        if(tracker.containsKey(connection.tokenAnimal())){
+                            tracker.get(connection.tokenAnimal()).add(connection);
+                        }else{
+                            tracker.put(connection.tokenAnimal(), new HashSet<HabitatTiles>());
+                            tracker.get(connection.tokenAnimal()).add(connection);
                         }
                     }
                     histogram.remove(null);
@@ -135,7 +159,16 @@ public class FoxCard implements ScoringCard{
                         }
                     }
                     points2+=max;//if 0, only adds 0
-                    
+                    HashSet<CardAnimals> remove = new HashSet<CardAnimals>();
+                    for(CardAnimals c:histogram.keySet()){
+                        if(histogram.get(c)!=max){
+                            remove.add(c);
+                        }
+                    }
+                    for(CardAnimals c:remove){
+                        histogram.remove(c);
+                    }
+                    HabitatTiles.highlightGroups(histogram, tracker, "FOX");
                 }
                 return points2;
             case CARD_D:
@@ -154,11 +187,18 @@ public class FoxCard implements ScoringCard{
                         }
                     }
                     HashMap<CardAnimals, Integer> histogram = new HashMap<CardAnimals, Integer>();
+                    HashMap<CardAnimals, HashSet<HabitatTiles>> tracker = new HashMap<CardAnimals, HashSet<HabitatTiles>>();
                     for(HabitatTiles adjacent:adjacentTiles){
                         if(histogram.containsKey(adjacent.tokenAnimal())){
                             histogram.put(adjacent.tokenAnimal(), histogram.get(adjacent.tokenAnimal())+1);
                         }else{
                             histogram.put(adjacent.tokenAnimal(), 1);
+                        }
+                        if(tracker.containsKey(adjacent.tokenAnimal())){
+                            tracker.get(adjacent.tokenAnimal()).add(adjacent);
+                        }else{
+                            tracker.put(adjacent.tokenAnimal(), new HashSet<HabitatTiles>());
+                            tracker.get(adjacent.tokenAnimal()).add(adjacent);
                         }
                     }
                     histogram.remove(null);
@@ -188,7 +228,7 @@ public class FoxCard implements ScoringCard{
                         default:
                         break;
                     }
-
+                    HabitatTiles.highlightGroups(histogram, tracker, "FOX");
                 }
                 return points3;
         }

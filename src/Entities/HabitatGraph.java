@@ -32,7 +32,7 @@ public class HabitatGraph{
         this.fixStackedTileLocation();
     }
 
-
+    
 
     public void drawGraph(Graphics g, Boolean drawEmptys){
         //PrintTester.print("DrawGraph method called");
@@ -105,6 +105,14 @@ public class HabitatGraph{
             //PrintTester.print(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
         }
         
+    }
+
+    public void drawScoringHighlight(Graphics g, String s){
+        for(HabitatTiles h:iterate()){
+            if(h.highlights.contains(s)){
+                h.drawScoringHighlight(g);
+            }
+        }
     }
 
     public void highlightCompatibles(Graphics g, WildlifeTokens w){
@@ -405,6 +413,12 @@ public class HabitatGraph{
             group.remove(null);
             if(group.size()>max){
                 max = group.size();
+            }
+        }
+        Boolean oneHighlight = false;
+        for(HashSet<HabitatTiles> group:groups){
+            if(!oneHighlight&&group.size()==max){
+                HabitatTiles.highlightGroup(group, target.toString());
             }
         }
         //PrintTester.print(target + " returns "+max);
