@@ -1,6 +1,10 @@
 package Components;
 import Entities.*;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.*;
 import EventAndListener.*;
 import java.awt.*;
@@ -13,7 +17,7 @@ import MathHelper.*;
 import Panels.MainPanel;
 
 import static java.lang.System.*;
-public class PlayerDisplay extends JComponent implements MouseListener,PickListener,ActionListener{
+public class PlayerDisplay extends JComponent implements MouseListener,PickListener,ActionListener,MouseWheelListener,Runnable{
     private int xSize,ySize;
     private int xPos,yPos;
     private WildlifeTokens token;
@@ -29,7 +33,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private boolean tutorial = false;
 
     private coordinateGraphGeneration cgg;
-    
+    private HabitatTiles toHighlight;
     private JButton rotateButton;
     private JButton rotateCButton;
     private boolean switchTrigger;
@@ -62,8 +66,10 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         constructHexagons();
         enableInputMethods(true);
         addMouseListener(this);
-
+        addMouseWheelListener(this);
         testConstruct();
+        Thread t = new Thread(this);
+        t.run();
     }
     //testing stuff
     public PlayerDisplay(int x, int y, int xS, int yS, ArrayList<Player>play,boolean b){
@@ -133,6 +139,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public void paint(Graphics g){
         //super.paint(g);
         periodic();
+        
         g.setColor(Color.BLACK);
         Polygon p = new Polygon();
         //cgg.paintAll(g);
@@ -143,6 +150,14 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         
         g.setFont(new Font("Arial",100,30));
         g.drawString("Turns Left: "+players.get(0).getTurn(),30,50);
+        try {
+            if((showEmptyTiles||(!toHighlight.isEmpty()))){
+                toHighlight.drawMouseHighlight(g);
+            }
+            
+        } catch (Exception e) {
+            //System.out.println("shit fucked up");
+        }
         paintComponents(g);
         
     }
@@ -299,6 +314,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         temp = null;
         token = null;
         current = null;
+        toHighlight = null;
     }
     public void actionPerformed(ActionEvent e){
         periodic();
@@ -378,5 +394,46 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     }
     public void setUListener(UpdateEventListener uel){
         uListener = uel;
+    }
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        //System.out.println("Mouse Wheel Event");
+        int units = 0;
+        if(current!=null){
+            if(e.getWheelRotation()>0){
+                units = e.getScrollAmount()/3;
+            }else{
+                units = -1*e.getScrollAmount()/3;
+            }
+            
+            //System.out.println("units = "+units);
+            if(units>0){
+                for(int i = 0; i<units; i++){
+                    current.rotate();
+                }
+            }else{
+                int negUnits = -1*units;
+                for(int i = 0; i<negUnits; i++){
+                    current.rotateC();
+                }
+            }
+        }
+        repaint();
+    }
+    @Override
+    public void run() {
+        Runnable helloRunnable = new Runnable() {
+            public void run() {
+                Point point = MouseInfo.getPointerInfo().getLocation();
+                Point location = PlayerDisplay.this.getLocation();
+                int x = (int) (point.getX()-location.getX());
+                int y = (int) (point.getY()-location.getY());
+                toHighlight = players.get(0).getGraph().bfs(new MathPoint(x, y));
+                PlayerDisplay.this.repaint();
+            }
+        };
+        
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(helloRunnable, 0, 1, TimeUnit.MILLISECONDS);
     }
 }
