@@ -114,6 +114,9 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
             g.drawString(""+p.getNatureTokens(),950,375+73+300);
             //Total Score
             g.drawString(""+p.getScore(),945,375+77+360);
+            g.drawString("Click on the animal and habitat icons",1050,750);
+            g.drawString("to check scoring!",1050,800);
+            //g.drawStrin
             paintCards(g);
             paintComponents(g);
         }
