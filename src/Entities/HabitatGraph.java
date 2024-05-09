@@ -419,6 +419,7 @@ public class HabitatGraph{
         for(HashSet<HabitatTiles> group:groups){
             if(!oneHighlight&&group.size()==max){
                 HabitatTiles.highlightGroup(group, target.toString());
+                oneHighlight=true;
             }
         }
         //PrintTester.print(target + " returns "+max);

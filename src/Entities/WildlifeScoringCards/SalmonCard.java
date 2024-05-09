@@ -167,6 +167,7 @@ public class SalmonCard implements ScoringCard{
                         for(HabitatTiles connection: salmonTile.getConnections().values()){
                             if(connection.tokenAnimal()!=null){
                                 adjacentTokens.add(connection);
+                                System.out.println(connection+" added to thing");
                             }
                         }
                     }
