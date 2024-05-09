@@ -442,6 +442,10 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     public void mousePressed(MouseEvent e) {
     	int x = e.getX();
         int y = e.getY();
+        if(e.getButton()==MouseEvent.BUTTON2){
+            pa.middleClick(e);
+            return;
+        }
         if (instructBoolean){    
             if(x>1780&&x<1825){
                 if (y>40&&y<95){

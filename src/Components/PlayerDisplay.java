@@ -39,6 +39,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private boolean switchTrigger;
     private boolean showEmptyTiles = true;
     private ArrayList<Player>players;
+    Thread t;
 
     private UpdateEventListener uListener;
     public PlayerDisplay(int x, int y, int xS, int yS, ArrayList<Player>play){
@@ -68,7 +69,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         addMouseListener(this);
         addMouseWheelListener(this);
         testConstruct();
-        Thread t = new Thread(this);
+        t = new Thread(this);
         t.run();
     }
     //testing stuff
@@ -168,6 +169,10 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public void mousePressed(MouseEvent e) {
         //PrintTester.print("******************************************* PLAYER DISPLAY CLICK "+e.getX()+", "+e.getY());
         periodic();
+        if(e.getButton()==MouseEvent.BUTTON2){
+            ((PickArea)listener).middleClick(e);
+            return;
+        }
         //for(int i =0;i<players.get(0).getHexagons().size();i++){
             //if(players.get(0).getHexagons().get(i).isPointInsideHexagon(e)){
                 if (token!=null&&temp==null){
@@ -315,6 +320,9 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         token = null;
         current = null;
         toHighlight = null;
+        t = new Thread(this);
+        t.setPriority(10);
+        t.run();
     }
     public void actionPerformed(ActionEvent e){
         periodic();
@@ -422,7 +430,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     }
     @Override
     public void run() {
-        Runnable helloRunnable = new Runnable() {
+        Runnable Philip = new Runnable() {
             public void run() {
                 Point point = MouseInfo.getPointerInfo().getLocation();
                 Point location = PlayerDisplay.this.getLocation();
@@ -434,6 +442,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         };
         
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(helloRunnable, 0, 1, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(Philip, 0, (int)(Math.floor(Math.pow(players.get(0).getGraph().iterate().size()-2, 2)/2)), TimeUnit.MILLISECONDS);
     }
 }

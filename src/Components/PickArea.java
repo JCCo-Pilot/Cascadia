@@ -412,6 +412,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     hexagons[i] =ht.remove(0); 
                     PickEvent pe = new PickEvent(this, temp);
                     tileTaken = true;
+                    
                     if (listener!=null){
                         listener.process(pe);
                     }
@@ -596,6 +597,34 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         Border compound = new CompoundBorder(line, margin);
         button.setBorder(compound);
         return button;
+    }
+    public void middleClick(MouseEvent e){
+        if(tileTaken&&!tokenTaken){
+            PickEvent evnet = new PickEvent(e, removeAndReplaceToken(limitedSelection));
+            tokenTaken = true;
+                    if (listener!=null){
+                        listener.process(evnet);
+                    }
+                    hexagons[limitedSelection].setX(56+69);
+                    hexagons[limitedSelection].setY(175+(146*limitedSelection));
+                    limitedSelection = -1;
+                    stopDoublePick = true;
+        }else if(tokenTaken&&!tokenPlaced){
+            allowPick=true;
+            limitedSelection =-1;
+            pickedHex = -1;
+            Player temp = players.remove(0);
+            temp.decrement();
+            players.add(temp);
+            PickEvent ee = new PickEvent(this, "PickArea");
+            
+            listener.process(ee);
+            ((PlayerDisplay)listener).setupNew();
+            jasperisadumbass();
+        }
+        uListener.update(new UpdateEvent(this, players));
+        periodic();
+        repaint();
     }
     private void periodic(){
         //out.println("Turns Left: "+players.get(0).getTurn());

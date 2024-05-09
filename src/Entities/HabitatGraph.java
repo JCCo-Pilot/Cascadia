@@ -110,7 +110,7 @@ public class HabitatGraph{
     public void drawScoringHighlight(Graphics g, String s){
         for(HabitatTiles h:iterate()){
             if(h.highlights.contains(s)){
-                if(h.tokenString().equals(s)){
+                if(h.tokenAnimal()!=null&&h.tokenString().equals(s)){
                     h.drawScoringHighlight(g);
                 }else{
                     h.drawSecondaryHighlight(g);
