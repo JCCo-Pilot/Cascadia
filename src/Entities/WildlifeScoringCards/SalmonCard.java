@@ -165,15 +165,16 @@ public class SalmonCard implements ScoringCard{
                     //TODO: if the empty animal token ever gets changed to avoid null errors, change what it is here
                     for(HabitatTiles salmonTile: run){
                         for(HabitatTiles connection: salmonTile.getConnections().values()){
-                            if(connection.tokenAnimal()!=null){
+                            if(connection.tokenAnimal()!=null&&connection.tokenAnimal()!=CardAnimals.SALMON){
                                 adjacentTokens.add(connection);
-                                System.out.println(connection+" added to thing");
+                                //System.out.println(connection+" added to thing");
                             }
                         }
                     }
                     adjacentTokens.remove(null);
                     if(run.size()>=1){
                         points3 += adjacentTokens.size();
+                        //System.out.println("adjacent tokens size = "+adjacentTokens.size());
                     }
                     HabitatTiles.highlightGroup(run, "SALMON");
                     HabitatTiles.highlightGroup(adjacentTokens, "SALMON");

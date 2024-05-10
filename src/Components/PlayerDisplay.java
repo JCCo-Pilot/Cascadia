@@ -442,6 +442,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         };
         
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(Philip, 0, (int)(Math.floor(Math.pow(players.get(0).getGraph().iterate().size()-2, 2)/2)), TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(Philip, 0, (int)(Math.floor(Math.pow(players.get(0).getGraph().iterate().size()-2, 2)/10)), TimeUnit.MILLISECONDS);
     }
 }

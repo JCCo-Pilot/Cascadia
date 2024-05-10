@@ -40,16 +40,19 @@ public class HabitatTiles extends PointGenerator{
     private static int normieCnt;
 
     public HashSet<String> highlights = new HashSet<String>();
+    private static HashMap<String, HabitatTiles> allTiles = new HashMap<String, HabitatTiles>();
 
     //CONSTRUCTORS*******************************************************************************************************
     public HabitatTiles(double size){
         super(0, 0, (int)size);
         imageName = "empty"+ ++emptyCnt;
+        allTiles.put(this.imageName, this);
     }
 
     public HabitatTiles(){
         super(0, 0, 0);
         imageName = "empty empty" + ++emptyCnt;
+        allTiles.put(this.imageName, this);
     }
 
     public HabitatTiles(String imageName,int x, int y, Double size){
@@ -61,11 +64,13 @@ public class HabitatTiles extends PointGenerator{
         }catch(Exception e){
             out.println("Shit fucked up56");
         }
+        allTiles.put(this.imageName, this);
     }   
 
     public HabitatTiles(Integer x, Integer y, Double size){
         super(x, y, size);
         imageName = "N/A" + ++emptyCnt;
+        allTiles.put(this.imageName, this);
     }
 
     public HabitatTiles(String imageName,boolean isKey,int x, int y, double sz){
@@ -92,6 +97,7 @@ public class HabitatTiles extends PointGenerator{
         if(ani.indexOf("-")!=ani.lastIndexOf("-")){
             //3 habitats
         }
+        allTiles.put(this.imageName, this);
     }
 
     public HabitatTiles(String imageName, String[] habitats, String[] animals, Boolean isKeyStone){
@@ -123,6 +129,7 @@ public class HabitatTiles extends PointGenerator{
         }catch(Exception e){
             out.println("Shit fucked up118");
         }
+        allTiles.put(this.imageName, this);
     }
 
     public HabitatTiles(String imageName, String[] habitats, String[] animals, boolean isKeyStone, Integer x, Integer y, Double size){
@@ -151,9 +158,11 @@ public class HabitatTiles extends PointGenerator{
         try{
             //image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
             image = ImageIO.read(HabitatTiles.class.getResource("/Entities/Images/"+imageName+".png"));
+            //System.out.println("image pulled: "+"/Entities/Images/"+imageName+".png");
         }catch(Exception e){
             out.println("Shit fucked up149");
         }
+        allTiles.put(this.imageName, this);
     }
 
     public HabitatTiles(String imageName, String[] habitats, String[] animals, boolean isKeyStone, Integer x, Integer y, Double size,boolean isStarter){
@@ -183,9 +192,15 @@ public class HabitatTiles extends PointGenerator{
         try{
             //image = ImageIO.read(new File("src/Entities/StarterTilePics/"+imageName+".png"));
             image = ImageIO.read(HabitatTiles.class.getResource("/Entities/StarterTilePics/"+imageName+".png"));
+            //System.out.println("image pulled: "+"/Entities/Images/"+imageName+".png");
         }catch(Exception e){
             out.println("Shit fucked up181");
         }
+        allTiles.put(this.imageName, this);
+    }
+
+    public static HabitatTiles getTile(String s){
+        return allTiles.get(s);
     }
 
     public static void highlightGroup(HashSet<HabitatTiles> set, String s){
