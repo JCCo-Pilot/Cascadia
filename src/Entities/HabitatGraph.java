@@ -17,6 +17,8 @@ public class HabitatGraph{
     private Integer size = 70;
     private Boolean autoSize = true;
 
+    private static HashSet<HabitatGraph> allGraphs = new HashSet<HabitatGraph>();
+
     public HabitatGraph(StarterTile s){
         root = s.down_right;
         root.setCoordinate(new MathPoint(500, 490));
@@ -30,6 +32,47 @@ public class HabitatGraph{
         connectTilesToNonConnectedAdjacents();
         PrintTester.print(iterate().toString());
         this.fixStackedTileLocation();
+        allGraphs.add(this);
+    }
+
+    public static HabitatGraph findGraph(HabitatTiles h){
+        for(HabitatGraph graph:allGraphs){
+            if(graph.iterate().contains(h)){
+                return graph;
+            }
+        }
+        return null;
+    }
+
+    public Boolean withinDimensions(MathPoint p){
+        int highestX = 0;
+        int lowestX = 900;
+        int highestY = 0;
+        int lowestY = 900;
+        for(HabitatTiles h:iterate()){
+            if(h.getAdjacentTileOffset(HabitatTiles.LEFT).xPoint<lowestX){
+                lowestX = h.getAdjacentTileOffset(HabitatTiles.LEFT).xPoint;
+            }
+
+            if(h.getAdjacentTileOffset(HabitatTiles.RIGHT).xPoint>highestX){
+                highestX = h.getAdjacentTileOffset(HabitatTiles.RIGHT).xPoint;
+            }
+
+            if(h.getAdjacentTileOffset(HabitatTiles.UP_LEFT).yPoint<lowestY){
+                lowestY = h.getAdjacentTileOffset(HabitatTiles.UP_LEFT).yPoint;
+            }
+
+            if(h.getAdjacentTileOffset(HabitatTiles.DOWN_LEFT).yPoint>highestY){
+                highestY = h.getAdjacentTileOffset(HabitatTiles.DOWN_LEFT).yPoint;
+            }
+        }
+        int newXOffset = (highestX+lowestX)/2-450;
+        int newYOffset = (highestY+lowestY)/2-450;
+
+        Boolean xGood = p.xPoint>=lowestX&&p.xPoint<=highestX;
+        Boolean yGood = p.yPoint>=lowestY&&p.yPoint<=highestY;
+
+        return xGood&&yGood;
     }
 
     

@@ -203,6 +203,8 @@ public class HabitatTiles extends PointGenerator{
         return allTiles.get(s);
     }
 
+
+
     public static void highlightGroup(HashSet<HabitatTiles> set, String s){
         for(HabitatTiles h:set){
             h.highlights.add(s);
@@ -638,6 +640,38 @@ public class HabitatTiles extends PointGenerator{
 
         return new MathPoint(xPoint, yPoint); 
     }       
+
+    public static MathPoint getAdjacentTileOffset(MathPoint p, Double size, Integer direction){
+        Double x = p.xPoint+0.0;
+        Double y = p.yPoint+0.0;
+        
+
+        if(direction==LEFT){
+            x -= Math.sqrt(3)*size;
+        }else if(direction==RIGHT){
+            x += Math.sqrt(3)*size;
+        }else if(direction==UP_RIGHT){
+            x += size*Math.sqrt(3)/2.0;
+            y -= size*3/2.0;
+        }else if(direction==UP_LEFT){
+            x += -1*size*Math.sqrt(3)/2.0;
+            y -= size*3/2.0;
+        }else if(direction==DOWN_RIGHT){
+            x += size*Math.sqrt(3)/2.0;
+            y -= -1*size*3/2.0;
+        }else if(direction==DOWN_LEFT){
+            x += -1*size*Math.sqrt(3)/2.0;
+            y -= -1*size*3/2.0;
+        }
+
+        //PrintTester.print(direction + " offset of "+this+" is "+x+", "+y);
+
+        Integer xPoint = (int)(double)x;
+        Integer yPoint = (int)(double)y;
+
+        return new MathPoint(xPoint, yPoint); 
+    }       
+
     // do they equal each other 
     public boolean equals(HabitatTiles t){
         if(t.getImageName().equals(imageName)){

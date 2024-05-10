@@ -14,6 +14,7 @@ import Entities.HabitatTiles;
 import Entities.Player;
 import Entities.Enums.CardAnimals;
 import Entities.Enums.CardTypes;
+import MathHelper.MathPoint;
 
 public class HawkCard implements ScoringCard{
 
@@ -228,7 +229,8 @@ public class HawkCard implements ScoringCard{
             lineOfSight = new HashSet<HabitatTiles>();
             lineOfSight.add(hawk);
             //System.out.println("Pushed Direction: "+dir);
-            addToLineOfSight(hawk.get(dir), dir, lineOfSight);
+            HabitatGraph hab = HabitatGraph.findGraph(hawk);
+            addToLineOfSight(hab, hawk.getAdjacentTileOffset(dir), dir, lineOfSight);
             int hawkCounter = 0;
             for(HabitatTiles h:lineOfSight){
                 if(h.tokenAnimal()!=null&&h.tokenAnimal()==CardAnimals.HAWK){
@@ -242,19 +244,28 @@ public class HawkCard implements ScoringCard{
         return linesOfSight;
     }
 
-    private void addToLineOfSight(HabitatTiles inLine, Integer direction, HashSet<HabitatTiles> lineOfSight){
+    private void addToLineOfSight(HabitatGraph h, MathPoint p, Integer direction, HashSet<HabitatTiles> lineOfSight){
+        HabitatTiles inLine = find(h, p);
         if(inLine==null){
-            return;
+            if(h.withinDimensions(p)){
+                addToLineOfSight(h, HabitatTiles.getAdjacentTileOffset(p, h.getSize()+0.0, direction), direction, lineOfSight);
+            }else{
+                return;
+            }
         }else{
             //System.out.println("inLine = "+inLine.toString());
             //System.out.println("dir = "+direction);
             lineOfSight.add(inLine);
             if(inLine.tokenAnimal()!=CardAnimals.HAWK&&inLine.get(direction)!=null){//ensure that coming across a hawk would end the line 
-                addToLineOfSight(inLine.get(direction), direction, lineOfSight);
+                addToLineOfSight(h, inLine.getAdjacentTileOffset(direction), direction, lineOfSight);
                 //System.out.println(inLine.get(direction).toString()+" added to line of sight");
             }
         }
         //System.out.println("Line of Sight = "+lineOfSight);
+    }
+
+    private HabitatTiles find(HabitatGraph graph, MathPoint p){
+        return graph.bfs(p);
     }
 
     private void removeDuplicateLinesOfSight(HashSet<HashSet<HabitatTiles>> totalLOS){
