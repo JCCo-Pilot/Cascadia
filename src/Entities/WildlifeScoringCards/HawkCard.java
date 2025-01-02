@@ -3,11 +3,8 @@ package Entities.WildlifeScoringCards;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.*;
-import java.awt.*;
-import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
-import java.io.File;
 
 import Entities.HabitatGraph;
 import Entities.HabitatTiles;
@@ -25,24 +22,14 @@ public class HawkCard implements ScoringCard{
 
     public HawkCard(CardTypes letter){
         this.cardLetter = letter;
-        String choice = "";
-        switch(letter){
-            case CARD_A:
-                choice = "A";
-            break;
-            case CARD_B:
-                choice ="B";
-            break;
-            case CARD_C:
-                choice = "C";
-            break;
-            case CARD_D:
-                choice = "D";
-            break;
-        }
+        String choice = switch (letter) {
+            case CARD_A -> "A";
+            case CARD_B -> "B";
+            case CARD_C -> "C";
+            case CARD_D -> "D";
+        };
         try{
-            //image = ImageIO.read(new File("src/Entities/ScoringCardsPics/HawkScore"+choice+".png"));
-            image = ImageIO.read(HawkCard.class.getResource("/Entities/ScoringCardsPics/HawkScore"+choice+".png"));
+            image = ImageIO.read(Objects.requireNonNull(HawkCard.class.getResource("/Entities/ScoringCardsPics/HawkScore" + choice + ".png")));
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -109,15 +96,15 @@ public class HawkCard implements ScoringCard{
                 }
                 return points0;
             case CARD_B:
-                Integer nonAdjacentLOSHawks = 0;
+                Integer nonAdjacentLineOfSightHawks = 0;
                 for(HabitatTiles hawk:hawks){
                     if(hawk.getNumberOf(CardAnimals.HAWK)==0&&linesOfSightByHawk.get(hawk).size()>0){
-                        nonAdjacentLOSHawks++;
+                        nonAdjacentLineOfSightHawks++;
                         hawk.highlights.add("HAWK");
                     }
                 }
                 Integer points1 = 0;
-                switch(nonAdjacentLOSHawks){
+                switch(nonAdjacentLineOfSightHawks){
                     case 0:
                     break;
                     case 1:
@@ -149,9 +136,7 @@ public class HawkCard implements ScoringCard{
             case CARD_C:
                 HashSet<HashSet<HabitatTiles>> totalLinesOfSight2 = new HashSet<HashSet<HabitatTiles>>();
                 for(HashSet<HashSet<HabitatTiles>> lineGroup:linesOfSightByHawk.values()){
-                    for(HashSet<HabitatTiles> line: lineGroup){
-                        totalLinesOfSight2.add(line);
-                    }
+                    totalLinesOfSight2.addAll(lineGroup);
                 }
                 removeDuplicateLinesOfSight(totalLinesOfSight2);
                 HabitatTiles.highlightGroups(totalLinesOfSight2, "HAWK");
@@ -160,9 +145,7 @@ public class HawkCard implements ScoringCard{
                 HashSet<HashSet<HabitatTiles>> totalLinesOfSight3 = new HashSet<HashSet<HabitatTiles>>();
                 HashMap<HashSet<HabitatTiles>, Integer> groupPoints3 = new HashMap<HashSet<HabitatTiles>, Integer>();
                 for(HashSet<HashSet<HabitatTiles>> lineGroup:linesOfSightByHawk.values()){
-                    for(HashSet<HabitatTiles> line: lineGroup){
-                        totalLinesOfSight3.add(line);
-                    }
+                    totalLinesOfSight3.addAll(lineGroup);
                 }
                 removeDuplicateLinesOfSight(totalLinesOfSight3);
                 Integer points3 = 0;
@@ -228,7 +211,6 @@ public class HawkCard implements ScoringCard{
             HashSet<HabitatTiles> lineOfSight = new HashSet<HabitatTiles>();        
             lineOfSight = new HashSet<HabitatTiles>();
             lineOfSight.add(hawk);
-            //System.out.println("Pushed Direction: "+dir);
             HabitatGraph hab = HabitatGraph.findGraph(hawk);
             addToLineOfSight(hab, hawk.getAdjacentTileOffset(dir), dir, lineOfSight);
             int hawkCounter = 0;
@@ -249,23 +231,17 @@ public class HawkCard implements ScoringCard{
         if(inLine==null){
             if(h.withinDimensions(p)){
                 addToLineOfSight(h, HabitatTiles.getAdjacentTileOffset(p, h.getSize()+0.0, direction), direction, lineOfSight);
-            }else{
-                return;
             }
         }else{
-            //System.out.println("inLine = "+inLine.toString());
-            //System.out.println("dir = "+direction);
             lineOfSight.add(inLine);
             if(inLine.tokenAnimal()!=CardAnimals.HAWK&&inLine.get(direction)!=null){//ensure that coming across a hawk would end the line 
                 addToLineOfSight(h, inLine.getAdjacentTileOffset(direction), direction, lineOfSight);
-                //System.out.println(inLine.get(direction).toString()+" added to line of sight");
             }
         }
-        //System.out.println("Line of Sight = "+lineOfSight);
     }
 
     private HabitatTiles find(HabitatGraph graph, MathPoint p){
-        return graph.bfs(p);
+        return graph.search(p);
     }
 
     private void removeDuplicateLinesOfSight(HashSet<HashSet<HabitatTiles>> totalLOS){

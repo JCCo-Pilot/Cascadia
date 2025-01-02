@@ -6,18 +6,14 @@ import Entities.Enums.CardAnimals;
 import Entities.Enums.Habitats;
 import MathHelper.MathPoint;
 
-import java.io.*;
 import java.util.*;
-import java.awt.image.*;
-import javax.imageio.*;
-import java.awt.event.*;
-import static java.lang.System.*;
+
 public class HabitatGraph{
-    private HabitatTiles root;
+    private final HabitatTiles root;
     private Integer size = 70;
     private Boolean autoSize = true;
 
-    private static HashSet<HabitatGraph> allGraphs = new HashSet<HabitatGraph>();
+    private static final HashSet<HabitatGraph> allGraphs = new HashSet<HabitatGraph>();
 
     public HabitatGraph(StarterTile s){
         root = s.down_right;
@@ -78,7 +74,6 @@ public class HabitatGraph{
     
 
     public void drawGraph(Graphics g, Boolean drawEmptys){
-        //PrintTester.print("DrawGraph method called");
         for(HabitatTiles h: iterate()){
             if(h.isEmpty()){
                 if(drawEmptys){
@@ -87,15 +82,7 @@ public class HabitatGraph{
             }else{
                 new TaskThreadManager(TaskThreadManager.ActionVar.DRAW, new Object[]{g, h});
             }
-            //PrintTester.print(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
         }
-        /*for(HabitatTiles h:iterate()){
-            for(HabitatTiles con:h.getConnections().values()){
-                g.setColor(Color.RED);
-                g.drawLine(h.getXPos(), h.getYPos(), con.getXPos(), con.getYPos()w2);
-            }
-            g.setColor(Color.BLACK);
-        }*/
     }
 
     public void drawGraph(Graphics g, int x1, int y1, int xLength, int yLength){
@@ -130,7 +117,7 @@ public class HabitatGraph{
 
         int lowestDifference = (int)(ratio*Math.min(xDifference, yDifference));
         
-        double ratio2 = lowest/lowestDifference;
+        double ratio2 = (double) lowest /lowestDifference;
 
         for(HabitatTiles h: iterate()){
             if(h.isEmpty()){
@@ -141,11 +128,8 @@ public class HabitatGraph{
 
                 int xNew = (int) (xCartesian*ratio) + center.xPoint;
                 int yNew = (int) (yCartesian*ratio) + center.yPoint;
-
-                //h.drawHexagon(g, radius, xNew, yNew);
                 new TaskThreadManager(TaskThreadManager.ActionVar.DRAWPOSITION, new Object[]{g, h, radius, xNew, yNew});
             }
-            //PrintTester.print(h+" drawn at coords "+h.getXPos()+", "+h.getYPos());
         }
         
     }
@@ -184,11 +168,10 @@ public class HabitatGraph{
     public HashSet<HabitatTiles> filter(Habitats hab){
         HashSet<HabitatTiles> filterReturn = new HashSet<HabitatTiles>();
         for(HabitatTiles h:iterate()){
-            if(h.getHabitats().values().contains(hab)){
+            if(h.getHabitats().containsValue(hab)){
                 filterReturn.add(h);
             }
         }
-        //PrintTester.print("Filter for "+hab+" returns "+filterReturn.toString());
         return filterReturn;
     }
 
@@ -199,12 +182,10 @@ public class HabitatGraph{
     }
 
     private void iterate(HabitatTiles h, HashSet<HabitatTiles> s){
-        if(h==null||s.contains(h)){
-            return;
-        }else{
+        if(!(h ==null) &&!s.contains(h)){
             s.add(h);
             PrintTester.print("iterate " + h);
-            for(int i = 0; i>6; i++){
+            for(int i = 0; i<6; i++){
                 iterate(h.get(i), s);
             }
         }
@@ -218,9 +199,7 @@ public class HabitatGraph{
             HabitatTiles current = toVisit.remove();
             if(!visited.contains(current)){
                 visited.add(current);
-                for(HabitatTiles h: current.getConnections().values()){
-                    toVisit.add(h);
-                }
+                toVisit.addAll(current.getConnections().values());
             }
         }
         return visited;
@@ -334,7 +313,7 @@ public class HabitatGraph{
     }
 
     public Boolean add(HabitatTiles toAdd, MathPoint clickPoint){
-        HabitatTiles toReplace = bfs(clickPoint);
+        HabitatTiles toReplace = search(clickPoint);
         if(toReplace==null){
             return false;
         }
@@ -352,7 +331,7 @@ public class HabitatGraph{
     }
 
     public Boolean addToken(WildlifeTokens t, MathPoint clickPoint){
-        HabitatTiles toAdd = bfs(clickPoint);
+        HabitatTiles toAdd = search(clickPoint);
         if(!toAdd.isEmpty()&&toAdd.canPick(t)){
             toAdd.addToken(t);
             return true;
@@ -363,26 +342,7 @@ public class HabitatGraph{
         return addToken(new WildlifeTokens(a), p);
     }
 
-    public HabitatTiles bfs(MathPoint p){
-        //PrintTester.print("bfs "+p);
-        /*Queue<HabitatTiles> toVisit = new LinkedList<HabitatTiles>();
-        Queue<HabitatTiles> visited = new LinkedList<HabitatTiles>();
-        toVisit.add(root);
-        while(!toVisit.isEmpty()){
-            HabitatTiles current = toVisit.poll();
-            if(!visited.contains(current)){
-                visited.offer(current);
-                if(current.isPointInsideHexagon(p)){
-                    PrintTester.print("bfs found "+current+" at "+p);
-                    return current;
-                }
-                for(HabitatTiles h: current.getConnections().values()){
-                    toVisit.add(h);
-                }
-            }
-        }
-        PrintTester.print("bfs found null at "+p);
-        return null;*/
+    public HabitatTiles search(MathPoint p){
         for(HabitatTiles h:iterate()){
             if(h.isPointInsideHexagon(p)||h.getCoordinate().equals(p)){
                 return h;
@@ -400,7 +360,6 @@ public class HabitatGraph{
     }
 
     public void fixStackedTileLocation(){
-        //PrintTester.print("/////////// FIX STACKED BEGIN");
         HashMap<HabitatTiles, HashSet<HabitatTiles>> checkedPairs = new HashMap<HabitatTiles, HashSet<HabitatTiles>>();
         for(HabitatTiles i:this.iterate()){
             if(!checkedPairs.containsKey(i)){
@@ -415,26 +374,22 @@ public class HabitatGraph{
                 if(!checkedPairs.get(i).contains(j)){
                     checkedPairs.get(i).add(j);
                     checkedPairs.get(j).add(i);
-                    if(i.isPointInsideHexagon(j.getCoordinate())||i.getCoordinate().equals(j.getCoordinate())){//(i.getXPos()==j.getXPos()&&i.getYPos()==j.getYPos())){
+                    if(i.isPointInsideHexagon(j.getCoordinate())||i.getCoordinate().equals(j.getCoordinate())){
                         PrintTester.print(i+" : "+i.getCoordinate().toString()+", "+j+" : "+j.getCoordinate().toString());
                         if(i.isEmpty()){
                             i.replaceWith(j);
                             PrintTester.print(i+" removed because i empty");
-                            JOptionPane.showMessageDialog(null, i+" removed because i empty");
                         }else if(j.isEmpty()){
                             j.replaceWith(i);
                             PrintTester.print(j+" removed because j empty");
-                            JOptionPane.showMessageDialog(null, j+" removed because j empty");
                         }else{
                             j.replaceWith(i);
                             PrintTester.print(j+" removed because both empty");
-                            JOptionPane.showMessageDialog(null, j+" removed over "+i);
                         }
                     }
                 }
             }
         }
-        //PrintTester.print("/////////// FIX STACKED END");
     }
 
     public void connectTilesToNonConnectedAdjacents(){
@@ -457,7 +412,6 @@ public class HabitatGraph{
         Integer max = 0;
         groups.remove(null);
         for(HashSet<HabitatTiles> group:groups){
-            //PrintTester.print(target+" group size "+group.size());
             group.remove(null);
             if(group.size()>max){
                 max = group.size();
@@ -470,7 +424,6 @@ public class HabitatGraph{
                 oneHighlight=true;
             }
         }
-        //PrintTester.print(target + " returns "+max);
         return max;
     }
 
@@ -480,7 +433,6 @@ public class HabitatGraph{
         while(!q.isEmpty()){
             new TaskThreadManager(TaskThreadManager.ActionVar.GROUP, new Object[]{target, q, group, visitedTiles});
         }
-        //PrintTester.print(target+" group size = "+group.size());
     }
 
     private class TaskThreadManager{
@@ -495,22 +447,18 @@ public class HabitatGraph{
             switch(a){
                 case DRAW:
                     DrawingTaskThreadManager d = new DrawingTaskThreadManager((Graphics)arr[0], (HabitatTiles)arr[1]);
-                    d.setPriority(6);
                     d.run();
                     break;
                 case DRAWPOSITION:
                     PositionalTaskThreadManager p = new PositionalTaskThreadManager((Graphics)arr[0], (HabitatTiles)arr[1], (double)arr[2], (int)arr[3], (int)arr[4]);
-                    p.setPriority(1);
                     p.run();
                     break;
                 case CONNECT:
                     ConnectionTaskThreadManager c = new ConnectionTaskThreadManager((HabitatTiles)arr[0]);
-                    //c.setPriority(7);
                     c.run();
                     break;
                 case GROUP:
                     GroupingTaskThreadManager g = new GroupingTaskThreadManager((Habitats)arr[0],(Queue<HabitatTiles>)arr[1], (HashSet<HabitatTiles>)arr[2], (HashSet<HabitatTiles>)arr[3]);
-                    g.setPriority(1);
                     g.run();
                     break;
                 default:
@@ -519,11 +467,10 @@ public class HabitatGraph{
             }
         }
 
-        private class DrawingTaskThreadManager extends Thread{
+        private class DrawingTaskThreadManager{
             Graphics graphics;
             HabitatTiles tile;
             private DrawingTaskThreadManager(Graphics g, HabitatTiles toDraw){
-                //PrintTester.print("DrawingTaskThreadManager");
                 graphics = g;
                 tile = toDraw;
             }
@@ -533,14 +480,13 @@ public class HabitatGraph{
             }
         }
 
-        private class PositionalTaskThreadManager extends Thread{
+        private class PositionalTaskThreadManager{
             Graphics graphics;
             HabitatTiles tile;
             double radius;
             int x;
             int y;
             private PositionalTaskThreadManager(Graphics g, HabitatTiles toDraw, double rad, int xPos, int yPos){
-                //PrintTester.print("PositionalTaskThreadManager");
                 graphics = g;
                 tile = toDraw;
                 radius = rad;
@@ -556,14 +502,13 @@ public class HabitatGraph{
         private class ConnectionTaskThreadManager{
             HabitatTiles h;
             private ConnectionTaskThreadManager(HabitatTiles tile){
-                //PrintTester.print("ConnectionTaskThreadManager");
                 h = tile;
             }
 
             public void run(){
                 for(int i = 0; i<6; i++){
                     if(h.get(i)==null){
-                        HabitatTiles adjacent = bfs(h.getAdjacentTileOffset(i));
+                        HabitatTiles adjacent = search(h.getAdjacentTileOffset(i));
                         if(adjacent!=null){
                             h.add(adjacent, i);
                         }
@@ -574,7 +519,7 @@ public class HabitatGraph{
 
         }
 
-        private class GroupingTaskThreadManager extends Thread{
+        private class GroupingTaskThreadManager{
             Queue<HabitatTiles> q;
             HashSet<HabitatTiles> group;
             HashSet<HabitatTiles> visitedTiles;
@@ -592,10 +537,8 @@ public class HabitatGraph{
                     if(!visitedTiles.contains(current)){
                         group.add(current);
                         visitedTiles.add(current);
-                        //PrintTester.print(current+" added to group of "+target);
                         for(int i = 0; i<6; i++){
                             HabitatTiles next = current.get(i);
-                            //PrintTester.print("HabitatMatch between "+current.getHabitats()+", "+next.getHabitats()+" at "+i+" returns "+ current.habitatMatch(i));
                             if(current.habitatMatch(i)&&current.getHabitats().get(i)==target&&!next.isEmpty()){
                                 q.add(next);
                             }

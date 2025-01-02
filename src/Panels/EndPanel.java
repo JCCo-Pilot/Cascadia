@@ -35,24 +35,18 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     public EndPanel(){
         setLayout(null);
         repaint();
-        /*for (int i =0;i<4;i++){
-            players.add(new Player(i));
-        }*/
         construct();
         pullImages();
         this.setVisible(true);
     }
     public void pullImages(){
         try{
-            bg = ImageIO.read(EndPanel.class.getResource("/Panels/Background/EndScreenbg.png"));
-            //bg = ImageIO.read(new File("src/Panels/Background/EndScreenbg.png"));
+            bg = ImageIO.read(Objects.requireNonNull(EndPanel.class.getResource("/Panels/Background/EndScreenbg.png")));
         }catch(Exception e){
             out.println("Error in pulling images in EndPanel class");
         }
     }
     public void construct(){
-        //coordinates for buttons x - 1020 y - 690, 740, 790, 840 w - 560 h- 50
-        //out.println(players.size());
         for (int i =0;i<players.size();i++){
             JButton temp = new JButton("Player "+(i+1));
             int x = 1010; int yBonus = 0;
@@ -65,9 +59,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
             this.add(temp);
             playerButtons.add(temp);
         }
-        //this.addAll(playerButtons);
         this.setVisible(true);
-        //testCreateCards();
     }
     public void setNumPlayers(int i){
         numPlayers = i;
@@ -88,16 +80,11 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
     }
     private void score(){
         ArrayList<ScoringCard> cards = new ArrayList<ScoringCard>();
-        //add all the cards to this
         cards.add(bearCard);
         cards.add(foxCard);
         cards.add(elkCard);
         cards.add(hawkCard);
         cards.add(salmonCard);
-        //use the player.getScore() method to return the final score
-        //use the player.getScore(CardAnimals) for a card
-        //use player.getScore(Habitats) for a habitat
-        //use player.getBonus(Habitats) for a habitat bonus
         Scorer.score(players, cards);
         switch(numPlayers){
             case 4:
@@ -108,28 +95,11 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
                 
             break;
         }
-        /*for (int i =0;i<players.size();i++){
-            ArrayList<Integer>temp = new ArrayList<>();
-            Player current = players.get(i);
-            //bear
-            temp.add(bearCard.score(current));
-            //elk
-            temp.add(elkCard.score(current));
-            //salmon
-            temp.add(salmonCard.score(current));
-            //hawk
-            temp.add(hawkCard.score(current));
-            //fox
-            temp.add(foxCard.score(current));
-            //total
-            //put it into the hashMap
-        }*/
     }
     private ArrayList<Integer> scorePlayer(Player p){
         return null;
     }
     public void paint(Graphics g){
-        //g.fillRect(0, 0, 1590, 865);
         g.drawImage(bg, 0,0, 1585, 865,null);
         Painting(g);
         paintCards(g);
@@ -139,6 +109,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         g.drawString(w, 80, 400);
         out.println("Painted");
     }
+
     public void paintCards(Graphics g){
         g.drawImage(bearCard.getImage(),1020,10,250,230,null);
         g.drawImage(elkCard.getImage(),1300,10,250,230,null);
@@ -146,7 +117,7 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         g.drawImage(hawkCard.getImage(), 1300, 240, 250, 230, null);
         g.drawImage(foxCard.getImage(), 1020, 470, 250, 230, null);
     }
-    //painting all the scores of the different players
+
     public void Painting(Graphics g){
         int size = players.size();
         score();
@@ -244,7 +215,6 @@ public class EndPanel extends JPanel implements ActionListener,MouseListener{
         salmonCard = new SalmonCard(type);
     }
     private void addAll(ArrayList<JButton>comps){
-        //PrintTester.print("Line 59"+comps.size());
         for (int i =0;i<comps.size();i++){
             this.add(comps.get(i));
         }

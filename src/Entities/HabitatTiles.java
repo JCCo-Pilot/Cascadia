@@ -26,11 +26,10 @@ public class HabitatTiles extends PointGenerator{
 
 
     private BufferedImage image;
-    //private HashSet<CardAnimals> animals = new HashSet<CardAnimals>();
-    private ArrayList<CardAnimals> animals = new ArrayList<CardAnimals>();
+    private final ArrayList<CardAnimals> animals = new ArrayList<CardAnimals>();
     
     private HashMap<Integer, Habitats> habitatSides = new HashMap<Integer, Habitats>();
-    private HashMap<Integer, HabitatTiles> connections = new HashMap<Integer, HabitatTiles>();
+    private final HashMap<Integer, HabitatTiles> connections = new HashMap<Integer, HabitatTiles>();
     private Integer rotation = 0;
     private String imageName;
     private String name;
@@ -40,9 +39,8 @@ public class HabitatTiles extends PointGenerator{
     private static int normieCnt;
 
     public HashSet<String> highlights = new HashSet<String>();
-    private static HashMap<String, HabitatTiles> allTiles = new HashMap<String, HabitatTiles>();
+    private static final HashMap<String, HabitatTiles> allTiles = new HashMap<String, HabitatTiles>();
 
-    //CONSTRUCTORS*******************************************************************************************************
     public HabitatTiles(double size){
         super(0, 0, (int)size);
         imageName = "empty"+ ++emptyCnt;
@@ -57,12 +55,9 @@ public class HabitatTiles extends PointGenerator{
 
     public HabitatTiles(String imageName,int x, int y, Double size){
         super(x,y,size);
-        //imageName = imageName.substring(5);
         try{
-            //image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
-            image = ImageIO.read(HabitatTiles.class.getResource("/Entities/StarterTilePics/"+imageName+".png"));
-        }catch(Exception e){
-            out.println("Shit fucked up56");
+            image = ImageIO.read(Objects.requireNonNull(HabitatTiles.class.getResource("/Entities/StarterTilePics/" + imageName + ".png")));
+        }catch(Exception _){
         }
         allTiles.put(this.imageName, this);
     }   
@@ -83,17 +78,13 @@ public class HabitatTiles extends PointGenerator{
 
         ArrayList<String>environments = new ArrayList<>();
         ArrayList<String>animals = new ArrayList<>();
-        
-        //sample input:swamp-hawk-key
-        
-        //environmental processing
+
         if (env.contains("+")){
             environments.add(env.substring(0,env.indexOf("+")));
             env = env.substring(env.indexOf("+")+1);
         }
         environments.add(env);
 
-        //habitat processing
         if(ani.indexOf("-")!=ani.lastIndexOf("-")){
             //3 habitats
         }
@@ -124,10 +115,8 @@ public class HabitatTiles extends PointGenerator{
         }
 
         try{
-            //image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
-            image = ImageIO.read(HabitatTiles.class.getResource("/Entities/StarterTilePics/"+imageName+".png"));
-        }catch(Exception e){
-            out.println("Shit fucked up118");
+            image = ImageIO.read(Objects.requireNonNull(HabitatTiles.class.getResource("/Entities/StarterTilePics/" + imageName + ".png")));
+        }catch(Exception _){
         }
         allTiles.put(this.imageName, this);
     }
@@ -156,11 +145,8 @@ public class HabitatTiles extends PointGenerator{
         }
 
         try{
-            //image = ImageIO.read(new File("src/Entities/Images/"+imageName+".png"));
-            image = ImageIO.read(HabitatTiles.class.getResource("/Entities/Images/"+imageName+".png"));
-            //System.out.println("image pulled: "+"/Entities/Images/"+imageName+".png");
-        }catch(Exception e){
-            out.println("Shit fucked up149");
+            image = ImageIO.read(Objects.requireNonNull(HabitatTiles.class.getResource("/Entities/Images/" + imageName + ".png")));
+        }catch(Exception _){
         }
         allTiles.put(this.imageName, this);
     }
@@ -191,10 +177,9 @@ public class HabitatTiles extends PointGenerator{
 
         try{
             //image = ImageIO.read(new File("src/Entities/StarterTilePics/"+imageName+".png"));
-            image = ImageIO.read(HabitatTiles.class.getResource("/Entities/StarterTilePics/"+imageName+".png"));
+            image = ImageIO.read(Objects.requireNonNull(HabitatTiles.class.getResource("/Entities/StarterTilePics/" + imageName + ".png")));
             //System.out.println("image pulled: "+"/Entities/Images/"+imageName+".png");
-        }catch(Exception e){
-            out.println("Shit fucked up181");
+        }catch(Exception _){
         }
         allTiles.put(this.imageName, this);
     }
@@ -234,8 +219,7 @@ public class HabitatTiles extends PointGenerator{
             highlightGroup(set2.get(c), s);
         }
     }
-    
-    //WILDLIFE TOKEN METHODS*******************************************************************************************************
+
     public WildlifeTokens getToken(){
         return super.getTokens();
     }
@@ -262,8 +246,6 @@ public class HabitatTiles extends PointGenerator{
 
     public Boolean habitatMatch(Integer connection){
         HabitatTiles c = this.get(connection);
-        //PrintTester.print("HabitatSides this "+habitatSides.toString());
-        //PrintTester.print("HabitatSides c "+c.getHabitats().toString());
         try {
             return this.habitatSides.get(connection).equals(c.getHabitats().get(c.getSideOf(this)));
         } catch (Exception e) {
@@ -284,12 +266,9 @@ public class HabitatTiles extends PointGenerator{
     public void drawHexagon(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
         if(isEmpty()){
-            //super.drawHexagon(g);
-            //g.drawString(imageName, super.getXPos()+(int)(Math.random()*5), super.getYPos()+(int)(Math.random()*5));
             g.setColor(new Color(255, 255, 143));
             g.fillPolygon(super.getPolygon());
             g.setColor(Color.BLACK);
-            //g.drawString(imageName, super.getXPos(), super.getYPos());
         }else{
             super.drawHexagon(g);
             Double offset = super.getSize();
@@ -306,12 +285,10 @@ public class HabitatTiles extends PointGenerator{
             int sz = (int)Math.round(super.getSize()/2);
             if (super.getXPos()!=0&&super.getYPos()!=0){
                 g.drawImage(newImage, xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
-                //g.drawImage(newImage, xPos+xOffset,yPos-yOffset,(int)(50*Math.sqrt(3)),(int)(50*2),null);
                 if (super.getTokens()!=null){
                     g.drawImage(super.getTokens().getImage(),xPos-sz,yPos-sz,sz*2,sz*2,null);
                 }   
             }
-            //g.drawString(imageName, xPos, yPos);
         }
         
     }
@@ -325,7 +302,7 @@ public class HabitatTiles extends PointGenerator{
             int xPos = super.getXPos();
             int yPos = super.getYPos();
         try {
-            g.drawImage(ImageIO.read(HabitatTiles.class.getResource("/Entities/Images/HexHighlight.png")), xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
+            g.drawImage(ImageIO.read(Objects.requireNonNull(HabitatTiles.class.getResource("/Entities/Images/HexHighlight.png"))), xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
             PrintTester.print("Highlight Drawn");
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -342,7 +319,7 @@ public class HabitatTiles extends PointGenerator{
             int xPos = super.getXPos();
             int yPos = super.getYPos();
         try {
-            g.drawImage(ImageIO.read(HabitatTiles.class.getResource("/Entities/Images/ScoringHighlight.png")), xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
+            g.drawImage(ImageIO.read(Objects.requireNonNull(HabitatTiles.class.getResource("/Entities/Images/ScoringHighlight.png"))), xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
             PrintTester.print("Highlight Drawn");
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -359,7 +336,7 @@ public class HabitatTiles extends PointGenerator{
             int xPos = super.getXPos();
             int yPos = super.getYPos();
         try {
-            g.drawImage(ImageIO.read(HabitatTiles.class.getResource("/Entities/Images/ScoringHighlight2.png")), xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
+            g.drawImage(ImageIO.read(Objects.requireNonNull(HabitatTiles.class.getResource("/Entities/Images/ScoringHighlight2.png"))), xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
             PrintTester.print("Highlight Drawn");
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -376,7 +353,7 @@ public class HabitatTiles extends PointGenerator{
             int xPos = super.getXPos();
             int yPos = super.getYPos();
         try {
-            g.drawImage(ImageIO.read(HabitatTiles.class.getResource("/Entities/Images/MouseHighlight.png")), xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
+            g.drawImage(ImageIO.read(Objects.requireNonNull(HabitatTiles.class.getResource("/Entities/Images/MouseHighlight.png"))), xPos+xOffset,yPos-yOffset,(int)(super.getSize()*Math.sqrt(3)),(int)(super.getSize()*2),null);
             PrintTester.print("Highlight Drawn");
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -418,29 +395,28 @@ public class HabitatTiles extends PointGenerator{
     public void setCoordinate(MathPoint m){
         super.setX(m.xPoint);
         super.setY(m.yPoint);
-        //PrintTester.print("Coords of "+this+" set to "+m.xPoint+", "+m.yPoint);
+
     }
+
     //rotational stuff
     public static BufferedImage rotate(BufferedImage image, double angle) {
         double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
         int w = image.getWidth(), h = image.getHeight();
-        int neww = (int)Math.floor(w*cos+h*sin), newh = (int) Math.floor(h * cos + w * sin);
         GraphicsConfiguration gc = getDefaultConfiguration();
         BufferedImage result = gc.createCompatibleImage(w, h, Transparency.TRANSLUCENT);
         Graphics2D g = result.createGraphics();
-        //g.translate((neww - w) / 2, (newh - h) / 2);
         g.rotate(angle, w / 2, h / 2);
         g.drawRenderedImage(image, null);
         g.dispose();
         return result;
     }
-    //it works
+
     private static GraphicsConfiguration getDefaultConfiguration() {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
         return gd.getDefaultConfiguration();
     }
-    //MISC*******************************************************************************************************
+
     public void replaceNullConnectionsWithEmpty(){
         for(int i = 0; i<6; i++){
             if(connections.get(i)==null){
@@ -494,7 +470,6 @@ public class HabitatTiles extends PointGenerator{
             rotation-=360;
         }
         PrintTester.print(imageName+" rotated: "+habitatSides.toString());
-        //out.println("Rotation- "+getRotation());
     }
     public void rotateC(){
         rotation+=300;
@@ -507,7 +482,6 @@ public class HabitatTiles extends PointGenerator{
             rotation-=360;
         }
         PrintTester.print(imageName+" rotated: "+habitatSides.toString());
-        //out.println("Rotation- "+getRotation());
     }
 
     public int getRotation(){
@@ -586,19 +560,10 @@ public class HabitatTiles extends PointGenerator{
     }
 
     public boolean canPick(WildlifeTokens tk){
-        //out.println("canPick method:"+tk.toString());
-        if (super.getTokens()==null&&super.getTokens()==null&&tk!=null){
-            /*if(animals.contains(CardAnimals.StringToAnimal(tk.getName()))){
-                PrintTester.print("Called");
-                return true;
-            }*/
-            //out.println("Name"+tk.getName());
-            if(animals.contains(tk.getType())){
-                //out.println("canPick = true");
-                return true;
-            }
+        if (super.getTokens()==null&&tk!=null){
+            return animals.contains(tk.getType());
         }   
-        //out.println("canPick = false");
+
         return false;
     }
 
@@ -615,25 +580,23 @@ public class HabitatTiles extends PointGenerator{
         Double y = super.getYPos()+0.0;
         Double size = super.getSize();
 
-        if(direction==LEFT){
+        if(Objects.equals(direction, LEFT)){
             x -= Math.sqrt(3)*size;
-        }else if(direction==RIGHT){
+        }else if(Objects.equals(direction, RIGHT)){
             x += Math.sqrt(3)*size;
-        }else if(direction==UP_RIGHT){
+        }else if(Objects.equals(direction, UP_RIGHT)){
             x += size*Math.sqrt(3)/2.0;
             y -= size*3/2.0;
-        }else if(direction==UP_LEFT){
+        }else if(Objects.equals(direction, UP_LEFT)){
             x += -1*size*Math.sqrt(3)/2.0;
             y -= size*3/2.0;
-        }else if(direction==DOWN_RIGHT){
+        }else if(Objects.equals(direction, DOWN_RIGHT)){
             x += size*Math.sqrt(3)/2.0;
             y -= -1*size*3/2.0;
-        }else if(direction==DOWN_LEFT){
+        }else if(Objects.equals(direction, DOWN_LEFT)){
             x += -1*size*Math.sqrt(3)/2.0;
             y -= -1*size*3/2.0;
         }
-
-        //PrintTester.print(direction + " offset of "+this+" is "+x+", "+y);
 
         Integer xPoint = (int)(double)x;
         Integer yPoint = (int)(double)y;
@@ -646,25 +609,23 @@ public class HabitatTiles extends PointGenerator{
         Double y = p.yPoint+0.0;
         
 
-        if(direction==LEFT){
+        if(Objects.equals(direction, LEFT)){
             x -= Math.sqrt(3)*size;
-        }else if(direction==RIGHT){
+        }else if(Objects.equals(direction, RIGHT)){
             x += Math.sqrt(3)*size;
-        }else if(direction==UP_RIGHT){
+        }else if(Objects.equals(direction, UP_RIGHT)){
             x += size*Math.sqrt(3)/2.0;
             y -= size*3/2.0;
-        }else if(direction==UP_LEFT){
+        }else if(Objects.equals(direction, UP_LEFT)){
             x += -1*size*Math.sqrt(3)/2.0;
             y -= size*3/2.0;
-        }else if(direction==DOWN_RIGHT){
+        }else if(Objects.equals(direction, DOWN_RIGHT)){
             x += size*Math.sqrt(3)/2.0;
             y -= -1*size*3/2.0;
-        }else if(direction==DOWN_LEFT){
+        }else if(Objects.equals(direction, DOWN_LEFT)){
             x += -1*size*Math.sqrt(3)/2.0;
             y -= -1*size*3/2.0;
         }
-
-        //PrintTester.print(direction + " offset of "+this+" is "+x+", "+y);
 
         Integer xPoint = (int)(double)x;
         Integer yPoint = (int)(double)y;

@@ -137,7 +137,7 @@ public class Player implements Comparable{
         natureTokens++;
     }
 
-    public void spendNT(){
+    public void spendNatureToken(){
         if(natureTokens>0){
             natureTokens--;
         }
@@ -151,15 +151,8 @@ public class Player implements Comparable{
         
     }
 
-    public void drawInventory(Graphics g, Boolean drawEmptys){
-        // will implement a draw inventory based graph
-        /*for (int i =0;i<tiles.size();i++){
-            tiles.get(i).drawHexagon(g);
-        }
-        if (st!=null){
-            st.paintStarter(g);
-        }*/
-        graph.drawGraph(g, drawEmptys);
+    public void drawGraph(Graphics g, Boolean drawEmptyTiles){
+        graph.drawGraph(g, drawEmptyTiles);
     }
     
     public void addAll(ArrayList<HabitatTiles>ht){
@@ -175,7 +168,6 @@ public class Player implements Comparable{
     }
     public void decrement() {
     	turns = turns-1;
-        //PrintTester.print("Decremented");
     }
     public int getTurn() {
     	return turns;

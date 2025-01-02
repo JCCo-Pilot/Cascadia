@@ -2,27 +2,25 @@ package Panels;
 import java.util.*;
 import javax.swing.*;
 import EventAndListener.*;
-import MathHelper.*;
 import Entities.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
-import java.io.File;
+
 import Components.*;
-import Entities.WildlifeScoringCards.*;
 import Entities.Enums.*;
 import static java.lang.System.*;
 public class PlayThroughPanel extends JPanel implements MouseListener,ActionListener,EndGameListener,AllowPickEventListener{
-    private Color highligheter = new Color(255, 255, 143);
+    private final Color highlighter = new Color(255, 255, 143);
     private GameListener listener;
     private PickListener pListener;
     private BufferedImage background;
-    private PlayerDisplay pd;
-    private ArrayList<WildlifeTokens>tokens = new ArrayList<>();
+    private final PlayerDisplay playerDisplay;
+    private final ArrayList<WildlifeTokens>tokens = new ArrayList<>();
     private ArrayList<HabitatTiles>habitatTiles = new ArrayList<>();
     public HabitatTiles[]hexagons = new HabitatTiles[4];
-    private ArrayList<Player>players = new ArrayList<>();
+    private final ArrayList<Player>players = new ArrayList<>();
     private ArrayList<JButton>buttons = new ArrayList<>();
 
     private JTextArea jta = new JTextArea();
@@ -32,13 +30,12 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
     private HabitatTiles taken;
     private WildlifeTokens takenToken;
 
-    private JButton suicideButton = new JButton("Return to game");
+    private final JButton returnButton = new JButton("Return to game");
 
     private int state;
     public PlayThroughPanel(){
         setLayout(null);
         addMouseListener(this);
-        out.println("Added listener");
 
         createTokens();
         randShuffle();
@@ -53,9 +50,9 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         jta.setFont(new Font("Times New Roman",10,20));
         this.add(jta);
 
-        suicideButton.setBounds(1215,780,352,40);
-        suicideButton.addActionListener(this);
-        this.add(suicideButton);
+        returnButton.setBounds(1215,780,352,40);
+        returnButton.addActionListener(this);
+        this.add(returnButton);
 
         players.add(new Player(1));
         habitatTiles= new TileCreator().getTiles();
@@ -67,10 +64,8 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
 
         constructStarters();
         try{
-            //background = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
-            background = ImageIO.read(PlayThroughPanel.class.getResource("/Panels/Background/MainPanelBG.png"));
-        }catch(Exception e){
-            out.println("line 72 of the playthrough panel");
+            background = ImageIO.read(Objects.requireNonNull(PlayThroughPanel.class.getResource("/Panels/Background/MainPanelBG.png")));
+        }catch(Exception _){
         }
         //button creation
         for (int i= 0;i<1;i++){
@@ -84,13 +79,13 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
             this.add(buttons.get(i));
         }
         //player display
-        pd = new PlayerDisplay(310, 15, 905, 830,players,true);
-        pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
-        add(pd);
+        playerDisplay = new PlayerDisplay(310, 15, 905, 830,players,true);
+        playerDisplay.setBounds(playerDisplay.getXPos(), playerDisplay.getYPos(), playerDisplay.getPreferredSize().width, playerDisplay.getPreferredSize().height);
+        add(playerDisplay);
 
-        pd.addListener(this);
+        playerDisplay.addListener(this);
 
-        this.pListener(pd);
+        this.pListener(playerDisplay);
 
         this.setVisible(true);
     }
@@ -131,11 +126,11 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         //start painting stuff here
         switch(state){
             case 1: //choosing a habitat tile
-                g.setColor(highligheter);
+                g.setColor(highlighter);
                 g.fillRect(56+69-70,175-80,140,600);
             break;
             case 2: //choosing an animal token
-                g.setColor(highligheter);
+                g.setColor(highlighter);
                 out.println("case 2 achieved");
                 g.fillRect(200,95,70,600);
             break;
@@ -148,7 +143,6 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
         }
         for (int i = 0;i<4;i++){
             g.drawImage(tokens.get(i).getImage(),131+69,250+(146*i)-100,70,70,null);
-            //g.fillOval(131, 200+25+(106)*i, 50, 50);
         }
         updateString();
         paintComponents(g);
@@ -176,7 +170,7 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==suicideButton){
+        if (e.getSource()== returnButton){
             GameStateEvent gse = new GameStateEvent(this, "Brain Rot");
             if (listener!=null){
                 listener.process(gse);
@@ -207,8 +201,8 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
             case 2:
                 for (int i =0;i<4;i++){
                     if(pointIsInside(200, 250+(146*i)-100, 70, 70, e)&&i == pickedHex){
-                        PickEvent evnet = new PickEvent(e, removeAndReplaceToken(i));
-                        pListener.process(evnet);
+                        PickEvent event = new PickEvent(e, removeAndReplaceToken(i));
+                        pListener.process(event);
                         hexagons[pickedHex].setX(56+69);
                         hexagons[pickedHex].setY(175+(146*pickedHex));
                         pickedHex = 0;
@@ -225,9 +219,7 @@ public class PlayThroughPanel extends JPanel implements MouseListener,ActionList
     }
     private boolean pointIsInside(int x, int y, int xSize, int ySize,MouseEvent e){
         if (e.getX()>x&&e.getX()<x+xSize){
-            if (e.getY()>y&&e.getY()<y+ySize){
-                return true;
-            }
+            return e.getY() > y && e.getY() < y + ySize;
         }
         return false;
     }

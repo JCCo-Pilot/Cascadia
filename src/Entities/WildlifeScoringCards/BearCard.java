@@ -23,24 +23,14 @@ public class BearCard implements ScoringCard{
 
     public BearCard(CardTypes letter){
         this.cardLetter = letter;
-        String choice = "";
-        switch(letter){
-            case CARD_A:
-                choice = "A";
-            break;
-            case CARD_B:
-                choice ="B";
-            break;
-            case CARD_C:
-                choice = "C";
-            break;
-            case CARD_D:
-                choice = "D";
-            break;
-        }
+        String choice = switch (letter) {
+            case CARD_A -> "A";
+            case CARD_B -> "B";
+            case CARD_C -> "C";
+            case CARD_D -> "D";
+        };
         try{
-            //image = ImageIO.read(new File("src/Entities/ScoringCardsPics/BearScore"+choice+".png"));
-            image = ImageIO.read(BearCard.class.getResource("/Entities/ScoringCardsPics/BearScore"+choice+".png"));
+            image = ImageIO.read(Objects.requireNonNull(BearCard.class.getResource("/Entities/ScoringCardsPics/BearScore" + choice + ".png")));
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -61,7 +51,6 @@ public class BearCard implements ScoringCard{
     }
 
     public Integer bearScore(HabitatGraph h){
-        //PrintTester.print("bearScore");
         HashSet<HabitatTiles> bears = h.filter(CardAnimals.BEAR);
         PrintTester.print(bears.toString());
         HashSet<HabitatTiles> visitedBears = new HashSet<HabitatTiles>();
@@ -156,7 +145,6 @@ public class BearCard implements ScoringCard{
     private HashSet<HabitatTiles> findBearGroup(HabitatTiles bear, HashSet<HabitatTiles> visitedBears){
         HashSet<HabitatTiles> bearGroup = new HashSet<HabitatTiles>();
         addBearToGroup(bear, visitedBears, bearGroup);
-        //PrintTester.print("Bear Group Size = "+bearGroup.size());
         if(bearGroup.size()>0){
             return bearGroup;
         }else{
@@ -166,9 +154,7 @@ public class BearCard implements ScoringCard{
     }
 
     private void addBearToGroup(HabitatTiles bear, HashSet<HabitatTiles> visitedBears, HashSet<HabitatTiles> bearGroup){
-        if(bear.getToken()==null||bear.tokenAnimal()!=CardAnimals.BEAR||visitedBears.contains(bear)){
-            return;
-        }else{
+        if(!(bear.getToken()==null||bear.tokenAnimal()!=CardAnimals.BEAR||visitedBears.contains(bear))){
             visitedBears.add(bear);
             bearGroup.add(bear);
             for(HabitatTiles h:bear.getConnections().values()){

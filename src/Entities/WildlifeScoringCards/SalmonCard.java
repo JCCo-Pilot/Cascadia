@@ -26,24 +26,14 @@ public class SalmonCard implements ScoringCard{
 
     public SalmonCard(CardTypes letter){
         this.cardLetter = letter;
-        String choice = "";
-        switch(letter){
-            case CARD_A:
-                choice = "A";
-            break;
-            case CARD_B:
-                choice ="B";
-            break;
-            case CARD_C:
-                choice = "C";
-            break;
-            case CARD_D:
-                choice = "D";
-            break;
-        }
+        String choice = switch (letter) {
+            case CARD_A -> "A";
+            case CARD_B -> "B";
+            case CARD_C -> "C";
+            case CARD_D -> "D";
+        };
         try{
-            //image = ImageIO.read(new File("src/Entities/ScoringCardsPics/SalmonScore"+choice+".png"));
-            image = ImageIO.read(SalmonCard.class.getResource("/Entities/ScoringCardsPics/SalmonScore"+choice+".png"));
+            image = ImageIO.read(Objects.requireNonNull(SalmonCard.class.getResource("/Entities/ScoringCardsPics/SalmonScore" + choice + ".png")));
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -137,7 +127,7 @@ public class SalmonCard implements ScoringCard{
                         case 0://redundancy, shouldn't ever happen but yk
                               points2+=0;
                         break;
-                        case 1://catches these two so they dont go to default
+                        case 1://catches these two so they don't go to default
                         break;
                         case 2:                            
                         break;
@@ -167,14 +157,12 @@ public class SalmonCard implements ScoringCard{
                         for(HabitatTiles connection: salmonTile.getConnections().values()){
                             if(connection.tokenAnimal()!=null&&connection.tokenAnimal()!=CardAnimals.SALMON){
                                 adjacentTokens.add(connection);
-                                //System.out.println(connection+" added to thing");
                             }
                         }
                     }
                     adjacentTokens.remove(null);
-                    if(run.size()>=1){
+                    if(!run.isEmpty()){
                         points3 += adjacentTokens.size();
-                        //System.out.println("adjacent tokens size = "+adjacentTokens.size());
                     }
                     HabitatTiles.highlightGroup(run, "SALMON");
                     HabitatTiles.highlightGroup(adjacentTokens, "SALMON");
@@ -187,7 +175,7 @@ public class SalmonCard implements ScoringCard{
     private HashSet<HabitatTiles> findSalmonRun(HabitatTiles salmon, HashSet<HabitatTiles> visitedSalmon){
         HashSet<HabitatTiles> salmonRun = new HashSet<HabitatTiles>();
         addSalmonToRun(salmon, visitedSalmon, salmonRun);
-        if(salmonRun.size()>0){
+        if(!salmonRun.isEmpty()){
             return salmonRun;
         }else{
             return null;

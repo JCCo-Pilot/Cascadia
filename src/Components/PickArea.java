@@ -12,15 +12,8 @@ import javax.swing.border.LineBorder;
 import EventAndListener.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.imageio.ImageIO;
-import javax.print.DocFlavor.INPUT_STREAM;
 
-import java.awt.image.*;
-import java.io.File;
-
-import MathHelper.*;
 import Panels.ScoreTesterPanel;
-import Panels.*;
 
 import static java.lang.System.*;
 public class PickArea extends JComponent implements MouseListener, ActionListener,AllowPickEventListener{
@@ -62,7 +55,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private JComboBox<String>jcb;
     private JButton spendToken = constructButton("Spend");
     private JButton confirmButton = constructButton("Confirm Token Removal");
-    //private JButton showSelected = new JButton("Show Selection");
 
     private HabitatTiles[]hexagons = new HabitatTiles[4];
     private ArrayList<HabitatTiles>ht = new ArrayList<>();
@@ -76,7 +68,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         this.setVisible(true);
         
         createTokens();
-        //sumChecker();
         randShuffle();
         while(isOverpopulated4()){
             randShuffle();
@@ -108,7 +99,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
 
         overpopButton.setBounds(33,745,270,30);
         overpopButton.setVisible(isOverpopulated3());
-        //overpopButton.setVisible(true);
         overpopButton.setActionCommand("Overpopulation");
         overpopButton.addActionListener(this);
         add(overpopButton);
@@ -127,7 +117,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         xPos = x; yPos = y;
         xSize = xS; ySize = yS;
         for (int i = 0;i<4;i++){
-            //PointGenerator pg = new PointGenerator(56+69, 275+(146*i)-100, 70.0); //changed from y-6 to y-50
             hexagons[i]= ht.remove(0);
             hexagons[i].setX(56+69);
             hexagons[i].setY(275+(146*i)-100);
@@ -136,16 +125,12 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public void paint(Graphics g){
         periodic();
         g.setColor(Color.RED);
-        //g.fillRect(0, 0, xSize, ySize);
-        //spacing+(size+space)*i
         for (int i = 0;i<4;i++){
-            //g.fillRect(6+(106)*i, 6, 100, 100);
             hexagons[i].drawHexagon(g);
         }
         g.setColor(Color.BLACK);
         for (int i = 0;i<4;i++){
             g.drawImage(tokens.get(i).getImage(),131+69,250+(146*i)-100,70,70,null);
-            //g.fillOval(131, 200+25+(106)*i, 50, 50);
         }
         //options
         g.setFont(new Font("Arial", 100, 50));
@@ -155,12 +140,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         g.setFont(new Font("Arial", 100, 15));
         g.drawString("Tokens: "+tokens.size(),200,140);
         //other more different option
-        /*g.setFont(new Font("Arial",100,30));
-        if (players.size()>0){
-            g.drawString(players.get(0).getName()+":",40,50);
-        }
-        g.drawString("Turns Left: "+players.get(0).getTurn(),40,80);*/
-        //g.drawImage(natureToken,50,680,50,50,null);
         g.setFont(new Font("Arial",100,30));
         g.drawString("Nature Tokens: "+players.get(0).getNatureTokens(),50,720);
         paintComponents(g);
@@ -316,10 +295,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     }
 
     public WildlifeTokens removeAndReplaceToken(Integer index){
-        /*if(index<=3&&index>=0){
-            int rand = (int) (Math.random()*tokens.size());
-            return tokens.set(index, tokens.remove(rand));
-        }*/
         if (index<4&&index>-1){
             WildlifeTokens temp = tokens.get(index);
             tokens.set(index,tokens.remove(4));
@@ -336,12 +311,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        //131+69,250+(146*i)-100,70,70,
-       // PrintTester.print("Some fucking nerd tried to get a token. lmao. ");
-        //PrintTester.print("Skibidi stop double pick = "+stopDoublePick);
-        //PrintTester.print("Ohio allow pick = "+allowPick);
-        //PrintTester.print("Raghav Ahuja limited selection = "+limitedSelection);
-        //PrintTester.print("Picked hex = "+pickedHex);
         if (pickCombo&&pickedHex!=-1&&!stopDoublePick){
             for (int i = 0;i<4;i++){
                 if (hexagons[i].isPointInsideHexagon(e)){
@@ -364,21 +333,15 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                 out.println("Line 312");
                 for (int i =0;i<4;i++){
                     if(pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
-                        PickEvent evnet = new PickEvent(e, removeAndReplaceToken(i));
+                        PickEvent event = new PickEvent(e, removeAndReplaceToken(i));
                         tokenTaken = true;
                         if (listener!=null){
-                            listener.process(evnet);
+                            listener.process(event);
                         }
                         hexagons[pickedHex].setX(56+69);
                         hexagons[pickedHex].setY(175+(146*pickedHex));
-                        //chat it works/////////////////////////////////////////////////////////////////
                         pickedHex = -1;
                         pickCombo=false;
-                        //////////////////////////////////////////////////
-                        //stopDoublePick = true;
-                        //PickEvent ev = new PickEvent(this, true);
-                        //listener.process(ev);
-                        //players.add(players.remove(0));
                     }
                 }
             }
@@ -392,20 +355,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
         if (!pickCombo&&limitedSelection==-1&&!removeTrigger&&!stopDoublePick){
             for (int i = 0;i<4;i++){
-                //pick stuff
-                /*if (pointIsInside(200, 250+(146*i)-100, 70, 70, e)){
-                    if (allowPick){
-                        PickEvent event = new PickEvent(this, removeAndReplaceToken(i));
-                        //need to delay the swap
-                        //PickEvent event = new PickEvent(this, tokens.remove(i));
-                        //tokens.set(i,null);
-                        listener.process(event);
-                        allowPick=false;
-                        limitedSelection = i;
-                        break;
-                    }
-                }*/
-                //end of picking stuff
                 if (hexagons[i].isPointInsideHexagon(e)){
                     HabitatTiles temp = hexagons[i];
                     //out.println("Clicked "+i);
@@ -418,7 +367,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     }
                     limitedSelection = i;
                     stopDoublePick = true;
-                    //allowPick=false;
                 }
             }
         }else if (limitedSelection>-1&&limitedSelection<4){
@@ -434,29 +382,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
                     hexagons[limitedSelection].setY(175+(146*limitedSelection));
                     limitedSelection = -1;
                     stopDoublePick = true;
-                    //PickEvent ev = new PickEvent(this, true);
-                    //listener.process(ev);
-                    //players.add(players.remove(0));
                 }
             }
-            //if you pick the wildlife token first
-            /*else if (!allowPick){
-                if (hexagons[limitedSelection].isPointInsideHexagon(e)){
-                    HabitatTiles temp = hexagons[limitedSelection];
-                    hexagons[limitedSelection] =ht.remove(0); 
-                    PickEvent pe = new PickEvent(this, temp);
-                    listener.process(pe);
-                    hexagons[limitedSelection].setX(56+69);
-                    hexagons[limitedSelection].setY(175+(146*limitedSelection));
-                    limitedSelection = -1;
-                    //PickEvent ev = new PickEvent(this, true);
-                    //listener.process(ev);
-                    //players.add(players.remove(0));
-                }
-            }*/
-            //hexagons[i].setX(56+69);
-            //hexagons[i].setY(275+(146*i)-100);
-            
         }
         uListener.update(new UpdateEvent(this, players));
         periodic();
@@ -465,8 +392,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public void process(AllowPickEvent e){
         if (e.allowed()){
             allowPick= true;
-            //out.println("Line 401");
-            //players.add(players.remove(0));
             repaint();
         }else if (e.movedOn()!=null){
             stopDoublePick = false;
@@ -488,8 +413,7 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     public int getYPos(){return yPos;}
     public int getXSize(){return xSize;}
     public int getYSize(){return ySize;}
-    public void jasperisadumbass(){
-        //PrintTester.print("Skibidi Raghav Ahuja");
+    public void endUpdate(){
         Thread.currentThread().setPriority(10);
         stopDoublePick = false;
         allowPick=true;
@@ -521,10 +445,8 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             tokenPlaced = true;
             spendToken.setVisible(false);
             jcb.setVisible(false);
-            //PrintTester.print("tokenPlaced = true");
         }else{
             tilePlaced = true;
-            //PrintTester.print("tilePlaced = true");
         }
         repaint();
     }
@@ -536,7 +458,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             overPopUsed = true;
             ((JComponent) e.getSource()).setVisible(false);
         }else if (e.getSource()==clearToken){
-            //periodic();
             allowPick=true;
             limitedSelection =-1;
             pickedHex = -1;
@@ -547,30 +468,25 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             
             listener.process(ee);
             ((PlayerDisplay)listener).setupNew();
-            jasperisadumbass();
-            //hexagons[limitedSelection].setX(56+69);
-            //hexagons[limitedSelection].setY(175+(146*limitedSelection));
+            endUpdate();
         }else if(e.getSource()==spendToken&&jcb.getSelectedIndex()==1&&!pickCombo){//fixes the infinte spend abilities
-            //clicked spend on any combo of tiles+tokens
             pickCombo = true;
-            players.get(0).spendNT();
+            players.get(0).spendNatureToken();
             spendToken.setVisible(false);
             jcb.setVisible(false);
             out.println("438");
         }else if (e.getSource()==spendToken&&jcb.getSelectedIndex()==2&&!removeTrigger){
-            //clicked on remove the stuff
             spendToken.setVisible(false);
             jcb.setVisible(false);
             confirmButton.setVisible(true);
             removeTrigger = true;
-            players.get(0).spendNT();
+            players.get(0).spendNatureToken();
             repaint();
             jcb = new JComboBox<>(choices);
             jcb.setBounds(103,775,200,20);
             jcb.addActionListener(this);
             jcb.setVisible(false);
             add(jcb);
-            //out.println("398");
         }else if (e.getSource()==confirmButton&&removeTrigger){
             ArrayList<WildlifeTokens>wt = new ArrayList<>();
             for (int i =0;i<4&&i<removal.size();i++){
@@ -591,7 +507,6 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     private static JButton constructButton(String text) {
         JButton button = new JButton(text);
         button.setForeground(Color.BLACK);
-        //button.setBackground(Color.LIGHT_GRAY);
         Border line = new LineBorder(Color.GRAY);
         Border margin = new EmptyBorder(5, 15, 5, 15);
         Border compound = new CompoundBorder(line, margin);
@@ -600,10 +515,10 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
     }
     public void middleClick(MouseEvent e){
         if(tileTaken&&!tokenTaken){
-            PickEvent evnet = new PickEvent(e, removeAndReplaceToken(limitedSelection));
+            PickEvent event = new PickEvent(e, removeAndReplaceToken(limitedSelection));
             tokenTaken = true;
                     if (listener!=null){
-                        listener.process(evnet);
+                        listener.process(event);
                     }
                     hexagons[limitedSelection].setX(56+69);
                     hexagons[limitedSelection].setY(175+(146*limitedSelection));
@@ -620,14 +535,13 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
             
             listener.process(ee);
             ((PlayerDisplay)listener).setupNew();
-            jasperisadumbass();
+            endUpdate();
         }
         uListener.update(new UpdateEvent(this, players));
         periodic();
         repaint();
     }
     private void periodic(){
-        //out.println("Turns Left: "+players.get(0).getTurn());
         if (players.get(0).getTurn()==0){
             EndGameEvent ege = new EndGameEvent(this, true);
             egl.endGameTime(ege);
@@ -646,18 +560,9 @@ public class PickArea extends JComponent implements MouseListener, ActionListene
         }
         if(tilePlaced&tokenTaken){
             clearToken.setVisible(true);
-            //showSelected.setBounds(33,775,270,30);
-
         }
         if(tileTaken){
             overpopButton.setVisible(false);
-            //showSelected.setVisible(true);
-        }
-        if(tilePlaced&&tokenPlaced){
-            //showSelected.setVisible(false);
-        }
-        if(!tileTaken&&!tokenTaken){
-            //showSelected.setVisible(false);
         }
         while(isOverpopulated4()){
             removeOverpopulation();

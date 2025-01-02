@@ -5,10 +5,10 @@ public class GameStateEvent extends EventObject{
     private int state;
     private Player play;
     private Character difficulty;
-    private String justForFun;
+    private String panelName;
     public GameStateEvent(Object source, String panelName){
         super(source);
-        justForFun = panelName;
+        this.panelName = panelName;
     }
     public GameStateEvent(Object source, int s){
         super(source);
@@ -44,6 +44,6 @@ public class GameStateEvent extends EventObject{
         return difficulty;
     }
     public String getPanel(){
-        return justForFun;
+        return panelName;
     }
 }
