@@ -25,7 +25,6 @@ public class PointGenerator {
         xPos = x; yPos = y;
     }
     public PointGenerator(int x, int y, Double sz){//default point generator 0/180 degree
-        //calculation(x, y, size);
         int s = (int)(Math.round(sz));
         unitCirclePoints(x, y, s);
         xPos = x; yPos = y;
@@ -42,15 +41,6 @@ public class PointGenerator {
             myPolygon mp = new myPolygon(ogPoints);
             g.fillPolygon(mp);
         }
-        for (int i =0; i<5;i++){
-            //drawLine(g, ogPoints[i], ogPoints[i+1]);
-        }
-        //drawLine(g,ogPoints[5],ogPoints[0]);
-        // part of the test code will remove later
-        if (test!=null){
-            //g.drawImage(test.getImage(),xPos-35,yPos-35,70,70,null);
-        }
-        //end of test code
     }
     public void setX(int i){
         xPos = i;
@@ -79,13 +69,12 @@ public class PointGenerator {
     }
     public boolean isPointInsideHexagon(MouseEvent e){
         return myPoly.contains(e.getX(), e.getY());
-        //return isPointInsideHexagon(e.getX(), e.getY());
     }
 
     public boolean isPointInsideHexagon(MathPoint e){
         return myPoly.contains(e.xPoint, e.yPoint);
-        //return isPointInsideHexagon(e.getX(), e.getY());
     }
+
     private boolean isPointInsideHexagon(int x, int y) {
         int[] xPoints = new int[6];
         int[] yPoints = new int[6];

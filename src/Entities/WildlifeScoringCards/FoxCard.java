@@ -29,24 +29,14 @@ public class FoxCard implements ScoringCard{
 
     public FoxCard(CardTypes letter){
         this.cardLetter = letter;
-        String choice = "";
-        switch(letter){
-            case CARD_A:
-                choice = "A";
-            break;
-            case CARD_B:
-                choice ="B";
-            break;
-            case CARD_C:
-                choice = "C";
-            break;
-            case CARD_D:
-                choice = "D";
-            break;
-        }
+        String choice = switch (letter) {
+            case CARD_A -> "A";
+            case CARD_B -> "B";
+            case CARD_C -> "C";
+            case CARD_D -> "D";
+        };
         try{
-            //image = ImageIO.read(new File("src/Entities/ScoringCardsPics/FoxScore"+choice+".png"));
-            image = ImageIO.read(FoxCard.class.getResource("/Entities/ScoringCardsPics/FoxScore"+choice+".png"));
+            image = ImageIO.read(Objects.requireNonNull(FoxCard.class.getResource("/Entities/ScoringCardsPics/FoxScore" + choice + ".png")));
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -3,19 +3,14 @@ import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import Components.*;
 import Entities.Player;
-import Entities.Enums.*;
 import EventAndListener.*;
 import Panels.*;
 import static java.lang.System.*;
-import java.io.File;
+
 public class App extends JFrame implements GameListener{
     public static void main(String[] args) throws Exception {
         App  ap = new App("Team Aditya Chen");
-        //Spotify s = new Spotify();
-        //s.play();
-        //PanelTester pt = new PanelTester("lmao");
     }
     private StartPanel spanel;
     private MainPanel mpanel;
@@ -35,10 +30,8 @@ public class App extends JFrame implements GameListener{
         mpanel = new MainPanel('a');
         mpanel.setListener(this);
         add(mpanel);
-        //troll comments
         try {
-            this.setIconImage(ImageIO.read(App.class.getResource("Entities/Images/IMG_5104.jpg")));
-            //this.setIconImage(ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg")));
+            this.setIconImage(ImageIO.read(Objects.requireNonNull(App.class.getResource("Entities/Images/IMG_5104.jpg"))));
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -53,10 +46,8 @@ public class App extends JFrame implements GameListener{
         spanel = new StartPanel(onlyACards);
         spanel.setListener(this);
         add(spanel);
-        //troll comments
         try {
-            this.setIconImage(ImageIO.read(App.class.getResource("Entities/Images/IMG_5104.jpg")));
-            //this.setIconImage(ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg")));
+            this.setIconImage(ImageIO.read(Objects.requireNonNull(App.class.getResource("Entities/Images/IMG_5104.jpg"))));
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -67,7 +58,6 @@ public class App extends JFrame implements GameListener{
     }
     public void process(GameStateEvent e) {
         if (e.getSource()==ptp){
-            //out.println("Recieved issues");
             this.remove(ptp);
             spanel = new StartPanel(onlyACards);
             this.add(spanel);
@@ -110,7 +100,6 @@ public class App extends JFrame implements GameListener{
                 mpanel.setListener(this);
                 repaint();
                 this.setVisible(true);
-                //out.println("Switched");
         	}
         }else if (e.getSource()==mpanel){
             this.remove(mpanel);
@@ -136,7 +125,7 @@ public class App extends JFrame implements GameListener{
                     this.remove(mpanel);
                     this.setSize(1600,900);
                     add(pPanel);
-                    pPanel.currentPlayer(getNumero(1, mpanel.getPlayers()));
+                    pPanel.currentPlayer(getNumber(1, mpanel.getPlayers()));
                     pPanel.setListener(this);
                     pPanel.setBearCard(mpanel.getBearCard());
                     pPanel.setElkCard(mpanel.getElkCard());
@@ -150,7 +139,7 @@ public class App extends JFrame implements GameListener{
                     this.remove(mpanel);
                     this.setSize(1600,900);
                     add(pPanel);
-                    pPanel.currentPlayer(getNumero(2, mpanel.getPlayers()));
+                    pPanel.currentPlayer(getNumber(2, mpanel.getPlayers()));
                     pPanel.setListener(this);
                     pPanel.setBearCard(mpanel.getBearCard());
                     pPanel.setElkCard(mpanel.getElkCard());
@@ -164,7 +153,7 @@ public class App extends JFrame implements GameListener{
                     this.remove(mpanel);
                     this.setSize(1600,900);
                     add(pPanel);
-                    pPanel.currentPlayer(getNumero(3, mpanel.getPlayers()));
+                    pPanel.currentPlayer(getNumber(3, mpanel.getPlayers()));
                     pPanel.setListener(this);
                     pPanel.setBearCard(mpanel.getBearCard());
                     pPanel.setElkCard(mpanel.getElkCard());
@@ -178,7 +167,7 @@ public class App extends JFrame implements GameListener{
                     this.remove(mpanel);
                     this.setSize(1600,900);
                     add(pPanel);
-                    pPanel.currentPlayer(getNumero(4, mpanel.getPlayers()));
+                    pPanel.currentPlayer(getNumber(4, mpanel.getPlayers()));
                     pPanel.setListener(this);
                     pPanel.setBearCard(mpanel.getBearCard());
                     pPanel.setElkCard(mpanel.getElkCard());
@@ -219,7 +208,7 @@ public class App extends JFrame implements GameListener{
             }
         }
     }
-    public Player getNumero(int find,ArrayList<Player>players){
+    public Player getNumber(int find, ArrayList<Player>players){
         for(int i =0;i<players.size();i++){
             if (players.get(i).getName().equals("Player "+find)){
                 return players.get(i);
@@ -227,8 +216,4 @@ public class App extends JFrame implements GameListener{
         }
         return null;
     }
-    /*public void update(UpdateEvent e){
-
-    }*/
-    
 }

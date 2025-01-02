@@ -1,27 +1,24 @@
 package Panels;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 import EventAndListener.*;
-import MathHelper.*;
 import Entities.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
-import java.io.File;
+
 import Components.*;
 import Entities.WildlifeScoringCards.*;
 import Entities.Enums.*;
 import static java.lang.System.*;
 public class MainPanel extends JPanel implements MouseListener,ActionListener,EndGameListener,UpdateEventListener{
     private GameListener listener;
-    private PickArea pa;
-    private PlayerDisplay pd;
-    private ArrayList<Player> players = new ArrayList<>();
-    private ArrayList<JButton>buttons = new ArrayList<>();
-    //private ArrayList<ScoringCard>cards = new ArrayList<>();
+    private final PickArea pa;
+    private final PlayerDisplay pd;
+    private final ArrayList<Player> players = new ArrayList<>();
+    private final ArrayList<JButton>buttons = new ArrayList<>();
     private BearCard bearCard;
     private ElkCard elkCard;
     private SalmonCard salmonCard;
@@ -42,6 +39,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     private ArrayList<miniMap>maps = new ArrayList<>();
 
     private SelectedScoringCard sc;
+
     public MainPanel(int l, Character diffcult){
         setLayout(null);
 
@@ -59,7 +57,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
 
         pa = new PickArea(l,0,0,310,870);
 
-        pa.setReginaPerez(this);
+        pa.setEndgameListener(this);
         pa.setUListener(this);
 
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
@@ -74,13 +72,10 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         instructButton.addActionListener(this);
 
         try{
-            //ImageIO.read(Reworking.class.getResource("/Image/BackgroundStart.png"));
             bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/RealMainPanelBG.png"));
             troll = ImageIO.read(MainPanel.class.getResource("/Entities/Images/IMG_5104.jpg"));
             instructions = ImageIO.read(MainPanel.class.getResource("/Panels/Background/Instructions.png"));
             sigma = ImageIO.read(MainPanel.class.getResource("/Panels/Background/sSigma.png"));
-            //bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
-            //troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
         }catch(Exception e){
             out.println("Unable to pull");
         }
@@ -90,8 +85,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             cards.add(salmonCard);
             cards.add(hawkCard);
             cards.add(foxCard);
-        //commented this out for the sake of no testing
-        //ScoreTesterPanel p = new ScoreTesterPanel(players, cards);
         sc = new SelectedScoringCard();
         pa.setPlayers(players);
         //additional maths
@@ -106,20 +99,19 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             add(temp);
             maps.add(temp);
         }
-        
         repaint();
-        
         this.setVisible(true);
         addMouseListener(this);
     }
+
     //test mode
-    public MainPanel(Character diffcult){
+    public MainPanel(Character difficulty){
         setLayout(null);
 
         construct(1);
         constructStarters();
 
-        constructScoring(diffcult);
+        constructScoring(difficulty);
         
         pd = new PlayerDisplay(310, 15, 905, 830,players);
         pd.setBounds(pd.getXPos(),pd.getYPos(),pd.getPreferredSize().width,pd.getPreferredSize().height);
@@ -127,7 +119,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
 
         pa = new PickArea(1,0,0,310,870);
 
-        pa.setReginaPerez(this);
+        pa.setEndgameListener(this);
 
         pa.setBounds(pa.getXPos(),pa.getYPos(),pa.getPreferredSize().width,pa.getPreferredSize().height);
         pa.addListener(pd);
@@ -136,10 +128,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         pd.addListener(pa);
 
         try{
-            bg = ImageIO.read(MainPanel.class.getResource("/Panels/Background/RealMainPanelBG.png"));
-            troll = ImageIO.read(MainPanel.class.getResource("/Entities/Images/IMG_5104.jpg"));
-            //bg = ImageIO.read(new File("src/Panels/Background/MainPanelBG.png"));
-            //troll = ImageIO.read(new File("src/Entities/Images/IMG_5104.jpg"));
+            bg = ImageIO.read(Objects.requireNonNull(MainPanel.class.getResource("/Panels/Background/RealMainPanelBG.png")));
+            troll = ImageIO.read(Objects.requireNonNull(MainPanel.class.getResource("/Entities/Images/IMG_5104.jpg")));
         }catch(Exception e){
             out.println("Unable to pull");
         }
@@ -149,8 +139,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             cards.add(salmonCard);
             cards.add(hawkCard);
             cards.add(foxCard);
-        //commented this out for the sake of no testing
-        //ScoreTesterPanel p = new ScoreTesterPanel(players, cards);
         for(int i =0;i<1000;i++){
             players.get(0).incrementNature();
         }
@@ -161,9 +149,10 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     }
     //end of test
     private void constructScoring(Character diff){
+        CardTypes type;
         switch(diff){
             case 'a':
-                CardTypes type = CardTypes.CARD_A; 
+                type = CardTypes.CARD_A;
                 bearCard = new BearCard(type);
                 foxCard = new FoxCard(type);
                 elkCard = new ElkCard(type);
@@ -171,7 +160,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
                 salmonCard = new SalmonCard(type);
             break;
             case 'b':
-                type = CardTypes.CARD_B; 
+                type = CardTypes.CARD_B;
                 bearCard = new BearCard(type);
                 foxCard = new FoxCard(type);
                 elkCard = new ElkCard(type);
@@ -202,20 +191,13 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
                 for (int i =0;i<rands.length;i++){
                     int r = rands[i];
                     CardTypes t = CardTypes.CARD_A;
-                    switch(r){
-                        case 0:
-                            t = CardTypes.CARD_A;
-                        break;
-                        case 1:
-                            t = CardTypes.CARD_B;
-                        break;
-                        case 2:
-                            t = CardTypes.CARD_C;
-                        break;
-                        case 3:
-                            t = CardTypes.CARD_D;
-                        break;
-                    }
+                    t = switch (r) {
+                        case 0 -> CardTypes.CARD_A;
+                        case 1 -> CardTypes.CARD_B;
+                        case 2 -> CardTypes.CARD_C;
+                        case 3 -> CardTypes.CARD_D;
+                        default -> t;
+                    };
                     switch(i){
                         case 0:
                             bearCard = (new BearCard(t));
@@ -239,15 +221,11 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }
     }
     private void construct(int limit){
-        //buttons.add(new JButton("Scoring Cards"));
         for (int i= 0;i<limit;i++){
             JButton j = new JButton("Player "+(i+1)+" [0]");
             j.setFont(new Font("Arial", Font.BOLD, 19));
             buttons.add(j);
         }
-        //JButton j = new JButton("Show all Players");
-        //j.setFont(new Font("Arial", Font.BOLD, 19));
-        //buttons.add(j);
         for (int i= 0;i<buttons.size();i++){
             buttons.get(i).setBounds(1217,19+40*i,352,40);
             buttons.get(i).addActionListener(this);
@@ -255,7 +233,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             buttons.get(i).setFocusable(false);
             this.add(buttons.get(i));
         }
-        //construction time
         for(int i =1;i<limit+1;i++){
             players.add(new Player(i));
         }
@@ -271,7 +248,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             cards.add(foxCard);
         Scorer.score(players, cards);
         for(int i = 0; i<buttons.size(); i++){
-            buttons.get(i).setText("Player "+(i+1)+" ["+findPlayer(i+1, players).getScore()+"]");
+            buttons.get(i).setText("Player "+(i+1)+" ["+ Objects.requireNonNull(findPlayer(i + 1, players)).getScore()+"]");
         }
         for(Player p:players){
             for(CardAnimals c:CardAnimals.values()){
@@ -286,10 +263,10 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }
     }
 
-    public static Player findPlayer(int find,ArrayList<Player>players){
-        for(int i =0;i<players.size();i++){
-            if (players.get(i).getName().equals("Player "+find)){
-                return players.get(i);
+    public static Player findPlayer(int number, ArrayList<Player>players){
+        for (Player player : players) {
+            if (player.getName().equals("Player " + number)) {
+                return player;
             }
         }
         return null;
@@ -343,7 +320,6 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
 
         //randomize adding starter tiles for each players
         Collections.shuffle(sTiles);
-        //issues here @JC-Copilot
         for (int i =0;i<players.size();i++){
             players.get(i).add(sTiles.get(i));
             Player temp = players.get(i);
@@ -360,26 +336,15 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
             checkVis(bearCard, foxCard, elkCard, hawkCard, salmonCard, g);
         }else if (instructBoolean){
             g.drawImage(instructions, 0,0, 1890,865,null);
-            //g.drawRect(1780,40,45,45);
             checkVis();
         }else{
             g.drawImage(bg, 0, 0, 1890,865,null);
-            /*g.setColor(Color.GREEN);
-            for (int i=0;i<4;i++){
-                g.drawRect(1213, 19+(40*i), 352, 40);
-            }*/
-            //g.fillRect(310,0,905,870);
             this.paintComponents(g);
-            //pa.paint(g);
-            //g.fillRect(700, 100, 500, 500);
             g.drawImage(bearCard.getImage(), 1213,250-70,175,170,null);
             g.drawImage(foxCard.getImage(), 1213+180,250-70,175,170,null);
             g.drawImage(elkCard.getImage(), 1213,250+180-80,175,170,null);
             g.drawImage(hawkCard.getImage(), 1213+180,250+180-80,175,170,null);
             g.drawImage(salmonCard.getImage(), 1213,250+180+180-90,175,170,null);
-            //g.fillRect(1600, 0, 300, 270);
-            //just for the trolls
-            //g.drawImage(troll,0,0,1900,900,null);
         }
     }
     public ArrayList<Player> getPlayers(){
@@ -390,14 +355,12 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     }
     public void actionPerformed(ActionEvent e){
         if (e.getSource()==instructButton){
-            out.println("Yes sir");
             instructBoolean = true;
             checkVis();
             repaint();
         }
         for (int i =0;i<buttons.size();i++){
             if (e.getSource()==buttons.get(i)){
-                //out.println("Fuck ");
                 GameStateEvent gse = new  GameStateEvent(buttons.get(i), 10*(i+1));
                 listener.process(gse);
             }
@@ -406,37 +369,8 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
     public void endGameTime(EndGameEvent e){
         GameStateEvent gse = new GameStateEvent(this,players.get(0));
         listener.process(gse);
-        //PrintTester.print("Skbidi on that toilet");
     }
     public void mouseClicked(MouseEvent e) {
-    	/*int x = e.getX();
-        int y = e.getY();
-        //left side
-        if (x>1213&&x<1213+180){
-            //first row
-            if (y>200&&y<370){
-            	sc.addScoringCard(bearCard);
-            }
-            //second row
-            if (y>380&&y<380+170){
-            	sc.addScoringCard(elkCard);
-            }
-            //third row
-            if (y>380+180+180&&y<380+180+180+170){
-            	sc.addScoringCard(salmonCard);
-            }
-        }
-        //right side
-        if (x>1213+180&&x<1213+180+175){
-            //first row
-            if (y>200&&y<370){
-            	sc.addScoringCard(foxCard);
-            }
-            //second row
-            if(y>380&&y<380+170) {
-            	sc.addScoringCard(hawkCard);
-            }
-        }*/
         repaint();
     }
     public void mousePressed(MouseEvent e) {
@@ -541,7 +475,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         if (e.getPlayers()!=null){
             ArrayList<Player>temp = e.getPlayers();
             for (int i =0;i<temp.size()&&i<maps.size();i++){
-                maps.get(i).setPlayer(getNumero(i, temp));
+                maps.get(i).setPlayer(getNumber(i, temp));
                 maps.get(i).repaint();
             }
         }else if (e.getPlayers()==null&&e.getMouseEvent()!=null){
@@ -554,7 +488,7 @@ public class MainPanel extends JPanel implements MouseListener,ActionListener,En
         }
         
     }
-    private Player getNumero(int find , ArrayList<Player>play){
+    private Player getNumber(int find , ArrayList<Player>play){
         for (int i =0;i<play.size();i++){
             if (play.get(i).getName().equals("Player "+(find+1))){
                 return play.get(i);

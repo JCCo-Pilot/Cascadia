@@ -35,7 +35,6 @@ public class Selected extends JFrame implements ActionListener{
         } catch (Exception e) {
             // TODO: handle exception
         }
-        //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setResizable(false);
         this.setAlwaysOnTop(true);
@@ -47,15 +46,12 @@ public class Selected extends JFrame implements ActionListener{
         panel.setLayout(new GridLayout(1, 2, 3, 10));
         tileLabel = new JLabel();
         tokenLabel = new JLabel();
-        //tileLabel.setSize(190, 190);
         tileLabel.setBackground(Color.WHITE);    
         tileLabel.setOpaque(true);
         tokenLabel.setBackground(Color.WHITE);
         tokenLabel.setOpaque(true);
         tileLabel.setVisible(true);
         tokenLabel.setVisible(true);
-        //tileLabel.setText("Tile Label");
-        //tokenLabel.setText("Token Label");
         tileLabel.setVerticalAlignment(JLabel.CENTER);
         tileLabel.setHorizontalAlignment(JLabel.CENTER);
         tokenLabel.setVerticalAlignment(JLabel.CENTER);
@@ -69,7 +65,6 @@ public class Selected extends JFrame implements ActionListener{
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
         buttonPanel.add(hide);
         buttonPanel.add(hidePermanent);
-        //this.add(buttonPanel, BorderLayout.SOUTH);
         hidePermanent.setSize(buttonPanel.getWidth(), 75);
         buttonPanel.setVisible(true);
         hide.setVisible(true);
@@ -83,8 +78,6 @@ public class Selected extends JFrame implements ActionListener{
         tokenLabel.setOpaque(true);
         tileLabel.setVisible(true);
         tokenLabel.setVisible(true);
-        //tileLabel.setText("Tile Label");
-        //tokenLabel.setText("Token Label");
         tileLabel.setVerticalAlignment(JLabel.CENTER);
         tileLabel.setHorizontalAlignment(JLabel.CENTER);
         tokenLabel.setVerticalAlignment(JLabel.CENTER);

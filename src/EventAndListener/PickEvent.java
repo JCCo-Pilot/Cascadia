@@ -5,7 +5,7 @@ public class PickEvent extends EventObject{
     private WildlifeTokens token;
     private HabitatTiles tile;
     private Boolean switchTurns;
-    private String stringCheese;
+    private String eventName;
     public PickEvent(Object source, WildlifeTokens tok){
         super(source);
         token = tok;
@@ -26,10 +26,10 @@ public class PickEvent extends EventObject{
         switchTurns = false;
         tile = null;
         token = null;
-        stringCheese = s;
+        eventName = s;
     }
     public String getString(){
-        return stringCheese;
+        return eventName;
     }
     public Boolean switchTurns(){
         return switchTurns;

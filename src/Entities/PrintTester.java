@@ -32,11 +32,11 @@ public class PrintTester extends Thread{
 
     public static void addToQueue(String s){
         printer.setPriority(1);
-        if(printQueue.size()>0){
+        if(!printQueue.isEmpty()){
             printQueue.add(s);
         }else{
             printQueue.add(s);
-            printer.run();
+            printer.start();
         }
     }
 

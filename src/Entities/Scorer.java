@@ -44,7 +44,6 @@ public class Scorer implements Runnable{
                 Thread t = new Thread(s);
                 t.setPriority(2);
                 wildlifeThreads.add(t);
-                //s.scorePlayer();
                 t.start();
             }
         }
@@ -123,27 +122,14 @@ public class Scorer implements Runnable{
         while(threadsWaiting(wildlifeThreads)){
 
         }
-        
-        /*ArrayList<Player> finalPlayers = new ArrayList<Player>();
-        Collections.copy(finalPlayers,players);*/
-        HashMap<Integer, Player> finalOrder = new HashMap<Integer, Player>();
-        /*for(int i = 1; i<=players.size(); i++){
-            finalOrder.put((Integer)i, finalPlayers.remove(finalPlayers.indexOf(Collections.max(finalPlayers))));
-        }*/
-        return finalOrder;
+
+
+        return new HashMap<Integer, Player>();
     }
 
     @Override
     public void run() {
-        /*try {
-            this.scorePlayer();
-        } catch (Exception e) {
-            if(habitat==null){
-                PrintTester.print("Score "+player.getName()+", "+scoringCard.getAnimal());
-            }else{
-                PrintTester.print("Score "+player.getName()+", "+habitat);
-            }
-        }*/
+
         this.scorePlayer();
     }
 

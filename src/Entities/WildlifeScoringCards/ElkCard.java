@@ -25,24 +25,14 @@ public class ElkCard implements ScoringCard{
 
     public ElkCard(CardTypes letter){
         this.cardLetter = letter;
-        String choice = "";
-        switch(letter){
-            case CARD_A:
-                choice = "A";
-            break;
-            case CARD_B:
-                choice ="B";
-            break;
-            case CARD_C:
-                choice = "C";
-            break;
-            case CARD_D:
-                choice = "D";
-            break;
-        }
+        String choice = switch (letter) {
+            case CARD_A -> "A";
+            case CARD_B -> "B";
+            case CARD_C -> "C";
+            case CARD_D -> "D";
+        };
         try{
-            //image = ImageIO.read(new File("src/Entities/ScoringCardsPics/ElkScore"+choice+".png"));
-            image = ImageIO.read(ElkCard.class.getResource("/Entities/ScoringCardsPics/ElkScore"+choice+".png"));
+            image = ImageIO.read(Objects.requireNonNull(ElkCard.class.getResource("/Entities/ScoringCardsPics/ElkScore" + choice + ".png")));
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -87,26 +77,18 @@ public class ElkCard implements ScoringCard{
                         HashSet<HabitatTiles> lineSet = elkIterateInDirection(end, direction);
                         switch(lineSet.size()){
                             case 2:
-                                //HabitatTiles.highlightGroup(lineSet, "ELK");
                                 groupPoints0.put(lineSet, 5);//putting in lineSet instead of s makes sure that the connected resolve alg only counts the tiles being scored 
                             break;
                             case 3:
-                                //HabitatTiles.highlightGroup(lineSet, "ELK");
                                 groupPoints0.put(lineSet, 9);
                             break;
                             case 4:
-                                //HabitatTiles.highlightGroup(lineSet, "ELK");
                                 groupPoints0.put(lineSet, 13);
                             break;
 
                         }
                     }
-                }   
-                /*for(HabitatTiles e:elk){
-                    if(e.getNumberOf(CardAnimals.ELK)==0){
-
-                    }
-                }*/
+                }
                 resolveConnectedElkGroups(groupPoints0);
                 Integer points0 = 0;
                 for(Integer points:groupPoints0.values()){
@@ -119,11 +101,9 @@ public class ElkCard implements ScoringCard{
                 for(HashSet<HabitatTiles> s:elkGroups){
                     switch(s.size()){
                         case 1://for case 1 and 2, only one possible shape so there is no need to check for the exact shape
-                            //HabitatTiles.highlightGroup(s, "ELK");
                             groupPoints1.put(s, 2);
                         break;
                         case 2:
-                            //HabitatTiles.highlightGroup(s, "ELK");
                             groupPoints1.put(s, 5);
                         break;
                         case 3:
@@ -135,7 +115,6 @@ public class ElkCard implements ScoringCard{
                             }
                             Integer direction = start3.getSideOf(start3.findFirstWithSpecificToken(CardAnimals.ELK));
                             if((start3.get(HabitatTiles.nextInt(direction)).tokenAnimal()!=null&&start3.get(HabitatTiles.nextInt(direction)).tokenAnimal().equals(CardAnimals.ELK))||(start3.get(HabitatTiles.previousInt(direction)).tokenAnimal()!=null&&start3.get(HabitatTiles.previousInt(direction)).tokenAnimal().equals(CardAnimals.ELK))){//develops redundancy since, by using a hashSet, it is possible for the numbers to not iterate in the expected way, it checks if both tiles adjacent to the one we know has an ELK have an ELK as their token
-                                //HabitatTiles.highlightGroup(s, "ELK");
                                 groupPoints1.put(s, 9);
                             }
                         break;
@@ -151,7 +130,6 @@ public class ElkCard implements ScoringCard{
                                 HabitatTiles upright = start4.get(HabitatTiles.next(HabitatTiles.UP_RIGHT, i));
                                 HabitatTiles top = upright.get(HabitatTiles.next(HabitatTiles.UP_LEFT, i));
                                 if(upleft!=null&&upright!=null&&top!=null&&upleft.tokenAnimal()!=null&&upleft.tokenAnimal().equals(CardAnimals.ELK)&&upright.tokenAnimal()!=null&&upright.tokenAnimal().equals(CardAnimals.ELK)&&top.tokenAnimal().equals(CardAnimals.ELK)){
-                                    //HabitatTiles.highlightGroup(s, "ELK");
                                     groupPoints1.put(s, 13);
                                 }
                             }
@@ -168,7 +146,6 @@ public class ElkCard implements ScoringCard{
             
             case CARD_C:
                 HashMap<HashSet<HabitatTiles>, Integer> groupPoints2 = new HashMap<HashSet<HabitatTiles>, Integer>();//maps each group to its number of points, will be used to clear up adjacent groups
-                //Integer points2 = 0;
                 for(HashSet<HabitatTiles> s:elkGroups){
                     switch(s.size()){
                         case 1:
@@ -210,9 +187,9 @@ public class ElkCard implements ScoringCard{
                     int connectedElk = e.getNumberOf(CardAnimals.ELK);
                     switch (connectedElk) {
                         case 0:
-                            HashSet<HabitatTiles> tharoon = new HashSet<HabitatTiles>();
-                            tharoon.add(e);
-                            groupPoints3.put(tharoon, 2);
+                            HashSet<HabitatTiles> set = new HashSet<HabitatTiles>();
+                            set.add(e);
+                            groupPoints3.put(set, 2);
                             break;
                         default:
                             for(Integer dir:e.getConnections().keySet()){
@@ -229,26 +206,25 @@ public class ElkCard implements ScoringCard{
                                         default:
                                             for(Integer dir2:connect.getConnections().keySet()){
                                                 Boolean cc = false;
-                                                HabitatTiles connect2 = connect.get(dir);
                                                 if(dir2==dir+1){
                                                     cc = true;
                                                 }else if(dir2==dir-1){
                                                     cc = false;
                                                 }
                                                 if(Math.abs(dir2-dir)==1){
-                                                    HashSet<HabitatTiles> regina = elkIterateInCircle(e, dir, cc);
-                                                    switch(regina.size()){
+                                                    HashSet<HabitatTiles> group = elkIterateInCircle(e, dir, cc);
+                                                    switch(group.size()){
                                                         case 3:
-                                                            groupPoints3.put(regina, 8);
+                                                            groupPoints3.put(group, 8);
                                                             break;
                                                         case 4:
-                                                            groupPoints3.put(regina, 12);
+                                                            groupPoints3.put(group, 12);
                                                                 break;
                                                         case 5:
-                                                            groupPoints3.put(regina, 16);
+                                                            groupPoints3.put(group, 16);
                                                             break;
                                                         case 6:
-                                                            groupPoints3.put(regina, 21);
+                                                            groupPoints3.put(group, 21);
                                                             break;
                                                     }
                                                 }
@@ -258,111 +234,6 @@ public class ElkCard implements ScoringCard{
                             }
                     }
                 }
-                /*HashMap<HashSet<HabitatTiles>, Integer> groupPoints3 = new HashMap<HashSet<HabitatTiles>, Integer>();//maps each group to its number of points, will be used to clear up adjacent groups
-                for(HashSet<HabitatTiles> s:elkGroups){
-                    switch(s.size()){
-                        case 1://for case 1 and 2, only one possible shape so there is no need to check for the exact shape
-                            groupPoints3.put(s, 2);
-                        break;
-                        case 2:
-                            groupPoints3.put(s, 5);
-                        break;
-                        default: //3 or more
-                            Integer count = 0; //used to ensure that if its a perfect circle it doesnt't simply ignore every node.
-                            HabitatTiles startIfNoOther = new HabitatTiles();
-                            Boolean foundCircle = false;
-                            for(HabitatTiles tile:s){//see if a circle starts from any of these tiles; ensure that it is not simply the continuation of a circle
-                                if(++count==1){startIfNoOther = tile;}
-                                Integer direction = -1;
-                                Boolean isCircle = false;
-                                Boolean isClockwise = false;
-                                for(int i = 0; i<6; i++){
-                                    if(tile.get(i).tokenAnimal()!=null&&tile.get(i).tokenAnimal().equals(CardAnimals.ELK)){
-                                        direction = i;
-                                        if(tile.get(i).get(HabitatTiles.nextInt(i)).tokenAnimal()!=null&&tile.get(i).get(HabitatTiles.nextInt(i)).tokenAnimal().equals(CardAnimals.ELK)){
-                                            isClockwise = true;
-                                            isCircle = true;
-                                        }else if(tile.get(i).get(HabitatTiles.previousInt(i)).tokenAnimal()!=null&&tile.get(i).get(HabitatTiles.previousInt(i)).tokenAnimal().equals(CardAnimals.ELK)){
-                                            isClockwise = false;
-                                            isCircle = true;
-                                        }
-                                        if(isCircle){
-                                            if(tile.get(HabitatTiles.next(direction, 2)).tokenAnimal()!=null&&isClockwise&&tile.get(HabitatTiles.next(direction, 2)).tokenAnimal().equals(CardAnimals.ELK)){
-                                                isCircle = false;
-                                            }else if(!isClockwise&&tile.get(HabitatTiles.previous(direction, 2)).tokenAnimal()!=null&&tile.get(HabitatTiles.previous(direction, 2)).tokenAnimal().equals(CardAnimals.ELK)){
-                                                isCircle = false;
-                                            }else{
-                                                HashSet<HabitatTiles> circle = elkIterateInCircle(tile, i, isClockwise);
-                                                foundCircle = true;
-                                                switch(circle.size()){
-                                                    case 1://redundancy
-                                                        groupPoints3.put(circle, 2);
-                                                    break;
-                                                    case 2://redundancy
-                                                        groupPoints3.put(circle, 5);
-                                                    break;
-                                                    case 3:
-                                                        groupPoints3.put(circle, 8);
-                                                    break;
-                                                    case 4:
-                                                        groupPoints3.put(circle, 12);
-                                                    break;
-                                                    case 5:
-                                                        groupPoints3.put(circle, 16);
-                                                    break;
-                                                    case 6:
-                                                        groupPoints3.put(circle, 21);
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                
-                            }
-                            if(!foundCircle){
-                                        for(int i = 0; i<6; i++){
-                                            if(startIfNoOther.get(i).tokenAnimal()!=null&&startIfNoOther.get(i).tokenAnimal().equals(CardAnimals.ELK)){
-                                                
-                                                Boolean isClockwise = false;
-                                                Boolean isCircle = false;
-                                                if(startIfNoOther.get(i).get(HabitatTiles.nextInt(i)).tokenAnimal()!=null&&startIfNoOther.get(i).get(HabitatTiles.nextInt(i)).tokenAnimal().equals(CardAnimals.ELK)){
-                                                    isClockwise = true;
-                                                    isCircle = true;
-                                                }else if(startIfNoOther.get(i).get(HabitatTiles.previousInt(i)).tokenAnimal()!=null&&startIfNoOther.get(i).get(HabitatTiles.previousInt(i)).tokenAnimal().equals(CardAnimals.ELK)){
-                                                    isClockwise = false;
-                                                    isCircle = true;
-                                                }
-                                                if(isCircle){
-                                                        HashSet<HabitatTiles> circle = elkIterateInCircle(startIfNoOther, i, isClockwise);
-                                                        foundCircle = true;
-                                                        switch(circle.size()){
-                                                            case 1://redundancy
-                                                                groupPoints3.put(circle, 2);
-                                                            break;
-                                                            case 2://redundancy
-                                                                groupPoints3.put(circle, 5);
-                                                            break;
-                                                            case 3:
-                                                                groupPoints3.put(circle, 8);
-                                                            break;
-                                                            case 4:
-                                                                groupPoints3.put(circle, 12);
-                                                            break;
-                                                            case 5:
-                                                                groupPoints3.put(circle, 16);
-                                                            break;
-                                                            case 6:
-                                                                groupPoints3.put(circle, 21);
-                                                            break;
-                                                        }
-                                                    
-                                                }
-                                            }
-                                        }
-                                    }
-                    }
-                }*/
                 resolveConnectedElkGroups(groupPoints3);
                 Integer points3 = 0;
                 for(Integer points:groupPoints3.values()){

@@ -9,10 +9,7 @@ import javax.swing.*;
 import EventAndListener.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.imageio.ImageIO;
-import javax.management.timer.Timer;
 
-import java.awt.image.*;
 import MathHelper.*;
 import Panels.MainPanel;
 
@@ -21,7 +18,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     private int xSize,ySize;
     private int xPos,yPos;
     private WildlifeTokens token;
-    //private Integer[] xPositions = {92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758,92,213,334,455,576,697,818,153,274,395,516,637,758};
     private AllowPickEventListener listener;
 
     private HabitatTiles current;
@@ -105,7 +101,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
 
 
     public void addMainPanel(MainPanel p){
-        //what the fuck is a listener anyways
         mainPanel = p;
     }
 
@@ -121,10 +116,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         //x increments are size* root(3)/2
         int size = 70;
         Double inc = size*Math.sqrt(3)/2;
-        int xInc = (int)(Math.round(inc));
-        //out.println(xInc*2*(0+1)-30);
-        
-        
     }
     @Override
     public void paintComponent(Graphics g){
@@ -138,13 +129,10 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         g.fillRect(0, 0, xPos, yPos);
     }
     public void paint(Graphics g){
-        //super.paint(g);
         periodic();
-        
         g.setColor(Color.BLACK);
         Polygon p = new Polygon();
-        //cgg.paintAll(g);
-        players.get(0).drawInventory(g, showEmptyTiles);
+        players.get(0).drawGraph(g, showEmptyTiles);
         if(token!=null&&temp==null){
             players.get(0).getGraph().highlightCompatibles(g, token);
         }
@@ -156,8 +144,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                 toHighlight.drawMouseHighlight(g);
             }
             
-        } catch (Exception e) {
-            //System.out.println("shit fucked up");
+        } catch (Exception _) {
         }
         paintComponents(g);
         
@@ -167,16 +154,14 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     public Dimension getMaximumSize() {return new Dimension(xSize , ySize );}
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        //PrintTester.print("******************************************* PLAYER DISPLAY CLICK "+e.getX()+", "+e.getY());
         periodic();
         if(e.getButton()==MouseEvent.BUTTON2){
             ((PickArea)listener).middleClick(e);
             return;
         }
-        //for(int i =0;i<players.get(0).getHexagons().size();i++){
-            //if(players.get(0).getHexagons().get(i).isPointInsideHexagon(e)){
+
                 if (token!=null&&temp==null){
-                    HabitatTiles toAddTo = players.get(0).getGraph().bfs(new MathPoint(e.getX(), e.getY()));
+                    HabitatTiles toAddTo = players.get(0).getGraph().search(new MathPoint(e.getX(), e.getY()));
                     //add a check method here
                     if (players.get(0).getGraph().addToken(token, new MathPoint(e.getX(), e.getY()))){
                         AllowPickEvent ape = new AllowPickEvent(this, true);
@@ -186,7 +171,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                             players.get(0).incrementNature();
                         }
                         players.get(0).getGraph().update();
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         Player p = players.remove(0);
                         p.decrement();
                         players.add(p);
@@ -197,24 +181,12 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                         listener.process(apes);
                         if (tutorial!=true){
                             ((PickArea)listener).placement(true);
-                            ((PickArea)listener).jasperisadumbass();
+                            ((PickArea)listener).endUpdate();
                         }
-                        //((PickArea)listener).placement(true);
-                        //((PickArea)listener).jasperisadumbass();
                     }  
                 }
-            //}
-        //}
-        
-        //for (int i =0;i<cgg.getHexs().size();i++){
+
             if(temp!=null){
-            //if (cgg.getHexs().get(i).isPointInsideHexagon(e)&&temp!=null){
-                //if (canPlace(cgg.getHexs().get(i).getXPos(), cgg.getHexs().get(i).getYPos())){
-                    //out.println(cgg.getHexs().get(i).getXPos());
-                    //out.println(cgg.getHexs().get(i).getYPos());
-                    
-                    //temp.setX(cgg.getHexs().get(i).getXPos());
-                    //temp.setY(cgg.getHexs().get(i).getYPos());
                     current = temp;
                     if(players.get(0).addTile(current, new MathPoint(e.getX(), e.getY()))){
                         temp = null;
@@ -222,13 +194,8 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                         if (tutorial!=true){
                             ((PickArea)listener).placement(false);
                         }
-                        //((PickArea)listener).placement(false);
-                        
                     }
-                    
-               // }
             }
-        //}
         if (uListener!=null) {
             	uListener.update(new UpdateEvent(this, players));
         }
@@ -236,7 +203,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     }
     public boolean canPlace(int x, int y){
         Double r3 = 1.7320508075688772935;
-        Double ySpace = 1.5;
         Double r32 = 0.86602540378;
         ArrayList<HabitatTiles>temp = players.get(0).getHexagons();
         Double sz = temp.get(0).getSize();
@@ -248,7 +214,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
                 }
             }
         }
-        //check to make sure it is its neighbor
         int counter = 0;
         for (int i =0;i<temp.size();i++){
             int cx = temp.get(i).getXPos();
@@ -256,14 +221,14 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             //top left
             if (Math.abs((cx-(r32*sz))-x)<2){
                 if (Math.abs((cy-(1.5*sz))-y)<2){
-                    // it is the top left of the comparision
+                    // it is the top left of the comparison
                     counter++;
                 }
             }
             //top right
             if (Math.abs((cx+(r32*sz))-x)<2){
                 if (Math.abs((cy-(1.5*sz))-y)<2){
-                    // it is the top right of the comparision
+                    // it is the top right of the comparison
                     counter++;
                 }
             }
@@ -282,19 +247,18 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             //bottom left
             if (Math.abs((cx-(r32*sz))-x)<2){
                 if (Math.abs((cy+(1.5*sz))-y)<2){
-                    // it is the bottom left of the comparision
+                    // it is the bottom left of the comparison
                     counter++;
                 }
             }
             //bottom right
             if (Math.abs((cx+(r32*sz))-x)<2){
                 if (Math.abs((cy+(1.5*sz))-y)<2){
-                    // it is the bottom right of the comparision
+                    // it is the bottom right of the comparison
                     counter++;
                 }
             }
         }
-        //out.println(counter>0);
         return counter>0;
     }
 
@@ -350,7 +314,7 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             p.decrement();
             players.add(p);
             out.println("line 244");
-            ((PickArea)listener).jasperisadumbass();
+            ((PickArea)listener).endUpdate();
             repaint();
         }else if (e.getToken()!=null){
             token = e.getToken();
@@ -358,27 +322,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
         }else if(e.getTile()!=null){
             HabitatTiles tiles = e.getTile();
             temp = tiles;
-            /*tiles.setX(xPositions[players.get(0).getHexagons().size()]);
-            if (players.get(0).getHexagons().size()<7){
-                tiles.setY(105);
-            }else if (players.get(0).getHexagons().size()<13){
-                tiles.setY(215);
-            }else if (players.get(0).getHexagons().size()<20){
-                tiles.setY(325);
-            }else if (players.get(0).getHexagons().size()<26){
-                tiles.setY(435);
-            }else if (players.get(0).getHexagons().size()<33){
-                tiles.setY(435+110);
-            }else if (players.get(0).getHexagons().size()<39){
-                tiles.setY(435+220);
-            }else if (players.get(0).getHexagons().size()<47){
-                tiles.setY(435+330);
-            }
-            //players.get(0).getHexagons()
-            players.get(0).addTile(tiles);
-            
-            current = tiles;*/
-            
             repaint();
         }
     }
@@ -405,7 +348,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     }
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        //System.out.println("Mouse Wheel Event");
         int units = 0;
         if(current!=null){
             if(e.getWheelRotation()>0){
@@ -413,8 +355,6 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
             }else{
                 units = -1*e.getScrollAmount()/3;
             }
-            
-            //System.out.println("units = "+units);
             if(units>0){
                 for(int i = 0; i<units; i++){
                     current.rotate();
@@ -430,15 +370,13 @@ public class PlayerDisplay extends JComponent implements MouseListener,PickListe
     }
     @Override
     public void run() {
-        Runnable Philip = new Runnable() {
-            public void run() {
-                Point point = MouseInfo.getPointerInfo().getLocation();
-                Point location = PlayerDisplay.this.getLocation();
-                int x = (int) (point.getX()-location.getX());
-                int y = (int) (point.getY()-location.getY());
-                toHighlight = players.get(0).getGraph().bfs(new MathPoint(x, y));
-                PlayerDisplay.this.repaint();
-            }
+        Runnable Philip = () -> {
+            Point point = MouseInfo.getPointerInfo().getLocation();
+            Point location = PlayerDisplay.this.getLocation();
+            int x = (int) (point.getX()-location.getX())-10;
+            int y = (int) (point.getY()-location.getY())-10;
+            toHighlight = players.get(0).getGraph().search(new MathPoint(x, y));
+            PlayerDisplay.this.repaint();
         };
         
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);

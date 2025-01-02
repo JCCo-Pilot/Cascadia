@@ -47,19 +47,12 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             difficultyOptions.add(new PointGenerator(530-265+(265*i), 580, 150.0));
         }
         hexagons.add(new PointGenerator(795, 575, 150.0));
-        //also commented out bc gay
-        //hexagons.add(new PointGenerator(1460, 800, 150.0));
     }
     private void pullImages(){
         try{
-            //ImageIO.read(Reworking.class.getResource("/Image/BackgroundStart.png"));
             bg = ImageIO.read(StartPanel.class.getResource("/Panels/Background/StartBG.png"));
             starter = ImageIO.read(StartPanel.class.getResource("/Panels/Background/PlayerSelection.png"));
             difficult = ImageIO.read(StartPanel.class.getResource("/Panels/Background/DiffcultySelection.png"));
-            /*bg = ImageIO.read(new File("src/Panels/Background/StartBG.png"));
-            starter = ImageIO.read(new File("src/Panels/Background/PlayerSelection.png"));
-            difficult = ImageIO.read(new File("src/Panels/Background/DiffcultySelection.png"));
-            */
         }catch(Exception e){
             out.println("Errors in pulling instruction images");
         }
@@ -69,53 +62,8 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
         super.paint(g);
         setBackground(Color.WHITE);
         switch (state) {
-            /*case 1:
-                g.drawImage(images.get(0), 0, 0, width, height, null);
-            break;
-            case 2:
-                g.drawImage(images.get(1), 0, 0, width, height, null);
-                g.drawImage(images.get(2), width/2, 0, width, height, null);
-            break;
-            case 3:
-                g.drawImage(images.get(3), 0, 0, width, height, null);
-                g.drawImage(images.get(4), width/2, 0, width, height, null);
-            break;
-            case 4:
-                g.drawImage(images.get(5), 0, 0, width, height, null);
-                g.drawImage(images.get(6), width/2, 0, width, height, null);
-            break;
-            case 5:
-                g.drawImage(images.get(7), 0, 0, width, height, null);
-                g.drawImage(images.get(8), width/2, 0, width, height, null);
-            break;
-            case 6:
-                g.drawImage(images.get(9), 0, 0, width, height, null);
-                g.drawImage(images.get(10), width/2, 0, width, height, null);
-            break;
-            case 7:
-                g.drawImage(images.get(11), 0, 0, width, height, null);
-                g.drawImage(images.get(12), width/2, 0, width, height, null);
-            break;
-            case 8:
-                g.drawImage(images.get(13), 0, 0, width, height, null);
-                g.drawImage(images.get(14), width/2, 0, width, height, null);
-            break;
-            case 9:
-                g.drawImage(images.get(14), 0, 0, width, height, null);
-                g.drawImage(images.get(15), width/2, 0, width, height, null);
-            break;*/
             case 10:
                 g.drawImage(starter, 0, 0, 1590, 865, null);
-                /*for(int i=0;i<playerOptions.size();i++){
-                    playerOptions.get(i).drawHexagon(g);
-                }*/
-                
-                /*g.setFont(new Font("Arial", 100, 70));
-                g.drawString("Number of Players:",520,250);
-                g.setFont(new Font("Arial", 100, 100));
-                g.drawString("2", 570, 330+150);
-                g.drawString("3", 770, 330+150);
-                g.drawString("4", 970, 330+150);*/
             break;
             case 100:
                 if (difficultyLimit){
@@ -125,27 +73,20 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 }else if (!difficultyLimit){
                     g.drawImage(difficult, 0, 0, 1590, 865, null);
                 }
-               
-                /*for (int i =0;i<difficultyOptions.size();i++){
-                    difficultyOptions.get(i).drawHexagon(g);
-                }*/
             break;
         }
         if (state==-1){
             g.setFont(new Font("Arial", 100, 100));
             g.drawString("Cascadia", 550, 200);
-            /*g.setFont(new Font("Arial", 100, 40));
-            g.drawString("Start",740,610);*/
             g.drawImage(bg,0,0,1590,865,null);
-            //paintHexagons(g);
             paintComponents(g);
         }
         
     }
     private void paintHexagons(Graphics g){
         g.setColor(Color.GREEN);
-        for(int i=0;i<hexagons.size();i++){
-            hexagons.get(i).drawHexagon(g);
+        for (PointGenerator hexagon : hexagons) {
+            hexagon.drawHexagon(g);
         }
     }
     public void actionPerformed(ActionEvent e){
@@ -153,21 +94,17 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
             uListener.update(new UpdateEvent(this,e));
         }
         if (e.getSource()==start){
-            //GameStateEvent gse = new GameStateEvent(this, 1);
-            //listener.process(gse);
             state = 10;
             instructions.setVisible(false);
             start.setVisible(false);
         }else if (e.getSource()==instructions){
             state = 1;
-            //instructions.setVisible(false);
             start.setVisible(false);
         }
         repaint();
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        //out.println(uListener==null);
         if (uListener!=null){
             uListener.update(new UpdateEvent(this, e));
         }
@@ -176,11 +113,7 @@ public class StartPanel extends JPanel implements MouseListener,ActionListener{
                 state =100;
                 hexagons.clear();
                 repaint();
-            }/*else if (hexagons.get(1).isPointInsideHexagon(e)){ //commented out instructions bc gay
-                state =1;
-                GameStateEvent gse = new GameStateEvent(this, 100);
-                listener.process(gse);
-            }*/
+            }
         }else if (state==100){
             if (!difficultyLimit){
                 for(int i =0;i<difficultyOptions.size();i++){

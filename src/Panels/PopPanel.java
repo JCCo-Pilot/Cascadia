@@ -5,7 +5,6 @@ import Entities.WildlifeScoringCards.ElkCard;
 import Entities.WildlifeScoringCards.FoxCard;
 import Entities.WildlifeScoringCards.HawkCard;
 import Entities.WildlifeScoringCards.SalmonCard;
-import Entities.WildlifeScoringCards.ScoringCard;
 
 import java.util.*;
 import javax.swing.*;
@@ -14,9 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
-import java.io.File;
 
-import MathHelper.*;
 import static java.lang.System.*;
 public class PopPanel extends JComponent implements MouseListener, ActionListener{
     private Player p;
@@ -64,7 +61,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
         if(state == 1) {
         	g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
             g.setColor(Color.BLACK);
-        	p.drawInventory(g, false);
+        	p.drawGraph(g, false);
             if(scoringHighlight!=null){
                 p.getGraph().drawScoringHighlight(g, scoringHighlight);
             }
@@ -116,7 +113,6 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
             g.drawString(""+p.getScore(),945,375+77+360);
             g.drawString("Click on the animal and habitat icons",1050,750);
             g.drawString("to check scoring!",1050,800);
-            //g.drawStrin
             paintCards(g);
             paintComponents(g);
         }
@@ -148,8 +144,6 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
         try{
             bg = ImageIO.read(PopPanel.class.getResource("/Panels/Background/PopPanelBackground.png"));
             bg2 = ImageIO.read(PopPanel.class.getResource("/Panels/Background/PopPanelBackground2.png"));
-            //bg = ImageIO.read(new File("src/Panels/Background/PopPanelBackground.png"));
-            //bg2 = ImageIO.read(new File("src/Panels/Background/PopPanelBackground2.png"));
         }catch(Exception e){
             out.println("Error in pulling images in PopPanel class");
         }
@@ -173,7 +167,6 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==back){
             goBack = true;
-            //this.setVisible(false);
             GameStateEvent gse = new  GameStateEvent(this, 50);
             listener.process(gse);
         }
@@ -196,8 +189,6 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
     }
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
-        //880-1008
-
         int x = e.getX();
         int y = e.getY();
 
@@ -205,7 +196,7 @@ public class PopPanel extends JComponent implements MouseListener, ActionListene
             for(Integer i:criteriaCoords.keySet()){
                 if(y>=i-35&&y<=i+15){
                     scoringHighlight = criteriaCoords.get(i);
-                    System.out.println(criteriaCoords.get(i));
+                    PrintTester.print(criteriaCoords.get(i));
                 }
             }
         }
